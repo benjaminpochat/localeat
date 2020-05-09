@@ -1,0 +1,43 @@
+version: '3.7'
+services:
+
+  database:
+    image: postgres:12.2-alpine
+    networks:
+      - hostnet
+    volumes:
+      - /var/lib/postgresql/data/pgdata:/var/lib/postgresql/data/pgdata
+    environment:
+      - POSTGRES_USER=localeat
+      - POSTGRES_PASSWORD=localeat
+      - PGDATA=/var/lib/postgresql/data/pgdata
+
+  core:
+    build:
+      context: "."
+      dockerfile: ./localeat/Dockerfile
+    image: benjaminpochat/localeat:${DOCKER_IMAGE_TAG:-latest}
+    networks:
+      - hostnet
+    depends_on:
+      - database
+    environment:
+      - demos.datasource.url=jdbc:postgresql://localhost:5432/fermestore
+      - demos.datasource.user=fermestore
+      - demos.datasource.password=f3Rme5t0r3
+
+  gui:
+    build:
+      context: "./localeat-ui"
+    image: benjaminpochat/ferme-store-ui:${DOCKER_IMAGE_TAG:-latest}
+    networks:
+      - hostnet
+    depends_on:
+      - core
+
+networks:
+  hostnet:
+    external: true
+    name: host
+
+
