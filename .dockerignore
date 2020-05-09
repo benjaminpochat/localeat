@@ -1,0 +1,10 @@
+.gitignore
+.git
+.coverage
+.idea
+.out
+**/target
+**/.idea
+**/.iml
+**/Dockerfile
+scripts

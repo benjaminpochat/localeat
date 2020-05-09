@@ -15,25 +15,25 @@ services:
   core:
     build:
       context: "."
-      dockerfile: ./localeat/Dockerfile
-    image: benjaminpochat/localeat:${DOCKER_IMAGE_TAG:-latest}
+      dockerfile: ./core/Dockerfile
+    image: benjaminpochat/localeat-core:${DOCKER_IMAGE_TAG:-latest}
     networks:
       - hostnet
     depends_on:
       - database
     environment:
-      - demos.datasource.url=jdbc:postgresql://localhost:5432/fermestore
-      - demos.datasource.user=fermestore
-      - demos.datasource.password=f3Rme5t0r3
+      - localeat_datasource_url=jdbc:postgresql://localhost:5432/localeat
+      - localeat_datasource_username=localeat
+      - localeat_datasource_password=localeat
 
-  gui:
-    build:
-      context: "./localeat-ui"
-    image: benjaminpochat/ferme-store-ui:${DOCKER_IMAGE_TAG:-latest}
-    networks:
-      - hostnet
-    depends_on:
-      - core
+#  gui:
+#    build:
+#      context: "./ui"
+#    image: benjaminpochat/localeat-ui:${DOCKER_IMAGE_TAG:-latest}
+#    networks:
+#      - hostnet
+#    depends_on:
+#      - core
 
 networks:
   hostnet:
