@@ -1,4 +1,4 @@
-package com.localeat.core.config;
+package com.localeat.core.config.database;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
