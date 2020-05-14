@@ -1,7 +1,6 @@
 package com.localeat.core.domains.slaughter;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -26,6 +25,4 @@ public class SlaughterController {
     public Optional<Slaughter> getSlaughter(@PathVariable Long id){
         return slaughterRepository.findById(id);
     }
-
-
 }

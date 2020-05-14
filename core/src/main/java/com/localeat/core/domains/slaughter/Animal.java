@@ -59,7 +59,7 @@ class Animal implements com.localeat.model.domains.slaughter.Animal<AnimalType> 
 
     @Override
     public String getIdentificationNumber() {
-        return null;
+        return identificationNumber;
     }
 
     public void setIdentificationNumber(String identificationNumber) {
@@ -68,7 +68,7 @@ class Animal implements com.localeat.model.domains.slaughter.Animal<AnimalType> 
 
     @Override
     public String getFinalFarm() {
-        return null;
+        return finalFarm;
     }
 
     public void setFinalFarm(String finalFarm) {

@@ -1,8 +1,10 @@
 package com.localeat.core.domains.order;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.localeat.core.domains.customer.Customer;
 import com.localeat.core.domains.delivery.Delivery;
 import com.localeat.core.domains.product.Product;
+import com.localeat.core.domains.product.ProductSerializer;
 
 import javax.persistence.*;
 import java.util.Map;
@@ -24,6 +26,7 @@ public class Order implements com.localeat.model.domains.order.Order<Customer, P
     @CollectionTable(name="ordered_items", joinColumns=@JoinColumn(name="order_id"))
     @MapKeyColumn(name="product_id")
     @Column(name="ordered_quantity")
+    @JsonSerialize(keyUsing = ProductSerializer.class)
     private Map<Product, Integer> orderedItems;
 
     @OneToOne

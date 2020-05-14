@@ -17,16 +17,16 @@ public class Delivery implements com.localeat.model.domains.delivery.Delivery<Or
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Address deliveryAddress;
 
     private LocalDateTime deliveryDate;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name="delivery_available_products")
     private Set<Product> availableProducts;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private Set<Order> orders;
 
     public Long getId() {
@@ -46,6 +46,7 @@ public class Delivery implements com.localeat.model.domains.delivery.Delivery<Or
         this.deliveryAddress = deliveryAddress;
     }
 
+    @Override
     public Set<Product> getAvailableProducts() {
         return availableProducts;
     }

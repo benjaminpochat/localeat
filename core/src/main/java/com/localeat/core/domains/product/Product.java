@@ -18,6 +18,10 @@ public class Product implements com.localeat.model.domains.product.Product {
 
     private byte[] photo;
 
+    public Product(String id) {
+        this.id = Long.valueOf(id);
+    }
+
     public Long getId() {
         return id;
     }

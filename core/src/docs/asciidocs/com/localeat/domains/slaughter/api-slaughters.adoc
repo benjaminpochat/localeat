@@ -1,0 +1,15 @@
+== APIs for "slaughter" domain
+
+=== Create a slaughter
+
+The http request :
+include::{snippets}/create-slaughter/http-request.adoc[]
+The http response :
+include::{snippets}/create-slaughter/http-response.adoc[]
+
+=== Get all slaughters
+
+The http request :
+include::{snippets}/get-all-slaughters/http-request.adoc[]
+The http response :
+include::{snippets}/get-all-slaughters/http-response.adoc[]

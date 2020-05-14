@@ -16,10 +16,10 @@ public class Slaughter implements com.localeat.model.domains.slaughter.Slaughter
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Animal animal;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Delivery delivery;
 
     private LocalDate slaughterDate;
