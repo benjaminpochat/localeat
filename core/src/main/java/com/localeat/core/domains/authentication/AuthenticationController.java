@@ -16,6 +16,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,10 +27,15 @@ public class AuthenticationController {
     private final Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
 
     @GetMapping(path = "/authentication")
-    public String authenticate(){
+    public void authenticate(HttpServletResponse response){
         SecurityContext securityContext = SecurityContextHolder.getContext();
         Authentication authentication = securityContext.getAuthentication();
-        return generateJSONWebToken(authentication);
+        String jwt = generateJSONWebToken(authentication);
+        Cookie jwtCookie = new Cookie("jwt", jwt);
+        jwtCookie.setHttpOnly(false);
+        jwtCookie.setSecure(false);
+        jwtCookie.setMaxAge(10);
+        response.addCookie(jwtCookie);
     }
 
     private String generateJSONWebToken(Authentication authentication){
