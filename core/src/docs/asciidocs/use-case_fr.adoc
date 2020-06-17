@@ -1,0 +1,21 @@
+[ditaa]
+....
+
+
+            2. Publication
+            des prochaines
+            ventes à
+/--------\  proximité       /-----------------\                /---------\
+|        |<-----------------+                 |                |         |
+| Client |                  | manger-local.fr |<---------------+ Eleveur |
+|        +----------------->|                 |                |         |
+\--------/  3. Achat et     \-----------------/   1.Planifier  \---------/
+            paiement en                           l'abattage
+            ligne
+
+
+
+
+
+
+....
