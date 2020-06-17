@@ -1,0 +1,29 @@
+<div>
+<mat-card>
+  <div *ngIf="authenticationErrorMessage">{{authenticationErrorMessage}}</div>
+  <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
+    <mat-form-field>
+      <input matInput formControlName="email" placeholder="E-mail">
+    </mat-form-field>
+    <mat-form-field>
+      <input type="password" formControlName="password" matInput placeholder="Mot de passe">
+    </mat-form-field>
+    <button type="submit" mat-raised-button color="primary" [disabled]="!loginForm.valid">Connexion</button>
+  </form>
+</mat-card>
+
+<!--
+<mat-card *ngIf="registerToggle == true">
+  <form [formGroup]="registerForm" (ngSubmit)="addAccounts(registerForm.value)">
+    <mat-form-field>
+      <input matInput formControlName="username" placeholder="Username">
+    </mat-form-field>
+    <mat-form-field>
+      <input type="password" formControlName="password" matInput placeholder="Password">
+    </mat-form-field>
+    <button type="submit" mat-raised-button color="primary" [disabled]="!registerForm.valid">Register</button>
+    <span style="color:red" (click)="toggleForm()">Cancel</span>
+  </form>
+</mat-card>
+-->
+</div>

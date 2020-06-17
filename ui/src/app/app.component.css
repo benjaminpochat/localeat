@@ -1,0 +1,36 @@
+@media (min-width:600px) {
+  .main-title{
+    font-size: 4rem;
+  }
+
+  .photo-title > img {
+    max-width: 50%;
+    height: auto;
+  }
+}
+
+@media (max-width:600px) {
+  .main-title{
+    font-size: 2rem;
+  }
+
+  .photo-title > img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+.main-title {
+  font-family: Acme;
+  text-align: center;
+  width: 100%;
+}
+
+.photo-title > img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+

@@ -1,0 +1,30 @@
+.main-menu {
+  background-color: darkolivegreen;
+  font-family: 'Lato-Bold';
+  color: whitesmoke;
+}
+
+.main-menu-end {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.main-menu-end > div {
+  padding: 0.2rem;
+  margin: 0.2rem;
+  border-radius: 5px;
+}
+
+.main-menu-end > div:hover {
+  background-color: green;
+  font-family: 'Lato-Black';
+  cursor: pointer;
+}
+
+@media (max-width:600px) {
+  .main-menu {
+    font-size: 0.8rem;
+  }
+}
+
+

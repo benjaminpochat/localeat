@@ -34,7 +34,7 @@ public class AuthenticationController {
         Cookie jwtCookie = new Cookie("jwt", jwt);
         jwtCookie.setHttpOnly(false);
         jwtCookie.setSecure(false);
-        jwtCookie.setMaxAge(10);
+        jwtCookie.setMaxAge(3600);
         response.addCookie(jwtCookie);
     }
 

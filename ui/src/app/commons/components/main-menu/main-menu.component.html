@@ -1,0 +1,7 @@
+<div class='main-menu'>
+  <div class='main-menu-end'>
+    <div routerLink="/breeder-area">espace éleveur</div>
+    <div [hidden]="authentication ? false : true" (click)="logout()">déconnexion</div>
+    <div [hidden]="authentication ? true : false" routerLink="/authentication">connexion</div>
+  </div>
+</div>
