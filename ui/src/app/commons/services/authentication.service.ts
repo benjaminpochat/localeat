@@ -24,12 +24,8 @@ export class AuthenticationService {
       withCredentials : true
     };
     const response = this.http.get('http://localhost:8080/authentication', httpOptions);
-    response.subscribe(() => this.reloadAuthentication());
+    response.subscribe(() => this.authentication.next(this.getAuthenticationFromCookie()));
     return response;
-}
-
-  public reloadAuthentication(){
-    this.authentication.next(this.getAuthenticationFromCookie());
   }
 
   public deleteAuthentication(): void {
@@ -38,13 +34,13 @@ export class AuthenticationService {
   }
 
   public isAuthenticated(): boolean {
-    //TODO : utliser l'une des variables locales
+    //TODO : utiliser l'une des variables locales
     const jwt = this.getAuthenticationFromCookie();
     return jwt as boolean;
   }
 
   public isAuthenticatedWithAuthority(authority: string): boolean {
-    //TODO : utliser l'une des variables locales
+    //TODO : utiliser l'une des variables locales
     const jwt = this.getAuthenticationFromCookie();
     if (jwt) {
       const authorities = jwt.authorities as Array<string>;

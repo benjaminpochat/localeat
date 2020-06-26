@@ -2,23 +2,33 @@
   background-color: darkolivegreen;
   font-family: 'Lato-Bold';
   color: whitesmoke;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.main-menu-home {
+  cursor: pointer;
+  padding: 0.2rem;
+  margin: 0.2rem;
+  font-family: Acme;
+  font-size: 1.2rem;
+}
+
+.main-menu div:nth-child(2){
+  flex: 1;
 }
 
 .main-menu-end {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.main-menu-end > div {
+  cursor: pointer;
   padding: 0.2rem;
   margin: 0.2rem;
   border-radius: 5px;
 }
 
-.main-menu-end > div:hover {
+.main-menu-end:hover {
   background-color: green;
   font-family: 'Lato-Black';
-  cursor: pointer;
 }
 
 @media (max-width:600px) {
@@ -26,5 +36,3 @@
     font-size: 0.8rem;
   }
 }
-
-

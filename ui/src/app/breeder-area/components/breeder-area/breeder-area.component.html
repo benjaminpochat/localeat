@@ -1,4 +1,13 @@
 <p>Bienvenu dans l'espace éleveur</p>
-<div [hidden]="authentication">Vous n'êtes pas loggé. Vous devez d'abord vous logger.</div>
-<div [hidden]="!authentication || isAuthorized()">Vous n'êtes pas autorisé à accéder à l'espace éleveur</div>
-<div [hidden]="!isAuthorized()">Vos prochains abbattages...</div>
+<div [hidden]="authentication">
+  Vous n'êtes pas loggé. Vous devez d'abord vous logger.
+</div>
+<div [hidden]="authentication">
+ <app-authentication></app-authentication>
+</div>
+<div [hidden]="!authentication || isAuthorized()">
+  Vous n'êtes pas autorisé à accéder à l'espace éleveur
+</div>
+<div [hidden]="!isAuthorized()">
+  Vos prochains abbattages...
+</div>
