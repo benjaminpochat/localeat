@@ -26,14 +26,14 @@ services:
       - localeat_datasource_username=localeat
       - localeat_datasource_password=localeat
 
-#  gui:
-#    build:
-#      context: "./ui"
-#    image: benjaminpochat/localeat-ui:${DOCKER_IMAGE_TAG:-latest}
-#    networks:
-#      - hostnet
-#    depends_on:
-#      - core
+  gui:
+    build:
+      context: "./ui"
+    image: benjaminpochat/localeat-ui:${DOCKER_IMAGE_TAG:-latest}
+    networks:
+      - hostnet
+    depends_on:
+      - core
 
 networks:
   hostnet:

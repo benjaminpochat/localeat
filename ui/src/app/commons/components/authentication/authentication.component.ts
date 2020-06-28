@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-authentication',
@@ -11,13 +12,13 @@ export class AuthenticationComponent implements OnInit {
 
   loginForm: FormGroup;
   authenticationErrorMessage;
-  //registerForm: FormGroup;
+  @Input() destinationRoute: string;
 
   constructor(
     private authenticationService: AuthenticationService,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    private router: Router) {
     this.createLoginForm();
-    //this.createRegisterForm();
   }
 
   ngOnInit() {
@@ -31,18 +32,13 @@ export class AuthenticationComponent implements OnInit {
     });
   }
 
-  // createRegisterForm(){
-  //   this.registerForm = this.formBuilder.group({
-  //     username: ['', Validators.required ],
-  //     password: ['', Validators.required ]
-  //   });
-  // }
-
   login(data){
     this.authenticationService.getAuthenticationFromBackend(data.email, data.password).subscribe(
       () => {
         console.log('authentication successful !');
         this.authenticationErrorMessage = 'Bonjour !';
+        // à tester...
+        //this.router.navigate([this.destinationRoute]);
       },
       () => {
         console.error('authentication failed !');
@@ -50,14 +46,4 @@ export class AuthenticationComponent implements OnInit {
       }
     );
   }
-
-  // addAccounts(data){
-  //   this.test = data.accessKey;
-  // }
-
-  // toggleForm(){
-  //   this.registerToggle = (this.registerToggle === false) ? true : false;
-  //   this.loginForm.reset();
-  //   this.registerForm.reset();
-  // }
 }

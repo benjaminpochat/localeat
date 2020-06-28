@@ -2,6 +2,6 @@
   <div class="main-menu-home" routerLink="/">M!</div>
   <div></div>
   <div class="main-menu-end" routerLink="/breeder-area">espace éleveur</div>
-  <div class="main-menu-end" [hidden]="authentication ? false : true" (click)="logout()" >déconnexion</div>
-  <div class="main-menu-end" [hidden]="authentication ? true : false" routerLink="/authentication">connexion</div>
+  <div class="main-menu-end" [hidden]="!authentication" (click)="logout()" >déconnexion</div>
+  <div class="main-menu-end" [hidden]="authentication" routerLink="/authentication">connexion</div>
 </div>

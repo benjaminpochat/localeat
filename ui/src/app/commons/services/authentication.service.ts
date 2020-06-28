@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-
-import { BehaviorSubject } from 'rxjs';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import * as decodeJwt from 'jwt-decode';
 
 @Injectable({
@@ -15,7 +15,7 @@ export class AuthenticationService {
   private authentication = new BehaviorSubject(this.getAuthenticationFromCookie());
   currentAuthentication = this.authentication.asObservable();
 
-  public getAuthenticationFromBackend(identifier: string, password: string ) {
+  public getAuthenticationFromBackend(identifier: string, password: string ): Observable<string> {
     const httpOptions = {
       headers: new HttpHeaders({
         Authorization : 'Basic ' + btoa(identifier + ':' + password)
@@ -23,7 +23,7 @@ export class AuthenticationService {
       responseType : 'text' as 'text',
       withCredentials : true
     };
-    const response = this.http.get('http://localhost:8080/authentication', httpOptions);
+    const response = this.http.get(environment.localeatCoreUrl + '/authentication', httpOptions);
     response.subscribe(() => this.authentication.next(this.getAuthenticationFromCookie()));
     return response;
   }
@@ -39,7 +39,7 @@ export class AuthenticationService {
     return jwt as boolean;
   }
 
-  public isAuthenticatedWithAuthority(authority: string): boolean {
+  public isAuthorized(authority: string): boolean {
     //TODO : utiliser l'une des variables locales
     const jwt = this.getAuthenticationFromCookie();
     if (jwt) {

@@ -1,4 +1,4 @@
-<div>
+<div class='authentication-form'>
 <mat-card>
   <div *ngIf="authenticationErrorMessage">{{authenticationErrorMessage}}</div>
   <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">

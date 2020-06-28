@@ -1,13 +1,11 @@
 <p>Bienvenu dans l'espace éleveur</p>
-<div [hidden]="authentication">
+<div [hidden]="isAuthenticated()" id="authentication-form">
   Vous n'êtes pas loggé. Vous devez d'abord vous logger.
+  <app-authentication [destinationRoute]="currentUrl"></app-authentication>
 </div>
-<div [hidden]="authentication">
- <app-authentication></app-authentication>
-</div>
-<div [hidden]="!authentication || isAuthorized()">
+<div [hidden]="isAuthorized() || !isAuthenticated()" id="forbiden-zone-message">
   Vous n'êtes pas autorisé à accéder à l'espace éleveur
 </div>
-<div [hidden]="!isAuthorized()">
+<div [hidden]="!isAuthorized()" id="slaughters-list">
   Vos prochains abbattages...
 </div>

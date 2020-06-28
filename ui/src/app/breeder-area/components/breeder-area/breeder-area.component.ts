@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../../commons/services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-breeder-area',
@@ -8,23 +9,21 @@ import { AuthenticationService } from '../../../commons/services/authentication.
 })
 export class BreederAreaComponent implements OnInit {
 
-  constructor(private authenticationService: AuthenticationService) { }
+  constructor(
+    private authenticationService: AuthenticationService,
+    private router: Router) { }
 
-  authentication;
+  currentUrl: string = this.router.url;
 
   ngOnInit(): void {
-    this.authenticationService.currentAuthentication.subscribe(authentication => this.authentication = authentication);
+  }
+
+  isAuthenticated(): boolean {
+    return this.authenticationService.isAuthenticated();
   }
 
   isAuthorized(): boolean {
-    if (!this.authentication){
-      return false;
-    }
-    const authorities = this.authentication.authorities as Array<string>;
-    if ( authorities ) {
-      return authorities.includes("BREEDER");
-    }
-    return false;
+    return this.authenticationService.isAuthorized('BREEDER');
   }
 
 }
