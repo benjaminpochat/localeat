@@ -1,5 +1,5 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests
-
+#TODO: add coverage report on coveralls (https://github.com/mattjmorrison/grunt-karma-coveralls)
 name: build-ui
 
 on:
@@ -20,5 +20,5 @@ jobs:
         with:
           node-version: 10.21.0
       - name: Build, and test with "ng test"
-        run: npm set progress=false && npm install && npm run ng test --watch=false --browsers=ChromeHeadless
+        run: npm set progress=false && npm install && npm run ng test --watch=false --browsers=ChromeHeadlessCustom
         working-directory: ./ui
