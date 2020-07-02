@@ -1,0 +1,24 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests
+
+name: build-ui
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 10.21.0
+        uses: actions/setup-node@v1
+        with:
+          node-version: 10.21.0
+      - name: Build, and test with "ng test"
+        run: ng test --watch=false --browsers=ChromeHeadless
+        working-directory: ./ui
