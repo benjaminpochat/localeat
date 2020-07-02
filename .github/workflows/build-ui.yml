@@ -1,5 +1,4 @@
-# This workflow will do a clean install of node dependencies, build the source code and run tests
-#TODO: add coverage report on coveralls (https://github.com/nickmerwin/node-coveralls#with-jasmine)
+# This workflow will do a clean install of node dependencies, build the source code, run tests, and publish java testing coverage to Coveralls
 name: build-ui
 
 on:
@@ -15,10 +14,24 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+
       - name: Use Node.js 10.21.0
         uses: actions/setup-node@v1
         with:
           node-version: 10.21.0
+
+      - name: Cache node modules
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       - name: Build, and test with "ng test"
         run: npm set progress=false && npm install && npm run ng test -- --watch=false --browsers=ChromeHeadless
+        working-directory: ./ui
+
+      - name: Publish coverage to Coveralls
+        run: cat ./coverage/ui/lcov.info |./node_modules/coveralls/bin/coveralls.js
         working-directory: ./ui
