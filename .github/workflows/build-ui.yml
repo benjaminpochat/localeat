@@ -20,5 +20,5 @@ jobs:
         with:
           node-version: 10.21.0
       - name: Build, and test with "ng test"
-        run: ng test --watch=false --browsers=ChromeHeadless
+        run: npm set progress=false && npm install && npm run ng test --watch=false --browsers=ChromeHeadless
         working-directory: ./ui
