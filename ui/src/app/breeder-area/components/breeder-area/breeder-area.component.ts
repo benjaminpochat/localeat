@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthenticationService } from '../../../commons/services/authentication.service';
 import { Router } from '@angular/router';
+import { SideMenuComponent } from 'src/app/commons/components/side-menu/side-menu.component';
 
 @Component({
   selector: 'app-breeder-area',
@@ -9,21 +10,36 @@ import { Router } from '@angular/router';
 })
 export class BreederAreaComponent implements OnInit {
 
+  currentUrl: string = this.router.url;
+
+  @ViewChild(SideMenuComponent)
+  private sideMenu: SideMenuComponent;
+
   constructor(
     private authenticationService: AuthenticationService,
     private router: Router) { }
-
-  currentUrl: string = this.router.url;
 
   ngOnInit(): void {
   }
 
   isAuthenticated(): boolean {
-    return this.authenticationService.isAuthenticated();
+    //return this.authenticationService.isAuthenticated();
+    return true;
   }
 
   isAuthorized(): boolean {
-    return this.authenticationService.isAuthorized('BREEDER');
+    //return this.authenticationService.isAuthorized('BREEDER');
+    return true;
   }
 
+  showSideMenu(sideMenuShown: boolean){
+    this.sideMenu.showSideMenu();
+  }
+
+  showContent(contentId: string){
+    document.getElementById(contentId).scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+      inline: 'nearest'});
+  }
 }

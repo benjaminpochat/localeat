@@ -21,7 +21,7 @@ export class AuthenticationComponent implements OnInit {
     this.createLoginForm();
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
 
   }
 

@@ -1,5 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Output, Input } from '@angular/core';
 import { AuthenticationService } from '../../../commons/services/authentication.service';
+import { SideMenuComponent } from '../side-menu/side-menu.component';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-main-menu',
@@ -8,9 +10,13 @@ import { AuthenticationService } from '../../../commons/services/authentication.
 })
 export class MainMenuComponent implements OnInit {
 
-  constructor(private authenticationService: AuthenticationService) { }
-
+  @Output() sideMenuActivated = new EventEmitter<boolean>();
+  @Input() sideMenuDisabled = true;
   authentication;
+
+  constructor(
+    private authenticationService: AuthenticationService,
+    private sideMenuComponent: SideMenuComponent) { }
 
   ngOnInit(): void {
     this.authenticationService.currentAuthentication.subscribe(authentication => this.authentication = authentication);
@@ -20,4 +26,7 @@ export class MainMenuComponent implements OnInit {
     this.authenticationService.deleteAuthentication();
   }
 
+  showSideMenu(): void {
+    this.sideMenuActivated.emit(true);
+  }
 }

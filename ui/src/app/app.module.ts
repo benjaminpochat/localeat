@@ -4,7 +4,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CommonsModule } from './commons/commons.module';
 import { AuthenticationInterceptor } from './commons/services/authentication-interceptor.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -15,37 +14,30 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule  } from '@angular/material/dialog';
-import { DeliveryComponent } from './delivery/components/delivery/delivery.component';
-import { BreederAreaComponent } from './breeder-area/components/breeder-area/breeder-area.component';
-
+import { MatSliderModule } from '@angular/material/slider';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
+import { CustomerAreaModule } from './customer-area/customer-area.module';
+import { BreederAreaModule } from './breeder-area/breeder-area.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DeliveryComponent,
-    BreederAreaComponent,
   ],
   imports: [
-    BrowserModule,
+    // external modules
     AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    CommonsModule,
+    BrowserModule,
     BrowserAnimationsModule,
-    MatFormFieldModule,
-    MatGridListModule,
-    MatInputModule,
-    MatButtonModule,
-    MatCardModule,
-    MatTableModule,
-    MatCheckboxModule,
-    MatDialogModule,
-    FormsModule,
-    ReactiveFormsModule,
+
+    // localeat modules
+    BreederAreaModule,
+    CustomerAreaModule,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true },
+    { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' }
+
   ],
   bootstrap: [
     AppComponent

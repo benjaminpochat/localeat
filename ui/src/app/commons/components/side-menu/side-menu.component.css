@@ -1,0 +1,34 @@
+.side-menu {
+  height: 100%;
+  width: 200px;
+  background-color: white;
+  box-shadow: 0 0 1em black;
+  z-index: 10;
+  display: block;
+  position: fixed;
+  font-family: Acme;
+}
+
+.side-menu div:first-child {
+  display: block;
+}
+
+.side-menu div:first-child span {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  color: black;
+  background-color: lightgray;
+  width: 40px;
+  height: 40px;
+  font-size: 30px;
+  font-family: Acme;
+  text-align: center;
+  cursor: pointer;
+}
+
+
+.side-menu-link {
+  width: 100%;
+  cursor: pointer;
+}

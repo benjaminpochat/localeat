@@ -1,7 +1,7 @@
 <div class='main-menu'>
-  <div class="main-menu-home" routerLink="/">M!</div>
+  <div class="side-menu-activator main-menu-home" [hidden]="sideMenuDisabled" (click)='showSideMenu()'>☰</div>
+  <div class="main-menu-home" routerLink="/">Viande Direct</div>
   <div></div>
-  <div class="main-menu-end" routerLink="/breeder-area">espace éleveur</div>
   <div class="main-menu-end" [hidden]="!authentication" (click)="logout()" >déconnexion</div>
   <div class="main-menu-end" [hidden]="authentication" routerLink="/authentication">connexion</div>
 </div>

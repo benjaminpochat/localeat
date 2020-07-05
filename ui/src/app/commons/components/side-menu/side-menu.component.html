@@ -1,0 +1,12 @@
+<div [hidden]="!sideMenuShown">
+  <nav class='side-menu'>
+    <div>
+      <span (click)='hideSideMenu()'>x</span>
+      <div>nom utilisateur</div>
+    </div>
+    <br>
+    <div class='side-menu-link' (click)="showSlaughtersList()">plannifier</div>
+    <div class='side-menu-link' (click)="showSalesList()">vendre</div>
+    <div class='side-menu-link' (click)="showDeliveriesList()">livrer</div>
+  </nav>
+</div>

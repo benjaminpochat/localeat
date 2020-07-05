@@ -1,6 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -12,31 +10,32 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule  } from '@angular/material/dialog';
 import { MainMenuComponent } from './components/main-menu/main-menu.component';
 import { AuthenticationComponent } from './components/authentication/authentication.component';
-
-
+import { SideMenuComponent } from './components/side-menu/side-menu.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
+    AuthenticationComponent,
     MainMenuComponent,
-    AuthenticationComponent
+    SideMenuComponent
   ],
   imports: [
-    CommonModule,
-    RouterModule,
+    HttpClientModule,
+    FormsModule,
+    MatButtonModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatDialogModule,
     MatFormFieldModule,
     MatGridListModule,
     MatInputModule,
-    MatButtonModule,
-    MatCardModule,
     MatTableModule,
-    MatCheckboxModule,
-    MatDialogModule,
-    FormsModule,
     ReactiveFormsModule
   ],
   exports: [
+    AuthenticationComponent,
     MainMenuComponent,
-    AuthenticationComponent
+    SideMenuComponent
   ]
 })
 export class CommonsModule { }

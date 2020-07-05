@@ -1,0 +1,7 @@
+<div class='subtitle-action' (click)='toggleSlaughterCreation()'>
+  <span [hidden]="slaughterFormCreation">+</span>
+  <span [hidden]="!slaughterFormCreation">-</span>
+</div>
+<div class='action-form' [hidden]="!slaughterFormCreation">
+  <app-slaughter-creation></app-slaughter-creation>
+</div>
