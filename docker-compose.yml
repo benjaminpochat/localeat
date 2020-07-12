@@ -26,9 +26,10 @@ services:
       - localeat_datasource_username=localeat
       - localeat_datasource_password=localeat
 
-  gui:
+  ui:
     build:
-      context: "./ui"
+      context: "."
+      dockerfile: ./ui/Dockerfile
     image: benjaminpochat/localeat-ui:${DOCKER_IMAGE_TAG:-latest}
     networks:
       - hostnet
