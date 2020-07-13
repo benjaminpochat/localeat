@@ -4,6 +4,7 @@ import { BreederAreaComponent } from './components/breeder-area/breeder-area.com
 import { SlaughtersActionsComponent } from './components/slaughters-actions/slaughters-actions.component';
 import { SlaughterCreationComponent } from './components/slaughter-creation/slaughter-creation.component';
 import { CommonsModule } from '../commons/commons.module';
+import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,6 +15,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatTableModule } from '@angular/material/table';
@@ -30,6 +32,7 @@ import { DeliveriesListComponent } from './components/deliveries-list/deliveries
     SlaughterCreationComponent,
   ],
   imports: [
+    CommonModule,
     FormsModule,
     HttpClientModule,
     MatButtonModule,
@@ -40,6 +43,7 @@ import { DeliveriesListComponent } from './components/deliveries-list/deliveries
     MatFormFieldModule,
     MatGridListModule,
     MatInputModule,
+    MatListModule,
     MatNativeDateModule,
     MatSliderModule,
     MatTableModule,

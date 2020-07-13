@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Slaughter } from 'src/app/commons/models/slaughter.model';
 import { SlaughterService } from '../../services/slaughter.service';
 
@@ -10,13 +10,18 @@ import { SlaughterService } from '../../services/slaughter.service';
 export class SlaughtersListComponent implements OnInit {
 
   slaughters: Slaughter[];
+  searchLoopback = new EventEmitter<Slaughter[]>();
 
   constructor(
     private slaughterService: SlaughterService
   ) { }
 
   ngOnInit(): void {
-    this.slaughters = this.slaughterService.getSlaughters();
+    this.searchLoopback.subscribe(slaughters => this.initSlaughters(slaughters));
+    this.slaughterService.getSlaughters(this.searchLoopback);
   }
 
+  private initSlaughters(slaughters: Slaughter[]) {
+    return this.slaughters = slaughters;
+  }
 }
