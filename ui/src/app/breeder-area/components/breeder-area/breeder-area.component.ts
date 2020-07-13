@@ -23,13 +23,11 @@ export class BreederAreaComponent implements OnInit {
   }
 
   isAuthenticated(): boolean {
-    //return this.authenticationService.isAuthenticated();
-    return true;
+    return this.authenticationService.isAuthenticated();
   }
 
   isAuthorized(): boolean {
-    //return this.authenticationService.isAuthorized('BREEDER');
-    return true;
+    return this.authenticationService.isAuthorized('BREEDER');
   }
 
   showSideMenu(sideMenuShown: boolean){
