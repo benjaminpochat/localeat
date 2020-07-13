@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { SlaughterService } from '../../services/slaughter.service';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Slaughter } from 'src/app/commons/models/slaughter.model';
@@ -13,6 +13,7 @@ export class SlaughterCreationComponent implements OnInit {
 
   slaughterForm: FormGroup;
   slaughter: Slaughter;
+  @Output() creationLoopBack = new EventEmitter<Slaughter>();
 
   constructor(
     private slaughterService: SlaughterService,
@@ -25,8 +26,9 @@ export class SlaughterCreationComponent implements OnInit {
   }
 
   saveSlaughter(slaughterFormValue): void {
-    this.slaughter.cuttingDate = slaughterFormValue.slaughterDate;
-    this.slaughterService.createSlaughter(this.slaughter);
+    this.slaughter.slaughterDate = slaughterFormValue.slaughterDate;
+    this.slaughter.animal.liveWeight = slaughterFormValue.liveWeight;
+    this.slaughterService.createSlaughter(this.slaughter, this.creationLoopBack);
   }
 
   createSlaughterForm() {

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import { Slaughter } from 'src/app/commons/models/slaughter.model';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -14,8 +14,12 @@ export class SlaughterService {
     return [];
   }
 
-  public createSlaughter(slaughter: Slaughter){
-    const response = this.http.post(environment.localeatCoreUrl + '/slaughters', slaughter);
-    response.subscribe(() => console.log('Slaughter saved.'));
+  public createSlaughter(slaughter: Slaughter, loopBack: EventEmitter<Slaughter>): void{
+    const response = this.http.post<Slaughter>(environment.localeatCoreUrl + '/slaughters', slaughter);
+    response.subscribe(
+      slaughterCreated => {
+        console.log('Slaughter saved.');
+        loopBack.emit(slaughterCreated);
+      });
   }
 }

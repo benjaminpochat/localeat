@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Slaughter } from 'src/app/commons/models/slaughter.model';
 
 @Component({
   selector: 'app-slaughters-actions',
@@ -7,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SlaughtersActionsComponent implements OnInit {
 
-  slaughterFormCreation = false;
+  formCreationShown = false;
+  message = '';
 
   constructor() {
   }
@@ -16,6 +18,11 @@ export class SlaughtersActionsComponent implements OnInit {
   }
 
   toggleSlaughterCreation(): void {
-    this.slaughterFormCreation = !this.slaughterFormCreation;
+    this.formCreationShown = !this.formCreationShown;
+  }
+
+  handleCreationResponse(slaughterCreated: Slaughter): void {
+    this.formCreationShown = false;
+    this.message = 'Un nouvel abattage a été créé avec le n° ' + slaughterCreated.id + ' :)';
   }
 }

@@ -1,7 +1,8 @@
 <button mat-flat-button class='subtitle-action' (click)='toggleSlaughterCreation()'>
-  <span [hidden]="slaughterFormCreation">creer</span>
-  <span [hidden]="!slaughterFormCreation">annuler</span>
+  <span [hidden]="formCreationShown">creer</span>
+  <span [hidden]="!formCreationShown">annuler</span>
 </button>
-<div class='action-form' [hidden]="!slaughterFormCreation">
-  <app-slaughter-creation></app-slaughter-creation>
+<div>{{message}}</div>
+<div class='action-form' [hidden]="!formCreationShown">
+  <app-slaughter-creation (creationLoopBack)="handleCreationResponse($event)"></app-slaughter-creation>
 </div>
