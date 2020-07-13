@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SlaughterService } from '../../services/slaughter.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Slaughter } from 'src/app/commons/models/slaughter.model';
+import { MatSliderChange } from '@angular/material/slider';
 
 @Component({
   selector: 'app-slaughter-creation',
@@ -23,21 +24,20 @@ export class SlaughterCreationComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  saveSlaughter(slaughterFormValue): void {
+    this.slaughter.cuttingDate = slaughterFormValue.slaughterDate;
+    this.slaughterService.createSlaughter(this.slaughter);
+  }
 
   createSlaughterForm() {
     this.slaughterForm = this.formBuilder.group({
-      slaughterDate: ['', Validators.required ],
-      liveWeight: ['', Validators.required]
+      slaughterDate: new FormControl(null, Validators.required),
+      liveWeight: new FormControl(0, Validators.required)
     });
   }
 
-  saveSlaughter(data): void {
-    const slaughter = new Slaughter();
-    slaughter.slaughterDate = data.date;
-    this.slaughterService.createSlaughter(slaughter);
-  }
-
-  hideSlaughterForm(): void {
-    //this.slaughterFormShown = false;
+  setLiveWeight(sliderChange: MatSliderChange){
+    console.log('live weight = ' + sliderChange.value);
+    this.slaughterForm.patchValue({liveWeight: sliderChange.value });
   }
 }

@@ -1,19 +1,25 @@
-<div class="action-form-title">Nouvel abattage</div>
-<form [formGroup]="slaughterForm" (ngSubmit)="saveSlaughter(slaughterForm.value)">
-  <div class="action-form-field">
-    <mat-form-field>
-      <input matInput formControlName="slaughterDate" [matDatepicker]="slaughterDatePicker" placeholder="Date d'abattage" disabled>
-      <mat-datepicker-toggle matSuffix [for]="slaughterDatePicker"></mat-datepicker-toggle>
-      <mat-datepicker #slaughterDatePicker disabled="false"></mat-datepicker>
-    </mat-form-field>
-  </div>
-  <div class="action-form-field">
-    <mat-form-field>
-      Poids vif estimé : {{liveWeightSlider.value}} kg
-      <input matInput formControlName="liveWeight" hidden="true">
-      <mat-slider min="0" max="1000" step="50" tickInterval="10" thumbLabel #liveWeightSlider></mat-slider>
-    </mat-form-field>
-  </div>
-  <div class="action-form-button">enregistrer</div>
-  <div class="action-form-button">annuler</div>
-</form>
+<mat-card>
+  <form [formGroup]="slaughterForm" (ngSubmit)="saveSlaughter(slaughterForm.value)">
+    <mat-card-header>
+      <mat-card-title>Nouvel abattage</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="action-form-field">
+          <mat-form-field>
+            <input matInput formControlName="slaughterDate" [matDatepicker]="slaughterDatePicker" placeholder="Date d'abattage">
+            <mat-datepicker-toggle matSuffix [for]="slaughterDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #slaughterDatePicker disabled="false"></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="action-form-field">
+          <mat-form-field>
+            <input matInput formControlName="liveWeight" placeholder="Poids vif estimé">
+            <mat-slider min="0" max="1000" step="50" tickInterval="10" thumbLabel #liveWeightSlider (change)="setLiveWeight($event)"></mat-slider>
+          </mat-form-field>
+        </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button type="submit" mat-button>enregistrer</button>
+    </mat-card-actions>
+  </form>
+</mat-card>

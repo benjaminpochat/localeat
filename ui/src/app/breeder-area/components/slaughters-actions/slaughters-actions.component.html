@@ -1,7 +1,7 @@
-<div class='subtitle-action' (click)='toggleSlaughterCreation()'>
-  <span [hidden]="slaughterFormCreation">+</span>
-  <span [hidden]="!slaughterFormCreation">-</span>
-</div>
+<button mat-flat-button class='subtitle-action' (click)='toggleSlaughterCreation()'>
+  <span [hidden]="slaughterFormCreation">creer</span>
+  <span [hidden]="!slaughterFormCreation">annuler</span>
+</button>
 <div class='action-form' [hidden]="!slaughterFormCreation">
   <app-slaughter-creation></app-slaughter-creation>
 </div>
