@@ -10,6 +10,5 @@ export class Slaughter {
 
   constructor(){
     this.animal = new Animal();
-    this.delivery = new Delivery();
   }
 }

@@ -37,8 +37,7 @@ export class AuthenticationComponent implements OnInit {
       () => {
         console.log('authentication successful !');
         this.authenticationErrorMessage = 'Bonjour !';
-        // à tester...
-        //this.router.navigate([this.destinationRoute]);
+        this.router.navigate([this.destinationRoute]);
       },
       () => {
         console.error('authentication failed !');

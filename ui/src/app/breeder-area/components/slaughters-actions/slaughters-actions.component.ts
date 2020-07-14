@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Slaughter } from 'src/app/commons/models/slaughter.model';
 
 @Component({
@@ -8,6 +8,7 @@ import { Slaughter } from 'src/app/commons/models/slaughter.model';
 })
 export class SlaughtersActionsComponent implements OnInit {
 
+  @Output() creationLoopBack = new EventEmitter<Slaughter>();
   formCreationShown = false;
   message = '';
 
@@ -23,6 +24,7 @@ export class SlaughtersActionsComponent implements OnInit {
 
   handleCreationResponse(slaughterCreated: Slaughter): void {
     this.formCreationShown = false;
+    this.creationLoopBack.emit(slaughterCreated);
     this.message = 'Un nouvel abattage a été créé avec le n° ' + slaughterCreated.id + ' :)';
   }
 }

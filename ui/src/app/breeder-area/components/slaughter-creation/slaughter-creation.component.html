@@ -13,6 +13,13 @@
         </div>
         <div class="action-form-field">
           <mat-form-field>
+            <input matInput formControlName="cuttingDate" [matDatepicker]="cuttingDatePicker" placeholder="Date découpe">
+            <mat-datepicker-toggle matSuffix [for]="cuttingDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #cuttingDatePicker disabled="false"></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="action-form-field">
+          <mat-form-field>
             <input matInput formControlName="liveWeight" placeholder="Poids vif estimé">
             <mat-slider min="0" max="1000" step="50" tickInterval="10" thumbLabel #liveWeightSlider (change)="setLiveWeight($event)"></mat-slider>
           </mat-form-field>

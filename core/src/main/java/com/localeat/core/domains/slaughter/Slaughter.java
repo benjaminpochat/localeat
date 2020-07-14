@@ -24,6 +24,8 @@ public class Slaughter implements com.localeat.model.domains.slaughter.Slaughter
 
     private LocalDate slaughterDate;
 
+    private LocalDate cuttingDate;
+
     public Long getId() {
         return id;
     }
@@ -57,5 +59,14 @@ public class Slaughter implements com.localeat.model.domains.slaughter.Slaughter
 
     public void setSlaughterDate(LocalDate slaughterDate) {
         this.slaughterDate = slaughterDate;
+    }
+
+    @Override
+    public LocalDate getCuttingDate() {
+        return cuttingDate;
+    }
+
+    public void setCuttingDate(LocalDate cuttingDate) {
+        this.cuttingDate = cuttingDate;
     }
 }

@@ -6,5 +6,6 @@ import java.time.LocalDate;
 public interface Slaughter<A extends Animal, D extends Delivery> {
     public A getAnimal();
     public LocalDate getSlaughterDate();
+    public LocalDate getCuttingDate();
     public D getDelivery();
 }

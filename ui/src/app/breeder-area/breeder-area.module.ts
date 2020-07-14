@@ -18,6 +18,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSliderModule } from '@angular/material/slider';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { MatTableModule } from '@angular/material/table';
 import { SalesListComponent } from './components/sales-list/sales-list.component';
 import { DeliveriesListComponent } from './components/deliveries-list/deliveries-list.component';
@@ -46,6 +47,7 @@ import { DeliveriesListComponent } from './components/deliveries-list/deliveries
     MatListModule,
     MatNativeDateModule,
     MatSliderModule,
+    MatSlideToggleModule,
     MatTableModule,
     ReactiveFormsModule,
     CommonsModule,

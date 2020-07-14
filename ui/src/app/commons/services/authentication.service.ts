@@ -42,8 +42,10 @@ export class AuthenticationService {
   public isAuthorized(authority: string): boolean {
     //TODO : utiliser l'une des variables locales
     const jwt = this.getAuthenticationFromCookie();
+    console.log(jwt);
     if (jwt) {
       const authorities = jwt.authorities as Array<string>;
+      console.log(authorities);
       if ( authorities ) {
         return authorities.includes(authority);
       }
