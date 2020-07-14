@@ -2,6 +2,7 @@ import { Component, OnInit, Output, Input } from '@angular/core';
 import { AuthenticationService } from '../../../commons/services/authentication.service';
 import { SideMenuComponent } from '../side-menu/side-menu.component';
 import { EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main-menu',
@@ -16,7 +17,8 @@ export class MainMenuComponent implements OnInit {
 
   constructor(
     private authenticationService: AuthenticationService,
-    private sideMenuComponent: SideMenuComponent) { }
+    private sideMenuComponent: SideMenuComponent,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.authenticationService.currentAuthentication.subscribe(authentication => this.authentication = authentication);
@@ -24,6 +26,7 @@ export class MainMenuComponent implements OnInit {
 
   logout() {
     this.authenticationService.deleteAuthentication();
+    this.router.navigate(['/authentication', {destinationRoute: this.router.url}]);
   }
 
   showSideMenu(): void {

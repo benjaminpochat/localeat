@@ -1,3 +1,21 @@
+.authentication-title{
+  font-family: Acme;
+  font-size: larger;
+  display: block;
+  text-align: center;
+  background-color: darkolivegreen;
+  color: whitesmoke;
+}
+
+.authentication-subtitle{
+  font-family: Acme;
+  font-size: large;
+  display: block;
+  text-align: center;
+  background-color: darkolivegreen;
+  color: whitesmoke;
+}
+
 mat-card{
   width: 30%;
   height: 50%;

@@ -1,20 +1,13 @@
 <app-main-menu [sideMenuDisabled]="false" (sideMenuActivated)="showSideMenu($event)"></app-main-menu>
 <app-side-menu #sideMenu (contentShown)="showContent($event)"></app-side-menu>
 <div class='content-body'>
-  <div [hidden]="isAuthenticated()" id="authentication-form">
-    Vous n'êtes pas loggé. Vous devez d'abord vous logger.
-    <app-authentication [destinationRoute]="currentUrl"></app-authentication>
-  </div>
-  <div [hidden]="isAuthorized() || !isAuthenticated()" id="forbiden-zone-message">
-    Vous n'êtes pas autorisé à accéder à l'espace éleveur
-  </div>
-  <div [hidden]="!isAuthorized()" id="slaughters-list">
+  <div id="slaughters-list">
     <app-slaughters-list></app-slaughters-list>
   </div>
-  <div [hidden]="!isAuthorized()" id="sales-list">
+  <div id="sales-list">
     <app-sales-list></app-sales-list>
   </div>
-  <div [hidden]="!isAuthorized()" id="deliveries-list">
+  <div id="deliveries-list">
     <app-deliveries-list></app-deliveries-list>
   </div>
 </div>

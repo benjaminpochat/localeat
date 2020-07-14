@@ -10,8 +10,6 @@ import { SideMenuComponent } from 'src/app/commons/components/side-menu/side-men
 })
 export class BreederAreaComponent implements OnInit {
 
-  currentUrl: string = this.router.url;
-
   @ViewChild(SideMenuComponent)
   private sideMenu: SideMenuComponent;
 
@@ -20,6 +18,9 @@ export class BreederAreaComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
+    if (!this.isAuthenticated() || !this.isAuthorized()){
+      this.router.navigate(['/authentication', {destinationRoute: this.router.url}]);
+    }
   }
 
   isAuthenticated(): boolean {

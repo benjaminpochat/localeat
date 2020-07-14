@@ -1,4 +1,6 @@
 <div class='authentication-form'>
+<div class='authentication-title'>Viande direct</div>
+<div class='authentication-subtitle'>espace éleveur</div>
 <mat-card>
   <div *ngIf="authenticationErrorMessage">{{authenticationErrorMessage}}</div>
   <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">

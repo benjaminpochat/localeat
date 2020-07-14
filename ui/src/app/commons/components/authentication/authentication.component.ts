@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-authentication',
@@ -12,17 +13,18 @@ export class AuthenticationComponent implements OnInit {
 
   loginForm: FormGroup;
   authenticationErrorMessage;
-  @Input() destinationRoute: string;
+  destinationRoute: string;
 
   constructor(
     private authenticationService: AuthenticationService,
     private formBuilder: FormBuilder,
-    private router: Router) {
+    private router: Router,
+    private route: ActivatedRoute) {
     this.createLoginForm();
   }
 
   ngOnInit(): void {
-
+    this.destinationRoute = this.route.snapshot.paramMap.get('destinationRoute');
   }
 
   createLoginForm(){
