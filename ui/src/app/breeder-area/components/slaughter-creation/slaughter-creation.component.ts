@@ -27,7 +27,7 @@ export class SlaughterCreationComponent implements OnInit {
 
   saveSlaughter(slaughterFormValue): void {
     this.slaughter.slaughterDate = slaughterFormValue.slaughterDate;
-    this.slaughter.cuttingDate = slaughterFormValue.cuttingDateConfirmed;
+    this.slaughter.cuttingDate = slaughterFormValue.cuttingDate;
     this.slaughter.animal.liveWeight = slaughterFormValue.liveWeight;
     this.slaughterService.createSlaughter(this.slaughter, this.creationLoopBack);
   }
