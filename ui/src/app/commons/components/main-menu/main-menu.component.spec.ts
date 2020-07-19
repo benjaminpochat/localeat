@@ -4,6 +4,7 @@ import { MainMenuComponent } from './main-menu.component';
 import { HttpTestingController, HttpClientTestingModule } from '@angular/common/http/testing';
 import { Type } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('MainMenuComponent', () => {
   let mainMenuComponent: MainMenuComponent;
@@ -15,7 +16,7 @@ describe('MainMenuComponent', () => {
     beforeEach(async () => {
       TestBed.configureTestingModule({
         declarations: [ MainMenuComponent ],
-        imports: [HttpClientTestingModule],
+        imports: [HttpClientTestingModule, RouterTestingModule],
         providers: [AuthenticationService]
       });
       await TestBed.compileComponents();

@@ -18,8 +18,12 @@ export class BreederAreaComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    if (!this.isAuthenticated() || !this.isAuthorized()){
-      this.router.navigate(['/authentication', {destinationRoute: this.router.url}]);
+    this.redirectToLoginIfNotAuthorized();
+  }
+
+  redirectToLoginIfNotAuthorized() {
+    if (!this.isAuthenticated() || !this.isAuthorized()) {
+      this.router.navigate(['/authentication', { destinationRoute: this.router.url }]);
     }
   }
 

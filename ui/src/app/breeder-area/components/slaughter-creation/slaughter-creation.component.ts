@@ -13,6 +13,7 @@ export class SlaughterCreationComponent implements OnInit {
 
   slaughterForm: FormGroup;
   slaughter: Slaughter;
+  userMessage: string;
   @Output() creationLoopBack = new EventEmitter<Slaughter>();
 
   constructor(
@@ -25,18 +26,22 @@ export class SlaughterCreationComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  saveSlaughter(slaughterFormValue): void {
-    this.slaughter.slaughterDate = slaughterFormValue.slaughterDate;
-    this.slaughter.cuttingDate = slaughterFormValue.cuttingDate;
-    this.slaughter.animal.liveWeight = slaughterFormValue.liveWeight;
-    this.slaughterService.createSlaughter(this.slaughter, this.creationLoopBack);
+  saveSlaughter(): void {
+    if (this.slaughterForm.valid) {
+      this.slaughter.slaughterDate = this.slaughterForm.value.slaughterDate;
+      this.slaughter.cuttingDate = this.slaughterForm.value.cuttingDate;
+      this.slaughter.animal.liveWeight = this.slaughterForm.value.liveWeight;
+      this.slaughterService.createSlaughter(this.slaughter, this.creationLoopBack);
+    } else {
+      this.userMessage = 'Veuillez vérifier les informations saisies.';
+    }
   }
 
   createSlaughterForm() {
     this.slaughterForm = this.formBuilder.group({
       slaughterDate: new FormControl(null, Validators.required),
       cuttingDate: new FormControl(null, Validators.required),
-      liveWeight: new FormControl(0, Validators.required),
+      liveWeight: new FormControl(0, Validators.min(100)),
     });
   }
 
