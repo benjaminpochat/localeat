@@ -19,11 +19,11 @@ export class SlaughterCreationComponent implements OnInit {
   constructor(
     private slaughterService: SlaughterService,
     private formBuilder: FormBuilder) {
-    this.createSlaughterForm();
-    this.slaughter = new Slaughter();
   }
 
   ngOnInit(): void {
+    this.createSlaughterForm();
+    this.slaughter = new Slaughter();
   }
 
   saveSlaughter(): void {

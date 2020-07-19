@@ -1,8 +1,8 @@
 <button mat-flat-button class='subtitle-action' (click)='toggleSlaughterCreation()'>
-  <span [hidden]="formCreationShown">creer</span>
-  <span [hidden]="!formCreationShown">annuler</span>
+  <span [hidden]="creationFormShown">creer</span>
+  <span [hidden]="!creationFormShown">annuler</span>
 </button>
 <div>{{message}}</div>
-<div class='action-form' [hidden]="!formCreationShown">
+<div class='action-form' #creationForm *ngIf="creationFormShown">
   <app-slaughter-creation (creationLoopBack)="handleCreationResponse($event)"></app-slaughter-creation>
 </div>
