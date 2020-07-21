@@ -102,4 +102,45 @@ public class TestAndDocSlaughterController {
                         preprocessResponse(prettyPrint())));
     }
 
+    @Test
+    public void createSlaughterWithDelivery() throws Exception {
+        // given
+        var requestBody = "{" +
+                "\"animal\":{" +
+                "   \"animalType\":null," +
+                "   \"liveWeight\":200," +
+                "   \"meatWeight\":80," +
+                "   \"finalFarm\":null," +
+                "   \"identificationNumber\":null" +
+                "   }," +
+                "\"delivery\":{" +
+                "   \"address\":{" +
+                "       \"addressLine1\":\"3 rue des pommiers\"," +
+                "       \"city\":\"Juan-les-Pins\"" +
+                "   }," +
+                "   \"availableProducts\":[" +
+                "       {\"price\":\"13\"}" +
+                "   ]" +
+                "}," +
+                "\"slaughterDate\":\"2020-07-27\"," +
+                "\"cuttingDate\":null" +
+                "}";
+        this.mockMvc.perform(post("/slaughters")
+                        .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(requestBody));
+
+        // when, then
+        this.mockMvc
+                .perform(post("/slaughters")
+                        .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(requestBody))
+                .andExpect(status().isOk())
+                .andDo(document(
+                        "create-slaughter",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint())));
+    }
+
 }

@@ -80,3 +80,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .subtitle > div{
   font-family: Acme;
 }
+
+.user-alert {
+  color: darkred;
+}

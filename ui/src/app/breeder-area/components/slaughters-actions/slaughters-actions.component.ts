@@ -1,7 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { Slaughter } from 'src/app/commons/models/slaughter.model';
-import { SideMenuComponent } from 'src/app/commons/components/side-menu/side-menu.component';
-import { SlaughterCreationComponent } from '../slaughter-creation/slaughter-creation.component';
 
 @Component({
   selector: 'app-slaughters-actions',
@@ -13,8 +11,6 @@ export class SlaughtersActionsComponent implements OnInit {
   @Output()
   creationLoopBack = new EventEmitter<Slaughter>();
 
-  @ViewChild(SlaughterCreationComponent)
-  private slaughterCreationComponent: SlaughterCreationComponent;
 
   creationFormShown = false;
   message = '';
@@ -31,7 +27,9 @@ export class SlaughtersActionsComponent implements OnInit {
 
   handleCreationResponse(slaughterCreated: Slaughter): void {
     this.creationFormShown = false;
-    this.creationLoopBack.emit(slaughterCreated);
-    this.message = 'Un nouvel abattage a été créé avec le n° ' + slaughterCreated.id + ' :)';
+    if (slaughterCreated){
+      this.creationLoopBack.emit(slaughterCreated);
+      this.message = 'Un nouvel abattage a été créé.';
+    }
   }
 }

@@ -15,7 +15,7 @@ export class SlaughterService {
     response.subscribe(slaughtersCollected => loopBack.emit(slaughtersCollected));
   }
 
-  public createSlaughter(slaughter: Slaughter, loopBack: EventEmitter<Slaughter>): void{
+  public saveSlaughter(slaughter: Slaughter, loopBack: EventEmitter<Slaughter>): void{
     const response = this.http.post<Slaughter>(environment.localeatCoreUrl + '/slaughters', slaughter);
     response.subscribe(
       slaughterCreated => {

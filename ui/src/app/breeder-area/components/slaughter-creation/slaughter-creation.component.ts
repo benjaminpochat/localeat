@@ -13,7 +13,7 @@ export class SlaughterCreationComponent implements OnInit {
 
   slaughterForm: FormGroup;
   slaughter: Slaughter;
-  userMessage: string;
+  userAlert: string;
   @Output() creationLoopBack = new EventEmitter<Slaughter>();
 
   constructor(
@@ -31,13 +31,13 @@ export class SlaughterCreationComponent implements OnInit {
       this.slaughter.slaughterDate = this.slaughterForm.value.slaughterDate;
       this.slaughter.cuttingDate = this.slaughterForm.value.cuttingDate;
       this.slaughter.animal.liveWeight = this.slaughterForm.value.liveWeight;
-      this.slaughterService.createSlaughter(this.slaughter, this.creationLoopBack);
+      this.slaughterService.saveSlaughter(this.slaughter, this.creationLoopBack);
     } else {
-      this.userMessage = 'Veuillez vérifier les informations saisies.';
+      this.userAlert = 'Veuillez vérifier les informations saisies.';
     }
   }
 
-  createSlaughterForm() {
+  createSlaughterForm(): void {
     this.slaughterForm = this.formBuilder.group({
       slaughterDate: new FormControl(null, Validators.required),
       cuttingDate: new FormControl(null, Validators.required),
@@ -45,8 +45,12 @@ export class SlaughterCreationComponent implements OnInit {
     });
   }
 
-  setLiveWeight(sliderChange: MatSliderChange){
+  setLiveWeight(sliderChange: MatSliderChange): void{
     console.log('live weight = ' + sliderChange.value);
     this.slaughterForm.patchValue({liveWeight: sliderChange.value });
+  }
+
+  cancel(): void{
+    this.creationLoopBack.emit();
   }
 }

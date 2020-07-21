@@ -1,10 +1,14 @@
 package com.localeat.core.domains.delivery;
 
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.localeat.core.domains.order.Order;
 import com.localeat.core.domains.product.Product;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity

@@ -18,15 +18,18 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSliderModule } from '@angular/material/slider';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
 import { SalesListComponent } from './components/sales-list/sales-list.component';
 import { DeliveriesListComponent } from './components/deliveries-list/deliveries-list.component';
+import { SalePublicationComponent } from './components/sale-publication/sale-publication.component';
 
 @NgModule({
   declarations: [
     BreederAreaComponent,
     DeliveriesListComponent,
+    SalePublicationComponent,
     SalesListComponent,
     SlaughtersActionsComponent,
     SlaughtersListComponent,
@@ -48,6 +51,7 @@ import { DeliveriesListComponent } from './components/deliveries-list/deliveries
     MatNativeDateModule,
     MatSliderModule,
     MatSlideToggleModule,
+    MatStepperModule,
     MatTableModule,
     ReactiveFormsModule,
     CommonsModule,

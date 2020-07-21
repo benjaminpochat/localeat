@@ -22,6 +22,10 @@ public class Product implements com.localeat.model.domains.product.Product {
         this.id = Long.valueOf(id);
     }
 
+    public Product(){
+
+    }
+
     public Long getId() {
         return id;
     }

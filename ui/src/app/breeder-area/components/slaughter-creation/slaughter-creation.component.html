@@ -1,7 +1,7 @@
 <mat-card>
   <form [formGroup]="slaughterForm" (ngSubmit)="saveSlaughter()">
     <mat-card-header>
-      <mat-card-title>Nouvel abattage</mat-card-title>
+      <mat-card-title>Créons un nouvel abattage</mat-card-title>
     </mat-card-header>
     <mat-card-content>
         <div class="action-form-field">
@@ -26,8 +26,9 @@
         </div>
     </mat-card-content>
     <mat-card-actions>
-      <button type="submit" mat-button>enregistrer</button>
-      <span>{{userMessage}}</span>
+      <button mat-button type="submit">Enregistrer</button>
+      <button mat-button (click)="cancel()">Annuler</button>
+      <div class='user-alert'>{{userAlert}}</div>
     </mat-card-actions>
   </form>
 </mat-card>
