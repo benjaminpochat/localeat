@@ -69,7 +69,7 @@ public class TestAndDocSlaughterController {
 
         // when, then
         this.mockMvc
-                .perform(get("/slaughters"))
+                .perform(get("/accounts/1/slaughters"))
                 .andExpect(status().isOk())
                 .andDo(document(
                         "get-all-slaughters",
@@ -91,7 +91,7 @@ public class TestAndDocSlaughterController {
 
         // when, then
         this.mockMvc
-                .perform(post("/slaughters")
+                .perform(post("/accounts/1/slaughters")
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestBody))
@@ -125,14 +125,10 @@ public class TestAndDocSlaughterController {
                 "\"slaughterDate\":\"2020-07-27\"," +
                 "\"cuttingDate\":null" +
                 "}";
-        this.mockMvc.perform(post("/slaughters")
-                        .accept(MediaType.APPLICATION_JSON)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(requestBody));
 
         // when, then
         this.mockMvc
-                .perform(post("/slaughters")
+                .perform(post("/accounts/1/slaughters")
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestBody))

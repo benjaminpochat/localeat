@@ -21,7 +21,7 @@ public class TokenSecurityConfig  extends WebSecurityConfigurerAdapter {
         AuthenticationEntryPoint authenticationEntryPoint;
         http
                 .authorizeRequests()
-                .anyRequest()
+                .antMatchers("/accounts/*")
                 .authenticated()
             .and()
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)

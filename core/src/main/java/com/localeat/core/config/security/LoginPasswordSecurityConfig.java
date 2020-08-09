@@ -40,7 +40,6 @@ public class LoginPasswordSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticated()
             .and()
                 .cors();
-
     }
 
     private BasicAuthenticationEntryPoint getBasicAuthenticationEntryPoint() {

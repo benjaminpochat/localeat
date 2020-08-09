@@ -1,4 +1,4 @@
-package com.localeat.core.domains.authentication;
+package com.localeat.core.domains.security;
 
 import com.localeat.core.config.security.LocalEatRSAKey;
 import com.nimbusds.jose.JOSEException;
@@ -10,9 +10,11 @@ import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,11 +28,19 @@ public class AuthenticationController {
 
     private final Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
 
+    @Autowired
+    AccountRepository accountRepository;
+
+    private Account getAccount(UserDetails userDetails){
+        return accountRepository.getAccountByUsername(userDetails.getUsername());
+    }
+
     @GetMapping(path = "/authentication")
     public void authenticate(HttpServletResponse response){
         SecurityContext securityContext = SecurityContextHolder.getContext();
         Authentication authentication = securityContext.getAuthentication();
-        String jwt = generateJSONWebToken(authentication);
+        Account account = getAccount((UserDetails) securityContext.getAuthentication().getPrincipal());
+        String jwt = generateJSONWebToken(authentication, account);
         Cookie jwtCookie = new Cookie("jwt", jwt);
         jwtCookie.setHttpOnly(false);
         jwtCookie.setSecure(false);
@@ -38,12 +48,13 @@ public class AuthenticationController {
         response.addCookie(jwtCookie);
     }
 
-    private String generateJSONWebToken(Authentication authentication){
+    private String generateJSONWebToken(Authentication authentication, Account account){
         List<String> authenticationsAsString = authentication.getAuthorities().stream().map(authority -> authority.toString()).collect(Collectors.toList());
         JWSSigner signer = new RSASSASigner(LocalEatRSAKey.getRSAPrivateKey());
         JWTClaimsSet claimsSet = new JWTClaimsSet.Builder()
                 .claim("name", authentication.getName())
                 .claim("authorities", authenticationsAsString)
+                .claim("account", account)
                 .build();
         SignedJWT signedJWT = new SignedJWT(
                 new JWSHeader.Builder(JWSAlgorithm.RS256).build(),
