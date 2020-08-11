@@ -1,8 +1,8 @@
 -- BCryptPasswordEncoder
 
---delete from authorities;
---delete from users ;
---delete from accounts;
+delete from authorities;
+delete from users ;
+delete from accounts;
 
 insert into users (username, password, enabled) values ('benjamin', '$2a$10$GAFeu1ig0iTKUXM3nNVuCevYrmPrK2Vh4wosSr5TzqODJ7tsujDKW', true); --1501
 insert into authorities (username, authority) values ('benjamin', 'BREEDER');

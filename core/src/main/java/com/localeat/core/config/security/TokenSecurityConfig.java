@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
+import org.springframework.security.oauth2.server.resource.web.BearerTokenAuthenticationFilter;
 import org.springframework.security.web.AuthenticationEntryPoint;
 
 @Configuration
@@ -19,17 +20,21 @@ public class TokenSecurityConfig  extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         AuthenticationEntryPoint authenticationEntryPoint;
-        http
+        http.cors()
+            .and()
                 .authorizeRequests()
-                .antMatchers("/accounts/*")
+                .antMatchers("/accounts/**")
                 .authenticated()
             .and()
+                .antMatcher("/accounts/**")
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
-                .cors();
+                .addFilterAfter(new AuthorizedAccountFilter(), BearerTokenAuthenticationFilter.class)
+                ;
     }
 
     @Bean
     public JwtDecoder jwtDecoder() {
         return NimbusJwtDecoder.withPublicKey(LocalEatRSAKey.getRSAPublicKey()).build();
     }
+
 }

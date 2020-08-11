@@ -23,8 +23,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 })
 public class TestAuthenticationController {
 
-    private MockMvc mockMvc;
-
     @Autowired
     private TestRestTemplate restTemplate;
 
@@ -34,27 +32,19 @@ public class TestAuthenticationController {
     @Test
     public void getAuthentication() throws Exception {
         // when
-        ResponseEntity<String> result = restTemplate
+        ResponseEntity<String> response = restTemplate
                 .withBasicAuth("benjamin", "1501")
                 .getForEntity("/authentication", String.class);
 
         // then
-        assertThat(result.getStatusCodeValue()).isEqualTo(200);
-        assertThat(result.getHeaders()).containsKey("Set-Cookie");
-        String jwtCookie = result.getHeaders().get("Set-Cookie").stream().filter(s -> s.startsWith("jwt=")).findFirst().orElse(null);
+        var jwtTestUtils = new JwtTestUtils();
+        assertThat(response.getStatusCodeValue()).isEqualTo(200);
+        assertThat(response.getHeaders()).containsKey("Set-Cookie");
+        String jwtCookie = jwtTestUtils.getJwtCookie(response);
         assertThat(jwtCookie).isNotNull();
-        Account account = getAccountFromJwt(jwtCookie);
+        Account account = jwtTestUtils.getAccountFromJwt(jwtCookie, jwtDecoder);
         assertThat(account.getUsername()).isEqualTo("benjamin");
         assertThat(account.getId()).isEqualTo(1);
     }
 
-    private Account getAccountFromJwt(String jwtCookie) throws com.fasterxml.jackson.core.JsonProcessingException {
-        Pattern jwtCookieRegexPattern = Pattern.compile("jwt=([^;]*);.*");
-        Matcher matcher = jwtCookieRegexPattern.matcher(jwtCookie);
-        matcher.matches();
-        String jwtEncoded = matcher.group(1);
-        Jwt jwt = jwtDecoder.decode(jwtEncoded);
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(jwt.getClaimAsString("account"), Account.class);
-    }
 }
