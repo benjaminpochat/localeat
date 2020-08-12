@@ -1,1 +1,14 @@
-<p>Les prochaines livraisons pour manger local...</p>
+<div class="subtitle">
+  <div>Les prochaines livraisons de viande locale</div>
+  <mat-card *ngFor="let delivery of deliveries" class="delivery-card">
+    <mat-card-header>
+      <mat-card-title>Livraison du {{delivery.deliveryDate | date: 'longDate'}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      Prix : {{delivery.price | date}}
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button>Commander</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
