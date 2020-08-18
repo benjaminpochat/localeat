@@ -1,28 +1,29 @@
-package com.localeat.core.domains.customer;
+package com.localeat.core.domains.actor;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "customers")
-public class Customer implements com.localeat.model.domains.customer.Customer {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Actor implements com.localeat.model.domains.actor.Actor {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_id_generator")
-    @SequenceGenerator(name="customer_id_generator", sequenceName = "customer_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "actor_id_generator")
+    @SequenceGenerator(name="actor_id_generator", sequenceName = "actor_id_seq", allocationSize = 1)
     @Column(name = "id", updatable = false, nullable = false)
-    private Long id;
+    private long id;
+
     private String name;
+
     private String firstName;
-    private String phoneNumber;
+
     private String email;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private String phoneNumber;
 
     @Override
     public String getName() {

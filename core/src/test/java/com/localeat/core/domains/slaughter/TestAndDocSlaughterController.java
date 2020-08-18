@@ -1,6 +1,8 @@
 package com.localeat.core.domains.slaughter;
 
 import com.localeat.commons.GenericBuilder;
+import com.localeat.core.domains.farm.Farm;
+import com.localeat.core.domains.farm.FarmRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -9,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.RestDocumentationExtension;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -23,17 +26,27 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
 @SpringBootTest
 @ExtendWith({RestDocumentationExtension.class, SpringExtension.class})
 @Transactional
+@Sql({
+        "/sql/create/com/localeat/domains/security/schema.sql",
+        "/sql/create/com/localeat/domains/security/test_data.sql",
+        "/sql/create/com/localeat/domains/farm/test_data.sql",
+        "/sql/create/com/localeat/domains/actor/test_data.sql"
+})
 public class TestAndDocSlaughterController {
     private MockMvc mockMvc;
 
     @Autowired
     private SlaughterRepository slaughterRepository;
+
+    @Autowired
+    private FarmRepository farmRepository;
 
     @BeforeEach
     public void setUp(WebApplicationContext webApplicationContext,
@@ -46,9 +59,11 @@ public class TestAndDocSlaughterController {
     @Test
     public void getAllSlaughters() throws Exception {
         // given
+        Farm farm1 = farmRepository.findById(1L).orElse(null);
+        Farm farm2 = farmRepository.findById(2L).orElse(null);
         var animal1 = GenericBuilder.of(Animal::new)
                 .with(Animal::setAnimalType, AnimalType.BEEF_CHAROLLAIS)
-                .with(Animal::setFinalFarm, "Ferme du Ruisseau")
+                .with(Animal::setFinalFarm, farm1)
                 .with(Animal::setIdentificationNumber, "ABCD")
                 .build();
         var slaughter1 = GenericBuilder.of(Slaughter::new)
@@ -57,20 +72,66 @@ public class TestAndDocSlaughterController {
                 .build();
         var animal2 = GenericBuilder.of(Animal::new)
                 .with(Animal::setAnimalType, AnimalType.BEEF_LIMOUSINE)
-                .with(Animal::setFinalFarm, "Gaec des 3 frères")
+                .with(Animal::setFinalFarm, farm2)
                 .with(Animal::setIdentificationNumber, "EFGH")
                 .build();
         var slaughter2 = GenericBuilder.of(Slaughter::new)
                 .with(Slaughter::setSlaughterDate, LocalDate.of(2020, JANUARY, 15))
                 .with(Slaughter::setAnimal, animal2)
                 .build();
+        var animal3 = GenericBuilder.of(Animal::new)
+                .with(Animal::setAnimalType, AnimalType.BEEF_LIMOUSINE)
+                .with(Animal::setFinalFarm, farm1)
+                .with(Animal::setIdentificationNumber, "IJKL")
+                .build();
+        var slaughter3 = GenericBuilder.of(Slaughter::new)
+                .with(Slaughter::setSlaughterDate, LocalDate.of(2020, JANUARY, 15))
+                .with(Slaughter::setAnimal, animal3)
+                .build();
         slaughterRepository.save(slaughter1);
         slaughterRepository.save(slaughter2);
+        slaughterRepository.save(slaughter3);
 
         // when, then
         this.mockMvc
                 .perform(get("/accounts/1/slaughters"))
                 .andExpect(status().isOk())
+                .andExpect(content().json("[" +
+                        "{" +
+                            "\"id\":3," +
+                            "\"animal\":{" +
+                                "\"id\":3," +
+                                "\"animalType\":\"BEEF_CHAROLLAIS\"," +
+                                "\"liveWeight\":0.0," +
+                                "\"meatWeight\":0.0," +
+                                "\"finalFarm\":{" +
+                                    "\"id\":1," +
+                                    "\"farmName\":\"La ferme de la Riviere\"," +
+                                    "\"farmDescription\":\"La ferme de la Riviere est un elevage d'excellence\"" +
+                                "}," +
+                                "\"identificationNumber\":\"ABCD\"" +
+                            "}," +
+                            "\"delivery\":null," +
+                            "\"slaughterDate\":\"2020-01-01\"," +
+                            "\"cuttingDate\":null" +
+                        "},{" +
+                            "\"id\":5," +
+                            "\"animal\":{" +
+                                "\"id\":5," +
+                                "\"animalType\":\"BEEF_LIMOUSINE\"," +
+                                "\"liveWeight\":0.0," +
+                                "\"meatWeight\":0.0," +
+                                "\"finalFarm\":{" +
+                                    "\"id\":1," +
+                                    "\"farmName\":\"La ferme de la Riviere\"," +
+                                    "\"farmDescription\":\"La ferme de la Riviere est un elevage d'excellence\"" +
+                                "}," +
+                                "\"identificationNumber\":\"IJKL\"" +
+                            "}," +
+                            "\"delivery\":null," +
+                            "\"slaughterDate\":\"2020-01-15\"," +
+                            "\"cuttingDate\":null" +
+                        "}]"))
                 .andDo(document(
                         "get-all-slaughters",
                         preprocessRequest(prettyPrint()),
@@ -83,7 +144,7 @@ public class TestAndDocSlaughterController {
         var requestBody = "{\n" +
                 "  \"animal\" : {\n" +
                 "    \"animalType\" : \"BEEF_CHAROLLAIS\",\n" +
-                "    \"finalFarm\" : \"Ferme du Ruisseau\",\n" +
+                "    \"finalFarm\" : {\"id\" : 1},\n" +
                 "    \"identificationNumber\" : \"ABCD\"\n" +
                 "  },\n" +
                 "  \"slaughterDate\" : \"2020-01-01\"\n" +
@@ -96,7 +157,7 @@ public class TestAndDocSlaughterController {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestBody))
                 .andExpect(status().isOk())
-                .andDo(document(
+                .andDo(document(        
                         "create-slaughter",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint())));

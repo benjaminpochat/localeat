@@ -1,6 +1,6 @@
-package com.localeat.model.domains.customer;
+package com.localeat.model.domains.actor;
 
-public interface Customer {
+public interface Actor {
     public String getName();
     public String getFirstName();
     public String getEmail();

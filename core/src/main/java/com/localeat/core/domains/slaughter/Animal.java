@@ -1,10 +1,13 @@
 package com.localeat.core.domains.slaughter;
 
+
+import com.localeat.core.domains.farm.Farm;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "animals")
-class Animal implements com.localeat.model.domains.slaughter.Animal<AnimalType> {
+class Animal implements com.localeat.model.domains.slaughter.Animal<AnimalType, Farm> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "animal_id_generator")
@@ -18,7 +21,8 @@ class Animal implements com.localeat.model.domains.slaughter.Animal<AnimalType> 
 
     private float meatWeight;
 
-    private String finalFarm;
+    @ManyToOne
+    private Farm finalFarm;
 
     private String identificationNumber;
 
@@ -67,11 +71,11 @@ class Animal implements com.localeat.model.domains.slaughter.Animal<AnimalType> 
     }
 
     @Override
-    public String getFinalFarm() {
+    public Farm getFinalFarm() {
         return finalFarm;
     }
 
-    public void setFinalFarm(String finalFarm) {
+    public void setFinalFarm(Farm finalFarm) {
         this.finalFarm = finalFarm;
     }
 }

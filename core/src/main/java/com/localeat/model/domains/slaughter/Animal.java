@@ -1,9 +1,11 @@
 package com.localeat.model.domains.slaughter;
 
-public interface Animal<AT extends AnimalType> {
-    AT getAnimalType();
+import com.localeat.model.domains.farm.Farm;
+
+public interface Animal<T extends AnimalType, F extends Farm> {
+    T getAnimalType();
     String getIdentificationNumber();
-    String getFinalFarm();
+    F getFinalFarm();
     float getLiveWeight();
     float getMeatWeight();
 }

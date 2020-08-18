@@ -1,26 +1,28 @@
 package com.localeat.core.domains.security;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.test.context.jdbc.Sql;
-import org.springframework.test.web.servlet.MockMvc;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@Sql({
+@Sql(value = {
         "/sql/create/com/localeat/domains/security/schema.sql",
-        "/sql/create/com/localeat/domains/security/test_data.sql"
-})
+        "/sql/create/com/localeat/domains/security/test_data.sql",
+        "/sql/create/com/localeat/domains/farm/test_data.sql",
+        "/sql/create/com/localeat/domains/actor/test_data.sql"
+}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+@Sql(value = {
+        "/sql/delete/com/localeat/domains/actor/test_data.sql",
+        "/sql/delete/com/localeat/domains/farm/test_data.sql",
+        "/sql/delete/com/localeat/domains/security/test_data.sql"
+}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 public class TestAuthenticationController {
 
     @Autowired

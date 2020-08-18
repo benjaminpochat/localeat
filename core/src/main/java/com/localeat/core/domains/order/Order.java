@@ -1,7 +1,7 @@
 package com.localeat.core.domains.order;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.localeat.core.domains.customer.Customer;
+import com.localeat.core.domains.actor.Customer;
 import com.localeat.core.domains.delivery.Delivery;
 import com.localeat.core.domains.product.Product;
 import com.localeat.core.domains.product.ProductSerializer;
@@ -19,7 +19,7 @@ public class Order implements com.localeat.model.domains.order.Order<Customer, P
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
-    @OneToOne
+    @ManyToOne
     private Customer customer;
 
     @ElementCollection

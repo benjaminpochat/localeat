@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import * as decodeJwt from 'jwt-decode';
+import { Authentication } from 'src/app/commons/models/authentication.model';
+import { Account } from 'src/app/commons/models/account.model';
 
 @Injectable({
   providedIn: 'root'
@@ -34,13 +36,11 @@ export class AuthenticationService {
   }
 
   public isAuthenticated(): boolean {
-    //TODO : utiliser l'une des variables locales
     const jwt = this.getAuthenticationFromCookie();
-    return jwt as boolean;
+    return jwt as unknown as boolean;
   }
 
   public isAuthorized(authority: string): boolean {
-    //TODO : utiliser l'une des variables locales
     const jwt = this.getAuthenticationFromCookie();
     console.log(jwt);
     if (jwt) {
@@ -53,8 +53,7 @@ export class AuthenticationService {
     return false;
   }
 
-  //TODO : créer une classe Authentication pour typer cette méthode
-  public getAuthenticationFromCookie() {
+  public getAuthenticationFromCookie(): Authentication {
     const cookies: Array<string> = document.cookie.split(';');
     const cookiesNumber: number = cookies.length;
     const cookieName = 'jwt=';

@@ -1,6 +1,6 @@
 package com.localeat.model.domains.order;
 
-import com.localeat.model.domains.customer.Customer;
+import com.localeat.model.domains.actor.Customer;
 import com.localeat.model.domains.delivery.Delivery;
 import com.localeat.model.domains.product.Product;
 

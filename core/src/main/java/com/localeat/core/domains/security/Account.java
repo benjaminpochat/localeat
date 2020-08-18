@@ -1,5 +1,8 @@
 package com.localeat.core.domains.security;
 
+
+import com.localeat.core.domains.actor.Actor;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,6 +16,9 @@ public class Account {
     private Long id;
 
     private String username;
+
+    @OneToOne
+    private Actor actor;
 
     public String getUsername() {
         return username;
@@ -28,5 +34,13 @@ public class Account {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Actor getActor() {
+        return actor;
+    }
+
+    public void setActor(Actor actor) {
+        this.actor = actor;
     }
 }
