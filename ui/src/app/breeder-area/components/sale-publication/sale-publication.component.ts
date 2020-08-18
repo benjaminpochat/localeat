@@ -5,7 +5,6 @@ import { Delivery } from 'src/app/commons/models/delivery.model';
 import { DeliveryAddress } from 'src/app/commons/models/delivery-address.model';
 import { Product } from 'src/app/commons/models/product.model';
 import { SlaughterService } from '../../services/slaughter.service';
-import { StepperSelectionEvent } from '@angular/cdk/stepper';
 
 @Component({
   selector: 'app-sale-publication',

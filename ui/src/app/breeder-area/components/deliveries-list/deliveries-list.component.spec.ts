@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DeliveriesListComponent } from './deliveries-list.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('DeliveriesListComponent', () => {
   let component: DeliveriesListComponent;
@@ -8,7 +9,8 @@ describe('DeliveriesListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DeliveriesListComponent ]
+      declarations: [ DeliveriesListComponent ],
+      imports: [HttpClientTestingModule]
     })
     .compileComponents();
   }));
