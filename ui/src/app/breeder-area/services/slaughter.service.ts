@@ -1,7 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Slaughter } from 'src/app/commons/models/slaughter.model';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
 import { UrlService } from 'src/app/commons/services/url.service';
 
 @Injectable({

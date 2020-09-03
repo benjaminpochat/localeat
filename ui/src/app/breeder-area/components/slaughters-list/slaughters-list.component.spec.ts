@@ -7,12 +7,13 @@ import { Type } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
 import { environment } from 'src/environments/environment';
-
+import { UrlService } from 'src/app/commons/services/url.service';
 
 describe('SlaughtersListComponent', () => {
   let slaughtersListComponent: SlaughtersListComponent;
   let fixture: ComponentFixture<SlaughtersListComponent>;
   let httpMock: HttpTestingController;
+  let urlService: UrlService;
 
   describe(' with HttpClient mocked ', () => {
 
@@ -29,6 +30,8 @@ describe('SlaughtersListComponent', () => {
       fixture = TestBed.createComponent(SlaughtersListComponent);
       slaughtersListComponent = fixture.componentInstance;
       httpMock = fixture.debugElement.injector.get<HttpTestingController>(HttpTestingController as Type<HttpTestingController>);
+      urlService = fixture.debugElement.injector.get<UrlService>(UrlService as Type<UrlService>);
+      spyOn(urlService, 'getAuthenticatedUrl').and.returnValue(environment.localeatCoreUrl + '/accounts/1/slaughters');
       fixture.detectChanges();
     });
 
@@ -37,7 +40,7 @@ describe('SlaughtersListComponent', () => {
     });
 
     it('should create', () => {
-      const request = httpMock.expectOne(environment.localeatCoreUrl + '/slaughters');
+      const request = httpMock.expectOne(environment.localeatCoreUrl + '/accounts/1/slaughters');
       expect(request.request.method).toEqual('GET');
       request.flush({data: [{id: 1}, {id: 2}]});
 
