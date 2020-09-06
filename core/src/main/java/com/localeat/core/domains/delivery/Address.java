@@ -11,6 +11,8 @@ class Address implements com.localeat.model.domains.delivery.Address {
     @SequenceGenerator(name="address_id_generator", sequenceName = "address_id_seq", allocationSize = 1)
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
+
+    private String name;
     private String city;
     private String zipCode;
     private String addressLine1;
@@ -37,7 +39,7 @@ class Address implements com.localeat.model.domains.delivery.Address {
 
     @Override
     public String getZipCode() {
-        return null;
+        return zipCode;
     }
 
     public void setZipCode(String zipCode) {
@@ -46,7 +48,7 @@ class Address implements com.localeat.model.domains.delivery.Address {
 
     @Override
     public String getAddressLine1() {
-        return null;
+        return addressLine1;
     }
 
     public void setAddressLine1(String addressLine1) {
@@ -55,7 +57,7 @@ class Address implements com.localeat.model.domains.delivery.Address {
 
     @Override
     public String getAddressLine2() {
-        return null;
+        return addressLine2;
     }
 
     public void setAddressLine2(String addressLine2) {
@@ -64,7 +66,7 @@ class Address implements com.localeat.model.domains.delivery.Address {
 
     @Override
     public String getAddressLine3() {
-        return null;
+        return addressLine3;
     }
 
     public void setAddressLine3(String addressLine3) {
@@ -73,10 +75,19 @@ class Address implements com.localeat.model.domains.delivery.Address {
 
     @Override
     public String getAddressLine4() {
-        return null;
+        return addressLine4;
     }
 
     public void setAddressLine4(String addressLine4) {
         this.addressLine4 = addressLine4;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

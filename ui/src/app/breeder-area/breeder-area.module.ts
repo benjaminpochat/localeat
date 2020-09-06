@@ -54,7 +54,7 @@ import { SalePublicationComponent } from './components/sale-publication/sale-pub
     MatStepperModule,
     MatTableModule,
     ReactiveFormsModule,
-    CommonsModule,
+    CommonsModule
   ],
   exports: [
     BreederAreaComponent

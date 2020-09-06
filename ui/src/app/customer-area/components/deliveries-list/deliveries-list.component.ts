@@ -19,7 +19,14 @@ export class DeliveriesListComponent implements OnInit {
   }
 
   refreshDeliveries() {
-    this.searchLoopBack.subscribe((deliveries: Delivery[]) => this.deliveries = deliveries);
+    this.searchLoopBack.subscribe((deliveries: Delivery[]) => {
+      this.deliveries = deliveries;
+      this.deliveries.forEach(delivery => delivery.availableProducts.forEach(product => {
+        if (product.description) {
+          product.description = product.description.split('\n').join('\n<br>');
+        }
+      }));
+    });
     this.deliveryService.getDeliveries(this.searchLoopBack);
   }
 

@@ -1,14 +1,10 @@
 package com.localeat.core.domains.delivery;
 
-import com.fasterxml.jackson.annotation.JsonUnwrapped;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.localeat.core.domains.order.Order;
 import com.localeat.core.domains.product.Product;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -24,7 +20,9 @@ public class Delivery implements com.localeat.model.domains.delivery.Delivery<Or
     @OneToOne(cascade = CascadeType.ALL)
     private Address deliveryAddress;
 
-    private LocalDateTime deliveryDate;
+    private LocalDateTime deliveryStart;
+
+    private LocalDateTime deliveryEnd;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name="delivery_available_products")
@@ -69,11 +67,20 @@ public class Delivery implements com.localeat.model.domains.delivery.Delivery<Or
     }
 
     @Override
-    public LocalDateTime getDeliveryDate() {
-        return deliveryDate;
+    public LocalDateTime getDeliveryStart() {
+        return deliveryStart;
     }
 
-    public void setDeliveryDate(LocalDateTime deliveryDate) {
-        this.deliveryDate = deliveryDate;
+    public void setDeliveryStart(LocalDateTime deliveryStart) {
+        this.deliveryStart = deliveryStart;
+    }
+
+    @Override
+    public LocalDateTime getDeliveryEnd() {
+        return deliveryEnd;
+    }
+
+    public void setDeliveryEnd(LocalDateTime deliveryEnd) {
+        this.deliveryEnd = deliveryEnd;
     }
 }

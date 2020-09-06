@@ -1,4 +1,5 @@
 export class DeliveryAddress {
+  name: string;
   city: string;
   zipCode: string;
   addressLine1: string;

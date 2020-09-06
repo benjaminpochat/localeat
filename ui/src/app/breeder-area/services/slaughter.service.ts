@@ -2,6 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { Slaughter } from 'src/app/commons/models/slaughter.model';
 import { HttpClient } from '@angular/common/http';
 import { UrlService } from 'src/app/commons/services/url.service';
+import { Product } from 'src/app/commons/models/product.model';
 
 @Injectable({
   providedIn: 'root'

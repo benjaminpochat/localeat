@@ -3,6 +3,7 @@ import { Product } from './product.model';
 
 export class Delivery {
   deliveryAddress: DeliveryAddress;
-  deliveryDate: Date;
+  deliveryStart: Date;
+  deliveryEnd: Date;
   availableProducts: Product[];
 }

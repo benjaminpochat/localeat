@@ -1,10 +1,12 @@
 package com.localeat.core.domains.product;
 
+import com.localeat.core.domains.slaughter.Animal;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "products")
-public class Product implements com.localeat.model.domains.product.Product {
+public class Product implements com.localeat.model.domains.product.Product<Animal> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_id_generator")
@@ -17,6 +19,9 @@ public class Product implements com.localeat.model.domains.product.Product {
     private float price;
 
     private byte[] photo;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Animal animal;
 
     public Product(String id) {
         this.id = Long.valueOf(id);
@@ -59,5 +64,14 @@ public class Product implements com.localeat.model.domains.product.Product {
 
     public void setPhoto(byte[] photo) {
         this.photo = photo;
+    }
+
+    @Override
+    public Animal getAnimal() {
+        return animal;
+    }
+
+    public void setAnimal(Animal animal) {
+        this.animal = animal;
     }
 }

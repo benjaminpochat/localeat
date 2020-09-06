@@ -1,6 +1,8 @@
 package com.localeat.core.domains.slaughter;
 
 import com.localeat.core.domains.actor.Breeder;
+import com.localeat.core.domains.product.Product;
+import com.localeat.core.domains.product.ProductRepository;
 import com.localeat.core.domains.security.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,11 +15,19 @@ public class SlaughterController {
     @Autowired
     private SlaughterRepository slaughterRepository;
 
+    @Autowired
+    private ProductRepository productRepository;
+
     @PostMapping(path = "/accounts/{account}/slaughters")
     public Slaughter setSlaughter(@PathVariable Account account, @Valid @RequestBody Slaughter slaughter){
         Breeder breeder = (Breeder) account.getActor();
         slaughter.getAnimal().setFinalFarm(breeder.getFarm());
-        return slaughterRepository.save(slaughter);
+        Slaughter savedSlaughter = slaughterRepository.save(slaughter);
+        savedSlaughter.getDelivery().getAvailableProducts().forEach(product -> {
+            product.setAnimal(savedSlaughter.getAnimal());
+            productRepository.save(product);
+        });
+        return savedSlaughter;
     }
 
     @GetMapping(path = "/accounts/{account}/slaughters")

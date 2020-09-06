@@ -12,9 +12,9 @@ public class Farm implements com.localeat.model.domains.farm.Farm {
     @Column(name = "id", updatable = false, nullable = false)
     Long id;
 
-    String farmName;
+    String name;
 
-    String farmDescription;
+    String description;
 
     public void setId(Long id) {
         this.id = id;
@@ -24,21 +24,21 @@ public class Farm implements com.localeat.model.domains.farm.Farm {
         return id;
     }
 
-    public void setFarmName(String farmName) {
-        this.farmName = farmName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
-    public String getFarmName() {
-        return farmName;
+    public String getName() {
+        return name;
     }
 
-    public void setFarmDescrition(String farmDescrition) {
-        this.farmDescription = farmDescrition;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
-    public String getFarmDescription() {
-        return farmDescription;
+    public String getDescription() {
+        return description;
     }
 }

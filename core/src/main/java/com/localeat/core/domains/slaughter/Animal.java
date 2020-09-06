@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "animals")
-class Animal implements com.localeat.model.domains.slaughter.Animal<AnimalType, Farm> {
+public class Animal implements com.localeat.model.domains.slaughter.Animal<AnimalType, Farm> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "animal_id_generator")

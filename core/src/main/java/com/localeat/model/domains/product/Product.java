@@ -1,7 +1,10 @@
 package com.localeat.model.domains.product;
 
-public interface Product {
+import com.localeat.model.domains.slaughter.Animal;
+
+public interface Product<A extends Animal> {
     public String getDescription();
     public float getPrice();
     public byte[] getPhoto();
+    public A getAnimal();
 }

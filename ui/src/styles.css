@@ -84,3 +84,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .user-alert {
   color: darkred;
 }
+
+.textarea-mat-form-field {
+  width: 100%;
+}

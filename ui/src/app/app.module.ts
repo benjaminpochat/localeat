@@ -8,6 +8,7 @@ import { CustomerAreaModule } from './customer-area/customer-area.module';
 import { BreederAreaModule } from './breeder-area/breeder-area.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { registerLocaleData } from '@angular/common';
+
 import localeFr from '@angular/common/locales/fr';
 registerLocaleData(localeFr);
 

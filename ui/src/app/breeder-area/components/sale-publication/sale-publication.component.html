@@ -1,5 +1,5 @@
   <mat-card [class.mat-elevation-z10]='true'>
-    <mat-card-header>Publions la vente pour l'abattage du {{slaughter.slaughterDate}}</mat-card-header>
+    <mat-card-header>Publions la vente pour l'abattage du {{slaughter.slaughterDate | date: 'shortDate'}}</mat-card-header>
     <mat-card-content>
       <mat-vertical-stepper #stepper>
         <mat-step [stepControl]="deliveryDateForm">
@@ -11,9 +11,14 @@
               <mat-datepicker-toggle matSuffix [for]="deliveryDatePicker"></mat-datepicker-toggle>
               <mat-datepicker #deliveryDatePicker disabled="false"></mat-datepicker>
             </mat-form-field>
+            <br>
             <mat-form-field>
-              <mat-label>Heure</mat-label>
-              <input type='time' step='900' matInput placeholder='hh:mm' formControlName="deliveryHour" required>
+              <mat-label>Début de la livraison</mat-label>
+              <input type='time' step='900' matInput placeholder='hh:mm' formControlName="deliveryStartHour" required>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Fin de la livraison</mat-label>
+              <input type='time' step='900' matInput placeholder='hh:mm' formControlName="deliveryEndHour" required>
             </mat-form-field>
             <div>
               <button mat-button matStepperNext>Suivant</button>
@@ -24,12 +29,23 @@
           <form [formGroup]="deliveryPlaceForm">
             <ng-template matStepLabel>Définissez un lieu de livraison</ng-template>
             <mat-form-field>
-              <mat-label>Adresse</mat-label>
-              <input matInput placeholder="Adresse" formControlName="address" required>
-            </mat-form-field>
-            <mat-form-field>
               <mat-label>Commune</mat-label>
-              <input matInput placeholder="Commune" formControlName="city" required>
+              <input matInput placeholder="Nom de la commune" formControlName="city" required>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+              <mat-label>Nom du lieu de livraison</mat-label>
+              <input matInput placeholder="Ex. : la Ferme des Pommiers" formControlName="addressName" required>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+              <mat-label>Numéro et rue</mat-label>
+              <input matInput placeholder="Ex. : 5, rue des pommiers" formControlName="addressLine1" required>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+              <mat-label>Code postal</mat-label>
+              <input matInput placeholder="Code postal" formControlName="zipCode" required>
             </mat-form-field>
             <div>
               <button mat-button matStepperNext>Suivant</button>
@@ -48,9 +64,14 @@
             </div>
           </form>
         </mat-step>
-        <mat-step [stepControl]="priceForm">
-          <form [formGroup]="priceForm">
-            <ng-template matStepLabel>Définissez le prix au kg</ng-template>
+        <mat-step [stepControl]="productDescriptionForm">
+          <form [formGroup]="productDescriptionForm">
+            <ng-template matStepLabel>Décrivez le produit vendu</ng-template>
+            <mat-form-field  class="textarea-mat-form-field">
+              <mat-label>Description du produit vendu</mat-label>
+              <textarea cdkTextareaAutosize matInput formControlName="productDescription" placeholder="Type de viande, composition des colis" required></textarea>
+            </mat-form-field>
+            <br>
             <mat-form-field>
               <mat-label>Prix au kg</mat-label>
               <input matInput formControlName="price" placeholder="Prix au kg en euro TTC" required>

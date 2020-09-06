@@ -2,11 +2,6 @@
   <div>Vos prochains abattages</div>
   <app-slaughters-actions (creationLoopBack)="handleSlaughterCreation($event)"></app-slaughters-actions>
   <mat-card *ngFor="let slaughter of slaughters" class="slaughter-card">
-    <app-sale-publication
-      *ngIf='salePublicationShown(slaughter)'
-      [slaughter]='slaughter'
-      (salePublicationLoopBack)='handleSalePublication($event)'>
-    </app-sale-publication>
     <mat-card-header>
       <mat-card-title>Abattage du {{slaughter.slaughterDate | date: 'longDate'}}</mat-card-title>
     </mat-card-header>
@@ -17,6 +12,11 @@
       <br>
       Poids vif estimé : {{slaughter.animal.liveWeight}} kg
     </mat-card-content>
+      <app-sale-publication
+        *ngIf='salePublicationShown(slaughter)'
+        [slaughter]='slaughter'
+        (salePublicationLoopBack)='handleSalePublication($event)'>
+      </app-sale-publication>
     <mat-card-actions>
       <button mat-button *ngIf='!slaughter.delivery' (click)='showSalePublication(slaughter)'>Publier la vente</button>
       <button mat-button *ngIf='!slaughter.delivery' >Abandonner l'abattage</button>

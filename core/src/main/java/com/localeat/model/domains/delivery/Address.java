@@ -1,6 +1,7 @@
 package com.localeat.model.domains.delivery;
 
 public interface Address {
+    String getName();
     String getCity();
     String getZipCode();
     String getAddressLine1();

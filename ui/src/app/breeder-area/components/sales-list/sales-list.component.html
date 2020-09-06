@@ -2,7 +2,7 @@
   <div>Vos ventes en cours</div>
   <mat-card *ngFor="let delivery of deliveries" class="sale-card">
     <mat-card-header>
-      <mat-card-title>Vente du {{delivery.deliveryDate | date : 'longDate' }} à {{delivery.deliveryAddress.city}}</mat-card-title>
+      <mat-card-title>Vente du {{delivery.deliveryStart | date : 'longDate' }} à {{delivery.deliveryAddress.city}}</mat-card-title>
     </mat-card-header>
   </mat-card>
 </div>
