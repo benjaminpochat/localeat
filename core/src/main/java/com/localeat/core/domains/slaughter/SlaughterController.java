@@ -23,11 +23,17 @@ public class SlaughterController {
         Breeder breeder = (Breeder) account.getActor();
         slaughter.getAnimal().setFinalFarm(breeder.getFarm());
         Slaughter savedSlaughter = slaughterRepository.save(slaughter);
-        savedSlaughter.getDelivery().getAvailableProducts().forEach(product -> {
-            product.setAnimal(savedSlaughter.getAnimal());
-            productRepository.save(product);
-        });
+        setAnimalToDeliveredProducts(savedSlaughter);
         return savedSlaughter;
+    }
+
+    private void setAnimalToDeliveredProducts(Slaughter savedSlaughter) {
+        if(savedSlaughter.getDelivery() != null) {
+            savedSlaughter.getDelivery().getAvailableProducts().forEach(product -> {
+                product.setAnimal(savedSlaughter.getAnimal());
+                productRepository.save(product);
+            });
+        }
     }
 
     @GetMapping(path = "/accounts/{account}/slaughters")

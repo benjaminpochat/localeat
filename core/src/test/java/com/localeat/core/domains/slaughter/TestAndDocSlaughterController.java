@@ -106,8 +106,8 @@ public class TestAndDocSlaughterController {
                                 "\"meatWeight\":0.0," +
                                 "\"finalFarm\":{" +
                                     "\"id\":1," +
-                                    "\"farmName\":\"La ferme de la Riviere\"," +
-                                    "\"farmDescription\":\"La ferme de la Riviere est un elevage d'excellence\"" +
+                                    "\"name\":\"La ferme de la Riviere\"," +
+                                    "\"description\":\"La ferme de la Riviere est un elevage d'excellence\"" +
                                 "}," +
                                 "\"identificationNumber\":\"ABCD\"" +
                             "}," +
@@ -123,8 +123,8 @@ public class TestAndDocSlaughterController {
                                 "\"meatWeight\":0.0," +
                                 "\"finalFarm\":{" +
                                     "\"id\":1," +
-                                    "\"farmName\":\"La ferme de la Riviere\"," +
-                                    "\"farmDescription\":\"La ferme de la Riviere est un elevage d'excellence\"" +
+                                    "\"name\":\"La ferme de la Riviere\"," +
+                                    "\"description\":\"La ferme de la Riviere est un elevage d'excellence\"" +
                                 "}," +
                                 "\"identificationNumber\":\"IJKL\"" +
                             "}," +
