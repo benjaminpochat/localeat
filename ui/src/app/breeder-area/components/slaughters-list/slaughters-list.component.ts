@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, EventEmitter, ViewChild, Output } from '@angular/core';
 import { Slaughter } from 'src/app/commons/models/slaughter.model';
 import { SlaughterService } from '../../services/slaughter.service';
 import { SalePublicationComponent } from '../sale-publication/sale-publication.component';
@@ -13,6 +13,9 @@ export class SlaughtersListComponent implements OnInit {
   slaughters: Slaughter[];
   slaughterSelectedForSalePublication: Slaughter;
   searchLoopBack = new EventEmitter<Slaughter[]>();
+
+  @Output()
+  salePublicationLoopBack = new EventEmitter<Slaughter>();
 
   constructor(
     private slaughterService: SlaughterService
@@ -45,6 +48,7 @@ export class SlaughtersListComponent implements OnInit {
 
   handleSalePublication(slaughter: Slaughter){
     this.hideSalePublication();
+    this.salePublicationLoopBack.emit(slaughter);
     //TODO : afficher un message d'info pour confirmer la création (slaughter !== undefined) ou l'annulation (slaughter === undefined)
   }
 

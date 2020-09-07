@@ -2,7 +2,7 @@
 <app-side-menu #sideMenu (contentShown)="showContent($event)"></app-side-menu>
 <div class='content-body'>
   <div id="slaughters-list">
-    <app-slaughters-list></app-slaughters-list>
+    <app-slaughters-list (salePublicationLoopBack)="handleSalePublication($event)"></app-slaughters-list>
   </div>
   <div id="sales-list">
     <app-sales-list></app-sales-list>

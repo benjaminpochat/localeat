@@ -19,9 +19,9 @@ export class SalesListComponent implements OnInit {
   ngOnInit(): void {
     this.refreshDeliveries();
   }
+
   refreshDeliveries() {
     this.searchLoopBack.subscribe((deliveries: Delivery[]) => this.deliveries = deliveries);
     this.deliveryService.getDeliveries(this.searchLoopBack);
   }
-
 }
