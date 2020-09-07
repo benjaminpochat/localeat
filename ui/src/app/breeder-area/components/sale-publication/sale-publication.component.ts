@@ -58,8 +58,8 @@ export class SalePublicationComponent implements OnInit {
   publishSale(){
     if (this.deliveryDateForm.valid && this.deliveryPlaceForm.valid && this.meatWeightForm.valid && this.productDescriptionForm.valid){
       this.slaughter.delivery =  new Delivery();
-      this.slaughter.delivery.deliveryStart = new Date(this.deliveryDateForm.value.deliveryDate + ':' + this.deliveryDateForm.value.deliveryStartHour);
-      this.slaughter.delivery.deliveryEnd = new Date(this.deliveryDateForm.value.deliveryDate + ':' + this.deliveryDateForm.value.deliveryEndHour);
+      this.slaughter.delivery.deliveryStart = new Date(this.deliveryDateForm.value.deliveryDate + 'T' + this.deliveryDateForm.value.deliveryStartHour + 'Z');
+      this.slaughter.delivery.deliveryEnd = new Date(this.deliveryDateForm.value.deliveryDate + 'T' + this.deliveryDateForm.value.deliveryEndHour + 'Z');
       this.slaughter.delivery.deliveryAddress = new DeliveryAddress();
       this.slaughter.delivery.deliveryAddress.name = this.deliveryPlaceForm.value.addressName;
       this.slaughter.delivery.deliveryAddress.addressLine1 = this.deliveryPlaceForm.value.addressLine1;
