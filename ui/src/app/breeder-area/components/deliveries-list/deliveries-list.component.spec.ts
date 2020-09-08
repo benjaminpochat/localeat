@@ -6,6 +6,7 @@ import { UrlService } from 'src/app/commons/services/url.service';
 
 import { environment } from 'src/environments/environment';
 import { Type } from '@angular/core';
+import { MatDialogModule } from '@angular/material/dialog';
 
 describe('DeliveriesListComponent', () => {
   let component: DeliveriesListComponent;
@@ -15,7 +16,7 @@ describe('DeliveriesListComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ DeliveriesListComponent ],
-      imports: [HttpClientTestingModule]
+      imports: [HttpClientTestingModule, MatDialogModule]
     })
     .compileComponents();
   }));

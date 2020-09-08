@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DeliveriesListComponent } from './deliveries-list.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { MatDialogModule } from '@angular/material/dialog';
 
 describe('DeliveriesListComponent', () => {
   let component: DeliveriesListComponent;
@@ -10,7 +11,7 @@ describe('DeliveriesListComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ DeliveriesListComponent ],
-      imports: [HttpClientTestingModule]
+      imports: [HttpClientTestingModule, MatDialogModule]
 
     })
     .compileComponents();

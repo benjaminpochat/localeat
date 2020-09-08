@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import * as decodeJwt from 'jwt-decode';
 import { Authentication } from 'src/app/commons/models/authentication.model';
-import { Account } from 'src/app/commons/models/account.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +13,7 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient) { }
 
-  private authentication = new BehaviorSubject(this.getAuthenticationFromCookie());
+  authentication = new BehaviorSubject(this.getAuthenticationFromCookie());
   currentAuthentication = this.authentication.asObservable();
 
   public getAuthenticationFromBackend(identifier: string, password: string ): Observable<string> {

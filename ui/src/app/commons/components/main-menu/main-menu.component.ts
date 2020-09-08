@@ -3,6 +3,7 @@ import { AuthenticationService } from '../../../commons/services/authentication.
 import { SideMenuComponent } from '../side-menu/side-menu.component';
 import { EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+import { Authentication } from '../../models/authentication.model';
 
 @Component({
   selector: 'app-main-menu',
@@ -13,7 +14,7 @@ export class MainMenuComponent implements OnInit {
 
   @Output() sideMenuActivated = new EventEmitter<boolean>();
   @Input() sideMenuDisabled = true;
-  authentication;
+  authentication: Authentication;
 
   constructor(
     private authenticationService: AuthenticationService,

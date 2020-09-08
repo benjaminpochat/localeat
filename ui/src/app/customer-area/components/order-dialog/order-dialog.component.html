@@ -1,0 +1,90 @@
+<mat-dialog-content>
+  <mat-vertical-stepper #stepper linear="true">
+
+    <mat-step [stepControl]="authenticationForm" [completed]="authentication">
+        <form [formGroup]="authenticationForm">
+        <ng-template matStepLabel>{{authenticationStepLabel}}</ng-template>
+        <div *ngIf="!authentication">
+          <mat-radio-group (change)="changeAuthentificationType($event)">
+            <mat-radio-button value="true" checked="true">J'ai déjà un compte</mat-radio-button>
+            <mat-radio-button value="false">Je n'ai pas de compte</mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+        <div *ngIf="authentication">
+          <button mat-flat-button matStepperNext color="accent">Poursuivre avec ce compte</button>
+          <button mat-flat-button (click)="logout()">Se déconnecter et changer de compte</button>
+        </div>
+
+        <div *ngIf="!authentication && existingAccount">
+          <mat-form-field>
+            <mat-label>Adresse mail</mat-label>
+            <input type="email" matInput formControlName="existingEmail" required>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Mot de passe</mat-label>
+            <input type="password" matInput formControlName="existingPassword" required>
+          </mat-form-field>
+          <button mat-flat-button color="accent" (click)="login()">Se connecter</button>
+          <div *ngIf="authenticationFailureMessage">
+            {{authenticationFailureMessage}}
+          </div>
+        </div>
+
+        <div *ngIf="!authentication && !existingAccount">
+          <mat-form-field>
+            <mat-label>Prénom</mat-label>
+            <input matInput formControlName="creatingFirstName" required>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Nom</mat-label>
+            <input matInput formControlName="creatingName" required>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Adresse mail</mat-label>
+            <input type="email" matInput formControlName="creatingEmail" required>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Téléphone mobile</mat-label>
+            <input type="tel" matInput formControlName="creatingPhone" required>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Mot de passe</mat-label>
+            <input type="password" matInput formControlName="creatingPassword" required>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Confirmez le mot de passe</mat-label>
+            <input type="password" matInput formControlName="creatingPasswordConfirmed" required>
+          </mat-form-field>
+          <button mat-flat-button color="accent" (click)="createNewAccount()">Créer un compte</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="productSelectionForm" >
+      <form [formGroup]="productSelectionForm">
+        <ng-template matStepLabel>Sélectionnez la quantité de viande commandée (en kg)</ng-template>
+        <mat-form-field>
+          <input matInput formControlName="quantity">
+          <mat-slider min="5" max="50" step="1" tickInterval="5" thumbLabel #quantitySlider (change)="setQuantity($event)"></mat-slider>
+        </mat-form-field>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="paymentForm">
+      <form [formGroup]="paymentForm">
+        <ng-template matStepLabel>Procédez au paiement</ng-template>
+        <mat-form-field>
+          <input matInput formControlName="payed" hidden="true">
+          <button mat-flat-button color="accent">Accéder au paiement</button>
+        </mat-form-field>
+      </form>
+    </mat-step>
+
+  </mat-vertical-stepper>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial disabled="!orderStored">C'est commandé !</button>
+  <button mat-button mat-dialog-close>Annuler la commande</button>
+</mat-dialog-actions>
