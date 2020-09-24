@@ -4,11 +4,20 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+import static com.fasterxml.jackson.annotation.JsonTypeInfo.As.PROPERTY;
+import static com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME;
+
+
 import javax.persistence.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonTypeInfo(use = NAME, include = PROPERTY, defaultImpl = Actor.class)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value=Breeder.class, name = "Breeder"),
+        @JsonSubTypes.Type(value=Customer.class, name = "Customer")
+})
 public class Actor implements com.localeat.model.domains.actor.Actor {
 
     @Id
