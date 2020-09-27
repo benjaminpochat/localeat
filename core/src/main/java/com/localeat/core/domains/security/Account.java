@@ -5,6 +5,12 @@ import com.localeat.core.domains.actor.Actor;
 
 import javax.persistence.*;
 
+/**
+ * Wrapper class that gathers : <ul>
+ *     <li>an actor, a business object that holds the data necessary for localeat business</li>
+ *     <li>a user identifier, that matches with the identifier used by SpringSecurity's class {@link org.springframework.security.core.userdetails.User}</li>
+ * </ul>
+ */
 @Entity
 @Table(name = "accounts")
 public class Account {

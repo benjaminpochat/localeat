@@ -1,19 +1,13 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { OrderDialogComponent } from './order-dialog.component';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { MatDialogModule } from '@angular/material/dialog';
-import { Type } from '@angular/core';
-import { AuthenticationService } from 'src/app/commons/services/authentication.service';
-import { Authentication } from 'src/app/commons/models/authentication.model';
-import { Account } from 'src/app/commons/models/account.model';
-import { Actor } from 'src/app/commons/models/actor.model';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
@@ -24,8 +18,14 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
+import { Type } from '@angular/core';
+
+import { AuthenticationService } from 'src/app/commons/services/authentication.service';
+import { Authentication } from 'src/app/commons/models/authentication.model';
+import { Account } from 'src/app/commons/models/account.model';
+import { Actor } from 'src/app/commons/models/actor.model';
 import { CommonsModule } from 'src/app/commons/commons.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { OrderDialogComponent } from './order-dialog.component';
 
 describe('OrderDialogComponent', () => {
 

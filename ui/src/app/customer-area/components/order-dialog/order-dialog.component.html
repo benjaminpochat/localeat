@@ -17,46 +17,109 @@
         </div>
 
         <div *ngIf="!authentication && existingAccount">
-          <mat-form-field>
-            <mat-label>Adresse mail</mat-label>
-            <input type="email" matInput formControlName="existingEmail" required>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Mot de passe</mat-label>
-            <input type="password" matInput formControlName="existingPassword" required>
-          </mat-form-field>
-          <button mat-flat-button color="accent" (click)="login()">Se connecter</button>
-          <div *ngIf="authenticationFailureMessage">
-            {{authenticationFailureMessage}}
+          <div>
+            <mat-form-field>
+              <mat-label>Adresse mail</mat-label>
+              <input type="email" matInput formControlName="existingEmail" required>
+            </mat-form-field>
+            <span *ngIf="isErrorMessageDisplayed('existingEmail', 'email', true)">
+              L'email est erroné.
+            </span>
+          </div>
+          <div>
+            <mat-form-field>
+              <mat-label>Mot de passe</mat-label>
+              <input type="password" matInput formControlName="existingPassword" required>
+            </mat-form-field>
+          </div>
+          <div>
+            <button
+              [disabled]="!areFormFieldsValid(['existingEmail', 'existingPassword'])"
+              mat-flat-button color="accent"
+              (click)="login(authenticationForm.value.existingEmail, authenticationForm.value.existingPassword)">
+              Se connecter
+            </button>
+            <div *ngIf="authenticationFailureMessage">
+              {{authenticationFailureMessage}}
+            </div>
           </div>
         </div>
 
         <div *ngIf="!authentication && !existingAccount">
-          <mat-form-field>
-            <mat-label>Prénom</mat-label>
-            <input matInput formControlName="creatingFirstName" required>
-          </mat-form-field>
+          <div>
+            <mat-form-field>
+              <mat-label>Prénom</mat-label>
+              <input matInput formControlName="creatingFirstName" required>
+            </mat-form-field>
+            <span *ngIf="isErrorMessageDisplayed('creatingFirstName', 'required')">
+              Le prénom est obligatoire.
+            </span>
+          </div>
+          <div>
           <mat-form-field>
             <mat-label>Nom</mat-label>
             <input matInput formControlName="creatingName" required>
           </mat-form-field>
-          <mat-form-field>
-            <mat-label>Adresse mail</mat-label>
-            <input type="email" matInput formControlName="creatingEmail" required>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Téléphone mobile</mat-label>
-            <input type="tel" matInput formControlName="creatingPhone" required>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Mot de passe</mat-label>
-            <input type="password" matInput formControlName="creatingPassword" required>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Confirmez le mot de passe</mat-label>
-            <input type="password" matInput formControlName="creatingPasswordConfirmed" required>
-          </mat-form-field>
-          <button mat-flat-button color="accent" (click)="createNewAccount()">Créer un compte</button>
+          <span *ngIf="isErrorMessageDisplayed('creatingName', 'required')">
+            Le nom est obligatoire.
+          </span>
+          </div>
+          <div>
+            <mat-form-field>
+              <mat-label>Adresse mail</mat-label>
+              <input type="email" matInput formControlName="creatingEmail" required>
+            </mat-form-field>
+            <span *ngIf="isErrorMessageDisplayed('creatingEmail', 'required')">
+              L'email est obligatoire.
+            </span>
+            <span *ngIf="isErrorMessageDisplayed('creatingEmail', 'email', true)">
+              L'email est erroné.
+            </span>
+          </div>
+          <div>
+            <mat-form-field>
+              <mat-label>Téléphone mobile</mat-label>
+              <input type="tel" matInput formControlName="creatingPhone" required>
+            </mat-form-field>
+            <span *ngIf="isErrorMessageDisplayed('creatingPhone', 'required')">
+              Le téléphone est obligatoire.
+            </span>
+          </div>
+          <div>
+            <mat-form-field>
+              <mat-label>Mot de passe</mat-label>
+              <input type="password" matInput formControlName="creatingPassword" required minlength="6">
+            </mat-form-field>
+            <span *ngIf="isErrorMessageDisplayed('creatingPassword', 'required')">
+              Le mot de passe est obligatoire.
+            </span>
+            <span *ngIf="isErrorMessageDisplayed('creatingPassword', 'minlength', true)">
+              Le mot de passe doit avoir au moins 6 caractères.
+            </span>
+          </div>
+          <div>
+            <mat-form-field>
+              <mat-label>Confirmez le mot de passe</mat-label>
+              <input type="password" matInput formControlName="creatingPasswordConfirmed" required>
+            </mat-form-field>
+            <span *ngIf="isErrorMessageDisplayed('creatingPassword', 'required')">
+              La confirmation du mot de passe est obligatoire.
+            </span>
+            <span *ngIf="authenticationForm.errors?.passwordConfirmationFailed && authenticationForm.get('creatingPasswordConfirmed').touched">
+              La confirmation du mot de passe est différente du mot de passe.
+            </span>
+          </div>
+          <div>
+            <button
+              mat-flat-button color="accent"
+              (click)="createCustomerAccount()"
+              [disabled]="!areFormFieldsValid(['creatingFirstName', 'creatingName', 'creatingEmail', 'creatingPhone', 'creatingPassword', 'creatingPasswordConfirmed'])">
+                Créer un compte
+            </button>
+            <div *ngIf="accountCreationFailureMessage">
+              {{accountCreationFailureMessage}}
+            </div>
+          </div>
         </div>
       </form>
     </mat-step>

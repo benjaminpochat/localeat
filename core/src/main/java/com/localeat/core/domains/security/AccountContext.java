@@ -1,6 +1,6 @@
 package com.localeat.core.domains.security;
 
-public class UserContext {
+public class AccountContext {
     Account account;
     String password;
     Role role;

@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 }, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 @SpringBootTest
 @ExtendWith({RestDocumentationExtension.class, SpringExtension.class})
-public class TestAndDocUserController {
+public class TestAndDocAccountController {
 
     private MockMvc mockMvc;
 
@@ -54,13 +54,13 @@ public class TestAndDocUserController {
                 "      \"name\": \"DESTIVEL\",\n" +
                 "      \"email\": \"catherine.destivel@montagne.fr\"\n" +
                 "    },\n" +
-                "    \"username\": \"benjamin\"\n" +
+                "    \"username\": \"catherine\"\n" +
                 "  }\n" +
                 "}";
 
         // when / then
         this.mockMvc
-                .perform(post("/users")
+                .perform(post("/account")
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestBody))
