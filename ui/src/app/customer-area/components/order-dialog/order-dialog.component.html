@@ -1,12 +1,12 @@
+<title mat-dialog-title>Commande pour la livraison du {{delivery.deliveryStart | date: 'shortDate'}} - {{delivery.deliveryAddress.name}}</title>
+
 <mat-dialog-content>
   <mat-vertical-stepper #stepper linear="true">
     <mat-step [stepControl]="productSelectionForm" [editable]="!orderStored">
       <form [formGroup]="productSelectionForm">
         <ng-template matStepLabel>{{productSelectionStepLabel}}</ng-template>
         <div class='mat-step-label'>
-          Livré le {{delivery.deliveryStart | date: 'shortDate'}}<br>
-          entre {{delivery.deliveryStart | date: 'shortTime'}} et {{delivery.deliveryEnd | date: 'shortTime'}}<br>
-          Lieu de livraison : {{delivery.deliveryAddress.name}}<br>
+          Livré entre {{delivery.deliveryStart | date: 'shortTime'}} et {{delivery.deliveryEnd | date: 'shortTime'}}
           <span *ngFor="let product of delivery.availableProducts">
             {{ product.price }} €/kg<br>
             <span [innerHTML]="product.description"></span><br>
