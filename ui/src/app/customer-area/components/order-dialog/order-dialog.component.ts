@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Authentication } from 'src/app/commons/models/authentication.model';
 import { AuthenticationService } from 'src/app/commons/services/authentication.service';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { MatSliderChange } from '@angular/material/slider';
 import { MatRadioChange } from '@angular/material/radio';
 import { Actor } from 'src/app/commons/models/actor.model';
-import { Account } from 'src/app/commons/models/account.model';
 import { AccountService } from 'src/app/commons/services/account.service';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Delivery } from 'src/app/commons/models/delivery.model';
+import { Product } from 'src/app/commons/models/product.model';
 
 @Component({
   selector: 'app-order-dialog',
@@ -15,29 +17,48 @@ import { AccountService } from 'src/app/commons/services/account.service';
 })
 export class OrderDialogComponent implements OnInit {
   authentication: Authentication;
-  authenticationForm: FormGroup;
+  orderedProduct: Product;
   productSelectionForm: FormGroup;
+  authenticationForm: FormGroup;
   paymentForm: FormGroup;
   existingAccount = true;
   orderStored = false;
+  productSelectionStepLabel: string;
   authenticationStepLabel: string;
+  paymentStepLabel: string;
+  productSelectionButtonLabel: string;
   authenticationFailureMessage: string;
   accountCreationFailureMessage: string;
   authenticationSubmitted = false;
 
   constructor(
+    @Inject(MAT_DIALOG_DATA)
+    public delivery: Delivery,
     private authenticationService: AuthenticationService,
     private userService: AccountService,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
+    this.orderedProduct = this.delivery.availableProducts[0];
+    this.productSelectionStepLabel = 'Sélectionnez la quantité de viande commandée (en kg)';
+    this.productSelectionButtonLabel = 'Je valide la quantité (5kg min)';
+    this.paymentStepLabel = 'Procédez au paiement';
     this.initAuthentication();
-    this.resetAuthenticationStepLabel();
     this.initOrderForms();
   }
 
+  setQuantity(sliderChange: MatSliderChange): void{
+    this.productSelectionForm.patchValue({quantity: sliderChange.value });
+    const totalPrice = this.productSelectionForm.value.quantity * this.orderedProduct.price;
+    this.productSelectionStepLabel = this.productSelectionForm.value.quantity + 'kg de viande pour ' + totalPrice + '€';
+    this.productSelectionButtonLabel = 'Je commande ' + this.productSelectionForm.value.quantity + 'kg pour ' + totalPrice + '€';
+  }
+
   private initAuthentication() {
-    this.authenticationService.currentAuthentication.subscribe(authentication => this.authentication = authentication);
+    this.authenticationService.currentAuthentication.subscribe(authentication => {
+      this.authentication = authentication;
+      this.resetAuthenticationStepLabel();
+    });
   }
 
   private resetAuthenticationStepLabel() {
@@ -65,7 +86,7 @@ export class OrderDialogComponent implements OnInit {
       quantity: [0, Validators.min(5)]
     });
     this.paymentForm = this.formBuilder.group({
-      payed: [false]
+      payed: [false, Validators.requiredTrue]
     });
   }
 
@@ -73,16 +94,12 @@ export class OrderDialogComponent implements OnInit {
     this.existingAccount = event.value === 'true';
   }
 
-  setQuantity(sliderChange: MatSliderChange): void{
-    this.productSelectionForm.patchValue({quantity: sliderChange.value });
-  }
-
   login(email: string, password: string): void {
     this.authenticationService.getAuthenticationFromBackend(email, password).subscribe(
         () => {
           console.log('authentication successful !');
           this.initAuthentication();
-          this.resetAuthenticationStepLabel();
+
         },
         () => {
           console.error('authentication failed !');
@@ -135,13 +152,21 @@ export class OrderDialogComponent implements OnInit {
       && formField.touched;
   }
 
-  areFormFieldsValid(formFieldNames: string[]){
-    let result = this.authenticationForm.errors === null;
+  areFormFieldsValid(formGroup: FormGroup, formFieldNames: string[]){
+    let result = formGroup.errors === null;
     formFieldNames.forEach((fieldName) => {
-      const formField = this.authenticationForm.get(fieldName);
+      const formField = formGroup.get(fieldName);
       result = result && (formField.errors === null);
     });
     return result;
+  }
+
+  pay(){
+    //TODO : remplacer ça par un vrai paiement
+    this.paymentForm.patchValue({payed : true});
+    //TODO : enregistrer la commande
+    this.paymentStepLabel = 'C\'est payé';
+    this.orderStored = true;
   }
 
 }

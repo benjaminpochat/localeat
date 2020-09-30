@@ -1,8 +1,45 @@
 <mat-dialog-content>
   <mat-vertical-stepper #stepper linear="true">
+    <mat-step [stepControl]="productSelectionForm" [editable]="!orderStored">
+      <form [formGroup]="productSelectionForm">
+        <ng-template matStepLabel>{{productSelectionStepLabel}}</ng-template>
+        <div class='mat-step-label'>
+          Livré le {{delivery.deliveryStart | date: 'shortDate'}}<br>
+          entre {{delivery.deliveryStart | date: 'shortTime'}} et {{delivery.deliveryEnd | date: 'shortTime'}}<br>
+          Lieu de livraison : {{delivery.deliveryAddress.name}}<br>
+          <span *ngFor="let product of delivery.availableProducts">
+            {{ product.price }} €/kg<br>
+            <span [innerHTML]="product.description"></span><br>
+            Eleveur : {{product.animal.finalFarm.name}}
+          </span>
+        </div>
+        <div>
+          <div class='mat-step-label'>Glissez pour définir la quantité commandée</div>
+          <div>
+            <input matInput formControlName="quantity" hidden>
+            <mat-slider
+              min="5"
+              max="50"
+              step="1"
+              tickInterval="5"
+              thumbLabel
+              #quantitySlider
+              (change)="setQuantity($event)"></mat-slider>
+          </div>
+        </div>
+        <div>
+          <button
+            [disabled]="!areFormFieldsValid(productSelectionForm, ['quantity'])"
+            mat-flat-button
+            matStepperNext
+            color="accent">{{productSelectionButtonLabel}}
+          </button>
+        </div>
+      </form>
+    </mat-step>
 
-    <mat-step [stepControl]="authenticationForm" [completed]="authentication">
-        <form [formGroup]="authenticationForm">
+    <mat-step [stepControl]="authenticationForm" [completed]="authentication" [editable]="!orderStored">
+      <form [formGroup]="authenticationForm">
         <ng-template matStepLabel>{{authenticationStepLabel}}</ng-template>
         <div *ngIf="!authentication">
           <mat-radio-group (change)="changeAuthentificationType($event)">
@@ -34,7 +71,7 @@
           </div>
           <div>
             <button
-              [disabled]="!areFormFieldsValid(['existingEmail', 'existingPassword'])"
+              [disabled]="!areFormFieldsValid(authenticationForm, ['existingEmail', 'existingPassword'])"
               mat-flat-button color="accent"
               (click)="login(authenticationForm.value.existingEmail, authenticationForm.value.existingPassword)">
               Se connecter
@@ -111,9 +148,11 @@
           </div>
           <div>
             <button
-              mat-flat-button color="accent"
+              mat-flat-button
+              matStepperNext
+              color="accent"
               (click)="createCustomerAccount()"
-              [disabled]="!areFormFieldsValid(['creatingFirstName', 'creatingName', 'creatingEmail', 'creatingPhone', 'creatingPassword', 'creatingPasswordConfirmed'])">
+              [disabled]="!areFormFieldsValid(authenticationForm, ['creatingFirstName', 'creatingName', 'creatingEmail', 'creatingPhone', 'creatingPassword', 'creatingPasswordConfirmed'])">
                 Créer un compte
             </button>
             <div *ngIf="accountCreationFailureMessage">
@@ -124,30 +163,35 @@
       </form>
     </mat-step>
 
-    <mat-step [stepControl]="productSelectionForm" >
-      <form [formGroup]="productSelectionForm">
-        <ng-template matStepLabel>Sélectionnez la quantité de viande commandée (en kg)</ng-template>
-        <mat-form-field>
-          <input matInput formControlName="quantity">
-          <mat-slider min="5" max="50" step="1" tickInterval="5" thumbLabel #quantitySlider (change)="setQuantity($event)"></mat-slider>
-        </mat-form-field>
+    <mat-step [stepControl]="paymentForm" [editable]="!orderStored">
+      <form [formGroup]="paymentForm">
+        <ng-template matStepLabel>{{paymentStepLabel}}</ng-template>
+        <div>
+          <input matInput formControlName="payed" hidden="true">
+        </div>
+        <div>
+          <button
+            mat-flat-button
+            color="accent"
+            (click)="pay(); stepper.next();">
+              Accéder au paiement
+          </button>
+        </div>
       </form>
     </mat-step>
 
-    <mat-step [stepControl]="paymentForm">
-      <form [formGroup]="paymentForm">
-        <ng-template matStepLabel>Procédez au paiement</ng-template>
-        <mat-form-field>
-          <input matInput formControlName="payed" hidden="true">
-          <button mat-flat-button color="accent">Accéder au paiement</button>
-        </mat-form-field>
-      </form>
+    <mat-step>
+      <ng-template matStepLabel>Vos références</ng-template>
+      <button
+        mat-flat-button>
+        Télécharger la facture
+      </button>
     </mat-step>
 
   </mat-vertical-stepper>
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial disabled="!orderStored">C'est commandé !</button>
-  <button mat-button mat-dialog-close>Annuler la commande</button>
+  <button mat-flat-button mat-dialog-close color="accent" *ngIf="orderStored">Revenir à l'accueil</button>
+  <button mat-flat-button mat-dialog-close *ngIf="!orderStored">Annuler la commande</button>
 </mat-dialog-actions>

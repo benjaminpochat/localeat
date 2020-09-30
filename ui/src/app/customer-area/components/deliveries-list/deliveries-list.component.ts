@@ -38,7 +38,7 @@ export class DeliveriesListComponent implements OnInit {
   openOrderDialog(delivery: Delivery) {
     this.orderDialog.open(OrderDialogComponent, {
       width: '90%',
-      data: {delivery}
+      data: delivery
     });
   }
 

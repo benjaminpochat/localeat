@@ -4,7 +4,7 @@
     <mat-card-header>
       <mat-card-title>
         <span>
-          Livraison du {{delivery.deliveryStart | date: 'longDate'}}
+          Livraison du {{delivery.deliveryStart | date: 'shortDate'}}
         </span>
         <span *ngIf="delivery.deliveryAddress">
           - {{delivery.deliveryAddress.city}} - {{delivery.deliveryAddress.name}}
@@ -13,8 +13,7 @@
     <mat-card-content>
       <ul>
         <li>
-          Livré le {{delivery.deliveryStart | date: 'shortDate'}}
-          entre {{delivery.deliveryStart | date: 'shortTime'}}
+          Livré entre {{delivery.deliveryStart | date: 'shortTime'}}
           et {{delivery.deliveryEnd | date: 'shortTime'}}
         </li>
         <li>
