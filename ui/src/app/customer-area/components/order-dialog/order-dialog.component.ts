@@ -8,7 +8,9 @@ import { Actor } from 'src/app/commons/models/actor.model';
 import { AccountService } from 'src/app/commons/services/account.service';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Delivery } from 'src/app/commons/models/delivery.model';
-import { Product } from 'src/app/commons/models/product.model';
+import { OrderService } from '../../services/order.service';
+import { Order } from 'src/app/commons/models/order.model';
+import { OrderItem } from 'src/app/commons/models/order-item.model';
 
 @Component({
   selector: 'app-order-dialog',
@@ -16,8 +18,8 @@ import { Product } from 'src/app/commons/models/product.model';
   styleUrls: ['./order-dialog.component.css']
 })
 export class OrderDialogComponent implements OnInit {
+  order: Order;
   authentication: Authentication;
-  orderedProduct: Product;
   productSelectionForm: FormGroup;
   authenticationForm: FormGroup;
   paymentForm: FormGroup;
@@ -36,22 +38,27 @@ export class OrderDialogComponent implements OnInit {
     public delivery: Delivery,
     private authenticationService: AuthenticationService,
     private userService: AccountService,
+    private orderService: OrderService,
     private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
-    this.orderedProduct = this.delivery.availableProducts[0];
-    this.productSelectionStepLabel = 'Sélectionnez la quantité de viande commandée (en kg)';
-    this.productSelectionButtonLabel = 'Je valide la quantité (5kg min)';
-    this.paymentStepLabel = 'Procédez au paiement';
+    this.initOrder();
+    this.initLabels();
     this.initAuthentication();
     this.initOrderForms();
   }
 
-  setQuantity(sliderChange: MatSliderChange): void{
-    this.productSelectionForm.patchValue({quantity: sliderChange.value });
-    const totalPrice = this.productSelectionForm.value.quantity * this.orderedProduct.price;
-    this.productSelectionStepLabel = this.productSelectionForm.value.quantity + 'kg de viande pour ' + totalPrice + '€';
-    this.productSelectionButtonLabel = 'Je commande ' + this.productSelectionForm.value.quantity + 'kg pour ' + totalPrice + '€';
+  private initOrder() {
+    this.order = new Order();
+    this.order.orderedItems = [new OrderItem()];
+    this.order.orderedItems[0].product = this.delivery.availableProducts[0];
+    this.order.delivery = this.delivery;
+  }
+
+  private initLabels() {
+    this.productSelectionStepLabel = 'Sélectionnez la quantité de viande commandée (en kg)';
+    this.productSelectionButtonLabel = 'Je valide la quantité (5kg min)';
+    this.paymentStepLabel = 'Procédez au paiement';
   }
 
   private initAuthentication() {
@@ -88,6 +95,14 @@ export class OrderDialogComponent implements OnInit {
     this.paymentForm = this.formBuilder.group({
       payed: [false, Validators.requiredTrue]
     });
+  }
+
+  setQuantity(sliderChange: MatSliderChange): void{
+    this.productSelectionForm.patchValue({quantity: sliderChange.value });
+    this.order.orderedItems[0].quantity = this.productSelectionForm.value.quantity;
+    const totalPrice = this.order.orderedItems[0].quantity * this.order.orderedItems[0].product.price;
+    this.productSelectionStepLabel = this.order.orderedItems[0].quantity + 'kg de viande pour ' + totalPrice + '€';
+    this.productSelectionButtonLabel = 'Je commande ' + this.order.orderedItems[0].quantity + 'kg pour ' + totalPrice + '€';
   }
 
   changeAuthentificationType(event: MatRadioChange){
@@ -164,9 +179,10 @@ export class OrderDialogComponent implements OnInit {
   pay(){
     //TODO : remplacer ça par un vrai paiement
     this.paymentForm.patchValue({payed : true});
-    //TODO : enregistrer la commande
-    this.paymentStepLabel = 'C\'est payé';
-    this.orderStored = true;
+    this.orderService.saveOrder(this.order).subscribe(() => {
+      this.paymentStepLabel = 'C\'est payé';
+      this.orderStored = true;
+    });
   }
 
 }

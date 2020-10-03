@@ -7,7 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
@@ -26,6 +26,11 @@ import { Account } from 'src/app/commons/models/account.model';
 import { Actor } from 'src/app/commons/models/actor.model';
 import { CommonsModule } from 'src/app/commons/commons.module';
 import { OrderDialogComponent } from './order-dialog.component';
+import { Delivery } from 'src/app/commons/models/delivery.model';
+import { Product } from 'src/app/commons/models/product.model';
+import { Animal } from 'src/app/commons/models/animal.model';
+import { Farm } from 'src/app/commons/models/farm.model';
+import { DeliveryAddress } from 'src/app/commons/models/delivery-address.model';
 
 describe('OrderDialogComponent', () => {
 
@@ -53,10 +58,25 @@ describe('OrderDialogComponent', () => {
     MatTableModule,
   ];
 
+  const deliveryAddress = new DeliveryAddress();
+  deliveryAddress.name = 'Place de la République';
+  const farm = new Farm();
+  farm.name = 'La ferme de la rivère';
+  const animal = new Animal();
+  animal.finalFarm = farm;
+  const product = new Product();
+  product.description = 'une belle vache';
+  product.price = 13.5;
+  product.animal = animal;
+  const delivery = new Delivery();
+  delivery.availableProducts = [product];
+  delivery.deliveryAddress = deliveryAddress;
+
   describe('with no authentication', () => {
     let component: OrderDialogComponent;
     let fixture: ComponentFixture<OrderDialogComponent>;
     let authenticationService: AuthenticationService;
+
 
     beforeEach(() => {
       TestBed.configureTestingModule({
@@ -70,7 +90,8 @@ describe('OrderDialogComponent', () => {
           basicAngularImports,
           materialImports),
         providers: [
-          FormBuilder
+          FormBuilder,
+          { provide: MAT_DIALOG_DATA, useValue: delivery }
         ]
       })
       .compileComponents();
@@ -89,7 +110,7 @@ describe('OrderDialogComponent', () => {
 
       const orderDialog: HTMLElement = fixture.debugElement.nativeElement;
       const activeStepLabel = orderDialog.getElementsByClassName('mat-step-label mat-step-label-active mat-step-label-selected')[0];
-      expect(activeStepLabel.textContent).toEqual('Identifiez-vous');
+      expect(activeStepLabel.textContent).toEqual('Sélectionnez la quantité de viande commandée (en kg)');
     });
   });
 
@@ -112,7 +133,8 @@ describe('OrderDialogComponent', () => {
           materialImports
           ),
         providers: [
-          FormBuilder
+          FormBuilder,
+          { provide: MAT_DIALOG_DATA, useValue: delivery }
         ]
       })
       .compileComponents();
@@ -144,7 +166,8 @@ describe('OrderDialogComponent', () => {
 
       const orderDialog: HTMLElement = fixture.debugElement.nativeElement;
       const activeStepLabel = orderDialog.getElementsByClassName('mat-step-label mat-step-label-active mat-step-label-selected')[0];
-      expect(activeStepLabel.textContent).toEqual('Votre commande est au nom de Louis Lachenal');
+      expect(activeStepLabel.textContent).toEqual('Sélectionnez la quantité de viande commandée (en kg)');
+      //expect(activeStepLabel.textContent).toEqual('Votre commande est au nom de Louis Lachenal');
 
     });
   });
