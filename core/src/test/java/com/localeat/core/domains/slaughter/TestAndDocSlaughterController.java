@@ -37,7 +37,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         "/sql/create/com/localeat/domains/security/schema.sql",
         "/sql/create/com/localeat/domains/security/test_data.sql",
         "/sql/create/com/localeat/domains/farm/test_data.sql",
-        "/sql/create/com/localeat/domains/actor/test_data.sql"
+        "/sql/create/com/localeat/domains/actor/breeder_test_data.sql"
 })
 public class TestAndDocSlaughterController {
     private MockMvc mockMvc;

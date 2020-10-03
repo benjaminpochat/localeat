@@ -1,19 +1,19 @@
 package com.localeat.core.domains.actor;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.localeat.core.domains.order.Order;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.Collection;
 
 @Entity
 @Table(name = "customers")
-public class Customer extends Actor implements com.localeat.model.domains.actor.Customer<Order> {
+public class Customer extends Actor {
 
     @OneToMany
     private Collection<Order> orders;
 
-    @Override
     public Collection<Order> getOrders() {
         return orders;
     }

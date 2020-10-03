@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "products")
-public class Product implements com.localeat.model.domains.product.Product<Animal> {
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_id_generator")
@@ -39,7 +39,6 @@ public class Product implements com.localeat.model.domains.product.Product<Anima
         this.id = id;
     }
 
-    @Override
     public String getDescription() {
         return description;
     }
@@ -48,7 +47,6 @@ public class Product implements com.localeat.model.domains.product.Product<Anima
         this.description = description;
     }
 
-    @Override
     public float getPrice() {
         return price;
     }
@@ -57,7 +55,6 @@ public class Product implements com.localeat.model.domains.product.Product<Anima
         this.price = price;
     }
 
-    @Override
     public byte[] getPhoto() {
         return photo;
     }
@@ -66,7 +63,6 @@ public class Product implements com.localeat.model.domains.product.Product<Anima
         this.photo = photo;
     }
 
-    @Override
     public Animal getAnimal() {
         return animal;
     }

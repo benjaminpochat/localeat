@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "farms")
-public class Farm implements com.localeat.model.domains.farm.Farm {
+public class Farm {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "farm_id_generator")
@@ -28,7 +28,6 @@ public class Farm implements com.localeat.model.domains.farm.Farm {
         this.name = name;
     }
 
-    @Override
     public String getName() {
         return name;
     }
@@ -37,7 +36,6 @@ public class Farm implements com.localeat.model.domains.farm.Farm {
         this.description = description;
     }
 
-    @Override
     public String getDescription() {
         return description;
     }

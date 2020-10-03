@@ -18,7 +18,7 @@ import javax.persistence.*;
         @JsonSubTypes.Type(value=Breeder.class, name = "Breeder"),
         @JsonSubTypes.Type(value=Customer.class, name = "Customer")
 })
-public class Actor implements com.localeat.model.domains.actor.Actor {
+public class Actor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "actor_id_generator")
@@ -34,7 +34,6 @@ public class Actor implements com.localeat.model.domains.actor.Actor {
 
     private String phoneNumber;
 
-    @Override
     public String getName() {
         return name;
     }
@@ -43,7 +42,6 @@ public class Actor implements com.localeat.model.domains.actor.Actor {
         this.name = name;
     }
 
-    @Override
     public String getFirstName() {
         return firstName;
     }
@@ -52,7 +50,6 @@ public class Actor implements com.localeat.model.domains.actor.Actor {
         this.firstName = firstName;
     }
 
-    @Override
     public String getEmail() {
         return email;
     }
@@ -61,7 +58,6 @@ public class Actor implements com.localeat.model.domains.actor.Actor {
         this.email = email;
     }
 
-    @Override
     public String getPhoneNumber() {
         return phoneNumber;
     }

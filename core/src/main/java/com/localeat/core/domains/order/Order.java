@@ -1,17 +1,15 @@
 package com.localeat.core.domains.order;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.localeat.core.domains.actor.Customer;
 import com.localeat.core.domains.delivery.Delivery;
-import com.localeat.core.domains.product.Product;
-import com.localeat.core.domains.product.ProductSerializer;
 
 import javax.persistence.*;
-import java.util.Map;
+import java.util.Set;
 
 @Entity
 @Table(name = "orders")
-public class Order implements com.localeat.model.domains.order.Order<Customer, Product, Delivery> {
+public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_id_generator")
@@ -22,12 +20,9 @@ public class Order implements com.localeat.model.domains.order.Order<Customer, P
     @ManyToOne
     private Customer customer;
 
-    @ElementCollection
-    @CollectionTable(name="ordered_items", joinColumns=@JoinColumn(name="order_id"))
-    @MapKeyColumn(name="product_id")
-    @Column(name="ordered_quantity")
-    @JsonSerialize(keyUsing = ProductSerializer.class)
-    private Map<Product, Integer> orderedItems;
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "order")
+    @JsonManagedReference
+    private Set<OrderItem> orderedItems;
 
     @OneToOne
     private Delivery delivery;
@@ -40,7 +35,6 @@ public class Order implements com.localeat.model.domains.order.Order<Customer, P
         this.id = id;
     }
 
-    @Override
     public Customer getCustomer() {
         return customer;
     }
@@ -49,16 +43,14 @@ public class Order implements com.localeat.model.domains.order.Order<Customer, P
         this.customer = customer;
     }
 
-    @Override
-    public Map<Product, Integer> getOrderedItems() {
+    public Set<OrderItem> getOrderedItems() {
         return orderedItems;
     }
 
-    public void setOrderedItems(Map<Product, Integer> orderedItems) {
+    public void setOrderedItems(Set<OrderItem> orderedItems) {
         this.orderedItems = orderedItems;
     }
 
-    @Override
     public Delivery getDelivery() {
         return delivery;
     }

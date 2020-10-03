@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "slaughters")
-public class Slaughter implements com.localeat.model.domains.slaughter.Slaughter<Animal, Delivery> {
+public class Slaughter {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "slaughter_id_generator")
@@ -34,7 +34,6 @@ public class Slaughter implements com.localeat.model.domains.slaughter.Slaughter
         this.id = id;
     }
 
-    @Override
     public Animal getAnimal() {
         return animal;
     }
@@ -43,7 +42,6 @@ public class Slaughter implements com.localeat.model.domains.slaughter.Slaughter
         this.animal = animal;
     }
 
-    @Override
     public Delivery getDelivery() {
         return delivery;
     }
@@ -52,7 +50,6 @@ public class Slaughter implements com.localeat.model.domains.slaughter.Slaughter
         this.delivery = delivery;
     }
 
-    @Override
     public LocalDate getSlaughterDate() {
         return slaughterDate;
     }
@@ -61,7 +58,6 @@ public class Slaughter implements com.localeat.model.domains.slaughter.Slaughter
         this.slaughterDate = slaughterDate;
     }
 
-    @Override
     public LocalDate getCuttingDate() {
         return cuttingDate;
     }

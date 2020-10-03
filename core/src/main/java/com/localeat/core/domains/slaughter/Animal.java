@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "animals")
-public class Animal implements com.localeat.model.domains.slaughter.Animal<AnimalType, Farm> {
+public class Animal {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "animal_id_generator")
@@ -34,7 +34,6 @@ public class Animal implements com.localeat.model.domains.slaughter.Animal<Anima
         this.id = id;
     }
 
-    @Override
     public AnimalType getAnimalType() {
         return animalType;
     }
@@ -43,7 +42,6 @@ public class Animal implements com.localeat.model.domains.slaughter.Animal<Anima
         this.animalType = animalType;
     }
 
-    @Override
     public float getLiveWeight() {
         return liveWeight;
     }
@@ -52,7 +50,6 @@ public class Animal implements com.localeat.model.domains.slaughter.Animal<Anima
         this.liveWeight = liveWeight;
     }
 
-    @Override
     public float getMeatWeight() {
         return meatWeight;
     }
@@ -61,7 +58,6 @@ public class Animal implements com.localeat.model.domains.slaughter.Animal<Anima
         this.meatWeight = meatWeight;
     }
 
-    @Override
     public String getIdentificationNumber() {
         return identificationNumber;
     }
@@ -70,7 +66,6 @@ public class Animal implements com.localeat.model.domains.slaughter.Animal<Anima
         this.identificationNumber = identificationNumber;
     }
 
-    @Override
     public Farm getFinalFarm() {
         return finalFarm;
     }

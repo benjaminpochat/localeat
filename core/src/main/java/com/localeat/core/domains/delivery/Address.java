@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "addresses")
-class Address implements com.localeat.model.domains.delivery.Address {
+class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "address_id_generator")
@@ -28,7 +28,6 @@ class Address implements com.localeat.model.domains.delivery.Address {
         this.id = id;
     }
 
-    @Override
     public String getCity() {
         return city;
     }
@@ -37,7 +36,6 @@ class Address implements com.localeat.model.domains.delivery.Address {
         this.city = city;
     }
 
-    @Override
     public String getZipCode() {
         return zipCode;
     }
@@ -46,7 +44,6 @@ class Address implements com.localeat.model.domains.delivery.Address {
         this.zipCode = zipCode;
     }
 
-    @Override
     public String getAddressLine1() {
         return addressLine1;
     }
@@ -55,7 +52,6 @@ class Address implements com.localeat.model.domains.delivery.Address {
         this.addressLine1 = addressLine1;
     }
 
-    @Override
     public String getAddressLine2() {
         return addressLine2;
     }
@@ -64,7 +60,6 @@ class Address implements com.localeat.model.domains.delivery.Address {
         this.addressLine2 = addressLine2;
     }
 
-    @Override
     public String getAddressLine3() {
         return addressLine3;
     }
@@ -73,7 +68,6 @@ class Address implements com.localeat.model.domains.delivery.Address {
         this.addressLine3 = addressLine3;
     }
 
-    @Override
     public String getAddressLine4() {
         return addressLine4;
     }
@@ -82,7 +76,6 @@ class Address implements com.localeat.model.domains.delivery.Address {
         this.addressLine4 = addressLine4;
     }
 
-    @Override
     public String getName() {
         return name;
     }

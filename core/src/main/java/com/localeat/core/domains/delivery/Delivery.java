@@ -9,7 +9,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "deliveries")
-public class Delivery implements com.localeat.model.domains.delivery.Delivery<Order, Address, Product> {
+public class Delivery {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "delivery_id_generator")
@@ -39,7 +39,6 @@ public class Delivery implements com.localeat.model.domains.delivery.Delivery<Or
         this.id = id;
     }
 
-    @Override
     public Address getDeliveryAddress() {
         return deliveryAddress;
     }
@@ -48,7 +47,6 @@ public class Delivery implements com.localeat.model.domains.delivery.Delivery<Or
         this.deliveryAddress = deliveryAddress;
     }
 
-    @Override
     public Set<Product> getAvailableProducts() {
         return availableProducts;
     }
@@ -57,7 +55,6 @@ public class Delivery implements com.localeat.model.domains.delivery.Delivery<Or
         this.availableProducts = availableProducts;
     }
 
-    @Override
     public Set<Order> getOrders() {
         return orders;
     }
@@ -66,7 +63,6 @@ public class Delivery implements com.localeat.model.domains.delivery.Delivery<Or
         this.orders = orders;
     }
 
-    @Override
     public LocalDateTime getDeliveryStart() {
         return deliveryStart;
     }
@@ -75,7 +71,6 @@ public class Delivery implements com.localeat.model.domains.delivery.Delivery<Or
         this.deliveryStart = deliveryStart;
     }
 
-    @Override
     public LocalDateTime getDeliveryEnd() {
         return deliveryEnd;
     }
