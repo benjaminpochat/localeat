@@ -1,4 +1,4 @@
-<app-main-menu [sideMenuDisabled]="false" (sideMenuActivated)="showSideMenu($event)"></app-main-menu>
+<app-main-menu [sideMenuDisabled]="false" [loginForced]='true' (sideMenuActivated)="showSideMenu($event)"></app-main-menu>
 <app-side-menu #sideMenu (contentShown)="showContent($event)"></app-side-menu>
 <div class='content-body'>
   <div id="slaughters-list">

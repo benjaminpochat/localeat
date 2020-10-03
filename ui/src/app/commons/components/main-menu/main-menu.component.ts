@@ -14,6 +14,7 @@ export class MainMenuComponent implements OnInit {
 
   @Output() sideMenuActivated = new EventEmitter<boolean>();
   @Input() sideMenuDisabled = true;
+  @Input() loginForced = true;
   authentication: Authentication;
 
   constructor(
@@ -27,7 +28,13 @@ export class MainMenuComponent implements OnInit {
 
   logout() {
     this.authenticationService.deleteAuthentication();
-    this.router.navigate(['/authentication', {destinationRoute: this.router.url}]);
+    if (this.loginForced){
+      this.router.navigate(['/authentication', {destinationRoute: this.router.url}]);
+    }
+  }
+
+  goToLoginPage() {
+    this.router.navigate(['/authentication', { destinationRoute: this.router.url }]);
   }
 
   showSideMenu(): void {
