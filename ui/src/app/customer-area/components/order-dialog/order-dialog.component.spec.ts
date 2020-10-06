@@ -31,6 +31,7 @@ import { Product } from 'src/app/commons/models/product.model';
 import { Animal } from 'src/app/commons/models/animal.model';
 import { Farm } from 'src/app/commons/models/farm.model';
 import { DeliveryAddress } from 'src/app/commons/models/delivery-address.model';
+import { AuthenticationServiceMock } from 'src/app/commons/services/authentication.service.mock';
 
 describe('OrderDialogComponent', () => {
 
@@ -144,20 +145,8 @@ describe('OrderDialogComponent', () => {
       fixture = TestBed.createComponent(OrderDialogComponent);
       component = fixture.componentInstance;
       authenticationService = fixture.debugElement.injector.get<AuthenticationService>(AuthenticationService as Type<AuthenticationService>);
-      const actor = new Actor();
-      actor.email = 'louis.lachenal@montblanc.fr';
-      actor.name = 'Lachenal';
-      actor.firstName = 'Louis';
-      actor.phoneNumber = '01 23 45 67 89';
-      const account = new Account();
-      account.id = 1;
-      account.username = 'louis.lachenal';
-      account.actor = actor;
-      const authentication = new Authentication();
-      authentication.authorities = ['CUSTOMER'];
-      authentication.account = account;
-      authenticationService.authentication.next(authentication);
-      authenticationService.getAuthenticationFromCookie = () => authentication;
+      const authenticationServiceMock = new AuthenticationServiceMock();
+      authenticationServiceMock.mockAuthenticationService(authenticationService);
       fixture.detectChanges();
     });
 
