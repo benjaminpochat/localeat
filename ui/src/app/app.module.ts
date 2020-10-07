@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CustomerAreaModule } from './customer-area/customer-area.module';
 
 import localeFr from '@angular/common/locales/fr';
+import { OrderListComponent } from './customer-area/components/order-list/order-list.component';
 registerLocaleData(localeFr);
 
 @NgModule({

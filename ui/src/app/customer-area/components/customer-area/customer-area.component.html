@@ -6,7 +6,8 @@
   <div *ngIf="authentication" class="welcome">
     Heureux de vous revoir {{authentication.account.actor.firstName}} !
   </div>
-  <app-deliveries-list></app-deliveries-list>
+  <app-order-list *ngIf="authentication"></app-order-list>
+  <app-deliveries-list (createOrderEvent)="refreshOrderList()"></app-deliveries-list>
   <div class="photo-title">
     <img src="assets/images/meat.jpg"/>
   </div>

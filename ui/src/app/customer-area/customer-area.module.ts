@@ -20,12 +20,14 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
 import { ReactiveFormsModule } from '@angular/forms';
 import { OrderDialogComponent } from './components/order-dialog/order-dialog.component';
+import { OrderListComponent } from './components/order-list/order-list.component';
 
 @NgModule({
   declarations: [
     CustomerAreaComponent,
     DeliveriesListComponent,
     OrderDialogComponent,
+    OrderListComponent,
   ],
   imports: [
     CommonModule,

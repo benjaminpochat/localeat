@@ -10,7 +10,7 @@ import { DeliveryService } from '../../services/delivery.service';
 export class SalesListComponent implements OnInit {
 
   deliveries: Delivery[];
-  searchLoopBack = new EventEmitter<Delivery[]>();
+  refreshDeliveriesEvent = new EventEmitter<Delivery[]>();
 
   constructor(
     private deliveryService: DeliveryService
@@ -21,7 +21,7 @@ export class SalesListComponent implements OnInit {
   }
 
   refreshDeliveries() {
-    this.searchLoopBack.subscribe((deliveries: Delivery[]) => this.deliveries = deliveries);
-    this.deliveryService.getDeliveries(this.searchLoopBack);
+    this.refreshDeliveriesEvent.subscribe((deliveries: Delivery[]) => this.deliveries = deliveries);
+    this.deliveryService.getDeliveries(this.refreshDeliveriesEvent);
   }
 }

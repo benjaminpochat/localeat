@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Output } from '@angular/core';
 import { Authentication } from 'src/app/commons/models/authentication.model';
 import { AuthenticationService } from 'src/app/commons/services/authentication.service';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, ValidationErrors } from '@angular/forms';
@@ -11,6 +11,7 @@ import { Delivery } from 'src/app/commons/models/delivery.model';
 import { OrderService } from '../../services/order.service';
 import { Order } from 'src/app/commons/models/order.model';
 import { OrderItem } from 'src/app/commons/models/order-item.model';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-order-dialog',
@@ -18,6 +19,9 @@ import { OrderItem } from 'src/app/commons/models/order-item.model';
   styleUrls: ['./order-dialog.component.css']
 })
 export class OrderDialogComponent implements OnInit {
+
+  @Output()
+  createOrderEvent = new EventEmitter<Order>();
   order: Order;
   authentication: Authentication;
   productSelectionForm: FormGroup;
@@ -179,9 +183,10 @@ export class OrderDialogComponent implements OnInit {
   pay(){
     //TODO : remplacer ça par un vrai paiement
     this.paymentForm.patchValue({payed : true});
-    this.orderService.saveOrder(this.order).subscribe(() => {
+    this.orderService.saveOrder(this.order).subscribe((order: Order) => {
       this.paymentStepLabel = 'C\'est payé';
       this.orderStored = true;
+      this.createOrderEvent.emit(this.order);
     });
   }
 

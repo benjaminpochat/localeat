@@ -1,8 +1,9 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Delivery } from 'src/app/commons/models/delivery.model';
 import { DeliveryService } from 'src/app/customer-area/services/delivery.service';
 import { OrderDialogComponent } from '../order-dialog/order-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Order } from 'src/app/commons/models/order.model';
 
 @Component({
   selector: 'app-deliveries-list',
@@ -11,8 +12,10 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class DeliveriesListComponent implements OnInit {
 
+  @Output()
+  createOrderEvent = new EventEmitter<Order>();
   deliveries: Delivery[];
-  searchLoopBack = new EventEmitter<Delivery[]>();
+  refreshDeliveriesEvent = new EventEmitter<Delivery[]>();
 
   constructor(
     private deliveryService: DeliveryService,
@@ -24,7 +27,7 @@ export class DeliveriesListComponent implements OnInit {
   }
 
   refreshDeliveries() {
-    this.searchLoopBack.subscribe((deliveries: Delivery[]) => {
+    this.refreshDeliveriesEvent.subscribe((deliveries: Delivery[]) => {
       this.deliveries = deliveries;
       this.deliveries.forEach(delivery => delivery.availableProducts.forEach(product => {
         if (product.description) {
@@ -32,14 +35,14 @@ export class DeliveriesListComponent implements OnInit {
         }
       }));
     });
-    this.deliveryService.getDeliveries(this.searchLoopBack);
+    this.deliveryService.getDeliveries(this.refreshDeliveriesEvent);
   }
 
   openOrderDialog(delivery: Delivery) {
-    this.orderDialog.open(OrderDialogComponent, {
+    const orderDialog = this.orderDialog.open(OrderDialogComponent, {
       width: '90%',
       data: delivery
     });
+    orderDialog.componentInstance.createOrderEvent.subscribe((order: Order) => this.createOrderEvent.emit(order));
   }
-
 }

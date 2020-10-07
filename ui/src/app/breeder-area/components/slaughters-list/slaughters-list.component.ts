@@ -1,7 +1,6 @@
 import { Component, OnInit, EventEmitter, ViewChild, Output } from '@angular/core';
 import { Slaughter } from 'src/app/commons/models/slaughter.model';
 import { SlaughterService } from '../../services/slaughter.service';
-import { SalePublicationComponent } from '../sale-publication/sale-publication.component';
 
 @Component({
   selector: 'app-slaughters-list',
@@ -12,7 +11,7 @@ export class SlaughtersListComponent implements OnInit {
 
   slaughters: Slaughter[];
   slaughterSelectedForSalePublication: Slaughter;
-  searchLoopBack = new EventEmitter<Slaughter[]>();
+  refreshDeliveriesEvent = new EventEmitter<Slaughter[]>();
 
   @Output()
   salePublicationLoopBack = new EventEmitter<Slaughter>();
@@ -26,8 +25,8 @@ export class SlaughtersListComponent implements OnInit {
   }
 
   refreshSlaughters(): void {
-    this.searchLoopBack.subscribe((slaughters: Slaughter[]) => this.slaughters = slaughters);
-    this.slaughterService.getSlaughters(this.searchLoopBack);
+    this.refreshDeliveriesEvent.subscribe((slaughters: Slaughter[]) => this.slaughters = slaughters);
+    this.slaughterService.getSlaughters(this.refreshDeliveriesEvent);
   }
 
   handleSlaughterCreation(slaughterCreated: Slaughter): void {

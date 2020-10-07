@@ -17,8 +17,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Sql(value = {
         "/sql/create/com/localeat/domains/security/schema.sql",
-        "/sql/create/com/localeat/domains/security/test_data.sql",
-        "/sql/create/com/localeat/domains/farm/test_data.sql",
+        "/sql/create/com/localeat/domains/security/security_test_data.sql",
+        "/sql/create/com/localeat/domains/farm/farm_test_data.sql",
         "/sql/create/com/localeat/domains/actor/breeder_test_data.sql"
 }, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(value = {
