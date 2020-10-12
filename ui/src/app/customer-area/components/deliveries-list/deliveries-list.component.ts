@@ -4,6 +4,7 @@ import { DeliveryService } from 'src/app/customer-area/services/delivery.service
 import { OrderDialogComponent } from '../order-dialog/order-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Order } from 'src/app/commons/models/order.model';
+import { Product } from 'src/app/commons/models/product.model';
 
 @Component({
   selector: 'app-deliveries-list',
@@ -44,5 +45,9 @@ export class DeliveriesListComponent implements OnInit {
       data: delivery
     });
     orderDialog.componentInstance.createOrderEvent.subscribe((order: Order) => this.createOrderEvent.emit(order));
+  }
+
+  getUniqueProduct(delivery: Delivery): Product {
+    return delivery.availableProducts[0];
   }
 }

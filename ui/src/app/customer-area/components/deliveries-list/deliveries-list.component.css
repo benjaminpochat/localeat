@@ -5,3 +5,18 @@
   border-width: 2px;
   border-color: darkolivegreen;
 }
+
+.mat-card-content > div {
+  display: block;
+  margin-block-end: 0.5rem;
+}
+
+.mat-card-content > div > i{
+  vertical-align: top;
+}
+
+
+.mat-card-content > div > span{
+  display: inline-block;
+  margin-left: 0.5rem;
+}

@@ -88,3 +88,46 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .textarea-mat-form-field {
   width: 100%;
 }
+
+/* icons */
+
+.icon {
+  width: 1.4rem;
+  height: 1.4rem;
+  display: inline-block;
+}
+
+.placeholder-icon {
+  background: url(assets/images/icons/svg/placeholder.svg);
+  background-size: contain;
+}
+
+.time-icon {
+  background: url(assets/images/icons/svg/time.svg);
+  background-size: contain;
+}
+
+.calendar-icon {
+  background: url(assets/images/icons/svg/calendar.svg);
+  background-size: contain;
+}
+
+.cow-icon {
+  background: url(assets/images/icons/svg/cow.svg);
+  background-size: contain;
+}
+
+.euro-icon {
+  background: url(assets/images/icons/svg/euro.svg);
+  background-size: contain;
+}
+
+.steak-icon {
+  background: url(assets/images/icons/svg/steak.svg);
+  background-size: contain;
+}
+
+.farm-icon {
+  background: url(assets/images/icons/svg/farm.svg);
+  background-size: contain;
+}

@@ -1,26 +1,35 @@
 .content-body div {
-  padding-top: 50px;
+  padding-top: 2.3rem;
 }
 
 @media (min-width:600px) {
-  .main-title{
-    font-size: 4rem;
+  .main-title {
+    font-size: 2.9rem;
+    display: flex;
   }
 
-  .photo-title > img {
-    max-width: 50%;
-    height: auto;
+  .main-title div:nth-child(1){
+    width: 10rem;
+    background: linear-gradient(to right, transparent, 95%, white),url(../../../../assets/images/cow.jpg);
+    background-size: cover;
   }
+
+  .main-title div:nth-child(2){
+    flex: 1;
+  }
+
+  .main-title div:nth-child(3){
+    width: 7rem;
+    background-position-y: 1rem;
+    background: linear-gradient(to left, transparent, 95%, white),url(../../../../assets/images/meat.jpg);
+    background-size: cover;
+  }
+
 }
 
 @media (max-width:600px) {
   .main-title{
     font-size: 2rem;
-  }
-
-  .photo-title > img {
-    max-width: 100%;
-    height: auto;
   }
 }
 
@@ -28,12 +37,6 @@
   font-family: Acme;
   text-align: center;
   width: 100%;
-}
-
-.photo-title > img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .welcome {

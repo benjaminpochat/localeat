@@ -12,26 +12,39 @@
       </mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <ul>
-        <li>
+      <div>
+        <i class="icon time-icon"></i>
+        <span>
           Livré entre {{delivery.deliveryStart | date: 'shortTime'}}
           et {{delivery.deliveryEnd | date: 'shortTime'}}
-        </li>
-        <li>
+        </span>
+      </div>
+      <div>
+        <i class="icon placeholder-icon"></i>
+        <span>
           Adresse de livraison :<br>
           {{delivery.deliveryAddress.name}}<br>
           {{delivery.deliveryAddress.addressLine1}}<br>
           {{delivery.deliveryAddress.zipCode}}<br>
           {{delivery.deliveryAddress.city}}
-        </li>
-        <li>
-          <span *ngFor="let product of delivery.availableProducts">
-            {{ product.price }} €/kg<br>
-            <span [innerHTML]="product.description"></span><br>
-            Eleveur : {{product.animal.finalFarm.name}}
-          </span>
-        </li>
-      </ul>
+        </span>
+      </div>
+      <div>
+        <i class="icon euro-icon"></i>
+        <span>
+          {{ getUniqueProduct(delivery).price }} €/kg
+        </span>
+      </div>
+      <div>
+        <i class="icon steak-icon"></i>
+        <span [innerHTML]="getUniqueProduct(delivery).description"></span>
+      </div>
+      <div>
+        <i class="icon farm-icon"></i>
+        <span>
+          Eleveur : {{getUniqueProduct(delivery).animal.finalFarm.name}}
+        </span>
+      </div>
     </mat-card-content>
     <mat-card-actions>
       <button mat-flat-button color='primary' (click)="openOrderDialog(delivery)">Je commande</button>
