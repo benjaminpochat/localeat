@@ -64,7 +64,7 @@ public class TestAndDocOrderController {
 
         // when, then
         this.mockMvc
-                .perform(post("/accounts/1/orders")
+                .perform(post("/accounts/3/orders")
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestBody))
@@ -79,7 +79,7 @@ public class TestAndDocOrderController {
     public void getOrderByCustomer() throws Exception {
         // when, then
         this.mockMvc
-                .perform(get("/accounts/1/orders"))
+                .perform(get("/accounts/3/orders"))
                 .andExpect(status().isOk())
                 .andExpect(content().json("[ {\n" +
                         "  \"id\" : 1,\n" +

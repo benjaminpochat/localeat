@@ -5,7 +5,7 @@ insert into customers (
     name,
     phone_number)
 values (
-    1,
+    3,
     'virginie@mail.fr',
     'Virginie',
     'WALTER',
@@ -19,7 +19,7 @@ insert into customers (
     name,
     phone_number)
 values (
-    2,
+    4,
     'jerome@mail.fr',
     'Jerome',
     'WILSON',

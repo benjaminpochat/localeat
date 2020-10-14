@@ -4,7 +4,7 @@ insert into orders (
     delivery_id)
 values (
     1,
-    1,
+    3,
     1)
 ;
 
@@ -28,7 +28,7 @@ insert into orders (
     delivery_id)
 values (
     2,
-    1,
+    3,
     2)
 ;
 
@@ -52,7 +52,7 @@ insert into orders (
     delivery_id)
 values (
     3,
-    2,
+    4,
     1)
 ;
 

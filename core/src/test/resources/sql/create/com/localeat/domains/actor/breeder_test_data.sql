@@ -6,7 +6,7 @@ insert into breeders (
     name,
     phone_number)
 values (
-    3,
+    1,
     'benjamin@ferme-du-ruisseau.fr',
     1,
     'Benjamin',
@@ -22,7 +22,7 @@ insert into breeders (
     name,
     phone_number)
 values (
-    4,
+    2,
     'estelle@gaec-3-frere.fr',
     2,
     'Estelle',
