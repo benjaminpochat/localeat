@@ -1,4 +1,4 @@
-package com.localeat.core.domains.order;
+package com.localeat.core.domains.delivery;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,12 +16,13 @@ import org.springframework.web.context.WebApplicationContext;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
-import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
-import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
+
+
 
 @SpringBootTest
 @ExtendWith({RestDocumentationExtension.class, SpringExtension.class})
@@ -29,13 +30,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Sql({
         "/sql/create/com/localeat/domains/security/schema.sql",
         "/sql/create/com/localeat/domains/security/security_test_data.sql",
+        "/sql/create/com/localeat/domains/farm/farm_test_data.sql",
+        "/sql/create/com/localeat/domains/actor/breeder_test_data.sql",
         "/sql/create/com/localeat/domains/actor/customer_test_data.sql",
         "/sql/create/com/localeat/domains/delivery/address_test_data.sql",
         "/sql/create/com/localeat/domains/product/product_test_data.sql",
         "/sql/create/com/localeat/domains/delivery/delivery_test_data.sql",
+        "/sql/create/com/localeat/domains/slaughter/slaughter_test_data.sql",
         "/sql/create/com/localeat/domains/order/order_test_data.sql",
 })
-public class TestAndDocOrderController {
+public class TestAndDocDeliveryController {
 
     private MockMvc mockMvc;
 
@@ -48,38 +52,15 @@ public class TestAndDocOrderController {
     }
 
     @Test
-    public void createOrder() throws Exception {
+    public void getOrdersByDelivery() throws Exception {
         // given
-        var requestBody = "{\n" +
-                "  \"orderedItems\": [" +
-                "    {" +
-                "       \"product\" : {\"id\":\"1\"}," +
-                "       \"quantity\" : 5" +
-                "    }" +
-                "  ]," +
-                "  \"delivery\" : {" +
-                "    \"id\" : \"1\"" +
-                "  }" +
-                "}";
+        // -> See SQL files executed
 
         // when, then
         this.mockMvc
-                .perform(post("/accounts/1/orders")
+                .perform(get("/accounts/1/deliveries/1/orders")
                         .accept(MediaType.APPLICATION_JSON)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(requestBody))
-                .andExpect(status().isOk())
-                .andDo(document(
-                        "create-order",
-                        preprocessRequest(prettyPrint()),
-                        preprocessResponse(prettyPrint())));
-    }
-
-    @Test
-    public void getOrderByCustomer() throws Exception {
-        // when, then
-        this.mockMvc
-                .perform(get("/accounts/1/orders"))
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().json("[ {\n" +
                         "  \"id\" : 1,\n" +
@@ -127,17 +108,17 @@ public class TestAndDocOrderController {
                         "    \"orders\" : [ ]\n" +
                         "  }\n" +
                         "}, {\n" +
-                        "  \"id\" : 2,\n" +
+                        "  \"id\" : 3,\n" +
                         "  \"customer\" : {\n" +
                         "    \"@type\" : \"Customer\",\n" +
-                        "    \"name\" : \"WALTER\",\n" +
-                        "    \"firstName\" : \"Virginie\",\n" +
-                        "    \"email\" : \"virginie@mail.fr\",\n" +
-                        "    \"phoneNumber\" : \"04 32 10 98 87\",\n" +
+                        "    \"name\" : \"WILSON\",\n" +
+                        "    \"firstName\" : \"Jerome\",\n" +
+                        "    \"email\" : \"jerome@mail.fr\",\n" +
+                        "    \"phoneNumber\" : \"06 98 87 65 21\",\n" +
                         "    \"orders\" : [ ]\n" +
                         "  },\n" +
                         "  \"orderedItems\" : [ {\n" +
-                        "    \"id\" : 2,\n" +
+                        "    \"id\" : 3,\n" +
                         "    \"product\" : {\n" +
                         "      \"id\" : 1,\n" +
                         "      \"description\" : \"un assortiment de steaks, de rotis, et de morceaux a bouillir\",\n" +
@@ -146,10 +127,10 @@ public class TestAndDocOrderController {
                         "      \"animal\" : null\n" +
                         "    },\n" +
                         "    \"unitPrice\" : 12.0,\n" +
-                        "    \"quantity\" : 5.0\n" +
+                        "    \"quantity\" : 20.0\n" +
                         "  } ],\n" +
                         "  \"delivery\" : {\n" +
-                        "    \"id\" : 2,\n" +
+                        "    \"id\" : 1,\n" +
                         "    \"deliveryAddress\" : {\n" +
                         "      \"id\" : 1,\n" +
                         "      \"name\" : \"Chez Bob\",\n" +
@@ -160,8 +141,8 @@ public class TestAndDocOrderController {
                         "      \"addressLine3\" : null,\n" +
                         "      \"addressLine4\" : null\n" +
                         "    },\n" +
-                        "    \"deliveryStart\" : \"2020-01-08T20:00:00\",\n" +
-                        "    \"deliveryEnd\" : \"2020-01-08T18:00:00\",\n" +
+                        "    \"deliveryStart\" : \"2020-01-01T20:00:00\",\n" +
+                        "    \"deliveryEnd\" : \"2020-01-01T18:00:00\",\n" +
                         "    \"availableProducts\" : [ {\n" +
                         "      \"id\" : 1,\n" +
                         "      \"description\" : \"un assortiment de steaks, de rotis, et de morceaux a bouillir\",\n" +
@@ -173,8 +154,26 @@ public class TestAndDocOrderController {
                         "  }\n" +
                         "} ]"))
                 .andDo(document(
-                        "get-orders-by-customer",
+                        "get-orders-by-delivery",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint())));
     }
+
+    @Test
+    public void getOrdersByDeliveryWithUnauthorizedAccount() throws Exception {
+        // given
+        // -> See SQL files executed
+
+        // when, then
+        this.mockMvc
+                .perform(get("/accounts/2/deliveries/1/orders")
+                        .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isUnauthorized())
+                .andDo(document(
+                        "get-orders-by-delivery-with-unauthorized-account",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint())));
+    }
+
 }
