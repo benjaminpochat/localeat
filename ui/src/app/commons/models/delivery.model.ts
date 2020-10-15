@@ -1,4 +1,5 @@
 import { DeliveryAddress } from './delivery-address.model';
+import { Order } from './order.model';
 import { Product } from './product.model';
 
 export class Delivery {
@@ -7,4 +8,5 @@ export class Delivery {
   deliveryStart: Date;
   deliveryEnd: Date;
   availableProducts: Product[];
+  orders: Order[];
 }

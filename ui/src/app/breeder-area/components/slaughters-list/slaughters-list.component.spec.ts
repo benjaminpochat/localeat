@@ -43,7 +43,6 @@ describe('SlaughtersListComponent', () => {
       const request = httpMock.expectOne(environment.localeatCoreUrl + '/accounts/1/slaughters');
       expect(request.request.method).toEqual('GET');
       request.flush({data: [{id: 1}, {id: 2}]});
-
       expect(slaughtersListComponent).toBeTruthy();
     });
   });

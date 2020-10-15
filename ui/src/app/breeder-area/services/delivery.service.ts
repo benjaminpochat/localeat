@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Delivery } from 'src/app/commons/models/delivery.model';
 import { UrlService } from 'src/app/commons/services/url.service';
 import { Order } from 'src/app/commons/models/order.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +19,7 @@ export class DeliveryService {
     response.subscribe(deliveriesCollected => loopBack.emit(deliveriesCollected));
   }
 
-  public getDeliveryOrders(delivery: Delivery, loadOrdersEvent: EventEmitter<Order[]>){
-    const response = this.http.get<Order[]>(this.urlService.getAuthenticatedUrl(['deliveries', delivery.id.toString(), 'orders']));
-    response.subscribe(orders => loadOrdersEvent.emit(orders));
+  public getDeliveryOrders(delivery: Delivery): Observable<Order[]>{
+    return this.http.get<Order[]>(this.urlService.getAuthenticatedUrl(['deliveries', delivery.id.toString(), 'orders']));
   }
 }

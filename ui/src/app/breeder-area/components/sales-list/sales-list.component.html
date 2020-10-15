@@ -4,5 +4,18 @@
     <mat-card-header>
       <mat-card-title>Vente du {{delivery.deliveryStart | date : 'longDate' }} à {{delivery.deliveryAddress.city}}</mat-card-title>
     </mat-card-header>
+    <mat-card-content>
+      <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{delivery.orders.length}} commandes client
+          </mat-panel-title>
+          <mat-panel-description>
+            {{getOrdersSummary(delivery)}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <app-delivery-orders-table [delivery]="delivery"></app-delivery-orders-table>
+      </mat-expansion-panel>
+    </mat-card-content>
   </mat-card>
 </div>

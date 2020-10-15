@@ -12,6 +12,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
@@ -24,6 +25,7 @@ import { MatTableModule } from '@angular/material/table';
 import { SalesListComponent } from './components/sales-list/sales-list.component';
 import { DeliveriesListComponent } from './components/deliveries-list/deliveries-list.component';
 import { SalePublicationComponent } from './components/sale-publication/sale-publication.component';
+import { DeliveryOrdersTableComponent } from './components/delivery-orders-table/delivery-orders-table.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,7 @@ import { SalePublicationComponent } from './components/sale-publication/sale-pub
     SlaughtersActionsComponent,
     SlaughtersListComponent,
     SlaughterCreationComponent,
+    DeliveryOrdersTableComponent,
   ],
   imports: [
     CommonModule,
@@ -44,6 +47,7 @@ import { SalePublicationComponent } from './components/sale-publication/sale-pub
     MatCheckboxModule,
     MatDatepickerModule,
     MatDialogModule,
+    MatExpansionModule,
     MatFormFieldModule,
     MatGridListModule,
     MatInputModule,

@@ -37,10 +37,10 @@ class AuthorizedAccountFilter extends OncePerRequestFilter {
     }
 
     private String getAccountIdInUri(HttpServletRequest request) {
-        Pattern uriPattern = Pattern.compile("/accounts/(.*)/(.*)");
-        Matcher uriPatterneMatcher = uriPattern.matcher(request.getRequestURI());
-        if (uriPatterneMatcher.matches()) {
-            return uriPatterneMatcher.group(1);
+        Pattern uriPattern = Pattern.compile("/accounts/(.*?)/(.*)");
+        Matcher uriPatternMatcher = uriPattern.matcher(request.getRequestURI());
+        if (uriPatternMatcher.matches()) {
+            return uriPatternMatcher.group(1);
         }
         return "";
     }
