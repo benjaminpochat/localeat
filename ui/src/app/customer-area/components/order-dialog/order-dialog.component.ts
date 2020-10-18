@@ -6,7 +6,6 @@ import { MatSliderChange } from '@angular/material/slider';
 import { MatRadioChange } from '@angular/material/radio';
 import { Actor } from 'src/app/commons/models/actor.model';
 import { AccountService } from 'src/app/commons/services/account.service';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Delivery } from 'src/app/commons/models/delivery.model';
 import { OrderService } from '../../services/order.service';
 import { Order } from 'src/app/commons/models/order.model';
@@ -20,9 +19,10 @@ import { EventEmitter } from '@angular/core';
 })
 export class OrderDialogComponent implements OnInit {
 
+  order: Order;
+
   @Output()
   createOrderEvent = new EventEmitter<Order>();
-  order: Order;
   authentication: Authentication;
   productSelectionForm: FormGroup;
   authenticationForm: FormGroup;
@@ -38,25 +38,22 @@ export class OrderDialogComponent implements OnInit {
   authenticationSubmitted = false;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA)
-    public delivery: Delivery,
     private authenticationService: AuthenticationService,
     private userService: AccountService,
     private orderService: OrderService,
     private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
-    this.initOrder();
     this.initLabels();
     this.initAuthentication();
     this.initOrderForms();
   }
 
-  private initOrder() {
+  public initOrder(delivery: Delivery) {
     this.order = new Order();
     this.order.orderedItems = [new OrderItem()];
-    this.order.orderedItems[0].product = this.delivery.availableProducts[0];
-    this.order.delivery = this.delivery;
+    this.order.orderedItems[0].product = delivery.availableProducts[0];
+    this.order.delivery = delivery;
   }
 
   private initLabels() {
@@ -190,4 +187,7 @@ export class OrderDialogComponent implements OnInit {
     });
   }
 
+  cancel(){
+    this.order = null;
+  }
 }

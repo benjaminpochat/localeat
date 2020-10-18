@@ -1,6 +1,7 @@
 package com.localeat.core.domains.delivery;
 
 import com.localeat.core.domains.order.Order;
+import com.localeat.core.domains.product.Batch;
 import com.localeat.core.domains.product.Product;
 
 import javax.persistence.*;
@@ -25,8 +26,8 @@ public class Delivery {
     private LocalDateTime deliveryEnd;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name="delivery_available_products")
-    private Set<Product> availableProducts;
+    @JoinTable(name="delivery_available_batches")
+    private Set<Batch> availableBatches;
 
     @OneToMany(cascade = CascadeType.ALL)
     private Set<Order> orders;
@@ -47,12 +48,12 @@ public class Delivery {
         this.deliveryAddress = deliveryAddress;
     }
 
-    public Set<Product> getAvailableProducts() {
-        return availableProducts;
+    public Set<Batch> getAvailableBatches() {
+        return availableBatches;
     }
 
-    public void setAvailableProducts(Set<Product> availableProducts) {
-        this.availableProducts = availableProducts;
+    public void setAvailableBatches(Set<Batch> availableBatches) {
+        this.availableBatches = availableBatches;
     }
 
     public Set<Order> getOrders() {

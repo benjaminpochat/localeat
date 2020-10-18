@@ -50,7 +50,8 @@ export class SalePublicationComponent implements OnInit {
       meatWeight: [this.slaughter.animal.liveWeight * 0.4, Validators.min(1)]
     });
     this.productDescriptionForm = this.formBuilder.group({
-      productDescription: ['', Validators.required],
+      name: ['', Validators.requiredTrue],
+      description: ['', Validators.required],
       price: ['', Validators.required]
     });
   }
@@ -67,8 +68,9 @@ export class SalePublicationComponent implements OnInit {
       this.slaughter.delivery.deliveryAddress.city = this.deliveryPlaceForm.value.city;
       this.slaughter.animal.meatWeight = this.meatWeightForm.value.meatWeight;
       const product = new Product();
+      product.name = this.productDescriptionForm.value.name;
       product.price = this.productDescriptionForm.value.price;
-      product.description = this.productDescriptionForm.value.productDescription;
+      product.description = this.productDescriptionForm.value.description;
       this.slaughter.delivery.availableProducts = [];
       this.slaughter.delivery.availableProducts.push(product);
       this.slaughterService.saveSlaughter(this.slaughter, this.salePublicationLoopBack);

@@ -1,6 +1,7 @@
 package com.localeat.core.domains.order;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.localeat.core.domains.product.Batch;
 import com.localeat.core.domains.product.Product;
 
 import javax.persistence.*;
@@ -16,7 +17,7 @@ public class OrderItem {
     private Long id;
 
     @ManyToOne
-    private Product product;
+    private Batch batch;
 
     @ManyToOne
     @JsonBackReference
@@ -34,12 +35,12 @@ public class OrderItem {
         this.id = id;
     }
 
-    public Product getProduct() {
-        return product;
+    public Batch getBatch() {
+        return batch;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setBatch(Batch batch) {
+        this.batch = batch;
     }
 
     public Float getUnitPrice() {

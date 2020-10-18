@@ -9,7 +9,6 @@ import { AuthenticationInterceptor } from './commons/services/authentication-int
 import { BreederAreaModule } from './breeder-area/breeder-area.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CustomerAreaModule } from './customer-area/customer-area.module';
-import { OrderListComponent } from './customer-area/components/order-list/order-list.component';
 
 import localeFr from '@angular/common/locales/fr';
 registerLocaleData(localeFr);

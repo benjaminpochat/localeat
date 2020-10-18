@@ -1,11 +1,11 @@
 <app-main-menu [loginForced]='false'></app-main-menu>
 <div class="content-body">
   <div class="main-title">
-    <div></div>
-    <div>
+    <div class="main-title__left"></div>
+    <div class="main-title__center">
       Viande Direct
     </div>
-    <div></div>
+    <div class="main-title__right"></div>
   </div>
   <div *ngIf="authentication" class="welcome">
     Heureux de vous revoir {{authentication.account.actor.firstName}} !

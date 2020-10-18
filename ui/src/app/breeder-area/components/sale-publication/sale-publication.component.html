@@ -66,10 +66,15 @@
         </mat-step>
         <mat-step [stepControl]="productDescriptionForm">
           <form [formGroup]="productDescriptionForm">
-            <ng-template matStepLabel>Décrivez le produit vendu</ng-template>
+            <ng-template matStepLabel>Description du produit</ng-template>
+            <mat-form-field  class="textarea-mat-form-field">
+              <mat-label>Nom du produit</mat-label>
+              <textarea cdkTextareaAutosize matInput formControlName="name" placeholder="Nom du colis" required></textarea>
+            </mat-form-field>
+            <br>
             <mat-form-field  class="textarea-mat-form-field">
               <mat-label>Description du produit vendu</mat-label>
-              <textarea cdkTextareaAutosize matInput formControlName="productDescription" placeholder="Type de viande, composition des colis" required></textarea>
+              <textarea cdkTextareaAutosize matInput formControlName="description" placeholder="Type de viande, composition des colis" required></textarea>
             </mat-form-field>
             <br>
             <mat-form-field>

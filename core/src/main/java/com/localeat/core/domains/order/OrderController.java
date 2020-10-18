@@ -21,7 +21,7 @@ public class OrderController {
     public Order createOrder(@PathParam("account") Account account, @RequestBody Order order){
         Customer customer = (Customer) account.getActor();
         order.getOrderedItems().forEach(orderItem -> {
-            orderItem.setUnitPrice(orderItem.getProduct().getPrice());
+            orderItem.setUnitPrice(orderItem.getBatch().getUnitPrice());
             orderItem.setOrder(order);
         });
         order.setCustomer(customer);

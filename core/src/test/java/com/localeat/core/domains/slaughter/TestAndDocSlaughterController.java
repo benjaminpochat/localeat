@@ -179,8 +179,8 @@ public class TestAndDocSlaughterController {
                 "       \"addressLine1\":\"3 rue des pommiers\"," +
                 "       \"city\":\"Juan-les-Pins\"" +
                 "   }," +
-                "   \"availableProducts\":[" +
-                "       {\"price\":\"13\"}" +
+                "   \"availableBatches\":[" +
+                "       {\"unitPrice\":\"13\"}" +
                 "   ]" +
                 "}," +
                 "\"slaughterDate\":\"2020-07-27\"," +

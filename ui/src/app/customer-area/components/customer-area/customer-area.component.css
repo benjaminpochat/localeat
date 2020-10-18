@@ -1,24 +1,22 @@
-.content-body div {
-  padding-top: 2.3rem;
+.main-title__center{
+  flex: 1;
+  vertical-align: middle;
 }
 
 @media (min-width:600px) {
   .main-title {
     font-size: 2.9rem;
     display: flex;
+    height: 6rem;
   }
 
-  .main-title div:nth-child(1){
+  .main-title__left{
     width: 10rem;
     background: linear-gradient(to right, transparent, 95%, white),url(../../../../assets/images/cow.jpg);
     background-size: cover;
   }
 
-  .main-title div:nth-child(2){
-    flex: 1;
-  }
-
-  .main-title div:nth-child(3){
+  .main-title__right{
     width: 7rem;
     background-position-y: 1rem;
     background: linear-gradient(to left, transparent, 95%, white),url(../../../../assets/images/meat.jpg);
@@ -30,6 +28,10 @@
 @media (max-width:600px) {
   .main-title{
     font-size: 2rem;
+  }
+
+  .main-title__left, .main-title__right {
+    display: hidden;
   }
 }
 

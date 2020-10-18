@@ -5,6 +5,7 @@ import { OrderDialogComponent } from '../order-dialog/order-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Order } from 'src/app/commons/models/order.model';
 import { Product } from 'src/app/commons/models/product.model';
+import { ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-deliveries-list',
@@ -15,6 +16,11 @@ export class DeliveriesListComponent implements OnInit {
 
   @Output()
   createOrderEvent = new EventEmitter<Order>();
+
+  @ViewChild(OrderDialogComponent)
+  private orderComponent: OrderDialogComponent;
+
+  orderComponentShown = false;
   deliveries: Delivery[];
   refreshDeliveriesEvent = new EventEmitter<Delivery[]>();
 
@@ -39,12 +45,9 @@ export class DeliveriesListComponent implements OnInit {
     this.deliveryService.getDeliveries(this.refreshDeliveriesEvent);
   }
 
-  openOrderDialog(delivery: Delivery) {
-    const orderDialog = this.orderDialog.open(OrderDialogComponent, {
-      width: '90%',
-      data: delivery
-    });
-    orderDialog.componentInstance.createOrderEvent.subscribe((order: Order) => this.createOrderEvent.emit(order));
+  showOrderComponent(delivery: Delivery) {
+    this.orderComponent.initOrder(delivery);
+    this.orderComponent.createOrderEvent.subscribe((order: Order) => this.createOrderEvent.emit(order));
   }
 
   getUniqueProduct(delivery: Delivery): Product {

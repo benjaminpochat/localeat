@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, Injectable, Input, Output, EventEmitter } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +11,14 @@ import { Component, OnInit, ViewChild, ElementRef, Injectable, Input, Output, Ev
 })
 export class SideMenuComponent implements OnInit {
 
-  @Input() sideMenuShown = false;
-  @Output() contentShown = new EventEmitter<string>();
+  @Input()
+  sideMenuShown = false;
+
+  @Output()
+  contentShown = new EventEmitter<string>();
+
+  @ViewChild(MatSidenav)
+  sideNav: MatSidenav;
 
   constructor() { }
 
@@ -19,11 +26,13 @@ export class SideMenuComponent implements OnInit {
   }
 
   hideSideMenu(): void {
+    this.sideNav.close();
     this.sideMenuShown = false;
   }
 
   showSideMenu(): void {
-    this.sideMenuShown = true;
+    this.sideNav.open();
+    //this.sideMenuShown = true;
   }
 
   showSlaughtersList(): void {

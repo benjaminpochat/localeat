@@ -21,6 +21,8 @@ import { MatTableModule } from '@angular/material/table';
 import { ReactiveFormsModule } from '@angular/forms';
 import { OrderDialogComponent } from './components/order-dialog/order-dialog.component';
 import { OrderListComponent } from './components/order-list/order-list.component';
+import { ProductCardComponent } from './components/product-card/product-card.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import { OrderListComponent } from './components/order-list/order-list.component
     DeliveriesListComponent,
     OrderDialogComponent,
     OrderListComponent,
+    ProductCardComponent,
   ],
   imports: [
     CommonModule,
@@ -38,6 +41,7 @@ import { OrderListComponent } from './components/order-list/order-list.component
     MatDialogModule,
     MatFormFieldModule,
     MatGridListModule,
+    MatIconModule,
     MatInputModule,
     MatListModule,
     MatNativeDateModule,

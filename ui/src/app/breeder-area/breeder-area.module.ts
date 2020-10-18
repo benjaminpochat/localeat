@@ -23,20 +23,20 @@ import { MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
 import { SalesListComponent } from './components/sales-list/sales-list.component';
-import { DeliveriesListComponent } from './components/deliveries-list/deliveries-list.component';
 import { SalePublicationComponent } from './components/sale-publication/sale-publication.component';
 import { DeliveryOrdersTableComponent } from './components/delivery-orders-table/delivery-orders-table.component';
+import { ProductsListComponent } from './components/products-list/products-list.component';
 
 @NgModule({
   declarations: [
     BreederAreaComponent,
-    DeliveriesListComponent,
     SalePublicationComponent,
     SalesListComponent,
     SlaughtersActionsComponent,
     SlaughtersListComponent,
     SlaughterCreationComponent,
     DeliveryOrdersTableComponent,
+    ProductsListComponent,
   ],
   imports: [
     CommonModule,

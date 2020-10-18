@@ -1,12 +1,11 @@
-<div [hidden]="!sideMenuShown">
-  <nav class='side-menu'>
-    <div>
-      <span (click)='hideSideMenu()'>x</span>
-      <div>nom utilisateur</div>
+<mat-sidenav-container class="side-menu">
+  <mat-sidenav mode="side" opened="false">
+    <div class="side-menu__title">
+      <mat-icon (click)="hideSideMenu()">close</mat-icon>
+      Viande Direct
     </div>
-    <br>
-    <div class='side-menu-link' (click)="showSlaughtersList()">plannifier</div>
-    <div class='side-menu-link' (click)="showSalesList()">vendre</div>
-    <div class='side-menu-link' (click)="showDeliveriesList()">livrer</div>
-  </nav>
-</div>
+    <div class='side-menu__link' (click)="showSlaughtersList()">Mes abattages</div>
+    <div class='side-menu__link' (click)="showSalesList()">Mes livraisons</div>
+    <div class='side-menu__link' (click)="showDeliveriesList()">Mes colis type</div>
+  </mat-sidenav>
+</mat-sidenav-container>

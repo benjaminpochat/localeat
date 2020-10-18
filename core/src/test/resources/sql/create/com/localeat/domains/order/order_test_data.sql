@@ -11,7 +11,7 @@ values (
 insert into order_items (
     id,
     order_id,
-    product_id,
+    batch_id,
     quantity,
     unit_price)
 values (
@@ -35,7 +35,7 @@ values (
 insert into order_items (
     id,
     order_id,
-    product_id,
+    batch_id,
     quantity,
     unit_price)
 values (
@@ -59,7 +59,7 @@ values (
 insert into order_items (
     id,
     order_id,
-    product_id,
+    batch_id,
     quantity,
     unit_price)
 values (

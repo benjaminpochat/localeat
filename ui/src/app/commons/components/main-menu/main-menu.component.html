@@ -1,7 +1,19 @@
-<div class='main-menu'>
-  <div class="side-menu-activator main-menu-home" [hidden]="sideMenuDisabled" (click)='showSideMenu()'>☰</div>
-  <div class="main-menu-home" routerLink="/">Viande Direct</div>
-  <div></div>
-  <div class="main-menu-end" [hidden]="!authentication" (click)="logout()" >déconnexion</div>
-  <div class="main-menu-end" [hidden]="authentication" (click)="goToLoginPage()"routerLink="/authentication">connexion</div>
-</div>
+<mat-toolbar class="main-menu">
+  <div [hidden]="sideMenuDisabled" >
+    <button (click)="showSideMenu()" mat-icon-button aria-label="menu pincipal">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+  <span class="main-menu__text-content">Viande Direct</span>
+  <span class="main-menu__spacer"></span>
+  <div [hidden]="authentication">
+    <button (click)="goToLoginPage()" mat-icon-button aria-label="login">
+      <mat-icon>login</mat-icon>
+    </button>
+  </div>
+  <div [hidden]="!authentication">
+    <button (click)="logout()" mat-icon-button aria-label="login">
+      <mat-icon>logout</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>

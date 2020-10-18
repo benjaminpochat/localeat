@@ -29,9 +29,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Sql({
         "/sql/create/com/localeat/domains/security/schema.sql",
         "/sql/create/com/localeat/domains/security/security_test_data.sql",
+        "/sql/create/com/localeat/domains/farm/farm_test_data.sql",
         "/sql/create/com/localeat/domains/actor/customer_test_data.sql",
         "/sql/create/com/localeat/domains/delivery/address_test_data.sql",
         "/sql/create/com/localeat/domains/product/product_test_data.sql",
+        "/sql/create/com/localeat/domains/slaughter/slaughter_test_data.sql",
         "/sql/create/com/localeat/domains/delivery/delivery_test_data.sql",
         "/sql/create/com/localeat/domains/order/order_test_data.sql",
 })
@@ -53,7 +55,7 @@ public class TestAndDocOrderController {
         var requestBody = "{\n" +
                 "  \"orderedItems\": [" +
                 "    {" +
-                "       \"product\" : {\"id\":\"1\"}," +
+                "       \"batch\" : {\"id\":\"1\"}," +
                 "       \"quantity\" : 5" +
                 "    }" +
                 "  ]," +
@@ -93,12 +95,29 @@ public class TestAndDocOrderController {
                         "  },\n" +
                         "  \"orderedItems\" : [ {\n" +
                         "    \"id\" : 1,\n" +
-                        "    \"product\" : {\n" +
-                        "      \"id\" : 1,\n" +
-                        "      \"description\" : \"un assortiment de steaks, de rotis, et de morceaux a bouillir\",\n" +
-                        "      \"price\" : 13.5,\n" +
-                        "      \"photo\" : null,\n" +
-                        "      \"animal\" : null\n" +
+                        "    \"batch\" : {\n" +
+                        "      \"product\" : {\n" +
+                        "        \"id\" : 1,\n" +
+                        "        \"name\" : \"colis 'tutti frutti'\",\n" +
+                        "        \"description\" : \"un assortiment de steaks, de rotis, et de morceaux a bouillir\",\n" +
+                        "        \"price\" : 13.5,\n" +
+                        "        \"photo\" : null,\n" +
+                        "        \"farm\" : null\n" +
+                        "      },\n" +
+                        "      \"animal\" : {\n" +
+                        "        \"id\" : 1,\n" +
+                        "        \"animalType\" : null,\n" +
+                        "        \"liveWeight\" : 850.0,\n" +
+                        "        \"meatWeight\" : 400.0,\n" +
+                        "        \"finalFarm\" : {\n" +
+                        "          \"id\" : 1,\n" +
+                        "          \"name\" : \"La ferme de la Riviere\",\n" +
+                        "          \"description\" : \"La ferme de la Riviere est un elevage d'excellence\"\n" +
+                        "        },\n" +
+                        "        \"identificationNumber\" : \"1234\"\n" +
+                        "      },\n" +
+                        "      \"quantity\" : 10,\n" +
+                        "      \"unitPrice\" : 12.0\n" +
                         "    },\n" +
                         "    \"unitPrice\" : 13.0,\n" +
                         "    \"quantity\" : 10.0\n" +
@@ -117,12 +136,29 @@ public class TestAndDocOrderController {
                         "    },\n" +
                         "    \"deliveryStart\" : \"2020-01-01T20:00:00\",\n" +
                         "    \"deliveryEnd\" : \"2020-01-01T18:00:00\",\n" +
-                        "    \"availableProducts\" : [ {\n" +
-                        "      \"id\" : 1,\n" +
-                        "      \"description\" : \"un assortiment de steaks, de rotis, et de morceaux a bouillir\",\n" +
-                        "      \"price\" : 13.5,\n" +
-                        "      \"photo\" : null,\n" +
-                        "      \"animal\" : null\n" +
+                        "    \"availableBatches\" : [ {\n" +
+                        "      \"product\" : {\n" +
+                        "        \"id\" : 1,\n" +
+                        "        \"name\" : \"colis 'tutti frutti'\",\n" +
+                        "        \"description\" : \"un assortiment de steaks, de rotis, et de morceaux a bouillir\",\n" +
+                        "        \"price\" : 13.5,\n" +
+                        "        \"photo\" : null,\n" +
+                        "        \"farm\" : null\n" +
+                        "      },\n" +
+                        "      \"animal\" : {\n" +
+                        "        \"id\" : 1,\n" +
+                        "        \"animalType\" : null,\n" +
+                        "        \"liveWeight\" : 850.0,\n" +
+                        "        \"meatWeight\" : 400.0,\n" +
+                        "        \"finalFarm\" : {\n" +
+                        "          \"id\" : 1,\n" +
+                        "          \"name\" : \"La ferme de la Riviere\",\n" +
+                        "          \"description\" : \"La ferme de la Riviere est un elevage d'excellence\"\n" +
+                        "        },\n" +
+                        "        \"identificationNumber\" : \"1234\"\n" +
+                        "      },\n" +
+                        "      \"quantity\" : 10,\n" +
+                        "      \"unitPrice\" : 12.0\n" +
                         "    } ],\n" +
                         "    \"orders\" : [ ]\n" +
                         "  }\n" +
@@ -138,12 +174,29 @@ public class TestAndDocOrderController {
                         "  },\n" +
                         "  \"orderedItems\" : [ {\n" +
                         "    \"id\" : 2,\n" +
-                        "    \"product\" : {\n" +
-                        "      \"id\" : 1,\n" +
-                        "      \"description\" : \"un assortiment de steaks, de rotis, et de morceaux a bouillir\",\n" +
-                        "      \"price\" : 13.5,\n" +
-                        "      \"photo\" : null,\n" +
-                        "      \"animal\" : null\n" +
+                        "    \"batch\" : {\n" +
+                        "      \"product\" : {\n" +
+                        "        \"id\" : 1,\n" +
+                        "        \"name\" : \"colis 'tutti frutti'\",\n" +
+                        "        \"description\" : \"un assortiment de steaks, de rotis, et de morceaux a bouillir\",\n" +
+                        "        \"price\" : 13.5,\n" +
+                        "        \"photo\" : null,\n" +
+                        "        \"farm\" : null\n" +
+                        "      },\n" +
+                        "      \"animal\" : {\n" +
+                        "        \"id\" : 1,\n" +
+                        "        \"animalType\" : null,\n" +
+                        "        \"liveWeight\" : 850.0,\n" +
+                        "        \"meatWeight\" : 400.0,\n" +
+                        "        \"finalFarm\" : {\n" +
+                        "          \"id\" : 1,\n" +
+                        "          \"name\" : \"La ferme de la Riviere\",\n" +
+                        "          \"description\" : \"La ferme de la Riviere est un elevage d'excellence\"\n" +
+                        "        },\n" +
+                        "        \"identificationNumber\" : \"1234\"\n" +
+                        "      },\n" +
+                        "      \"quantity\" : 10,\n" +
+                        "      \"unitPrice\" : 12.0\n" +
                         "    },\n" +
                         "    \"unitPrice\" : 12.0,\n" +
                         "    \"quantity\" : 5.0\n" +
@@ -162,12 +215,29 @@ public class TestAndDocOrderController {
                         "    },\n" +
                         "    \"deliveryStart\" : \"2020-01-08T20:00:00\",\n" +
                         "    \"deliveryEnd\" : \"2020-01-08T18:00:00\",\n" +
-                        "    \"availableProducts\" : [ {\n" +
-                        "      \"id\" : 1,\n" +
-                        "      \"description\" : \"un assortiment de steaks, de rotis, et de morceaux a bouillir\",\n" +
-                        "      \"price\" : 13.5,\n" +
-                        "      \"photo\" : null,\n" +
-                        "      \"animal\" : null\n" +
+                        "    \"availableBatches\" : [ {\n" +
+                        "      \"product\" : {\n" +
+                        "        \"id\" : 1,\n" +
+                        "        \"name\" : \"colis 'tutti frutti'\",\n" +
+                        "        \"description\" : \"un assortiment de steaks, de rotis, et de morceaux a bouillir\",\n" +
+                        "        \"price\" : 13.5,\n" +
+                        "        \"photo\" : null,\n" +
+                        "        \"farm\" : null\n" +
+                        "      },\n" +
+                        "      \"animal\" : {\n" +
+                        "        \"id\" : 1,\n" +
+                        "        \"animalType\" : null,\n" +
+                        "        \"liveWeight\" : 850.0,\n" +
+                        "        \"meatWeight\" : 400.0,\n" +
+                        "        \"finalFarm\" : {\n" +
+                        "          \"id\" : 1,\n" +
+                        "          \"name\" : \"La ferme de la Riviere\",\n" +
+                        "          \"description\" : \"La ferme de la Riviere est un elevage d'excellence\"\n" +
+                        "        },\n" +
+                        "        \"identificationNumber\" : \"1234\"\n" +
+                        "      },\n" +
+                        "      \"quantity\" : 10,\n" +
+                        "      \"unitPrice\" : 12.0\n" +
                         "    } ],\n" +
                         "    \"orders\" : [ ]\n" +
                         "  }\n" +

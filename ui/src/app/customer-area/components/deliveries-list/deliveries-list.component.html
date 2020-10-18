@@ -47,7 +47,9 @@
       </div>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-flat-button color='primary' (click)="openOrderDialog(delivery)">Je commande</button>
+      <button mat-flat-button color='primary' (click)="showOrderComponent(delivery)">Je commande</button>
     </mat-card-actions>
   </mat-card>
 </div>
+
+<app-order-dialog></app-order-dialog>

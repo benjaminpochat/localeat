@@ -1,4 +1,40 @@
 .side-menu {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.side-menu__title {
+  white-space: nowrap;
+  background-color: darkolivegreen;
+  color: whitesmoke;
+  font-family: Acme;
+}
+
+@media (min-width: 600px){
+  .side-menu__title {
+    padding: 1.1rem;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 699px){
+  .side-menu__title {
+    padding: 0.65rem;
+  }
+}
+
+.side-menu__link {
+  width: 100%;
+  cursor: pointer;
+  padding: 0.5rem;
+  font-family: Acme;
+  font-weight: lighter;
+}
+
+/*
+.side-menu {
   height: 100%;
   width: 200px;
   background-color: white;
@@ -33,3 +69,5 @@
   width: 100%;
   cursor: pointer;
 }
+
+*/

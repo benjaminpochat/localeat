@@ -1,45 +1,15 @@
 .main-menu {
   background-color: darkolivegreen;
-  font-family: 'Lato-Bold';
   color: whitesmoke;
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  position: fixed;
+  position: absolute;
+  z-index: 1;
   top: 0;
-  z-index: 99;
 }
 
-.side-menu-activator {
-
+.main-menu__text-content {
+  font-family: 'Acme';
 }
 
-.main-menu-home {
-  cursor: pointer;
-  padding: 0.2rem;
-  margin: 0.2rem;
-  font-family: Acme;
-  font-size: 1.2rem;
-}
-
-.main-menu div:nth-child(2){
-  flex: 1;
-}
-
-.main-menu-end {
-  cursor: pointer;
-  padding: 0.2rem;
-  margin: 0.2rem;
-  border-radius: 5px;
-}
-
-.main-menu-end:hover {
-  background-color: green;
-  font-family: 'Lato-Black';
-}
-
-@media (max-width:600px) {
-  .main-menu {
-    font-size: 0.8rem;
-  }
+.main-menu__spacer{
+  flex: 1 1 auto;
 }

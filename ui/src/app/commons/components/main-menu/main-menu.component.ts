@@ -12,9 +12,12 @@ import { Authentication } from '../../models/authentication.model';
 })
 export class MainMenuComponent implements OnInit {
 
-  @Output() sideMenuActivated = new EventEmitter<boolean>();
-  @Input() sideMenuDisabled = true;
-  @Input() loginForced = true;
+  @Output()
+  sideMenuActivated = new EventEmitter<boolean>();
+  @Input()
+  sideMenuDisabled = true;
+  @Input()
+  loginForced = true;
   authentication: Authentication;
 
   constructor(

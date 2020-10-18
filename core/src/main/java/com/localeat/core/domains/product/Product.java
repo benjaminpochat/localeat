@@ -1,9 +1,13 @@
 package com.localeat.core.domains.product;
 
-import com.localeat.core.domains.slaughter.Animal;
+import com.localeat.core.domains.farm.Farm;
 
 import javax.persistence.*;
 
+/**
+ * A product is something that can be sold by a {@link Farm}.
+ * To be sold, a {@link Batch} of products must created and exposed to customers.
+ */
 @Entity
 @Table(name = "products")
 public class Product {
@@ -14,14 +18,17 @@ public class Product {
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
+    private String name;
+
     private String description;
 
+    /** the suggested price, that can be adjusted in batch */
     private float price;
 
     private byte[] photo;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Animal animal;
+    @ManyToOne
+    private Farm farm;
 
     public Product(String id) {
         this.id = Long.valueOf(id);
@@ -37,6 +44,14 @@ public class Product {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {
@@ -63,11 +78,12 @@ public class Product {
         this.photo = photo;
     }
 
-    public Animal getAnimal() {
-        return animal;
+    public Farm getFarm() {
+        return farm;
     }
 
-    public void setAnimal(Animal animal) {
-        this.animal = animal;
+    public void setFarm(Farm farm) {
+        this.farm = farm;
     }
+
 }

@@ -24,7 +24,7 @@ public class DeliveryController {
     private OrderRepository orderRepository;
 
     @GetMapping(path = "/accounts/{account}/deliveries")
-    public Iterable<Delivery> getAllDeliveries(@PathVariable Account account){
+    public Iterable<Delivery> getBreedersDeliveries(@PathVariable Account account){
         Breeder breeder = (Breeder) account.getActor();
         return deliveryRepository.findByFarm(breeder.getFarm());
     }

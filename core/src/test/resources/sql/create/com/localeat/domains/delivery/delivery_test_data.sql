@@ -22,16 +22,32 @@ values (
     '20200108T2000')
 ;
 
-insert into delivery_available_products (
-    available_products_id,
+update slaughters set delivery_id = 1 where id = 1;
+
+insert into batches (
+    id,
+    animal_id,
+    product_id,
+    quantity,
+    unit_price
+) values (
+    1,
+    1,
+    1,
+    10,
+    12)
+;
+
+insert into delivery_available_batches (
+    available_batches_id,
     delivery_id)
 values (
     1,
     1)
 ;
 
-insert into delivery_available_products (
-    available_products_id,
+insert into delivery_available_batches (
+    available_batches_id,
     delivery_id)
 values (
     1,

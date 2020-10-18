@@ -1,197 +1,197 @@
-<title mat-dialog-title>Commande pour la livraison du {{delivery.deliveryStart | date: 'shortDate'}} - {{delivery.deliveryAddress.name}}</title>
+<div *ngIf="order" class="order-component">
+  <title mat-dialog-title>Commande pour la livraison du {{order.delivery.deliveryStart | date: 'shortDate'}} - {{order.delivery.deliveryAddress.name}}</title>
 
-<mat-dialog-content>
-  <mat-vertical-stepper #stepper linear="true">
-    <mat-step [stepControl]="productSelectionForm" [editable]="!orderStored">
-      <form [formGroup]="productSelectionForm">
-        <ng-template matStepLabel>{{productSelectionStepLabel}}</ng-template>
-        <div class='mat-step-label'>
-          Livré entre {{delivery.deliveryStart | date: 'shortTime'}} et {{delivery.deliveryEnd | date: 'shortTime'}}
-          <span *ngFor="let product of delivery.availableProducts">
-            {{ product.price }} €/kg<br>
-            <span [innerHTML]="product.description"></span><br>
-            Eleveur : {{product.animal.finalFarm.name}}
-          </span>
-        </div>
-        <div>
-          <div class='mat-step-label'>Glissez pour définir la quantité commandée</div>
-          <div>
-            <input matInput formControlName="quantity" hidden>
-            <mat-slider
-              min="5"
-              max="50"
-              step="1"
-              tickInterval="5"
-              thumbLabel
-              #quantitySlider
-              (change)="setQuantity($event)"></mat-slider>
-          </div>
-        </div>
-        <div>
-          <button
-            [disabled]="!areFormFieldsValid(productSelectionForm, ['quantity'])"
-            mat-flat-button
-            matStepperNext
-            color="accent">{{productSelectionButtonLabel}}
-          </button>
-        </div>
-      </form>
-    </mat-step>
-
-    <mat-step [stepControl]="authenticationForm" [completed]="authentication" [editable]="!orderStored">
-      <form [formGroup]="authenticationForm">
-        <ng-template matStepLabel>{{authenticationStepLabel}}</ng-template>
-        <div *ngIf="!authentication">
-          <mat-radio-group (change)="changeAuthentificationType($event)">
-            <mat-radio-button value="true" checked="true">J'ai déjà un compte</mat-radio-button>
-            <mat-radio-button value="false">Je n'ai pas de compte</mat-radio-button>
-          </mat-radio-group>
-        </div>
-
-        <div *ngIf="authentication">
-          <button mat-flat-button matStepperNext color="accent">Poursuivre avec ce compte</button>
-          <button mat-flat-button (click)="logout()">Se déconnecter et changer de compte</button>
-        </div>
-
-        <div *ngIf="!authentication && existingAccount">
-          <div>
-            <mat-form-field>
-              <mat-label>Adresse mail</mat-label>
-              <input type="email" matInput formControlName="existingEmail" required>
-            </mat-form-field>
-            <span *ngIf="isErrorMessageDisplayed('existingEmail', 'email', true)">
-              L'email est erroné.
-            </span>
+  <div>
+    <mat-vertical-stepper #stepper linear="true">
+      <mat-step [stepControl]="productSelectionForm" [editable]="!orderStored">
+        <form [formGroup]="productSelectionForm">
+          <ng-template matStepLabel>{{productSelectionStepLabel}}</ng-template>
+          <div class='mat-step-label'>
+            Livré entre {{order.delivery.deliveryStart | date: 'shortTime'}} et {{order.delivery.deliveryEnd | date: 'shortTime'}}
+            <div *ngFor="let product of order.delivery.availableProducts">
+              <app-product-card [product]="product" [order]="order"></app-product-card>
+            </div>
           </div>
           <div>
-            <mat-form-field>
-              <mat-label>Mot de passe</mat-label>
-              <input type="password" matInput formControlName="existingPassword" required>
-            </mat-form-field>
+            <div class='mat-step-label'>Glissez pour définir la quantité commandée</div>
+            <div>
+              <input matInput formControlName="quantity" hidden>
+              <mat-slider
+                min="5"
+                max="50"
+                step="1"
+                tickInterval="5"
+                thumbLabel
+                #quantitySlider
+                (change)="setQuantity($event)"></mat-slider>
+            </div>
           </div>
           <div>
             <button
-              [disabled]="!areFormFieldsValid(authenticationForm, ['existingEmail', 'existingPassword'])"
-              mat-flat-button color="accent"
-              (click)="login(authenticationForm.value.existingEmail, authenticationForm.value.existingPassword)">
-              Se connecter
+              [disabled]="!areFormFieldsValid(productSelectionForm, ['quantity'])"
+              mat-flat-button
+              matStepperNext
+              color="accent">{{productSelectionButtonLabel}}
             </button>
-            <div *ngIf="authenticationFailureMessage">
-              {{authenticationFailureMessage}}
+          </div>
+        </form>
+      </mat-step>
+
+      <mat-step [stepControl]="authenticationForm" [completed]="authentication" [editable]="!orderStored">
+        <form [formGroup]="authenticationForm">
+          <ng-template matStepLabel>{{authenticationStepLabel}}</ng-template>
+          <div *ngIf="!authentication">
+            <mat-radio-group (change)="changeAuthentificationType($event)">
+              <mat-radio-button value="true" checked="true">J'ai déjà un compte</mat-radio-button>
+              <mat-radio-button value="false">Je n'ai pas de compte</mat-radio-button>
+            </mat-radio-group>
+          </div>
+
+          <div *ngIf="authentication">
+            <button mat-flat-button matStepperNext color="accent">Poursuivre avec ce compte</button>
+            <button mat-flat-button (click)="logout()">Se déconnecter et changer de compte</button>
+          </div>
+
+          <div *ngIf="!authentication && existingAccount">
+            <div>
+              <mat-form-field>
+                <mat-label>Adresse mail</mat-label>
+                <input type="email" matInput formControlName="existingEmail" required>
+              </mat-form-field>
+              <span *ngIf="isErrorMessageDisplayed('existingEmail', 'email', true)">
+                L'email est erroné.
+              </span>
+            </div>
+            <div>
+              <mat-form-field>
+                <mat-label>Mot de passe</mat-label>
+                <input type="password" matInput formControlName="existingPassword" required>
+              </mat-form-field>
+            </div>
+            <div>
+              <button
+                [disabled]="!areFormFieldsValid(authenticationForm, ['existingEmail', 'existingPassword'])"
+                mat-flat-button color="accent"
+                (click)="login(authenticationForm.value.existingEmail, authenticationForm.value.existingPassword)">
+                Se connecter
+              </button>
+              <div *ngIf="authenticationFailureMessage">
+                {{authenticationFailureMessage}}
+              </div>
             </div>
           </div>
-        </div>
 
-        <div *ngIf="!authentication && !existingAccount">
-          <div>
+          <div *ngIf="!authentication && !existingAccount">
+            <div>
+              <mat-form-field>
+                <mat-label>Prénom</mat-label>
+                <input matInput formControlName="creatingFirstName" required>
+              </mat-form-field>
+              <span *ngIf="isErrorMessageDisplayed('creatingFirstName', 'required')">
+                Le prénom est obligatoire.
+              </span>
+            </div>
+            <div>
             <mat-form-field>
-              <mat-label>Prénom</mat-label>
-              <input matInput formControlName="creatingFirstName" required>
+              <mat-label>Nom</mat-label>
+              <input matInput formControlName="creatingName" required>
             </mat-form-field>
-            <span *ngIf="isErrorMessageDisplayed('creatingFirstName', 'required')">
-              Le prénom est obligatoire.
+            <span *ngIf="isErrorMessageDisplayed('creatingName', 'required')">
+              Le nom est obligatoire.
             </span>
+            </div>
+            <div>
+              <mat-form-field>
+                <mat-label>Adresse mail</mat-label>
+                <input type="email" matInput formControlName="creatingEmail" required>
+              </mat-form-field>
+              <span *ngIf="isErrorMessageDisplayed('creatingEmail', 'required')">
+                L'email est obligatoire.
+              </span>
+              <span *ngIf="isErrorMessageDisplayed('creatingEmail', 'email', true)">
+                L'email est erroné.
+              </span>
+            </div>
+            <div>
+              <mat-form-field>
+                <mat-label>Téléphone mobile</mat-label>
+                <input type="tel" matInput formControlName="creatingPhone" required>
+              </mat-form-field>
+              <span *ngIf="isErrorMessageDisplayed('creatingPhone', 'required')">
+                Le téléphone est obligatoire.
+              </span>
+            </div>
+            <div>
+              <mat-form-field>
+                <mat-label>Mot de passe</mat-label>
+                <input type="password" matInput formControlName="creatingPassword" required minlength="6">
+              </mat-form-field>
+              <span *ngIf="isErrorMessageDisplayed('creatingPassword', 'required')">
+                Le mot de passe est obligatoire.
+              </span>
+              <span *ngIf="isErrorMessageDisplayed('creatingPassword', 'minlength', true)">
+                Le mot de passe doit avoir au moins 6 caractères.
+              </span>
+            </div>
+            <div>
+              <mat-form-field>
+                <mat-label>Confirmez le mot de passe</mat-label>
+                <input type="password" matInput formControlName="creatingPasswordConfirmed" required>
+              </mat-form-field>
+              <span *ngIf="isErrorMessageDisplayed('creatingPassword', 'required')">
+                La confirmation du mot de passe est obligatoire.
+              </span>
+              <span *ngIf="authenticationForm.errors?.passwordConfirmationFailed && authenticationForm.get('creatingPasswordConfirmed').touched">
+                La confirmation du mot de passe est différente du mot de passe.
+              </span>
+            </div>
+            <div>
+              <button
+                mat-flat-button
+                matStepperNext
+                color="accent"
+                (click)="createCustomerAccount()"
+                [disabled]="!areFormFieldsValid(authenticationForm, ['creatingFirstName', 'creatingName', 'creatingEmail', 'creatingPhone', 'creatingPassword', 'creatingPasswordConfirmed'])">
+                  Créer un compte
+              </button>
+              <div *ngIf="accountCreationFailureMessage">
+                {{accountCreationFailureMessage}}
+              </div>
+            </div>
           </div>
+        </form>
+      </mat-step>
+
+      <mat-step [stepControl]="paymentForm" [editable]="!orderStored">
+        <form [formGroup]="paymentForm">
+          <ng-template matStepLabel>{{paymentStepLabel}}</ng-template>
           <div>
-          <mat-form-field>
-            <mat-label>Nom</mat-label>
-            <input matInput formControlName="creatingName" required>
-          </mat-form-field>
-          <span *ngIf="isErrorMessageDisplayed('creatingName', 'required')">
-            Le nom est obligatoire.
-          </span>
-          </div>
-          <div>
-            <mat-form-field>
-              <mat-label>Adresse mail</mat-label>
-              <input type="email" matInput formControlName="creatingEmail" required>
-            </mat-form-field>
-            <span *ngIf="isErrorMessageDisplayed('creatingEmail', 'required')">
-              L'email est obligatoire.
-            </span>
-            <span *ngIf="isErrorMessageDisplayed('creatingEmail', 'email', true)">
-              L'email est erroné.
-            </span>
-          </div>
-          <div>
-            <mat-form-field>
-              <mat-label>Téléphone mobile</mat-label>
-              <input type="tel" matInput formControlName="creatingPhone" required>
-            </mat-form-field>
-            <span *ngIf="isErrorMessageDisplayed('creatingPhone', 'required')">
-              Le téléphone est obligatoire.
-            </span>
-          </div>
-          <div>
-            <mat-form-field>
-              <mat-label>Mot de passe</mat-label>
-              <input type="password" matInput formControlName="creatingPassword" required minlength="6">
-            </mat-form-field>
-            <span *ngIf="isErrorMessageDisplayed('creatingPassword', 'required')">
-              Le mot de passe est obligatoire.
-            </span>
-            <span *ngIf="isErrorMessageDisplayed('creatingPassword', 'minlength', true)">
-              Le mot de passe doit avoir au moins 6 caractères.
-            </span>
-          </div>
-          <div>
-            <mat-form-field>
-              <mat-label>Confirmez le mot de passe</mat-label>
-              <input type="password" matInput formControlName="creatingPasswordConfirmed" required>
-            </mat-form-field>
-            <span *ngIf="isErrorMessageDisplayed('creatingPassword', 'required')">
-              La confirmation du mot de passe est obligatoire.
-            </span>
-            <span *ngIf="authenticationForm.errors?.passwordConfirmationFailed && authenticationForm.get('creatingPasswordConfirmed').touched">
-              La confirmation du mot de passe est différente du mot de passe.
-            </span>
+            <input matInput formControlName="payed" hidden="true">
           </div>
           <div>
             <button
               mat-flat-button
-              matStepperNext
               color="accent"
-              (click)="createCustomerAccount()"
-              [disabled]="!areFormFieldsValid(authenticationForm, ['creatingFirstName', 'creatingName', 'creatingEmail', 'creatingPhone', 'creatingPassword', 'creatingPasswordConfirmed'])">
-                Créer un compte
+              (click)="pay(); stepper.next();">
+                Accéder au paiement
             </button>
-            <div *ngIf="accountCreationFailureMessage">
-              {{accountCreationFailureMessage}}
-            </div>
           </div>
-        </div>
-      </form>
-    </mat-step>
+        </form>
+      </mat-step>
 
-    <mat-step [stepControl]="paymentForm" [editable]="!orderStored">
-      <form [formGroup]="paymentForm">
-        <ng-template matStepLabel>{{paymentStepLabel}}</ng-template>
-        <div>
-          <input matInput formControlName="payed" hidden="true">
-        </div>
-        <div>
-          <button
-            mat-flat-button
-            color="accent"
-            (click)="pay(); stepper.next();">
-              Accéder au paiement
-          </button>
-        </div>
-      </form>
-    </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Vos références</ng-template>
+        <button
+          mat-flat-button>
+          Télécharger la facture
+        </button>
+      </mat-step>
 
-    <mat-step>
-      <ng-template matStepLabel>Vos références</ng-template>
-      <button
-        mat-flat-button>
-        Télécharger la facture
-      </button>
-    </mat-step>
+    </mat-vertical-stepper>
+  </div>
 
-  </mat-vertical-stepper>
-</mat-dialog-content>
-
-<mat-dialog-actions>
-  <button mat-flat-button mat-dialog-close color="accent" *ngIf="orderStored">Revenir à l'accueil</button>
-  <button mat-flat-button mat-dialog-close *ngIf="!orderStored">Annuler la commande</button>
-</mat-dialog-actions>
+  <div>
+    <button mat-flat-button color="accent" *ngIf="orderStored">Revenir à l'accueil</button>
+    <button mat-flat-button *ngIf="!orderStored" (click)="cancel()">Annuler la commande</button>
+  </div>
+</div>

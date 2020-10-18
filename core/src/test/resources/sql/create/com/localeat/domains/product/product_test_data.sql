@@ -1,14 +1,16 @@
 insert into products (
     id,
-    animal_id,
+    name,
     description,
     photo,
-    price)
+    price,
+    farm_id)
 values (
     1,
-    null,
+    'colis ''tutti frutti''',
     'un assortiment de steaks, de rotis, et de morceaux a bouillir',
     null,
-    13.5)
+    13.5,
+    1)
 ;
 
