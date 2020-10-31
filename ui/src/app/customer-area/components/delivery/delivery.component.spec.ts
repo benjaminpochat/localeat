@@ -1,0 +1,68 @@
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { DeliveryComponent } from './delivery.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { MatDialogModule } from '@angular/material/dialog';
+
+describe('DeliveryComponent', () => {
+  let deliveryComponent: DeliveryComponent;
+  let fixture: ComponentFixture<DeliveryComponent>;
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ DeliveryComponent ],
+      imports: [HttpClientTestingModule, MatDialogModule]
+
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(DeliveryComponent);
+    deliveryComponent = fixture.componentInstance;
+    mockDelivery();
+    fixture.detectChanges();
+  });
+
+  function mockDelivery(): void {
+    deliveryComponent.delivery = {
+      id: 1,
+      deliveryAddress: {
+        name: 'Chez Bob',
+        city: 'Atlantic',
+        zipCode: '10000',
+        addressLine1: '2 rue des pommier',
+        addressLine2: null,
+        addressLine3: null,
+        addressLine4: null
+      },
+      deliveryStart: new Date('2020-01-01T20:00:00'),
+      deliveryEnd: new Date('2020-01-01T18:00:00'),
+      availableBatches: [{
+        product: {
+          name: 'colis \'tutti frutti\'',
+          description: 'un assortiment de steaks, de rotis, et de morceaux a bouillir',
+          unitPrice: 13.5,
+          quantity: 10,
+          photo: null,
+          farm: null
+        },
+        animal: {
+          liveWeight: 850.0,
+          meatWeight: 400.0,
+          finalFarm: {
+            name: 'La ferme de la Riviere',
+            description: 'La ferme de la Riviere est un elevage d\'excellence'
+          }
+        },
+        quantity: 10,
+        unitPrice: 12.0
+      }],
+      orders: []
+    };
+  }
+
+  it('should create', () => {
+    expect(deliveryComponent).toBeTruthy();
+  });
+});

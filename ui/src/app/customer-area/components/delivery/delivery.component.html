@@ -1,0 +1,40 @@
+<mat-card class="delivery-card">
+  <mat-card-header>
+    <mat-card-title>
+      <span>
+        Livraison du {{delivery.deliveryStart | date: 'shortDate'}}
+      </span>
+      <span>
+        - {{delivery.deliveryAddress.city}} - {{delivery.deliveryAddress.name}}
+      </span>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="delivery-card__content">
+      <div class="delivery-card__address">
+        <i class="icon placeholder-icon"></i>
+        <span>
+          Adresse de livraison :<br>
+          {{delivery.deliveryAddress.name}}<br>
+          {{delivery.deliveryAddress.addressLine1}}<br>
+          {{delivery.deliveryAddress.zipCode}}<br>
+          {{delivery.deliveryAddress.city}}
+        </span>
+      </div>
+      <div class="delivery-card__date">
+        <i class="icon time-icon"></i>
+        <span>
+          Livré entre {{delivery.deliveryStart | date: 'shortTime'}}
+          et {{delivery.deliveryEnd | date: 'shortTime'}}
+        </span>
+      </div>
+    </div>
+    <div class="delivery-card__batch-list">
+      <app-product *ngFor="let batch of delivery.availableBatches" [product]="batch.product">
+      </app-product>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-flat-button color='primary' (click)="showOrderComponent(delivery)">Je commande</button>
+  </mat-card-actions>
+</mat-card>

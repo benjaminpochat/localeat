@@ -79,9 +79,13 @@ public class TestAndDocDeliveryController {
                         "        \"id\" : 1,\n" +
                         "        \"name\" : \"colis 'tutti frutti'\",\n" +
                         "        \"description\" : \"un assortiment de steaks, de rotis, et de morceaux a bouillir\",\n" +
-                        "        \"price\" : 13.5,\n" +
+                        "        \"unitPrice\" : 13.5,\n" +
                         "        \"photo\" : null,\n" +
-                        "        \"farm\" : null\n" +
+                        "        \"farm\" : {\n" +
+                        "           \"id\" : 1,\n" +
+                        "           \"name\" : \"La ferme de la Riviere\",\n" +
+                        "           \"description\" : \"La ferme de la Riviere est un elevage d'excellence\"\n" +
+                        "        }\n" +
                         "      },\n" +
                         "      \"animal\" : {\n" +
                         "        \"id\" : 1,\n" +
@@ -120,9 +124,13 @@ public class TestAndDocDeliveryController {
                         "        \"id\" : 1,\n" +
                         "        \"name\" : \"colis 'tutti frutti'\",\n" +
                         "        \"description\" : \"un assortiment de steaks, de rotis, et de morceaux a bouillir\",\n" +
-                        "        \"price\" : 13.5,\n" +
+                        "        \"unitPrice\" : 13.5,\n" +
                         "        \"photo\" : null,\n" +
-                        "        \"farm\" : null\n" +
+                        "        \"farm\" : {\n" +
+                        "           \"id\" : 1,\n" +
+                        "           \"name\" : \"La ferme de la Riviere\",\n" +
+                        "           \"description\" : \"La ferme de la Riviere est un elevage d'excellence\"\n" +
+                        "        }\n" +
                         "      },\n" +
                         "      \"animal\" : {\n" +
                         "        \"id\" : 1,\n" +
@@ -158,9 +166,13 @@ public class TestAndDocDeliveryController {
                         "        \"id\" : 1,\n" +
                         "        \"name\" : \"colis 'tutti frutti'\",\n" +
                         "        \"description\" : \"un assortiment de steaks, de rotis, et de morceaux a bouillir\",\n" +
-                        "        \"price\" : 13.5,\n" +
+                        "        \"unitPrice\" : 13.5,\n" +
                         "        \"photo\" : null,\n" +
-                        "        \"farm\" : null\n" +
+                        "        \"farm\" : {\n" +
+                        "           \"id\" : 1,\n" +
+                        "           \"name\" : \"La ferme de la Riviere\",\n" +
+                        "           \"description\" : \"La ferme de la Riviere est un elevage d'excellence\"\n" +
+                        "        }\n" +
                         "      },\n" +
                         "      \"animal\" : {\n" +
                         "        \"id\" : 1,\n" +
@@ -199,9 +211,13 @@ public class TestAndDocDeliveryController {
                         "        \"id\" : 1,\n" +
                         "        \"name\" : \"colis 'tutti frutti'\",\n" +
                         "        \"description\" : \"un assortiment de steaks, de rotis, et de morceaux a bouillir\",\n" +
-                        "        \"price\" : 13.5,\n" +
+                        "        \"unitPrice\" : 13.5,\n" +
                         "        \"photo\" : null,\n" +
-                        "        \"farm\" : null\n" +
+                        "        \"farm\" : {\n" +
+                        "           \"id\" : 1,\n" +
+                        "           \"name\" : \"La ferme de la Riviere\",\n" +
+                        "           \"description\" : \"La ferme de la Riviere est un elevage d'excellence\"\n" +
+                        "        }\n" +
                         "      },\n" +
                         "      \"animal\" : {\n" +
                         "        \"id\" : 1,\n" +

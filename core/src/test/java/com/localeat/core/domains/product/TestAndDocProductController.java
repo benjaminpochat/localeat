@@ -52,7 +52,8 @@ public class TestAndDocProductController {
                         "  \"id\" : 1,\n" +
                         "  \"name\" : \"colis 'tutti frutti'\",\n" +
                         "  \"description\" : \"un assortiment de steaks, de rotis, et de morceaux a bouillir\",\n" +
-                        "  \"price\" : 13.5,\n" +
+                        "  \"unitPrice\" : 13.5,\n" +
+                        "  \"quantity\" : 10,\n" +
                         "  \"photo\" : null,\n" +
                         "  \"farm\" : {\n" +
                         "    \"id\" : 1,\n" +

@@ -14,7 +14,8 @@ export class SlaughterCreationComponent implements OnInit {
   slaughterForm: FormGroup;
   slaughter: Slaughter;
   userAlert: string;
-  @Output() creationLoopBack = new EventEmitter<Slaughter>();
+  @Output()
+  createSlaughterEvent = new EventEmitter<Slaughter>();
 
   constructor(
     private slaughterService: SlaughterService,
@@ -23,18 +24,6 @@ export class SlaughterCreationComponent implements OnInit {
 
   ngOnInit(): void {
     this.createSlaughterForm();
-    this.slaughter = new Slaughter();
-  }
-
-  saveSlaughter(): void {
-    if (this.slaughterForm.valid) {
-      this.slaughter.slaughterDate = this.slaughterForm.value.slaughterDate;
-      this.slaughter.cuttingDate = this.slaughterForm.value.cuttingDate;
-      this.slaughter.animal.liveWeight = this.slaughterForm.value.liveWeight;
-      this.slaughterService.saveSlaughter(this.slaughter, this.creationLoopBack);
-    } else {
-      this.userAlert = 'Veuillez vérifier les informations saisies.';
-    }
   }
 
   createSlaughterForm(): void {
@@ -50,7 +39,27 @@ export class SlaughterCreationComponent implements OnInit {
     this.slaughterForm.patchValue({liveWeight: sliderChange.value });
   }
 
-  cancel(): void{
-    this.creationLoopBack.emit();
+
+  save(): void {
+    if (this.slaughterForm.valid) {
+      this.slaughter.slaughterDate = this.slaughterForm.value.slaughterDate;
+      this.slaughter.cuttingDate = this.slaughterForm.value.cuttingDate;
+      this.slaughter.animal.liveWeight = this.slaughterForm.value.liveWeight;
+      this.slaughterService.saveSlaughter(this.slaughter).subscribe(slaughter => {
+        this.createSlaughterEvent.emit(slaughter);
+        this.resetComponenent();
+      });
+    } else {
+      this.userAlert = 'Veuillez vérifier les informations saisies.';
+    }
+  }
+
+  cancel(): void {
+    this.resetComponenent();
+  }
+
+  private resetComponenent() {
+    this.slaughter = null;
+    this.slaughterForm.reset();
   }
 }

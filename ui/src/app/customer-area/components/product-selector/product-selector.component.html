@@ -1,0 +1,10 @@
+<div class="product-selector">
+  <button *ngIf="quantity === 0" mat-flat-button color="primary" (click)="increaseQuantity()">Ajouter à la commande</button>
+  <button mat-mini-fab color="primary" *ngIf="quantity > 0">
+    <mat-icon (click)="decreaseQuantity()">remove</mat-icon>
+  </button>
+  <span *ngIf="quantity > 0">{{quantity}} colis</span>
+  <button *ngIf="quantity > 0" mat-mini-fab color="primary">
+    <mat-icon (click)="increaseQuantity()">add</mat-icon>
+  </button>
+</div>

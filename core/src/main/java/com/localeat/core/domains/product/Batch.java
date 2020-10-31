@@ -9,7 +9,9 @@ import javax.persistence.*;
  * The quantity of products that constitutes a batch is limited by animal's weight.<br>
  * For each batch, a unit price is given.<br>
  * <br>
- * The unit for the quantity and the unit price is always "kilograms".
+ * The unit for the quantity is the number of products.<br>
+ * <br>
+ * The unit price is tax free.<br>
  */
 @Entity
 @Table(name = "batches")
@@ -21,7 +23,7 @@ public class Batch {
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Product product;
 
     @ManyToOne

@@ -1,0 +1,23 @@
+.delivery-card {
+  margin: 0.5rem;
+  background-color: floralwhite;
+  border-style: solid;
+  border-width: 2px;
+  border-color: darkolivegreen;
+}
+
+.delivery-card__content,
+.delivery-card__batch-list {
+  display: flex;
+  flex-flow: wrap;
+  justify-content: left;
+}
+
+.delivery-card__address,
+.delivery-card__date {
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  padding: 1rem;
+}
+
+

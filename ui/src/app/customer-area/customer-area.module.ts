@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CustomerAreaComponent } from './components/customer-area/customer-area.component';
-import { DeliveriesListComponent } from './components/deliveries-list/deliveries-list.component';
+import { DeliveryComponent } from './components/delivery/delivery.component';
 import { CommonsModule } from '../commons/commons.module';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -21,16 +21,20 @@ import { MatTableModule } from '@angular/material/table';
 import { ReactiveFormsModule } from '@angular/forms';
 import { OrderDialogComponent } from './components/order-dialog/order-dialog.component';
 import { OrderListComponent } from './components/order-list/order-list.component';
-import { ProductCardComponent } from './components/product-card/product-card.component';
 import { MatIconModule } from '@angular/material/icon';
+import { ProductComponent } from './components/product/product.component';
+import { ProductSelectorComponent } from './components/product-selector/product-selector.component';
+import { OrderItemComponent } from './components/order-item/order-item.component';
 
 @NgModule({
   declarations: [
     CustomerAreaComponent,
-    DeliveriesListComponent,
+    DeliveryComponent,
     OrderDialogComponent,
     OrderListComponent,
-    ProductCardComponent,
+    OrderItemComponent,
+    ProductComponent,
+    ProductSelectorComponent,
   ],
   imports: [
     CommonModule,

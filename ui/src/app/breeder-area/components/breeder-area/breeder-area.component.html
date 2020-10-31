@@ -2,10 +2,20 @@
 <app-side-menu #sideMenu (contentShown)="showContent($event)"></app-side-menu>
 <div class='content-body'>
   <div id="slaughters-list">
-    <app-slaughters-list (salePublicationLoopBack)="handleSalePublication($event)"></app-slaughters-list>
+    <app-slaughters-list
+      [slaughters]="slaughters"
+      (createSlaughterEvent)="handleSlaughterCreation($event)"
+      (cancelSlaughterEvent)="handleSlaughterCancellation($event)"
+      (createDeliveryEvent)="handleDeliveryCreation($event)">
+    </app-slaughters-list>
   </div>
-  <div id="sales-list">
-    <app-sales-list></app-sales-list>
+  <div id="deliveries-list">
+    <app-deliveries-list
+      [deliveries]="deliveries">
+    </app-deliveries-list>
+  </div>
+  <div id="products-list">
+    <app-products-list></app-products-list>
   </div>
 </div>
 

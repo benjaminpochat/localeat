@@ -7,3 +7,9 @@
   width: 100%;
   height: 100%;
 }
+
+.order__batches {
+  display: flex;
+  flex-flow: wrap;
+  padding-bottom: 1rem;
+}

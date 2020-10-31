@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { SlaughtersListComponent } from './components/slaughters-list/slaughters-list.component';
 import { BreederAreaComponent } from './components/breeder-area/breeder-area.component';
-import { SlaughtersActionsComponent } from './components/slaughters-actions/slaughters-actions.component';
 import { SlaughterCreationComponent } from './components/slaughter-creation/slaughter-creation.component';
 import { CommonsModule } from '../commons/commons.module';
 import { CommonModule } from '@angular/common';
@@ -22,21 +21,25 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
-import { SalesListComponent } from './components/sales-list/sales-list.component';
-import { SalePublicationComponent } from './components/sale-publication/sale-publication.component';
+import { DeliveriesListComponent } from './components/deliveries-list/deliveries-list.component';
+import { DeliveryCreationComponent } from './components/delivery-creation/delivery-creation.component';
 import { DeliveryOrdersTableComponent } from './components/delivery-orders-table/delivery-orders-table.component';
 import { ProductsListComponent } from './components/products-list/products-list.component';
+import { ProductCreationComponent } from './components/product-creation/product-creation.component';
+import { MatIconModule } from '@angular/material/icon';
+import { DeliveryBatchComponent } from './components/delivery-batch/delivery-batch.component';
 
 @NgModule({
   declarations: [
     BreederAreaComponent,
-    SalePublicationComponent,
-    SalesListComponent,
-    SlaughtersActionsComponent,
-    SlaughtersListComponent,
+    DeliveryCreationComponent,
+    DeliveriesListComponent,
     SlaughterCreationComponent,
+    SlaughtersListComponent,
     DeliveryOrdersTableComponent,
+    ProductCreationComponent,
     ProductsListComponent,
+    DeliveryBatchComponent,
   ],
   imports: [
     CommonModule,
@@ -50,6 +53,7 @@ import { ProductsListComponent } from './components/products-list/products-list.
     MatExpansionModule,
     MatFormFieldModule,
     MatGridListModule,
+    MatIconModule,
     MatInputModule,
     MatListModule,
     MatNativeDateModule,

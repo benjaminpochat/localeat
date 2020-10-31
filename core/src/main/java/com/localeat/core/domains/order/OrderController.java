@@ -20,10 +20,6 @@ public class OrderController {
     @PostMapping(path = "/accounts/{account}/orders")
     public Order createOrder(@PathParam("account") Account account, @RequestBody Order order){
         Customer customer = (Customer) account.getActor();
-        order.getOrderedItems().forEach(orderItem -> {
-            orderItem.setUnitPrice(orderItem.getBatch().getUnitPrice());
-            orderItem.setOrder(order);
-        });
         order.setCustomer(customer);
         return orderRepository.save(order);
     }

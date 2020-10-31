@@ -1,0 +1,29 @@
+.product-creation-form {
+  display: block;
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  background-color: white;
+  width: 100%;
+  height: 100%;
+}
+
+.product-creation-form__title {
+  font-family: 'Acme';
+  font-size: 1rem;
+}
+
+.product-creation-form__photo > img {
+  max-height: 15rem;
+  max-width: 100%
+}
+
+.product-creation-form__name > *,
+.product-creation-form__description > * ,
+.product-creation-form__unitPrice,
+.product-creation-form__quantity > * {
+  display: inline-block;
+  margin: 2rem;
+  width: 90%;
+}

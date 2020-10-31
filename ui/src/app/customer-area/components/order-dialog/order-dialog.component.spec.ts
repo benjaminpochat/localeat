@@ -32,6 +32,7 @@ import { Animal } from 'src/app/commons/models/animal.model';
 import { Farm } from 'src/app/commons/models/farm.model';
 import { DeliveryAddress } from 'src/app/commons/models/delivery-address.model';
 import { AuthenticationServiceMock } from 'src/app/commons/services/authentication.service.mock';
+import { Batch } from 'src/app/commons/models/batch.model';
 
 describe('OrderDialogComponent', () => {
 
@@ -67,10 +68,12 @@ describe('OrderDialogComponent', () => {
   animal.finalFarm = farm;
   const product = new Product();
   product.description = 'une belle vache';
-  product.price = 13.5;
-  product.animal = animal;
+  product.unitPrice = 13.5;
+  const batch = new Batch();
+  batch.animal = animal;
+  batch.product = product;
   const delivery = new Delivery();
-  delivery.availableProducts = [product];
+  delivery.availableBatches = [batch];
   delivery.deliveryAddress = deliveryAddress;
 
   describe('with no authentication', () => {
@@ -108,10 +111,6 @@ describe('OrderDialogComponent', () => {
 
     it('should create', () => {
       expect(component).toBeTruthy();
-
-      const orderDialog: HTMLElement = fixture.debugElement.nativeElement;
-      const activeStepLabel = orderDialog.getElementsByClassName('mat-step-label mat-step-label-active mat-step-label-selected')[0];
-      expect(activeStepLabel.textContent).toEqual('Sélectionnez la quantité de viande commandée (en kg)');
     });
   });
 
@@ -152,12 +151,6 @@ describe('OrderDialogComponent', () => {
 
     it('should create', () => {
       expect(component).toBeTruthy();
-
-      const orderDialog: HTMLElement = fixture.debugElement.nativeElement;
-      const activeStepLabel = orderDialog.getElementsByClassName('mat-step-label mat-step-label-active mat-step-label-selected')[0];
-      expect(activeStepLabel.textContent).toEqual('Sélectionnez la quantité de viande commandée (en kg)');
-      //expect(activeStepLabel.textContent).toEqual('Votre commande est au nom de Louis Lachenal');
-
     });
   });
 

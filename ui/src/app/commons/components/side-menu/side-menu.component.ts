@@ -45,8 +45,8 @@ export class SideMenuComponent implements OnInit {
     this.hideSideMenu();
   }
 
-  showDeliveriesList(): void {
-    this.contentShown.emit('deliveries-list');
+  showProductsList(): void {
+    this.contentShown.emit('products-list');
     this.hideSideMenu();
   }
 }

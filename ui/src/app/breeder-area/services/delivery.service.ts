@@ -14,9 +14,8 @@ export class DeliveryService {
     private http: HttpClient,
     private urlService: UrlService) { }
 
-  public getDeliveries(loopBack: EventEmitter<Delivery[]>): void {
-    const response = this.http.get<Delivery[]>(this.urlService.getAuthenticatedUrl(['deliveries']));
-    response.subscribe(deliveriesCollected => loopBack.emit(deliveriesCollected));
+  public getDeliveries(): Observable<Delivery[]> {
+    return this.http.get<Delivery[]>(this.urlService.getAuthenticatedUrl(['deliveries']));
   }
 
   public getDeliveryOrders(delivery: Delivery): Observable<Order[]>{

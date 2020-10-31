@@ -1,8 +1,7 @@
 import { Component, OnInit, Inject, Output } from '@angular/core';
 import { Authentication } from 'src/app/commons/models/authentication.model';
 import { AuthenticationService } from 'src/app/commons/services/authentication.service';
-import { FormGroup, FormBuilder, Validators, ValidatorFn, ValidationErrors } from '@angular/forms';
-import { MatSliderChange } from '@angular/material/slider';
+import { FormGroup, FormBuilder, Validators, ValidatorFn, ValidationErrors, AbstractControl } from '@angular/forms';
 import { MatRadioChange } from '@angular/material/radio';
 import { Actor } from 'src/app/commons/models/actor.model';
 import { AccountService } from 'src/app/commons/services/account.service';
@@ -51,14 +50,20 @@ export class OrderDialogComponent implements OnInit {
 
   public initOrder(delivery: Delivery) {
     this.order = new Order();
-    this.order.orderedItems = [new OrderItem()];
-    this.order.orderedItems[0].product = delivery.availableProducts[0];
+    this.order.orderedItems = delivery.availableBatches.map(batch => {
+      const orderItem = new OrderItem();
+      orderItem.product = batch.product;
+      orderItem.unitPrice = batch.product.unitPrice;
+      orderItem.quantity = 0;
+      return orderItem;
+    });
+    debugger
     this.order.delivery = delivery;
   }
 
   private initLabels() {
     this.productSelectionStepLabel = 'Sélectionnez la quantité de viande commandée (en kg)';
-    this.productSelectionButtonLabel = 'Je valide la quantité (5kg min)';
+    this.productSelectionButtonLabel = 'Je valide la quantité';
     this.paymentStepLabel = 'Procédez au paiement';
   }
 
@@ -90,20 +95,22 @@ export class OrderDialogComponent implements OnInit {
       creatingPassword: ['', [Validators.required, Validators.minLength(6)]],
       creatingPasswordConfirmed: ['', Validators.required]
     }, {validators: this.passwordConfirmedValidator});
-    this.productSelectionForm = this.formBuilder.group({
-      quantity: [0, Validators.min(5)]
-    });
+    this.productSelectionForm = this.formBuilder.group({});
     this.paymentForm = this.formBuilder.group({
       payed: [false, Validators.requiredTrue]
     });
   }
 
-  setQuantity(sliderChange: MatSliderChange): void{
-    this.productSelectionForm.patchValue({quantity: sliderChange.value });
-    this.order.orderedItems[0].quantity = this.productSelectionForm.value.quantity;
-    const totalPrice = this.order.orderedItems[0].quantity * this.order.orderedItems[0].product.price;
-    this.productSelectionStepLabel = this.order.orderedItems[0].quantity + 'kg de viande pour ' + totalPrice + '€';
-    this.productSelectionButtonLabel = 'Je commande ' + this.order.orderedItems[0].quantity + 'kg pour ' + totalPrice + '€';
+  updateOrderItems(): void {
+    console.log(this.order.orderedItems);
+    const totalPrice = this.order.orderedItems
+      .map(orderItem => orderItem.product.unitPrice * orderItem.product.quantity * orderItem.quantity)
+      .reduce( (total, itemPrice) => total + itemPrice );
+    this.productSelectionButtonLabel = 'Je valide ma commande pour ' + totalPrice + ' €TTC';
+  }
+
+  isOrderEmpty(): boolean {
+    return this.order.orderedItems.filter((item) => item.quantity > 0).length > 0;
   }
 
   changeAuthentificationType(event: MatRadioChange){
@@ -168,6 +175,10 @@ export class OrderDialogComponent implements OnInit {
       && formField.touched;
   }
 
+  isOrderNotEmpty(){
+    return this.order.orderedItems.length > 0;
+  }
+
   areFormFieldsValid(formGroup: FormGroup, formFieldNames: string[]){
     let result = formGroup.errors === null;
     formFieldNames.forEach((fieldName) => {
@@ -179,7 +190,9 @@ export class OrderDialogComponent implements OnInit {
 
   pay(){
     //TODO : remplacer ça par un vrai paiement
+    debugger
     this.paymentForm.patchValue({payed : true});
+    this.order.orderedItems = this.order.orderedItems.filter(orderedItem => orderedItem.quantity > 0);
     this.orderService.saveOrder(this.order).subscribe((order: Order) => {
       this.paymentStepLabel = 'C\'est payé';
       this.orderStored = true;
@@ -187,7 +200,7 @@ export class OrderDialogComponent implements OnInit {
     });
   }
 
-  cancel(){
+  close(){
     this.order = null;
   }
 }

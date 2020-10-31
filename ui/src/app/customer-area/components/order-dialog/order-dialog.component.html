@@ -6,33 +6,15 @@
       <mat-step [stepControl]="productSelectionForm" [editable]="!orderStored">
         <form [formGroup]="productSelectionForm">
           <ng-template matStepLabel>{{productSelectionStepLabel}}</ng-template>
-          <div class='mat-step-label'>
-            Livré entre {{order.delivery.deliveryStart | date: 'shortTime'}} et {{order.delivery.deliveryEnd | date: 'shortTime'}}
-            <div *ngFor="let product of order.delivery.availableProducts">
-              <app-product-card [product]="product" [order]="order"></app-product-card>
-            </div>
-          </div>
-          <div>
-            <div class='mat-step-label'>Glissez pour définir la quantité commandée</div>
-            <div>
-              <input matInput formControlName="quantity" hidden>
-              <mat-slider
-                min="5"
-                max="50"
-                step="1"
-                tickInterval="5"
-                thumbLabel
-                #quantitySlider
-                (change)="setQuantity($event)"></mat-slider>
-            </div>
+          <div class="order__batches">
+            <app-order-item *ngFor="let orderItem of order.orderedItems" [orderItem]="orderItem" (changeOrderItem)="updateOrderItems()"></app-order-item>
           </div>
           <div>
             <button
-              [disabled]="!areFormFieldsValid(productSelectionForm, ['quantity'])"
+              [disabled]="!isOrderEmpty()"
               mat-flat-button
               matStepperNext
-              color="accent">{{productSelectionButtonLabel}}
-            </button>
+              color="accent">{{ productSelectionButtonLabel }}</button>
           </div>
         </form>
       </mat-step>
@@ -191,7 +173,7 @@
   </div>
 
   <div>
-    <button mat-flat-button color="accent" *ngIf="orderStored">Revenir à l'accueil</button>
-    <button mat-flat-button *ngIf="!orderStored" (click)="cancel()">Annuler la commande</button>
+    <button mat-flat-button color="accent" *ngIf="orderStored" (click)="close()">Revenir à l'accueil</button>
+    <button mat-flat-button *ngIf="!orderStored" (click)="close()">Annuler la commande</button>
   </div>
 </div>

@@ -1,0 +1,40 @@
+.product {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.product > div {
+  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  padding: 0.5rem;
+  width: 12rem;
+}
+
+.product__name {
+  font-size: large;
+  grid-column: 1 / -1;
+  padding: 0.2rem;
+}
+
+.product__description {
+  font-size: smaller;
+  grid-column: 1 / -1;
+  padding: 0.2rem;
+}
+
+i {
+  grid-column: 1;
+}
+
+.product__unit-price,
+.product__quantity {
+  grid-column: 2 / -1;
+  padding: 0.2rem;
+}
+
+.product__photo {
+  grid-column: 1 / -1;
+  width: 10rem;
+  padding: 0.2rem;
+}

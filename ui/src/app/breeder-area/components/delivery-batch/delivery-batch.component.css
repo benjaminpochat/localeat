@@ -1,0 +1,79 @@
+.batch {
+  border-top: 1px solid lightgrey;
+}
+
+.batch__product {
+  width: 35%;
+  display: inline-block;
+}
+
+.batch__product div {
+  display: grid;
+  grid-template-areas: "name        name"
+                       "description description"
+                       "quantity    price";
+}
+
+.batch__product__name {
+  grid-area: name;
+}
+
+.batch__product__description {
+  font-size: x-small;
+  grid-area: description;
+}
+
+.batch__product__quantity {
+  font-size: small;
+  grid-area: quantity;
+}
+
+.batch__product__unit-price {
+  font-size: small;
+  grid-area: price;
+}
+
+.batch__quantity-actions {
+  display: inline-block;
+  width: 35%
+}
+
+.batch__quantity-actions div {
+  display: grid;
+  grid-template-areas: "by-one by-one"
+                       "by-ten by-ten";
+  padding: 0.2rem;
+}
+
+.batch__quantity-actions__by-one {
+  grid-area: by-one;
+}
+
+.batch__quantity-actions__by-ten {
+  grid-area: by-ten;
+}
+
+.batch__summary {
+  display: inline-block;
+  width: 30%
+}
+
+.batch__summary div {
+  display: grid;
+  grid-template-areas: "number   number"
+                       "quantity price";
+}
+
+.batch__summary__product-number {
+  grid-area: number
+}
+
+.batch__summary__total-quantity {
+  grid-area: quantity;
+  font-size: small;
+}
+
+.batch__summary__total-price {
+  grid-area: price;
+  font-size: small;
+}

@@ -131,3 +131,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   background: url(assets/images/icons/svg/farm.svg);
   background-size: contain;
 }
+
+.weight-icon {
+  background: url(assets/images/icons/svg/weight.svg);
+  background-size: contain;
+}

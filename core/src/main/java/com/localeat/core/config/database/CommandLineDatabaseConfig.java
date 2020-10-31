@@ -1,5 +1,6 @@
 package com.localeat.core.config.database;
 
+import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
@@ -23,11 +24,11 @@ public class CommandLineDatabaseConfig {
 
     @Bean
     public DataSource dataSource() {
-        return DataSourceBuilder
-                .create()
-                .username(userName)
-                .password(password)
-                .url(url)
-                .build();
+        var dataSource = new HikariDataSource();
+        dataSource.setUsername(userName);
+        dataSource.setPassword(password);
+        dataSource.setJdbcUrl(url);
+        dataSource.setAutoCommit(false);
+        return dataSource;
     }
 }

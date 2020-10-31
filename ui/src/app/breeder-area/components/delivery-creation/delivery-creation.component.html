@@ -1,0 +1,73 @@
+<div *ngIf="delivery" class="delivery-creation-form">
+  <div class="delivery-creation-form__title">Publions la vente pour l'abattage du {{slaughter.slaughterDate | date: 'shortDate'}}</div>
+
+  <mat-vertical-stepper #stepper>
+    <mat-step [stepControl]="deliveryDateForm">
+      <form [formGroup]="deliveryDateForm">
+        <ng-template matStepLabel>Fixez la date et l'heure de livraison</ng-template>
+        <mat-form-field>
+          <mat-label>Date de livraison</mat-label>
+          <input matInput formControlName="deliveryDate" [matDatepicker]="deliveryDatePicker" placeholder="jj/mm/aaaa">
+          <mat-datepicker-toggle matSuffix [for]="deliveryDatePicker"></mat-datepicker-toggle>
+          <mat-datepicker #deliveryDatePicker disabled="false"></mat-datepicker>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <mat-label>Début de la livraison</mat-label>
+          <input type='time' step='900' matInput placeholder='hh:mm' formControlName="deliveryStartHour" required>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Fin de la livraison</mat-label>
+          <input type='time' step='900' matInput placeholder='hh:mm' formControlName="deliveryEndHour" required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Suivant</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="deliveryPlaceForm">
+      <form [formGroup]="deliveryPlaceForm">
+        <ng-template matStepLabel>Définissez un lieu de livraison</ng-template>
+        <mat-form-field>
+          <mat-label>Nom du lieu de livraison</mat-label>
+          <input matInput placeholder="Ex. : la Ferme des Pommiers" formControlName="addressName" required>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <mat-label>Numéro et rue</mat-label>
+          <input matInput placeholder="Ex. : 5, rue des pommiers" formControlName="addressLine1" required>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <mat-label>Code postal</mat-label>
+          <input matInput placeholder="Code postal" formControlName="zipCode" required>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <mat-label>Commune</mat-label>
+          <input matInput placeholder="Nom de la commune" formControlName="city" required>
+        </mat-form-field>
+        <br>
+        <div>
+          <button mat-button matStepperNext>Suivant</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="batchesForm">
+      <form [formGroup]="batchesForm">
+        <ng-template matStepLabel>Définissez les colis mis en vente</ng-template>
+        <app-delivery-batch *ngFor="let batch of delivery.availableBatches" [batch]="batch" class="delivery-creation-form__batches"></app-delivery-batch>
+        <div>
+          <button mat-button matStepperNext>Suivant</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Vérifiez les informations</ng-template>
+    </mat-step>
+  </mat-vertical-stepper>
+  <button mat-button (click)="save()">Valider</button>
+  <button mat-button (click)='cancel()'>Annuler</button>
+  <div class='user-alert'>{{userAlert}}</div>
+
+</div>

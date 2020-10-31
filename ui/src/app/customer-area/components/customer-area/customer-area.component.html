@@ -11,5 +11,12 @@
     Heureux de vous revoir {{authentication.account.actor.firstName}} !
   </div>
   <app-order-list *ngIf="authentication"></app-order-list>
-  <app-deliveries-list (createOrderEvent)="refreshOrderList()"></app-deliveries-list>
+
+  <div class="subtitle">
+    <div>Les prochaines livraisons de viande locale</div>
+    <app-delivery *ngFor="let delivery of deliveries" [delivery]="delivery" (createOrderEvent)="openOrderDialog($event)"></app-delivery>
+  </div>
+
+  <app-order-dialog (createOrderEvent)="refreshOrderList()"></app-order-dialog>
+
 </div>

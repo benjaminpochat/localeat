@@ -7,6 +7,10 @@ import javax.persistence.*;
 /**
  * A product is something that can be sold by a {@link Farm}.
  * To be sold, a {@link Batch} of products must created and exposed to customers.
+ * <br>
+ * The unit for quantity is kilograms.
+ * The unit price is tax free.
+ * The unit price is per kilogram.
  */
 @Entity
 @Table(name = "products")
@@ -22,10 +26,13 @@ public class Product {
 
     private String description;
 
-    /** the suggested price, that can be adjusted in batch */
-    private float price;
+    private float unitPrice;
 
-    private byte[] photo;
+    private float quantity;
+
+    /** the product's photo, base64 encoded  */
+    @Lob
+    private String photo;
 
     @ManyToOne
     private Farm farm;
@@ -35,7 +42,6 @@ public class Product {
     }
 
     public Product(){
-
     }
 
     public Long getId() {
@@ -62,19 +68,19 @@ public class Product {
         this.description = description;
     }
 
-    public float getPrice() {
-        return price;
+    public float getUnitPrice() {
+        return unitPrice;
     }
 
-    public void setPrice(float price) {
-        this.price = price;
+    public void setUnitPrice(float unitPrice) {
+        this.unitPrice = unitPrice;
     }
 
-    public byte[] getPhoto() {
+    public String getPhoto() {
         return photo;
     }
 
-    public void setPhoto(byte[] photo) {
+    public void setPhoto(String photo) {
         this.photo = photo;
     }
 
@@ -84,6 +90,14 @@ public class Product {
 
     public void setFarm(Farm farm) {
         this.farm = farm;
+    }
+
+    public float getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(float quantity) {
+        this.quantity = quantity;
     }
 
 }
