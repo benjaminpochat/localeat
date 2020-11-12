@@ -1,21 +1,26 @@
-<app-main-menu [sideMenuDisabled]="false" [loginForced]='true' (sideMenuActivated)="showSideMenu($event)"></app-main-menu>
-<app-side-menu #sideMenu (contentShown)="showContent($event)"></app-side-menu>
-<div class='content-body'>
-  <div id="slaughters-list">
-    <app-slaughters-list
-      [slaughters]="slaughters"
-      (createSlaughterEvent)="handleSlaughterCreation($event)"
-      (cancelSlaughterEvent)="handleSlaughterCancellation($event)"
-      (createDeliveryEvent)="handleDeliveryCreation($event)">
-    </app-slaughters-list>
+<div class="breeder-area">
+  <div class='breeder-area__main-menu'>
+    <app-main-menu [sideMenuDisabled]="false" [loginForced]='true' (sideMenuActivated)="showSideMenu($event)"></app-main-menu>
   </div>
-  <div id="deliveries-list">
-    <app-deliveries-list
-      [deliveries]="deliveries">
-    </app-deliveries-list>
+  <div class='breeder-area__side-menu'>
+    <app-side-menu #sideMenu (contentShown)="showContent($event)"></app-side-menu>
   </div>
-  <div id="products-list">
-    <app-products-list></app-products-list>
+  <div class='breeder-area__content-body'>
+    <div id="slaughters-list">
+      <app-slaughters-list
+        [slaughters]="slaughters"
+        (createSlaughterEvent)="handleSlaughterCreation($event)"
+        (cancelSlaughterEvent)="handleSlaughterCancellation($event)"
+        (createDeliveryEvent)="handleDeliveryCreation($event)">
+      </app-slaughters-list>
+    </div>
+    <div id="deliveries-list">
+      <app-deliveries-list
+        [deliveries]="deliveries">
+      </app-deliveries-list>
+    </div>
+    <div id="products-list">
+      <app-products-list></app-products-list>
+    </div>
   </div>
 </div>
-

@@ -1,3 +1,9 @@
+.customer-area__main-menu {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
 .main-title__center{
   flex: 1;
   vertical-align: middle;

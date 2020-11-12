@@ -24,7 +24,6 @@ export class OrderItemComponent implements OnInit {
   }
 
   setQuantity(quantity: number){
-    debugger
     this.orderItem.quantity = quantity;
     this.changeOrderItem.emit(this.orderItem);
   }

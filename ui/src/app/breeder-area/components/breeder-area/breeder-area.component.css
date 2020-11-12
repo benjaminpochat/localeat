@@ -1,7 +1,9 @@
-.content-body {
-  margin: 10px;
+.breeder-area__main-menu {
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }
 
-.content-body div {
-  padding-top: 50px;
+.breeder-area__content-body {
+  margin: 1rem;
 }

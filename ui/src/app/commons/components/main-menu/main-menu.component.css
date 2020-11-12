@@ -1,13 +1,16 @@
 .main-menu {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: var(--main-menu-height);
   background-color: darkolivegreen;
   color: whitesmoke;
-  position: absolute;
-  z-index: 1;
-  top: 0;
 }
 
 .main-menu__text-content {
   font-family: 'Acme';
+  font-size: var(--main-menu-font-size);
+  padding-left: 1rem;
 }
 
 .main-menu__spacer{

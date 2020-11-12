@@ -1,8 +1,10 @@
 <mat-sidenav-container class="side-menu">
   <mat-sidenav mode="side" opened="false">
     <div class="side-menu__title">
-      <mat-icon (click)="hideSideMenu()">close</mat-icon>
-      Viande Direct
+      <button (click)="hideSideMenu()" mat-icon-button aria-label="menu pincipal">
+        <mat-icon>close</mat-icon>
+      </button>
+      <div>Viande Direct</div>
     </div>
     <div class='side-menu__link' (click)="showSlaughtersList()">Vos abattages</div>
     <div class='side-menu__link' (click)="showSalesList()">Vos livraisons</div>

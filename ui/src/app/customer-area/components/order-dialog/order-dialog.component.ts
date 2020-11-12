@@ -57,7 +57,6 @@ export class OrderDialogComponent implements OnInit {
       orderItem.quantity = 0;
       return orderItem;
     });
-    debugger
     this.order.delivery = delivery;
   }
 
@@ -190,7 +189,6 @@ export class OrderDialogComponent implements OnInit {
 
   pay(){
     //TODO : remplacer ça par un vrai paiement
-    debugger
     this.paymentForm.patchValue({payed : true});
     this.order.orderedItems = this.order.orderedItems.filter(orderedItem => orderedItem.quantity > 0);
     this.orderService.saveOrder(this.order).subscribe((order: Order) => {

@@ -1,3 +1,50 @@
+html,body{
+  width:100%;
+  margin:0;
+  padding:0;
+  overflow-x:hidden;
+  font-family: Lato-regular;
+}
+
+.field-description {
+  font-family: Lato-regular;
+}
+
+@media (max-width:600px) {
+  html{
+    font-size: 20px;
+  }
+}
+
+html, body { height: 100%; }
+
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.subtitle > div{
+  font-family: Acme;
+}
+
+.user-alert {
+  color: darkred;
+}
+
+.textarea-mat-form-field {
+  width: 100%;
+}
+
+/*
+ * CONSTANTS
+ */
+
+ :root {
+   --main-menu-height: 3rem;
+   --main-menu-font-size: x-large;
+ }
+
+/*
+ * FONTS
+ */
+
 /* https://fonts.google.com/specimen/Acme */
 @font-face {
   font-family: "Acme";
@@ -55,41 +102,10 @@
   src: url("assets/fonts/lato/Lato-BlackItalic.ttf");
 }
 
-html,body{
-  width:100%;
-  margin:0;
-  padding:0;
-  overflow-x:hidden;
-  font-family: Lato-regular;
-}
 
-.field-description {
-  font-family: Lato-regular;
-}
-
-@media (max-width:600px) {
-  html{
-    font-size: 20px;
-  }
-}
-
-html, body { height: 100%; }
-
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-.subtitle > div{
-  font-family: Acme;
-}
-
-.user-alert {
-  color: darkred;
-}
-
-.textarea-mat-form-field {
-  width: 100%;
-}
-
-/* icons */
+/*
+ * ICONS
+ */
 
 .icon {
   width: 1.4rem;
