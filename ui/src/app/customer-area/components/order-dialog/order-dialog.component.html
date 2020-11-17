@@ -1,5 +1,11 @@
 <div *ngIf="order" class="order-component">
-  <title mat-dialog-title>Commande pour la livraison du {{order.delivery.deliveryStart | date: 'shortDate'}} - {{order.delivery.deliveryAddress.name}}</title>
+  <div class="order__title">
+    <div class="order__title-text">Votre commande de viande</div>
+    <div class="order__subtitle">
+      <div>Livraison du {{order.delivery.deliveryStart | date: 'shortDate'}}</div>
+      <div>{{order.delivery.deliveryAddress.name}}</div>
+    </div>
+  </div>
 
   <div>
     <mat-vertical-stepper #stepper linear="true">

@@ -1,5 +1,8 @@
 <div *ngIf="delivery" class="delivery-creation-form">
-  <div class="delivery-creation-form__title">Publions la vente pour l'abattage du {{slaughter.slaughterDate | date: 'shortDate'}}</div>
+  <div class="delivery-creation-form__title">
+    <div class="delivery-creation-form__title-text">Votre livraison de viande</div>
+    <div class="delivery-creation-form__subtitle">Animal abattu le {{slaughter.slaughterDate | date: 'shortDate'}}</div>
+  </div>
 
   <mat-vertical-stepper #stepper>
     <mat-step [stepControl]="deliveryDateForm">

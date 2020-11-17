@@ -10,6 +10,15 @@
 }
 
 .delivery-creation-form__title {
-  font-family: 'Acme';
-  font-size: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  background-color: darkolivegreen;
+  color: white;
+  font-family: "Acme";
+  padding-left: 1rem;
+}
+
+.delivery-creation-form__title-text {
+  font-size: var(--main-menu-font-size);
 }

@@ -1,5 +1,9 @@
 <div *ngIf="slaughter" class="slaughter-creation-form">
-  <div class="slaughter-creation-form__title">Créons un nouvel abtagge</div>
+
+  <div class="slaughter-creation-form__title">
+    <div class="slaughter-creation-form__title-text">Votre abattage</div>
+  </div>
+
   <form [formGroup]="slaughterForm" (ngSubmit)="save()">
     <div class="slaughter-creation-form__slaughter-date">
       <mat-form-field>

@@ -16,8 +16,6 @@ export class OrderService {
 
   saveOrder(order: Order): Observable<Order>{
     const response = this.httpClient.post<Order>(this.urlService.getAuthenticatedUrl(['orders']), order).pipe(share());
-    response.subscribe(() => console.log('ok'));
-    //TODO : refresh la liste des commande dès l'enregistrement
     return response;
   }
 
@@ -28,7 +26,7 @@ export class OrderService {
 
 
   getTotalPrice(order: Order): number {
-    return order.orderedItems.map(item => item.quantity * item.unitPrice).reduce( (sum, itemPrice) => sum + itemPrice, 0);
+    return order.orderedItems.map(item => item.quantity * item.product.quantity * item.unitPrice).reduce( (sum, itemPrice) => sum + itemPrice, 0);
   }
 
 }

@@ -51,5 +51,12 @@
   margin-bottom: 1rem;
 }
 
+.customer-area__footer {
+  font-size: 0.7rem;
+  background-color: black;
+  color: gray;
+}
 
-
+.customer-area__footer > a {
+  color: gray;
+}

@@ -7,3 +7,13 @@
 .breeder-area__content-body {
   margin: 1rem;
 }
+
+.breeder-area__footer {
+  font-size: 0.7rem;
+  background-color: black;
+  color: gray;
+}
+
+.breeder-area__footer > a {
+  color: gray;
+}

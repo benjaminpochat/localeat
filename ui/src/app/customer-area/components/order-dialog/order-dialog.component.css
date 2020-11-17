@@ -13,3 +13,26 @@
   flex-flow: wrap;
   padding-bottom: 1rem;
 }
+
+.order__title {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  background-color: darkolivegreen;
+  color: white;
+  font-family: "Acme";
+  padding-left: 1rem;
+}
+
+.order__title-text {
+  font-size: var(--main-menu-font-size);
+}
+
+.order__subtitle {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.order__subtitle > div {
+  padding-right: 2rem;
+}
