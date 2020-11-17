@@ -26,7 +26,7 @@ export class OrderService {
 
 
   getTotalPrice(order: Order): number {
-    return order.orderedItems.map(item => item.quantity * item.product.quantity * item.unitPrice).reduce( (sum, itemPrice) => sum + itemPrice, 0);
+    return order.orderedItems.map(item => item.quantity * item.batch.product.netWeight * item.unitPrice).reduce( (sum, itemPrice) => sum + itemPrice, 0);
   }
 
 }

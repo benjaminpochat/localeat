@@ -22,15 +22,21 @@ describe('OrderItemComponent', () => {
 
   function mockOrderItem(): void {
     orderItemComponent.orderItem = {
+      id: 1,
       quantity: 1,
       unitPrice: 13,
-      product: {
-        name: 'colis \'tutti frutti\'',
-        description: 'un assortiment de steaks, de rotis, et de morceaux a bouillir',
-        unitPrice: 13.5,
+      batch:{
+        id: 1,
         quantity: 10,
-        photo: null,
-        farm: null
+        product: {
+          id: 1,
+          name: 'colis \'tutti frutti\'',
+          description: 'un assortiment de steaks, de rotis, et de morceaux a bouillir',
+          unitPrice: 13.5,
+          netWeight: 10,
+          photo: null,
+          farm: null
+        }
       }
     };
   }

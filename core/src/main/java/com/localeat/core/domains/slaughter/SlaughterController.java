@@ -31,7 +31,6 @@ public class SlaughterController {
     private void setAnimalToDeliveredProducts(Slaughter savedSlaughter) {
         if(savedSlaughter.getDelivery() != null) {
             savedSlaughter.getDelivery().getAvailableBatches().forEach(batch -> {
-                batch.setAnimal(savedSlaughter.getAnimal());
                 batchRepository.save(batch);
             });
         }

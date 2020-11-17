@@ -70,7 +70,6 @@ describe('OrderDialogComponent', () => {
   product.description = 'une belle vache';
   product.unitPrice = 13.5;
   const batch = new Batch();
-  batch.animal = animal;
   batch.product = product;
   const delivery = new Delivery();
   delivery.availableBatches = [batch];

@@ -26,16 +26,12 @@ update slaughters set delivery_id = 1 where id = 1;
 
 insert into batches (
     id,
-    animal_id,
     product_id,
-    quantity,
-    unit_price
+    quantity
 ) values (
     1,
     1,
-    1,
-    10,
-    12)
+    10)
 ;
 
 insert into delivery_available_batches (

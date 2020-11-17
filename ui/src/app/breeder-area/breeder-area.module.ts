@@ -24,8 +24,8 @@ import { MatTableModule } from '@angular/material/table';
 import { DeliveriesListComponent } from './components/deliveries-list/deliveries-list.component';
 import { DeliveryCreationComponent } from './components/delivery-creation/delivery-creation.component';
 import { DeliveryOrdersTableComponent } from './components/delivery-orders-table/delivery-orders-table.component';
-import { ProductsListComponent } from './components/products-list/products-list.component';
-import { ProductCreationComponent } from './components/product-creation/product-creation.component';
+import { ProductTemplatesListComponent } from './components/product-templates-list/product-templates-list.component';
+import { ProductTemplateCreationComponent } from './components/product-template-creation/product-template-creation.component';
 import { MatIconModule } from '@angular/material/icon';
 import { DeliveryBatchComponent } from './components/delivery-batch/delivery-batch.component';
 
@@ -37,8 +37,8 @@ import { DeliveryBatchComponent } from './components/delivery-batch/delivery-bat
     SlaughterCreationComponent,
     SlaughtersListComponent,
     DeliveryOrdersTableComponent,
-    ProductCreationComponent,
-    ProductsListComponent,
+    ProductTemplateCreationComponent,
+    ProductTemplatesListComponent,
     DeliveryBatchComponent,
   ],
   imports: [

@@ -3,7 +3,7 @@
     <div>
       <div class="batch__product__name">{{batch.product.name}}</div>
       <div class="batch__product__description">{{batch.product.description}}</div>
-      <div class="batch__product__quantity">{{batch.product.quantity}} kg</div>
+      <div class="batch__product__net-weight">{{batch.product.netWeight}} kg</div>
       <div class="batch__product__unit-price">{{batch.product.unitPrice}} €HT/kg</div>
     </div>
   </div>
@@ -30,8 +30,8 @@
   <div class="batch__summary">
     <div>
       <div class="batch__summary__product-number">{{batch.quantity}} colis mis en vente</div>
-      <div class="batch__summary__total-quantity">{{batch.quantity * batch.product.quantity}} kg</div>
-      <div class="batch__summary__total-price">{{batch.quantity * batch.product.quantity * batch.product.unitPrice}} €HT</div>
+      <div class="batch__summary__total-quantity">{{batch.quantity * batch.product.netWeight}} kg</div>
+      <div class="batch__summary__total-price">{{batch.quantity * batch.product.netWeight * batch.product.unitPrice}} €HT</div>
     </div>
   </div>
 </div>

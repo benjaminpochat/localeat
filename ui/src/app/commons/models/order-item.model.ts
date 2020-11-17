@@ -1,7 +1,8 @@
-import { Product } from './product.model';
+import { Batch } from './batch.model';
 
 export class OrderItem {
+  id: number;
   quantity: number;
-  product: Product;
+  batch: Batch;
   unitPrice: number;
 }

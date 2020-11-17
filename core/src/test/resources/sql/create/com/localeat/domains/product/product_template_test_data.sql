@@ -1,4 +1,4 @@
-insert into products (
+insert into product_templates (
     id,
     name,
     description,

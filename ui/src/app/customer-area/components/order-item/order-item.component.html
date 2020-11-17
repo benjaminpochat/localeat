@@ -1,4 +1,4 @@
 <div class="order-item">
-  <app-product [product]="orderItem.product"></app-product>
+  <app-product [product]="orderItem.batch.product"></app-product>
   <app-product-selector (changeQuantityEvent)="setQuantity($event)"></app-product-selector>
 </div>

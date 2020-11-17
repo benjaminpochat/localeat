@@ -1,5 +1,5 @@
 import { EventEmitter, SimpleChanges } from '@angular/core';
-import { OnChanges, Output } from '@angular/core';
+import { Output } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 
 @Component({

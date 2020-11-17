@@ -101,6 +101,7 @@ public class TestAndDocOrderController {
                         "        \"name\" : \"colis 'tutti frutti'\",\n" +
                         "        \"description\" : \"un assortiment de steaks, de rotis, et de morceaux a bouillir\",\n" +
                         "        \"unitPrice\" : 13.5,\n" +
+                        "        \"netWeight\" : 10,\n" +
                         "        \"photo\" : null,\n" +
                         "        \"farm\" : {\n" +
                         "           \"id\" : 1,\n" +
@@ -108,20 +109,7 @@ public class TestAndDocOrderController {
                         "           \"description\" : \"La ferme de la Riviere est un elevage d'excellence\"\n" +
                         "        }\n" +
                         "      },\n" +
-                        "      \"animal\" : {\n" +
-                        "        \"id\" : 1,\n" +
-                        "        \"animalType\" : null,\n" +
-                        "        \"liveWeight\" : 850.0,\n" +
-                        "        \"meatWeight\" : 400.0,\n" +
-                        "        \"finalFarm\" : {\n" +
-                        "          \"id\" : 1,\n" +
-                        "          \"name\" : \"La ferme de la Riviere\",\n" +
-                        "          \"description\" : \"La ferme de la Riviere est un elevage d'excellence\"\n" +
-                        "        },\n" +
-                        "        \"identificationNumber\" : \"1234\"\n" +
-                        "      },\n" +
-                        "      \"quantity\" : 10,\n" +
-                        "      \"unitPrice\" : 12.0\n" +
+                        "      \"quantity\" : 10\n" +
                         "    },\n" +
                         "    \"unitPrice\" : 13.0,\n" +
                         "    \"quantity\" : 10.0\n" +
@@ -146,6 +134,7 @@ public class TestAndDocOrderController {
                         "        \"name\" : \"colis 'tutti frutti'\",\n" +
                         "        \"description\" : \"un assortiment de steaks, de rotis, et de morceaux a bouillir\",\n" +
                         "        \"unitPrice\" : 13.5,\n" +
+                        "        \"netWeight\" : 10,\n" +
                         "        \"photo\" : null,\n" +
                         "        \"farm\" : {\n" +
                         "           \"id\" : 1,\n" +
@@ -153,20 +142,7 @@ public class TestAndDocOrderController {
                         "           \"description\" : \"La ferme de la Riviere est un elevage d'excellence\"\n" +
                         "        }\n" +
                         "      },\n" +
-                        "      \"animal\" : {\n" +
-                        "        \"id\" : 1,\n" +
-                        "        \"animalType\" : null,\n" +
-                        "        \"liveWeight\" : 850.0,\n" +
-                        "        \"meatWeight\" : 400.0,\n" +
-                        "        \"finalFarm\" : {\n" +
-                        "          \"id\" : 1,\n" +
-                        "          \"name\" : \"La ferme de la Riviere\",\n" +
-                        "          \"description\" : \"La ferme de la Riviere est un elevage d'excellence\"\n" +
-                        "        },\n" +
-                        "        \"identificationNumber\" : \"1234\"\n" +
-                        "      },\n" +
-                        "      \"quantity\" : 10,\n" +
-                        "      \"unitPrice\" : 12.0\n" +
+                        "      \"quantity\" : 10\n" +
                         "    } ],\n" +
                         "    \"orders\" : [ ]\n" +
                         "  }\n" +
@@ -188,6 +164,7 @@ public class TestAndDocOrderController {
                         "        \"name\" : \"colis 'tutti frutti'\",\n" +
                         "        \"description\" : \"un assortiment de steaks, de rotis, et de morceaux a bouillir\",\n" +
                         "        \"unitPrice\" : 13.5,\n" +
+                        "        \"netWeight\" : 10,\n" +
                         "        \"photo\" : null,\n" +
                         "        \"farm\" : {\n" +
                         "           \"id\" : 1,\n" +
@@ -195,20 +172,7 @@ public class TestAndDocOrderController {
                         "           \"description\" : \"La ferme de la Riviere est un elevage d'excellence\"\n" +
                         "        }\n" +
                         "      },\n" +
-                        "      \"animal\" : {\n" +
-                        "        \"id\" : 1,\n" +
-                        "        \"animalType\" : null,\n" +
-                        "        \"liveWeight\" : 850.0,\n" +
-                        "        \"meatWeight\" : 400.0,\n" +
-                        "        \"finalFarm\" : {\n" +
-                        "          \"id\" : 1,\n" +
-                        "          \"name\" : \"La ferme de la Riviere\",\n" +
-                        "          \"description\" : \"La ferme de la Riviere est un elevage d'excellence\"\n" +
-                        "        },\n" +
-                        "        \"identificationNumber\" : \"1234\"\n" +
-                        "      },\n" +
-                        "      \"quantity\" : 10,\n" +
-                        "      \"unitPrice\" : 12.0\n" +
+                        "      \"quantity\" : 10\n" +
                         "    },\n" +
                         "    \"unitPrice\" : 12.0,\n" +
                         "    \"quantity\" : 5.0\n" +
@@ -233,6 +197,7 @@ public class TestAndDocOrderController {
                         "        \"name\" : \"colis 'tutti frutti'\",\n" +
                         "        \"description\" : \"un assortiment de steaks, de rotis, et de morceaux a bouillir\",\n" +
                         "        \"unitPrice\" : 13.5,\n" +
+                        "        \"netWeight\" : 10,\n" +
                         "        \"photo\" : null,\n" +
                         "        \"farm\" : {\n" +
                         "           \"id\" : 1,\n" +
@@ -240,20 +205,7 @@ public class TestAndDocOrderController {
                         "           \"description\" : \"La ferme de la Riviere est un elevage d'excellence\"\n" +
                         "        }\n" +
                         "      },\n" +
-                        "      \"animal\" : {\n" +
-                        "        \"id\" : 1,\n" +
-                        "        \"animalType\" : null,\n" +
-                        "        \"liveWeight\" : 850.0,\n" +
-                        "        \"meatWeight\" : 400.0,\n" +
-                        "        \"finalFarm\" : {\n" +
-                        "          \"id\" : 1,\n" +
-                        "          \"name\" : \"La ferme de la Riviere\",\n" +
-                        "          \"description\" : \"La ferme de la Riviere est un elevage d'excellence\"\n" +
-                        "        },\n" +
-                        "        \"identificationNumber\" : \"1234\"\n" +
-                        "      },\n" +
-                        "      \"quantity\" : 10,\n" +
-                        "      \"unitPrice\" : 12.0\n" +
+                        "      \"quantity\" : 10\n" +
                         "    } ],\n" +
                         "    \"orders\" : [ ]\n" +
                         "  }\n" +

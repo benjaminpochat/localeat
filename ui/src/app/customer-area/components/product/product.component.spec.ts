@@ -22,10 +22,11 @@ describe('ProductComponent', () => {
 
   function mockProduct(){
     productComponent.product = {
+      id: 1,
       name: 'colis \'tutti frutti\'',
       description: 'un assortiment de steaks, de rotis, et de morceaux a bouillir',
       unitPrice: 13.5,
-      quantity: 10,
+      netWeight: 10,
       photo: null,
       farm: null
     };

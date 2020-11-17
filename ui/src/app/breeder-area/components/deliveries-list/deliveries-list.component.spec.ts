@@ -46,24 +46,17 @@ describe('DeliveriesListComponent', () => {
       deliveryStart: new Date('2020-01-01T20:00:00'),
       deliveryEnd: new Date('2020-01-01T18:00:00'),
       availableBatches: [{
+        id: 1,
         product: {
+          id: 1,
           name: 'colis \'tutti frutti\'',
           description: 'un assortiment de steaks, de rotis, et de morceaux a bouillir',
           unitPrice: 13.5,
-          quantity: 10,
+          netWeight: 10,
           photo: null,
           farm: null
         },
-        animal: {
-          liveWeight: 850.0,
-          meatWeight: 400.0,
-          finalFarm: {
-            name: 'La ferme de la Riviere',
-            description: 'La ferme de la Riviere est un elevage d\'excellence'
-          }
-        },
-        quantity: 10,
-        unitPrice: 12.0
+        quantity: 10
       }],
       orders: []
     }];

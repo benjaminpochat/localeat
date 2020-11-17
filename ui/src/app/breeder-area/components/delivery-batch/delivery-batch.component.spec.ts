@@ -22,24 +22,17 @@ describe('DeliveryBatchComponent', () => {
 
   function mockBatch(){
     deliveryBatchComponent.batch = {
+      id: 1,
       product: {
+        id: 1,
         name: 'colis \'tutti frutti\'',
         description: 'un assortiment de steaks, de rotis, et de morceaux a bouillir',
         unitPrice: 13.5,
-        quantity: 10,
+        netWeight: 10,
         photo: null,
         farm: null
       },
-      animal: {
-        liveWeight: 850.0,
-        meatWeight: 400.0,
-        finalFarm: {
-          name: 'La ferme de la Riviere',
-          description: 'La ferme de la Riviere est un elevage d\'excellence'
-        }
-      },
-      quantity: 10,
-      unitPrice: 12.0
+      quantity: 10
     };
   }
 

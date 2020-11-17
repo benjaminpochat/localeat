@@ -52,7 +52,7 @@ export class OrderDialogComponent implements OnInit {
     this.order = new Order();
     this.order.orderedItems = delivery.availableBatches.map(batch => {
       const orderItem = new OrderItem();
-      orderItem.product = batch.product;
+      orderItem.batch = batch;
       orderItem.unitPrice = batch.product.unitPrice;
       orderItem.quantity = 0;
       return orderItem;
@@ -103,7 +103,7 @@ export class OrderDialogComponent implements OnInit {
   updateOrderItems(): void {
     console.log(this.order.orderedItems);
     const totalPrice = this.order.orderedItems
-      .map(orderItem => orderItem.product.unitPrice * orderItem.product.quantity * orderItem.quantity)
+      .map(orderItem => orderItem.batch.product.unitPrice * orderItem.batch.product.netWeight * orderItem.quantity)
       .reduce( (total, itemPrice) => total + itemPrice );
     this.productSelectionButtonLabel = 'Je valide ma commande pour ' + totalPrice + ' €TTC';
   }

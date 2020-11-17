@@ -1,9 +1,6 @@
 import { EventEmitter } from '@angular/core';
-import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { Batch } from 'src/app/commons/models/batch.model';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { OrderItem } from 'src/app/commons/models/order-item.model';
-import { Order } from 'src/app/commons/models/order.model';
-import { ProductSelectorComponent } from '../product-selector/product-selector.component';
 
 @Component({
   selector: 'app-order-item',

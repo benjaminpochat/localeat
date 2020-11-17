@@ -23,16 +23,19 @@ public class Batch {
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     private Product product;
-
-    @ManyToOne
-    private Animal animal;
 
     /** the available quantity of products for this batch */
     private int quantity;
 
-    private float unitPrice;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Product getProduct() {
         return product;
@@ -40,14 +43,6 @@ public class Batch {
 
     public void setProduct(Product product) {
         this.product = product;
-    }
-
-    public Animal getAnimal() {
-        return animal;
-    }
-
-    public void setAnimal(Animal animal) {
-        this.animal = animal;
     }
 
     public int getQuantity() {
@@ -58,11 +53,4 @@ public class Batch {
         this.quantity = quantity;
     }
 
-    public float getUnitPrice() {
-        return unitPrice;
-    }
-
-    public void setUnitPrice(float unitPrice) {
-        this.unitPrice = unitPrice;
-    }
 }

@@ -5,8 +5,9 @@ import { Delivery } from 'src/app/commons/models/delivery.model';
 import { DeliveryAddress } from 'src/app/commons/models/delivery-address.model';
 import { Product } from 'src/app/commons/models/product.model';
 import { SlaughterService } from '../../services/slaughter.service';
-import { ProductService } from '../../services/product.service';
+import { ProductTemplateService } from '../../services/product-template.service';
 import { Batch } from 'src/app/commons/models/batch.model';
+import { ProductTemplate } from 'src/app/commons/models/product-template.model';
 
 @Component({
   selector: 'app-delivery-creation',
@@ -25,7 +26,7 @@ export class DeliveryCreationComponent implements OnInit {
 
   constructor(
     private slaughterService: SlaughterService,
-    private productService: ProductService,
+    private productTemplateService: ProductTemplateService,
     private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
@@ -75,15 +76,26 @@ export class DeliveryCreationComponent implements OnInit {
     this.slaughter = slaughter;
     this.delivery = new Delivery();
     this.delivery.availableBatches = [];
-    this.productService.getProducts().subscribe(products => {
-      products.forEach(product => {
-        const batch = new Batch();
-        batch.quantity = 0;
-        batch.product = product;
-        this.delivery.availableBatches.push(batch);
+    this.productTemplateService.getProductTemplates().subscribe(productTemplates => {
+      productTemplates.forEach(productTemplate => {
+        this.addBatch(productTemplate);
       });
     });
     this.createDeliveryEvent = createDeliveryEvent;
+  }
+
+  private addBatch(productTemplate: ProductTemplate) {
+    const product = new Product();
+    product.name = productTemplate.name;
+    product.unitPrice = productTemplate.unitPrice;
+    product.netWeight = productTemplate.netWeight;
+    product.description = productTemplate.description;
+    product.photo = productTemplate.photo;
+    product.farm = productTemplate.farm;
+    const batch = new Batch();
+    batch.quantity = 0;
+    batch.product = product;
+    this.delivery.availableBatches.push(batch);
   }
 
   private resetComponent() {

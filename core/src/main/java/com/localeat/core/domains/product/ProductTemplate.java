@@ -5,20 +5,15 @@ import com.localeat.core.domains.farm.Farm;
 import javax.persistence.*;
 
 /**
- * A product is something that can be sold by a {@link Farm}.
- * To be sold, a {@link Batch} of products must created and exposed to customers.
- * <br>
- * The unit for netWeight is kilograms.
- * The unit price is tax free.
- * The unit price is per kilogram.
+ * A product template facilitates the creation of a new {@link Product} to be sold.
  */
 @Entity
-@Table(name = "products")
-public class Product {
+@Table(name = "product_templates")
+public class ProductTemplate {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_id_generator")
-    @SequenceGenerator(name="product_id_generator", sequenceName = "product_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_template_id_generator")
+    @SequenceGenerator(name="product_template_id_generator", sequenceName = "product_template_id_seq", allocationSize = 1)
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
@@ -37,11 +32,11 @@ public class Product {
     @ManyToOne
     private Farm farm;
 
-    public Product(String id) {
-        this.id = Long.valueOf(id);
+    public ProductTemplate(Long id) {
+        this.id = id;
     }
 
-    public Product(){
+    public ProductTemplate() {
     }
 
     public Long getId() {
@@ -76,6 +71,14 @@ public class Product {
         this.unitPrice = unitPrice;
     }
 
+    public float getNetWeight() {
+        return netWeight;
+    }
+
+    public void setNetWeight(float netWeight) {
+        this.netWeight = netWeight;
+    }
+
     public String getPhoto() {
         return photo;
     }
@@ -91,13 +94,4 @@ public class Product {
     public void setFarm(Farm farm) {
         this.farm = farm;
     }
-
-    public float getNetWeight() {
-        return netWeight;
-    }
-
-    public void setNetWeight(float netWeight) {
-        this.netWeight = netWeight;
-    }
-
 }
