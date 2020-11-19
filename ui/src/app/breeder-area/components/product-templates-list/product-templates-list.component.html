@@ -1,0 +1,26 @@
+<div class="subtitle">
+  <div>Vos colis types</div>
+  <button mat-flat-button (click)="showProductTemplateCreation()" class="subtitle-action">
+    Créer
+  </button>
+</div>
+<div>
+  <table mat-table [dataSource]="productTemplates" class="product-templates-list">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Nom</th>
+      <td mat-cell *matCellDef="let productTemplate"> {{productTemplate.name}} </td>
+    </ng-container>
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef>Description</th>
+      <td mat-cell *matCellDef="let productTemplate"> {{productTemplate.description}} </td>
+    </ng-container>
+    <ng-container matColumnDef="unitPrice">
+      <th mat-header-cell *matHeaderCellDef>Prix suggéré</th>
+      <td mat-cell *matCellDef="let productTemplate"> {{productTemplate.unitPrice}} €TTC </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="['name', 'description', 'unitPrice']"></tr>
+    <tr mat-row *matRowDef="let myRowData; columns: ['name', 'description', 'unitPrice']"></tr>
+  </table>
+</div>
+
+<app-product-creation (createProductEvent)=refreshProductTemplatesList()></app-product-creation>

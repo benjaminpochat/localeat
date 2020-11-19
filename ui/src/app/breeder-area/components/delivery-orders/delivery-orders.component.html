@@ -1,0 +1,39 @@
+<mat-card class="sale-card">
+  <mat-card-header>
+    <mat-card-title>Vente du {{slaughter.delivery.deliveryStart | date : 'shortDate' }} à {{slaughter.delivery.deliveryAddress.city}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div>
+      {{netWeightSold}} kg vendus
+      <br>
+      {{netWeightSold / slaughter.animal.meatWeight | percent}} de viande vendue sur la l'animal d'identifiant {{slaughter.animal.identificationNumber}}
+    </div>
+    <mat-expansion-panel hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{slaughter.delivery.orders.length}} commandes client
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <table mat-table [dataSource]="slaughter.delivery.orders" >
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>N°</th>
+          <td mat-cell *matCellDef="let order"> {{order.id}} </td>
+        </ng-container>
+        <ng-container matColumnDef="customer">
+          <th mat-header-cell *matHeaderCellDef>Client</th>
+          <td mat-cell *matCellDef="let order"> {{order.customer.name}} {{order.customer.firstName}} </td>
+        </ng-container>
+        <ng-container matColumnDef="quantity">
+          <th mat-header-cell *matHeaderCellDef>Quantité totale</th>
+          <td mat-cell *matCellDef="let order"> {{ order.totalNetWeight }} kg </td>
+        </ng-container>
+        <ng-container matColumnDef="totalPrice">
+          <th mat-header-cell *matHeaderCellDef>Montant de la commande</th>
+          <td mat-cell *matCellDef="let order"> {{ order.totalPrice }} € </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="['id', 'customer', 'quantity', 'totalPrice']"></tr>
+        <tr mat-row *matRowDef="let myRowData; columns: ['id', 'customer', 'quantity', 'totalPrice']"></tr>
+      </table>
+    </mat-expansion-panel>
+  </mat-card-content>
+</mat-card>

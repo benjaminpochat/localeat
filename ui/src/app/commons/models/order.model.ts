@@ -7,4 +7,6 @@ export class Order {
   orderedItems: OrderItem[];
   customer: Customer;
   delivery: Delivery;
+  totalPrice: number;
+  totalNetWeight: number;
 }

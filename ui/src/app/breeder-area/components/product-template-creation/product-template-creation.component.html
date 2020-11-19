@@ -1,0 +1,40 @@
+<div *ngIf="productTemplate" class="product-creation-form">
+  <div class="product-template-creation-form__title">Créons un nouveau colis type</div>
+
+  <form [formGroup]="productTemplateCreationForm">
+    <div class="product-template-creation-form__name">
+      <mat-form-field>
+        <mat-label>Nom du colis type</mat-label>
+        <input type="text" matInput formControlName="name" required>
+      </mat-form-field>
+    </div>
+    <div class="product-template-creation-form__description">
+      <mat-form-field>
+        <mat-label>Description du colis</mat-label>
+        <textarea cdkTextareaAutosize matInput formControlName="description" placeholder="description du contenu du colis" required></textarea>
+      </mat-form-field>
+    </div>
+    <div class="product-template-creation-form__unit-price">
+      <mat-form-field>
+        <mat-label>Prix de vente (TTC)</mat-label>
+        <input type="number" matInput formControlName="unitPrice" required>
+      </mat-form-field>
+    </div>
+    <div class="product-template-creation-form__net-weight">
+      <mat-form-field>
+        <mat-label>Quantité de viande dans le colis (kg)</mat-label>
+        <input type="number" matInput formControlName="netWeight" required>
+      </mat-form-field>
+    </div>
+    <div class="product-template-creation-form__photo">
+      <img *ngIf="productTemplate.photo" [src]="productTemplate.photo" class="">
+      <br>
+      <button type="button" mat-button (click)="fileInput.click()">{{this.photoUrl ? 'Modifiez la photo' : 'Ajoutez une photo'}}</button>
+      <input hidden (change)="uploadPhoto()" #fileInput type="file" id="file" accept="image/png, image/jpeg">
+    </div>
+  </form>
+
+  <button mat-button (click)="save()">Enregistrer</button>
+  <button mat-button (click)="cancel()">Abandonner</button>
+</div>
+

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Slaughter } from 'src/app/commons/models/slaughter.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Delivery } from 'src/app/commons/models/delivery.model';

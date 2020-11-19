@@ -15,9 +15,8 @@
       </app-slaughters-list>
     </div>
     <div id="deliveries-list">
-      <app-deliveries-list
-        [deliveries]="deliveries">
-      </app-deliveries-list>
+      <div class="subtitle">Vos ventes en cours</div>
+      <app-delivery-orders *ngFor="let slaughter of slaughters" [slaughter]="slaughter"></app-delivery-orders>
     </div>
     <div id="products-list">
       <app-products-list></app-products-list>

@@ -1,15 +1,15 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Delivery } from 'src/app/commons/models/delivery.model';
+import { Slaughter } from 'src/app/commons/models/slaughter.model';
 import { UrlService } from 'src/app/commons/services/url.service';
 import { environment } from 'src/environments/environment';
 
-import { DeliveryOrdersTableComponent } from './delivery-orders-table.component';
+import { DeliveryOrdersComponent } from './delivery-orders.component';
 
 describe('DeliveryOrdersTableComponent', () => {
-  let deliveryOrdersTableComponent: DeliveryOrdersTableComponent;
-  let fixture: ComponentFixture<DeliveryOrdersTableComponent>;
+  let deliveryOrdersComponent: DeliveryOrdersComponent;
+  let fixture: ComponentFixture<DeliveryOrdersComponent>;
   let httpMock: HttpTestingController;
   let urlService: UrlService;
 
@@ -18,16 +18,43 @@ describe('DeliveryOrdersTableComponent', () => {
     beforeEach(async(() => {
       TestBed.configureTestingModule({
         imports: [ HttpClientTestingModule ],
-        declarations: [ DeliveryOrdersTableComponent ],
+        declarations: [ DeliveryOrdersComponent ],
       })
       .compileComponents();
     }));
 
     beforeEach(() => {
-      fixture = TestBed.createComponent(DeliveryOrdersTableComponent);
-      deliveryOrdersTableComponent = fixture.componentInstance;
-      deliveryOrdersTableComponent.delivery = new Delivery();
-      deliveryOrdersTableComponent.delivery.id = 1;
+      fixture = TestBed.createComponent(DeliveryOrdersComponent);
+      deliveryOrdersComponent = fixture.componentInstance;
+      deliveryOrdersComponent.slaughter = new Slaughter();
+      deliveryOrdersComponent.slaughter.delivery = {
+        id: 1,
+        deliveryAddress: {
+          name: 'Chez Bob',
+          city: 'Atlantic',
+          zipCode: '10000',
+          addressLine1: '2 rue des pommier',
+          addressLine2: null,
+          addressLine3: null,
+          addressLine4: null
+        },
+        deliveryStart: new Date('2020-01-01T20:00:00'),
+        deliveryEnd: new Date('2020-01-01T18:00:00'),
+        availableBatches: [{
+          id: 1,
+          product: {
+            id: 1,
+            name: 'colis \'tutti frutti\'',
+            description: 'un assortiment de steaks, de rotis, et de morceaux a bouillir',
+            unitPrice: 13.5,
+            netWeight: 10,
+            photo: null,
+            farm: null
+          },
+          quantity: 10
+        }],
+        orders: []
+      };
       httpMock = fixture.debugElement.injector.get<HttpTestingController>(HttpTestingController as Type<HttpTestingController>);
       urlService = fixture.debugElement.injector.get<UrlService>(UrlService as Type<UrlService>);
       spyOn(urlService, 'getAuthenticatedUrl').and.returnValue(environment.localeatCoreUrl + '/accounts/1/deliveries/1/orders');
@@ -45,7 +72,7 @@ describe('DeliveryOrdersTableComponent', () => {
       request.flush({data: [{id: 1}, {id: 2}]});
 
       // when, then
-      expect(deliveryOrdersTableComponent).toBeTruthy();
+      expect(deliveryOrdersComponent).toBeTruthy();
     });
   });
 });

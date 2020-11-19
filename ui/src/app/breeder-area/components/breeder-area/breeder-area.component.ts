@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { SideMenuComponent } from 'src/app/commons/components/side-menu/side-menu.component';
 import { Delivery } from 'src/app/commons/models/delivery.model';
 import { Slaughter } from 'src/app/commons/models/slaughter.model';
-import { DeliveriesListComponent } from '../deliveries-list/deliveries-list.component';
 import { DeliveryService } from '../../services/delivery.service';
 import { SlaughterService } from '../../services/slaughter.service';
 
@@ -17,9 +16,6 @@ export class BreederAreaComponent implements OnInit {
 
   @ViewChild(SideMenuComponent)
   private sideMenu: SideMenuComponent;
-
-  @ViewChild(DeliveriesListComponent)
-  private salesList: DeliveriesListComponent;
 
   @Output()
   createSlaughterEvent = new EventEmitter<Slaughter>();

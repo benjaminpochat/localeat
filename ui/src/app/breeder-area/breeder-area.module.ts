@@ -21,9 +21,8 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
-import { DeliveriesListComponent } from './components/deliveries-list/deliveries-list.component';
 import { DeliveryCreationComponent } from './components/delivery-creation/delivery-creation.component';
-import { DeliveryOrdersTableComponent } from './components/delivery-orders-table/delivery-orders-table.component';
+import { DeliveryOrdersComponent } from './components/delivery-orders/delivery-orders.component';
 import { ProductTemplatesListComponent } from './components/product-templates-list/product-templates-list.component';
 import { ProductTemplateCreationComponent } from './components/product-template-creation/product-template-creation.component';
 import { MatIconModule } from '@angular/material/icon';
@@ -33,10 +32,9 @@ import { DeliveryBatchComponent } from './components/delivery-batch/delivery-bat
   declarations: [
     BreederAreaComponent,
     DeliveryCreationComponent,
-    DeliveriesListComponent,
     SlaughterCreationComponent,
     SlaughtersListComponent,
-    DeliveryOrdersTableComponent,
+    DeliveryOrdersComponent,
     ProductTemplateCreationComponent,
     ProductTemplatesListComponent,
     DeliveryBatchComponent,
