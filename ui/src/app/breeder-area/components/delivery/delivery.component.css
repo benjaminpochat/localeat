@@ -1,0 +1,11 @@
+.sale-card {
+  margin: 5px;
+  background-color: floralwhite;
+  border-style: solid;
+  border-width: 2px;
+  border-color: darkolivegreen
+}
+
+table {
+  width: 100%;
+}

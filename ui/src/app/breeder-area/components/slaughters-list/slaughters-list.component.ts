@@ -1,6 +1,5 @@
 import { Input } from '@angular/core';
 import { Component, OnInit, EventEmitter, ViewChild, Output } from '@angular/core';
-import { Delivery } from 'src/app/commons/models/delivery.model';
 import { Slaughter } from 'src/app/commons/models/slaughter.model';
 import { SlaughterService } from '../../services/slaughter.service';
 import { DeliveryCreationComponent } from '../delivery-creation/delivery-creation.component';

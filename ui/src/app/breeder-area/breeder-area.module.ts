@@ -22,11 +22,12 @@ import { MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
 import { DeliveryCreationComponent } from './components/delivery-creation/delivery-creation.component';
-import { DeliveryOrdersComponent } from './components/delivery-orders/delivery-orders.component';
+import { DeliveryComponent } from './components/delivery/delivery.component';
 import { ProductTemplatesListComponent } from './components/product-templates-list/product-templates-list.component';
 import { ProductTemplateCreationComponent } from './components/product-template-creation/product-template-creation.component';
 import { MatIconModule } from '@angular/material/icon';
 import { DeliveryBatchComponent } from './components/delivery-batch/delivery-batch.component';
+import { DeliveryOrdersComponent } from './components/delivery-orders/delivery-orders.component';
 
 @NgModule({
   declarations: [
@@ -34,10 +35,11 @@ import { DeliveryBatchComponent } from './components/delivery-batch/delivery-bat
     DeliveryCreationComponent,
     SlaughterCreationComponent,
     SlaughtersListComponent,
-    DeliveryOrdersComponent,
+    DeliveryComponent,
     ProductTemplateCreationComponent,
     ProductTemplatesListComponent,
     DeliveryBatchComponent,
+    DeliveryOrdersComponent,
   ],
   imports: [
     CommonModule,
