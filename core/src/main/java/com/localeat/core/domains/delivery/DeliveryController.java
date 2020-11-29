@@ -1,8 +1,9 @@
 package com.localeat.core.domains.delivery;
 
 import com.localeat.core.domains.actor.Breeder;
-import com.localeat.core.domains.order.Order;
-import com.localeat.core.domains.order.OrderRepository;
+import com.localeat.core.domains.order.*;
+import com.localeat.core.domains.product.Batch;
+import com.localeat.core.domains.product.BatchRepository;
 import com.localeat.core.domains.security.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -22,6 +28,12 @@ public class DeliveryController {
 
     @Autowired
     private OrderRepository orderRepository;
+
+    @Autowired
+    private BatchRepository batchRepository;
+
+    @Autowired
+    private OrderItemRepository orderItemRepository;
 
     @GetMapping(path = "/accounts/{account}/deliveries")
     public Iterable<Delivery> getBreedersDeliveries(@PathVariable Account account){
@@ -46,5 +58,15 @@ public class DeliveryController {
         return orderRepository.getOrdersByDelivery(delivery);
     }
 
-
+    public void updateQuantitySoldInBatches(Delivery delivery) {
+        StreamSupport.stream(orderItemRepository.findByDelivery(delivery).spliterator(), false)
+                .filter(orderItem -> !OrderStatus.CANCELLED.equals(orderItem.getOrder().getStatus()))                // Stream<Order>
+                .collect(Collectors.groupingBy(OrderItem::getBatch, Collectors.summingInt(OrderItem::getQuantity)))  // Map<Batch, Long>
+                .entrySet()
+                .forEach(entry -> {
+                    Batch batch = entry.getKey();
+                    batch.setQuantitySold(entry.getValue().intValue());
+                    batchRepository.save(batch);
+                });
+    }
 }

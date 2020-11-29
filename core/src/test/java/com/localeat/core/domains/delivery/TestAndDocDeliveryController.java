@@ -76,6 +76,8 @@ public class TestAndDocDeliveryController {
                         "    \"id\" : 1,\n" +
                         "    \"batch\" : {\n" +
                         "      \"id\" : 1,\n" +
+                        "      \"quantity\" : 50,\n" +
+                        "      \"quantitySold\" : 35,\n" +
                         "      \"product\" : {\n" +
                         "        \"id\" : 1,\n" +
                         "        \"name\" : \"colis 'tutti frutti'\",\n" +
@@ -88,8 +90,7 @@ public class TestAndDocDeliveryController {
                         "           \"name\" : \"La ferme de la Riviere\",\n" +
                         "           \"description\" : \"La ferme de la Riviere est un elevage d'excellence\"\n" +
                         "        }\n" +
-                        "      },\n" +
-                        "      \"quantity\" : 10\n" +
+                        "      }\n" +
                         "    },\n" +
                         "    \"unitPrice\" : 13.0,\n" +
                         "    \"quantity\" : 10.0\n" +
@@ -110,6 +111,8 @@ public class TestAndDocDeliveryController {
                         "    \"deliveryEnd\" : \"2020-01-01T18:00:00\",\n" +
                         "    \"availableBatches\" : [ {\n" +
                         "      \"id\" : 1,\n" +
+                        "      \"quantity\" : 50,\n" +
+                        "      \"quantitySold\" : 35,\n" +
                         "      \"product\" : {\n" +
                         "        \"id\" : 1,\n" +
                         "        \"name\" : \"colis 'tutti frutti'\",\n" +
@@ -122,8 +125,7 @@ public class TestAndDocDeliveryController {
                         "           \"name\" : \"La ferme de la Riviere\",\n" +
                         "           \"description\" : \"La ferme de la Riviere est un elevage d'excellence\"\n" +
                         "        }\n" +
-                        "      },\n" +
-                        "      \"quantity\" : 10\n" +
+                        "      }\n" +
                         "    } ],\n" +
                         "    \"orders\" : [ ]\n" +
                         "  }\n" +
@@ -141,6 +143,8 @@ public class TestAndDocDeliveryController {
                         "    \"id\" : 3,\n" +
                         "    \"batch\" : {\n" +
                         "      \"id\" : 1,\n" +
+                        "      \"quantity\" : 50,\n" +
+                        "      \"quantitySold\" : 35,\n" +
                         "      \"product\" : {\n" +
                         "        \"id\" : 1,\n" +
                         "        \"name\" : \"colis 'tutti frutti'\",\n" +
@@ -153,8 +157,7 @@ public class TestAndDocDeliveryController {
                         "           \"name\" : \"La ferme de la Riviere\",\n" +
                         "           \"description\" : \"La ferme de la Riviere est un elevage d'excellence\"\n" +
                         "        }\n" +
-                        "      },\n" +
-                        "      \"quantity\" : 10\n" +
+                        "      }\n" +
                         "    },\n" +
                         "    \"unitPrice\" : 12.0,\n" +
                         "    \"quantity\" : 20.0\n" +
@@ -175,6 +178,8 @@ public class TestAndDocDeliveryController {
                         "    \"deliveryEnd\" : \"2020-01-01T18:00:00\",\n" +
                         "    \"availableBatches\" : [ {\n" +
                         "      \"id\" : 1,\n" +
+                        "      \"quantity\" : 50,\n" +
+                        "      \"quantitySold\" : 35,\n" +
                         "      \"product\" : {\n" +
                         "        \"id\" : 1,\n" +
                         "        \"name\" : \"colis 'tutti frutti'\",\n" +
@@ -187,8 +192,7 @@ public class TestAndDocDeliveryController {
                         "           \"name\" : \"La ferme de la Riviere\",\n" +
                         "           \"description\" : \"La ferme de la Riviere est un elevage d'excellence\"\n" +
                         "        }\n" +
-                        "      },\n" +
-                        "      \"quantity\" : 10\n" +
+                        "      }\n" +
                         "    } ],\n" +
                         "    \"orders\" : [ ]\n" +
                         "  }\n" +

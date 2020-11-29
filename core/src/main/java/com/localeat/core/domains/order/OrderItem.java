@@ -25,7 +25,7 @@ public class OrderItem {
 
     private Float unitPrice;
 
-    private Float quantity;
+    private int quantity;
 
     public Long getId() {
         return id;
@@ -51,11 +51,11 @@ public class OrderItem {
         this.unitPrice = unitPrice;
     }
 
-    public Float getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Float quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 

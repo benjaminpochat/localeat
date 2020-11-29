@@ -26,8 +26,11 @@ public class Batch {
     @OneToOne(fetch = FetchType.LAZY)
     private Product product;
 
-    /** the available quantity of products for this batch */
+    /** the quantity of products for this batch initially on sale */
     private int quantity;
+
+    /** the quantity of products for this batch already sold */
+    private int quantitySold;
 
     public Long getId() {
         return id;
@@ -51,6 +54,14 @@ public class Batch {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public int getQuantitySold() {
+        return quantitySold;
+    }
+
+    public void setQuantitySold(int quantitySold) {
+        this.quantitySold = quantitySold;
     }
 
 }

@@ -23,6 +23,29 @@
   font-size: var(--main-menu-font-size);
 }
 
-.delivery-orders__table {
+.delivery-orders__list-header,
+.delivery-orders__list-body {
+  display: grid;
+  grid-template-columns: 1rem 1fr 1fr 1fr;
   width: 100%;
+}
+
+.delivery-orders__list-header {
+  color: gray;
+  font-size: small;
+}
+
+.delivery-orders__list-body__order-summary {
+  font-size: 0.8rem;
+}
+
+.delivery-orders__list-body__order-details {
+  grid-column: 2/5;
+  font-size: small;
+}
+
+.delivery-orders__list-body__order-actions{
+  grid-column: 2/5;
+  justify-self: end;
+  font-size: small;
 }

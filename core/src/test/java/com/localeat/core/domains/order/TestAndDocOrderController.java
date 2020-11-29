@@ -61,7 +61,8 @@ public class TestAndDocOrderController {
                 "  ]," +
                 "  \"delivery\" : {" +
                 "    \"id\" : \"1\"" +
-                "  }" +
+                "  }," +
+                "  \"status\" : \"BOOKED\"" +
                 "}";
 
         // when, then
@@ -96,6 +97,9 @@ public class TestAndDocOrderController {
                         "  \"orderedItems\" : [ {\n" +
                         "    \"id\" : 1,\n" +
                         "    \"batch\" : {\n" +
+                        "      \"id\" : 1,\n" +
+                        "      \"quantity\" : 50,\n" +
+                        "      \"quantitySold\" : 35,\n" +
                         "      \"product\" : {\n" +
                         "        \"id\" : 1,\n" +
                         "        \"name\" : \"colis 'tutti frutti'\",\n" +
@@ -108,8 +112,7 @@ public class TestAndDocOrderController {
                         "           \"name\" : \"La ferme de la Riviere\",\n" +
                         "           \"description\" : \"La ferme de la Riviere est un elevage d'excellence\"\n" +
                         "        }\n" +
-                        "      },\n" +
-                        "      \"quantity\" : 10\n" +
+                        "      }\n" +
                         "    },\n" +
                         "    \"unitPrice\" : 13.0,\n" +
                         "    \"quantity\" : 10.0\n" +
@@ -129,6 +132,9 @@ public class TestAndDocOrderController {
                         "    \"deliveryStart\" : \"2020-01-01T20:00:00\",\n" +
                         "    \"deliveryEnd\" : \"2020-01-01T18:00:00\",\n" +
                         "    \"availableBatches\" : [ {\n" +
+                        "      \"id\" : 1,\n" +
+                        "      \"quantity\" : 50,\n" +
+                        "      \"quantitySold\" : 35,\n" +
                         "      \"product\" : {\n" +
                         "        \"id\" : 1,\n" +
                         "        \"name\" : \"colis 'tutti frutti'\",\n" +
@@ -141,8 +147,7 @@ public class TestAndDocOrderController {
                         "           \"name\" : \"La ferme de la Riviere\",\n" +
                         "           \"description\" : \"La ferme de la Riviere est un elevage d'excellence\"\n" +
                         "        }\n" +
-                        "      },\n" +
-                        "      \"quantity\" : 10\n" +
+                        "      }\n" +
                         "    } ],\n" +
                         "    \"orders\" : [ ]\n" +
                         "  }\n" +
@@ -159,6 +164,9 @@ public class TestAndDocOrderController {
                         "  \"orderedItems\" : [ {\n" +
                         "    \"id\" : 2,\n" +
                         "    \"batch\" : {\n" +
+                        "      \"id\" : 1,\n" +
+                        "      \"quantity\" : 50,\n" +
+                        "      \"quantitySold\" : 35,\n" +
                         "      \"product\" : {\n" +
                         "        \"id\" : 1,\n" +
                         "        \"name\" : \"colis 'tutti frutti'\",\n" +
@@ -171,8 +179,7 @@ public class TestAndDocOrderController {
                         "           \"name\" : \"La ferme de la Riviere\",\n" +
                         "           \"description\" : \"La ferme de la Riviere est un elevage d'excellence\"\n" +
                         "        }\n" +
-                        "      },\n" +
-                        "      \"quantity\" : 10\n" +
+                        "      }\n" +
                         "    },\n" +
                         "    \"unitPrice\" : 12.0,\n" +
                         "    \"quantity\" : 5.0\n" +
@@ -192,6 +199,9 @@ public class TestAndDocOrderController {
                         "    \"deliveryStart\" : \"2020-01-08T20:00:00\",\n" +
                         "    \"deliveryEnd\" : \"2020-01-08T18:00:00\",\n" +
                         "    \"availableBatches\" : [ {\n" +
+                        "      \"id\" : 1,\n" +
+                        "      \"quantity\" : 50,\n" +
+                        "      \"quantitySold\" : 35,\n" +
                         "      \"product\" : {\n" +
                         "        \"id\" : 1,\n" +
                         "        \"name\" : \"colis 'tutti frutti'\",\n" +
@@ -204,8 +214,7 @@ public class TestAndDocOrderController {
                         "           \"name\" : \"La ferme de la Riviere\",\n" +
                         "           \"description\" : \"La ferme de la Riviere est un elevage d'excellence\"\n" +
                         "        }\n" +
-                        "      },\n" +
-                        "      \"quantity\" : 10\n" +
+                        "      }\n" +
                         "    } ],\n" +
                         "    \"orders\" : [ ]\n" +
                         "  }\n" +

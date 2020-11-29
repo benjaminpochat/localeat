@@ -3,25 +3,26 @@
     <div class=delivery-orders__title-text>Commandes pour la livraison du {{delivery.deliveryStart | date : 'shortDate'}} à {{delivery.deliveryAddress.city}}</div>
     <div>{{delivery.orders.length}} commande(s) client</div>
   </div>
-  <table mat-table class="delivery-orders__table" [dataSource]="delivery.orders" >
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef>N°</th>
-      <td mat-cell *matCellDef="let order"> {{order.id}} </td>
-    </ng-container>
-    <ng-container matColumnDef="customer">
-      <th mat-header-cell *matHeaderCellDef>Client</th>
-      <td mat-cell *matCellDef="let order"> {{order.customer.name}} {{order.customer.firstName}} </td>
-    </ng-container>
-    <ng-container matColumnDef="quantity">
-      <th mat-header-cell *matHeaderCellDef>Quantité totale</th>
-      <td mat-cell *matCellDef="let order"> {{ order.totalNetWeight }} kg </td>
-    </ng-container>
-    <ng-container matColumnDef="totalPrice">
-      <th mat-header-cell *matHeaderCellDef>Montant de la commande</th>
-      <td mat-cell *matCellDef="let order"> {{ order.totalPrice }} € </td>
-    </ng-container>
-    <tr mat-header-row *matHeaderRowDef="['id', 'customer', 'quantity', 'totalPrice']"></tr>
-    <tr mat-row *matRowDef="let myRowData; columns: ['id', 'customer', 'quantity', 'totalPrice']"></tr>
-  </table>
+  <div class="delivery-orders__list-header">
+    <div>N°</div>
+    <div>Nom</div>
+    <div>Description</div>
+    <div>Statut</div>
+  </div>
+  <div *ngFor="let order of delivery.orders" class="delivery-orders__list-body">
+    <div class="delivery-orders__list-body__order-summary">{{order.id}}</div>
+    <div class="delivery-orders__list-body__order-summary">{{order.customer.name}} {{order.customer.firstName}}</div>
+    <div class="delivery-orders__list-body__order-summary">{{order.totalNetWeight}} kg / {{order.totalPrice}} €</div>
+    <div class="delivery-orders__list-body__order-summary">réservé</div>
+    <div class="delivery-orders__list-body__order-details">
+      <div *ngFor="let item of order.orderedItems">
+        {{item.batch.product.name}} x{{item.quantity}}
+      </div>
+    </div>
+    <div class="delivery-orders__list-body__order-actions">
+      <button mat-flat-button color="primary">Valider le paiement</button>
+      <!--button mat-flat-button color="primary">Valider la livraison</button-->
+  </div>
+</div>
   <button mat-button (click)="close()">Retour à l'accueil</button>
 </div>

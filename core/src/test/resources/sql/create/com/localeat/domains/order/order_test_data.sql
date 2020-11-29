@@ -25,11 +25,13 @@ values (
 insert into orders (
     id,
     customer_id,
-    delivery_id)
+    delivery_id,
+    status)
 values (
     2,
     3,
-    2)
+    2,
+    'PAYED')
 ;
 
 insert into order_items (
@@ -49,11 +51,13 @@ values (
 insert into orders (
     id,
     customer_id,
-    delivery_id)
+    delivery_id,
+    status)
 values (
     3,
     4,
-    1)
+    1,
+    'PAYED')
 ;
 
 insert into order_items (

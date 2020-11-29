@@ -27,6 +27,9 @@ public class Order {
     @OneToOne
     private Delivery delivery;
 
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
+
     public Long getId() {
         return id;
     }
@@ -57,5 +60,13 @@ public class Order {
 
     public void setDelivery(Delivery delivery) {
         this.delivery = delivery;
+    }
+
+    public OrderStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(OrderStatus status) {
+        this.status = status;
     }
 }
