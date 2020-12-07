@@ -12,7 +12,9 @@
 .product-template-creation-form__title {
   font-family: 'Acme';
   font-size: 1rem;
-}
+  background-color: darkolivegreen;
+  color: white;
+ }
 
 .product-template-creation-form__photo > img {
   max-height: 15rem;

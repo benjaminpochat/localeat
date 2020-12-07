@@ -27,16 +27,18 @@ export class DeliveryComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.deliveryService.getDeliveryOrders(this.slaughter.delivery).subscribe(
-      orders => {
-        this.slaughter.delivery.orders = orders;
-        this.slaughter.delivery.orders.forEach(order => {
-          this.deliveryService.setOrderTotalNetWeight(order);
-          this.deliveryService.setOrderTotalPrice(order);
+    if (this.slaughter.delivery.id){
+      this.deliveryService.getDeliveryOrders(this.slaughter.delivery).subscribe(
+        orders => {
+          this.slaughter.delivery.orders = orders;
+          this.slaughter.delivery.orders.forEach(order => {
+            this.deliveryService.setOrderTotalNetWeight(order);
+            this.deliveryService.setOrderTotalPrice(order);
+          });
+          const netWeightSoldCalculator = (accumulator: number, order: Order): number => accumulator + order.totalNetWeight;
+          this.netWeightSold = this.slaughter.delivery.orders.reduce(netWeightSoldCalculator, 0);
         });
-        const netWeightSoldCalculator = (accumulator: number, order: Order): number => accumulator + order.totalNetWeight;
-        this.netWeightSold = this.slaughter.delivery.orders.reduce(netWeightSoldCalculator, 0);
-      });
+      }
   }
 
   showDeliveryOrders(): void {

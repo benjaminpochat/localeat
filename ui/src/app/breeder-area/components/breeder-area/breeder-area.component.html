@@ -16,7 +16,7 @@
     </div>
     <div id="deliveries-list">
       <div class="subtitle">Vos ventes en cours</div>
-      <app-delivery *ngFor="let slaughter of slaughters" [slaughter]="slaughter"></app-delivery>
+      <app-delivery *ngFor="let slaughter of getSlaughtersWithDelivery()" [slaughter]="slaughter"></app-delivery>
     </div>
     <div id="products-list">
       <app-products-list></app-products-list>

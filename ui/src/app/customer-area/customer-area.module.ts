@@ -20,7 +20,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
 import { ReactiveFormsModule } from '@angular/forms';
 import { OrderDialogComponent } from './components/order-dialog/order-dialog.component';
-import { OrderListComponent } from './components/order-list/order-list.component';
+import { OrderComponent } from './components/order/order.component';
 import { MatIconModule } from '@angular/material/icon';
 import { ProductComponent } from './components/product/product.component';
 import { ProductSelectorComponent } from './components/product-selector/product-selector.component';
@@ -31,7 +31,7 @@ import { OrderItemComponent } from './components/order-item/order-item.component
     CustomerAreaComponent,
     DeliveryComponent,
     OrderDialogComponent,
-    OrderListComponent,
+    OrderComponent,
     OrderItemComponent,
     ProductComponent,
     ProductSelectorComponent,

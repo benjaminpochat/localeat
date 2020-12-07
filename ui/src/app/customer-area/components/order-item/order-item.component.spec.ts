@@ -28,6 +28,7 @@ describe('OrderItemComponent', () => {
       batch:{
         id: 1,
         quantity: 10,
+        quantitySold: 0,
         product: {
           id: 1,
           name: 'colis \'tutti frutti\'',

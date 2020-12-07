@@ -16,4 +16,11 @@ export class DeliveryBatchComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  addProducts(n: number){
+    this.batch.quantity = this.batch.quantity + n;
+  }
+
+  removeProducts(n: number){
+    this.batch.quantity = Math.max(0, this.batch.quantity - n);
+  }
 }

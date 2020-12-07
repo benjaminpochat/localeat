@@ -46,17 +46,19 @@ export class OrderDialogComponent implements OnInit {
     this.initLabels();
     this.initAuthentication();
     this.initOrderForms();
+    this.orderStored = false;
   }
 
   public initOrder(delivery: Delivery) {
     this.order = new Order();
-    this.order.orderedItems = delivery.availableBatches.map(batch => {
-      const orderItem = new OrderItem();
-      orderItem.batch = batch;
-      orderItem.unitPrice = batch.product.unitPrice;
-      orderItem.quantity = 0;
-      return orderItem;
-    });
+    this.order.orderedItems = delivery.availableBatches
+      .map(batch => {
+        const orderItem = new OrderItem();
+        orderItem.batch = batch;
+        orderItem.unitPrice = batch.product.unitPrice;
+        orderItem.quantity = 0;
+        return orderItem;
+      });
     this.order.delivery = delivery;
   }
 

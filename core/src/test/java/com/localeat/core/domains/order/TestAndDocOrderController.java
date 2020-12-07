@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @ExtendWith({RestDocumentationExtension.class, SpringExtension.class})
 @Transactional
-@Sql({
+@Sql(value = {
         "/sql/create/com/localeat/domains/security/schema.sql",
         "/sql/create/com/localeat/domains/security/security_test_data.sql",
         "/sql/create/com/localeat/domains/farm/farm_test_data.sql",
@@ -36,7 +36,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         "/sql/create/com/localeat/domains/slaughter/slaughter_test_data.sql",
         "/sql/create/com/localeat/domains/delivery/delivery_test_data.sql",
         "/sql/create/com/localeat/domains/order/order_test_data.sql",
-})
+}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+@Sql(value = {
+        "/sql/delete/com/localeat/domains/order/test_data.sql"
+}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+
 public class TestAndDocOrderController {
 
     private MockMvc mockMvc;
@@ -99,7 +103,7 @@ public class TestAndDocOrderController {
                         "    \"batch\" : {\n" +
                         "      \"id\" : 1,\n" +
                         "      \"quantity\" : 50,\n" +
-                        "      \"quantitySold\" : 35,\n" +
+                        "      \"quantitySold\" : 0,\n" +
                         "      \"product\" : {\n" +
                         "        \"id\" : 1,\n" +
                         "        \"name\" : \"colis 'tutti frutti'\",\n" +
@@ -134,7 +138,7 @@ public class TestAndDocOrderController {
                         "    \"availableBatches\" : [ {\n" +
                         "      \"id\" : 1,\n" +
                         "      \"quantity\" : 50,\n" +
-                        "      \"quantitySold\" : 35,\n" +
+                        "      \"quantitySold\" : 0,\n" +
                         "      \"product\" : {\n" +
                         "        \"id\" : 1,\n" +
                         "        \"name\" : \"colis 'tutti frutti'\",\n" +
@@ -166,7 +170,7 @@ public class TestAndDocOrderController {
                         "    \"batch\" : {\n" +
                         "      \"id\" : 1,\n" +
                         "      \"quantity\" : 50,\n" +
-                        "      \"quantitySold\" : 35,\n" +
+                        "      \"quantitySold\" : 0,\n" +
                         "      \"product\" : {\n" +
                         "        \"id\" : 1,\n" +
                         "        \"name\" : \"colis 'tutti frutti'\",\n" +
@@ -201,7 +205,7 @@ public class TestAndDocOrderController {
                         "    \"availableBatches\" : [ {\n" +
                         "      \"id\" : 1,\n" +
                         "      \"quantity\" : 50,\n" +
-                        "      \"quantitySold\" : 35,\n" +
+                        "      \"quantitySold\" : 0,\n" +
                         "      \"product\" : {\n" +
                         "        \"id\" : 1,\n" +
                         "        \"name\" : \"colis 'tutti frutti'\",\n" +

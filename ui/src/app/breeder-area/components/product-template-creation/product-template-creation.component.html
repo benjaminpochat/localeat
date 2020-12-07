@@ -1,4 +1,4 @@
-<div *ngIf="productTemplate" class="product-creation-form">
+<div *ngIf="productTemplate" class="product-template-creation-form">
   <div class="product-template-creation-form__title">Créons un nouveau colis type</div>
 
   <form [formGroup]="productTemplateCreationForm">
@@ -16,7 +16,7 @@
     </div>
     <div class="product-template-creation-form__unit-price">
       <mat-form-field>
-        <mat-label>Prix de vente (TTC)</mat-label>
+        <mat-label>Prix de vente (€TTC/kg)</mat-label>
         <input type="number" matInput formControlName="unitPrice" required>
       </mat-form-field>
     </div>

@@ -1,17 +1,15 @@
 .batch {
   border-top: 1px solid lightgrey;
+  display: flex;
 }
 
 .batch__product {
   width: 35%;
-  display: inline-block;
-}
-
-.batch__product div {
   display: grid;
   grid-template-areas: "name        name"
                        "description description"
                        "netWeight   price";
+  align-items: center;
 }
 
 .batch__product__name {
@@ -33,40 +31,34 @@
   grid-area: price;
 }
 
-.batch__quantity-actions {
-  display: inline-block;
-  width: 35%
-}
-
-.batch__quantity-actions div {
-  display: grid;
-  grid-template-areas: "by-one by-one"
-                       "by-ten by-ten";
+.batch__quantity-actions-add,
+.batch__quantity-actions-remove {
+  display: flex;
+  flex-direction: column;
   padding: 0.2rem;
-}
-
-.batch__quantity-actions__by-one {
-  grid-area: by-one;
-}
-
-.batch__quantity-actions__by-ten {
-  grid-area: by-ten;
+  justify-content: space-around;
 }
 
 .batch__summary {
-  display: inline-block;
-  width: 30%
-}
-
-.batch__summary div {
   display: grid;
   grid-template-areas: "number   number"
+                       "label    label"
                        "quantity price";
+  width: 30%;
+  align-content: center;
+  text-align: center;
 }
 
 .batch__summary__product-number {
-  grid-area: number
+  grid-area: number;
+  font-size: xx-large;
 }
+
+.batch__summary__label {
+  grid-area: label;
+  font-size: x-small;
+}
+
 
 .batch__summary__total-quantity {
   grid-area: quantity;

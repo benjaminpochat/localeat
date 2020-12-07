@@ -23,7 +23,7 @@ public class Batch {
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL)
     private Product product;
 
     /** the quantity of products for this batch initially on sale */

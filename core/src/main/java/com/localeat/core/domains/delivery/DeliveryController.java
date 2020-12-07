@@ -12,12 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 @RestController
@@ -42,8 +37,8 @@ public class DeliveryController {
     }
 
     @GetMapping(path = "/deliveries")
-    public Iterable<Delivery> getAllDeliveries(){
-        return deliveryRepository.findAll();
+    public Iterable<Delivery> getPublicDeliveries(){
+        return deliveryRepository.findPublicDeliveries();
     }
 
     @GetMapping(path = "/accounts/{account}/deliveries/{delivery}/orders")

@@ -16,18 +16,17 @@ import org.springframework.web.context.WebApplicationContext;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
 
 
 
 @SpringBootTest
 @ExtendWith({RestDocumentationExtension.class, SpringExtension.class})
 @Transactional
-@Sql({
+@Sql(value = {
         "/sql/create/com/localeat/domains/security/schema.sql",
         "/sql/create/com/localeat/domains/security/security_test_data.sql",
         "/sql/create/com/localeat/domains/farm/farm_test_data.sql",
@@ -38,7 +37,10 @@ import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuild
         "/sql/create/com/localeat/domains/slaughter/slaughter_test_data.sql",
         "/sql/create/com/localeat/domains/delivery/delivery_test_data.sql",
         "/sql/create/com/localeat/domains/order/order_test_data.sql",
-})
+}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+@Sql(value = {
+        "/sql/delete/com/localeat/domains/order/test_data.sql"
+}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 public class TestAndDocDeliveryController {
 
     private MockMvc mockMvc;
@@ -49,6 +51,24 @@ public class TestAndDocDeliveryController {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
                 .apply(documentationConfiguration(restDocumentation))
                 .build();
+    }
+
+    @Test
+    public void getAllPublicDeliveries() throws Exception {
+        // given
+        // -> See SQL files executed
+
+        // when, then
+        this.mockMvc
+                .perform(get("/deliveries")
+                        .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                //.andExpect(content().json()
+                .andDo(document(
+                        "get-public-deliveries",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint())));
     }
 
     @Test
@@ -77,7 +97,7 @@ public class TestAndDocDeliveryController {
                         "    \"batch\" : {\n" +
                         "      \"id\" : 1,\n" +
                         "      \"quantity\" : 50,\n" +
-                        "      \"quantitySold\" : 35,\n" +
+                        "      \"quantitySold\" : 0,\n" +
                         "      \"product\" : {\n" +
                         "        \"id\" : 1,\n" +
                         "        \"name\" : \"colis 'tutti frutti'\",\n" +
@@ -112,7 +132,7 @@ public class TestAndDocDeliveryController {
                         "    \"availableBatches\" : [ {\n" +
                         "      \"id\" : 1,\n" +
                         "      \"quantity\" : 50,\n" +
-                        "      \"quantitySold\" : 35,\n" +
+                        "      \"quantitySold\" : 0,\n" +
                         "      \"product\" : {\n" +
                         "        \"id\" : 1,\n" +
                         "        \"name\" : \"colis 'tutti frutti'\",\n" +
@@ -144,7 +164,7 @@ public class TestAndDocDeliveryController {
                         "    \"batch\" : {\n" +
                         "      \"id\" : 1,\n" +
                         "      \"quantity\" : 50,\n" +
-                        "      \"quantitySold\" : 35,\n" +
+                        "      \"quantitySold\" : 0,\n" +
                         "      \"product\" : {\n" +
                         "        \"id\" : 1,\n" +
                         "        \"name\" : \"colis 'tutti frutti'\",\n" +
@@ -179,7 +199,7 @@ public class TestAndDocDeliveryController {
                         "    \"availableBatches\" : [ {\n" +
                         "      \"id\" : 1,\n" +
                         "      \"quantity\" : 50,\n" +
-                        "      \"quantitySold\" : 35,\n" +
+                        "      \"quantitySold\" : 0,\n" +
                         "      \"product\" : {\n" +
                         "        \"id\" : 1,\n" +
                         "        \"name\" : \"colis 'tutti frutti'\",\n" +

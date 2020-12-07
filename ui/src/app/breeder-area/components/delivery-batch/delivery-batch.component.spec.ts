@@ -32,7 +32,8 @@ describe('DeliveryBatchComponent', () => {
         photo: null,
         farm: null
       },
-      quantity: 10
+      quantity: 10,
+      quantitySold: 0
     };
   }
 

@@ -76,6 +76,7 @@ export class DeliveryCreationComponent implements OnInit {
     this.slaughter = slaughter;
     this.delivery = new Delivery();
     this.delivery.availableBatches = [];
+    this.delivery.orders = [];
     this.productTemplateService.getProductTemplates().subscribe(productTemplates => {
       productTemplates.forEach(productTemplate => {
         this.addBatch(productTemplate);

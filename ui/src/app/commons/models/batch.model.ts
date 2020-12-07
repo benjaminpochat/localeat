@@ -5,4 +5,5 @@ export class Batch {
   id: number;
   product: Product;
   quantity: number;
+  quantitySold: number;
 }

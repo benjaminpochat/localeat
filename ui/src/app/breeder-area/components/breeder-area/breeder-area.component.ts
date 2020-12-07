@@ -41,6 +41,10 @@ export class BreederAreaComponent implements OnInit {
     this.refreshDeliveries();
   }
 
+  getSlaughtersWithDelivery(): Slaughter[] {
+    return this.slaughters === undefined ? [] : this.slaughters.filter(slaughter => slaughter.delivery);
+  }
+
   private refreshSlaughters() {
     this.slaughterService.getSlaughters().subscribe(slaughters => this.slaughters = slaughters);
   }

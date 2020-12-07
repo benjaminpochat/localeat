@@ -1,4 +1,4 @@
-import { EventEmitter, SimpleChanges } from '@angular/core';
+import { EventEmitter, Input, SimpleChanges } from '@angular/core';
 import { Output } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 
@@ -9,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductSelectorComponent implements OnInit {
 
-  quantity = 0  ;
+  @Input()
+  quantityAvailable;
+  quantityOrdered = 0 ;
 
   @Output()
   changeQuantityEvent = new EventEmitter<number>();
@@ -19,14 +21,27 @@ export class ProductSelectorComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  isIncreaseQuantityPossible(): boolean {
+    return this.quantityAvailable > this.quantityOrdered;
+  }
+
+  getButtonLabel(): string {
+    if (this.isIncreaseQuantityPossible) {
+      return 'Ajouter ce produit à la commande';
+    }
+    return 'Ce produit n\'est plus disponible';
+  }
+
   increaseQuantity(){
-    this.quantity += 1;
-    this.changeQuantityEvent.emit(this.quantity);
+    if(this.isIncreaseQuantityPossible()){
+      this.quantityOrdered += 1;
+      this.changeQuantityEvent.emit(this.quantityOrdered);
+    }
   }
 
   decreaseQuantity(){
-    this.quantity -= 1;
-    this.changeQuantityEvent.emit(this.quantity);
+    this.quantityOrdered -= 1;
+    this.changeQuantityEvent.emit(this.quantityOrdered);
   }
 
 }

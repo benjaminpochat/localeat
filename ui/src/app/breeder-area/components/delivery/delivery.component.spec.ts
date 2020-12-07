@@ -51,7 +51,8 @@ describe('DeliveryComponent', () => {
             photo: null,
             farm: null
           },
-          quantity: 10
+          quantity: 10,
+          quantitySold: 0
         }],
         orders: []
       };

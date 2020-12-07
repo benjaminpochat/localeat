@@ -11,4 +11,11 @@ public interface DeliveryRepository extends CrudRepository<Delivery, Long> {
             "INNER JOIN s.animal a " +
             "WHERE a.finalFarm = :farm")
     Iterable<Delivery> findByFarm(@Param("farm") Farm farm);
+
+    @Query("SELECT d FROM Slaughter s " +
+            "INNER JOIN s.delivery d " +
+            "INNER JOIN d.availableBatches b " +
+            "WHERE b.quantitySold < b.quantity " +
+            "AND d.deliveryStart > CURRENT_DATE")
+    Iterable<Delivery> findPublicDeliveries();
 }
