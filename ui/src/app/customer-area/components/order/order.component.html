@@ -1,0 +1,22 @@
+<mat-card class="order-card">
+  <mat-card-header>
+    <mat-card-title>
+      <span>
+        Votre commande pour la livraison du {{order.delivery.deliveryStart | date: 'shortDate'}} - à {{order.delivery.deliveryAddress.name}}
+      </span>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <ul>
+      <li>
+      Montant de la commande : {{ getOrderTotalPrice() }} €TTC
+      </li>
+      <li>
+      Numero de commande : {{order.id}}
+      </li>
+    </ul>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-flat-button >J'enregistre le rendez-vous</button>
+  </mat-card-actions>
+</mat-card>
