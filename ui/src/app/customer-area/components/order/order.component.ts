@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Order } from 'src/app/commons/models/order.model';
 import { OrderService } from '../../services/order.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-order',
@@ -14,6 +15,7 @@ export class OrderComponent implements OnInit {
 
   constructor(
     private orderService: OrderService,
+    private messageInfo: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -21,5 +23,16 @@ export class OrderComponent implements OnInit {
 
   getOrderTotalPrice(){
     return this.orderService.getTotalPrice(this.order);
+  }
+
+  downloadCalendarFile() {
+    this.messageInfo.open(
+      'Désolé, cette fonctionnalité n\'est pas encore disponible',
+      'X',
+      {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top'
+      });
   }
 }

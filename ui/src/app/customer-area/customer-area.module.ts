@@ -16,6 +16,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -52,6 +53,7 @@ import { OrderItemComponent } from './components/order-item/order-item.component
     MatRadioModule,
     MatSliderModule,
     MatSlideToggleModule,
+    MatSnackBarModule,
     MatStepperModule,
     MatTableModule,
     ReactiveFormsModule,
