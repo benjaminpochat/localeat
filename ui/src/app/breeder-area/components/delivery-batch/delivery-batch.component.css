@@ -16,6 +16,15 @@
   grid-area: name;
 }
 
+.batch__product:hover {
+  cursor: pointer;
+  background-color: whitesmoke;
+}
+
+.batch__product__actions {
+  grid-area: actions;
+}
+
 .batch__product__description {
   font-size: x-small;
   grid-area: description;

@@ -1,33 +1,33 @@
-<div *ngIf="productTemplate" class="product-template-creation-form">
-  <div class="product-template-creation-form__title">Créons un nouveau colis type</div>
+<div *ngIf="product" class="product-form">
+  <div class="product-form__title">Créons un nouveau colis type</div>
 
-  <form [formGroup]="productTemplateCreationForm">
-    <div class="product-template-creation-form__name">
+  <form [formGroup]="productForm">
+    <div class="product-form__name">
       <mat-form-field>
         <mat-label>Nom du colis type</mat-label>
-        <input type="text" matInput formControlName="name" required>
+        <input type="text" matInput value="product.name" formControlName="name" required>
       </mat-form-field>
     </div>
-    <div class="product-template-creation-form__description">
+    <div class="product-form__description">
       <mat-form-field>
         <mat-label>Description du colis</mat-label>
         <textarea cdkTextareaAutosize matInput formControlName="description" placeholder="description du contenu du colis" required></textarea>
       </mat-form-field>
     </div>
-    <div class="product-template-creation-form__unit-price">
+    <div class="product-form__unit-price">
       <mat-form-field>
         <mat-label>Prix de vente (€TTC/kg)</mat-label>
         <input type="number" matInput formControlName="unitPrice" required>
       </mat-form-field>
     </div>
-    <div class="product-template-creation-form__net-weight">
+    <div class="product-form__net-weight">
       <mat-form-field>
         <mat-label>Quantité de viande dans le colis (kg)</mat-label>
         <input type="number" matInput formControlName="netWeight" required>
       </mat-form-field>
     </div>
-    <div class="product-template-creation-form__photo">
-      <img *ngIf="productTemplate.photo" [src]="productTemplate.photo" class="">
+    <div class="product-form__photo">
+      <img *ngIf="product.photo" [src]="product.photo" class="">
       <br>
       <button type="button" mat-button (click)="fileInput.click()">{{this.photoUrl ? 'Modifiez la photo' : 'Ajoutez une photo'}}</button>
       <input hidden (change)="uploadPhoto()" #fileInput type="file" id="file" accept="image/png, image/jpeg">

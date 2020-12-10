@@ -1,4 +1,3 @@
-import { Animal } from './animal.model';
 import { Farm } from './farm.model';
 
 export class Product {

@@ -24,7 +24,7 @@ import { MatTableModule } from '@angular/material/table';
 import { DeliveryCreationComponent } from './components/delivery-creation/delivery-creation.component';
 import { DeliveryComponent } from './components/delivery/delivery.component';
 import { ProductTemplatesListComponent } from './components/product-templates-list/product-templates-list.component';
-import { ProductTemplateCreationComponent } from './components/product-template-creation/product-template-creation.component';
+import { ProductComponent } from './components/product/product.component';
 import { MatIconModule } from '@angular/material/icon';
 import { DeliveryBatchComponent } from './components/delivery-batch/delivery-batch.component';
 import { DeliveryOrdersComponent } from './components/delivery-orders/delivery-orders.component';
@@ -36,7 +36,7 @@ import { DeliveryOrdersComponent } from './components/delivery-orders/delivery-o
     SlaughterCreationComponent,
     SlaughtersListComponent,
     DeliveryComponent,
-    ProductTemplateCreationComponent,
+    ProductComponent,
     ProductTemplatesListComponent,
     DeliveryBatchComponent,
     DeliveryOrdersComponent,

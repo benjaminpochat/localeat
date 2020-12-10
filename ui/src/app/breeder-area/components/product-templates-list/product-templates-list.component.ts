@@ -1,22 +1,23 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProductTemplate } from 'src/app/commons/models/product-template.model';
-import { ProductTemplateService } from '../../services/product-template.service';
-import { ProductTemplateCreationComponent } from '../product-template-creation/product-template-creation.component';
+import { ProductService } from '../../services/product.service';
+import { ProductComponent } from '../product/product.component';
 
 @Component({
   selector: 'app-products-list',
   templateUrl: './product-templates-list.component.html',
   styleUrls: ['./product-templates-list.component.css']
 })
+// TODO : This component is not used aynmore. To be deleted is really obsolete.
 export class ProductTemplatesListComponent implements OnInit {
 
   productTemplates: ProductTemplate[];
 
-  @ViewChild(ProductTemplateCreationComponent)
-  productTemplateCreationComponent: ProductTemplateCreationComponent;
+  @ViewChild(ProductComponent)
+  productComponent: ProductComponent;
 
   constructor(
-    private productTemplateService: ProductTemplateService
+    private productService: ProductService
   ) { }
 
   ngOnInit(): void {
@@ -24,10 +25,10 @@ export class ProductTemplatesListComponent implements OnInit {
   }
 
   showProductTemplateCreation() {
-    this.productTemplateCreationComponent.productTemplate = new ProductTemplate();
+    this.productComponent.product = new ProductTemplate();
   }
 
   refreshProductTemplatesList() {
-    this.productTemplateService.getProductTemplates().subscribe(productTemplates => this.productTemplates = productTemplates);
+    this.productService.getProductTemplates().subscribe(productTemplates => this.productTemplates = productTemplates);
   }
 }

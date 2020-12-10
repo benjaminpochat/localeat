@@ -1,13 +1,15 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input } from '@angular/core';
 import { Slaughter } from 'src/app/commons/models/slaughter.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Delivery } from 'src/app/commons/models/delivery.model';
 import { DeliveryAddress } from 'src/app/commons/models/delivery-address.model';
 import { Product } from 'src/app/commons/models/product.model';
 import { SlaughterService } from '../../services/slaughter.service';
-import { ProductTemplateService } from '../../services/product-template.service';
+import { ProductService } from '../../services/product.service';
 import { Batch } from 'src/app/commons/models/batch.model';
 import { ProductTemplate } from 'src/app/commons/models/product-template.model';
+import { ProductComponent } from '../product/product.component';
+import { ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-delivery-creation',
@@ -15,6 +17,9 @@ import { ProductTemplate } from 'src/app/commons/models/product-template.model';
   styleUrls: ['./delivery-creation.component.css']
 })
 export class DeliveryCreationComponent implements OnInit {
+
+  @ViewChild(ProductComponent)
+  productComponent: ProductComponent;
 
   slaughter: Slaughter;
   delivery: Delivery;
@@ -26,13 +31,13 @@ export class DeliveryCreationComponent implements OnInit {
 
   constructor(
     private slaughterService: SlaughterService,
-    private productTemplateService: ProductTemplateService,
+    private productService: ProductService,
     private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
   }
 
-  initForms() {
+  initForms(): void {
     this.deliveryDateForm = this.formBuilder.group({
       deliveryDate: [this.slaughter.cuttingDate, Validators.required],
       deliveryStartHour: ['18:00', Validators.required],
@@ -48,7 +53,7 @@ export class DeliveryCreationComponent implements OnInit {
     });
   }
 
-  save(){
+  save(): void{
     if ( this.deliveryDateForm.valid && this.deliveryPlaceForm.valid && this.batchesForm.valid ){
       this.delivery.deliveryStart = new Date(this.deliveryDateForm.value.deliveryDate + 'T' + this.deliveryDateForm.value.deliveryStartHour + 'Z');
       this.delivery.deliveryEnd = new Date(this.deliveryDateForm.value.deliveryDate + 'T' + this.deliveryDateForm.value.deliveryEndHour + 'Z');
@@ -68,16 +73,16 @@ export class DeliveryCreationComponent implements OnInit {
     }
   }
 
-  cancel(){
+  cancel(): void{
     this.resetComponent();
   }
 
-  initDelivery(slaughter: Slaughter, createDeliveryEvent: EventEmitter<Slaughter>) {
+  initDelivery(slaughter: Slaughter, createDeliveryEvent: EventEmitter<Slaughter>): void {
     this.slaughter = slaughter;
     this.delivery = new Delivery();
     this.delivery.availableBatches = [];
     this.delivery.orders = [];
-    this.productTemplateService.getProductTemplates().subscribe(productTemplates => {
+    this.productService.getProductTemplates().subscribe(productTemplates => {
       productTemplates.forEach(productTemplate => {
         this.addBatch(productTemplate);
       });
@@ -85,7 +90,7 @@ export class DeliveryCreationComponent implements OnInit {
     this.createDeliveryEvent = createDeliveryEvent;
   }
 
-  private addBatch(productTemplate: ProductTemplate) {
+  addBatch(productTemplate: ProductTemplate): void{
     const product = new Product();
     product.name = productTemplate.name;
     product.unitPrice = productTemplate.unitPrice;
@@ -99,10 +104,18 @@ export class DeliveryCreationComponent implements OnInit {
     this.delivery.availableBatches.push(batch);
   }
 
-  private resetComponent() {
+  private resetComponent(): void {
     this.delivery = null;
     this.deliveryDateForm.reset();
     this.deliveryPlaceForm.reset();
     this.batchesForm.reset();
+  }
+
+  createProduct(): void {
+    this.productComponent.setProduct(new ProductTemplate());
+  }
+
+  changeProduct(product: Product): void {
+    this.productComponent.setProduct(product);
   }
 }

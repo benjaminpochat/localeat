@@ -3,15 +3,15 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
 
-import { ProductTemplateCreationComponent } from './product-template-creation.component';
+import { ProductComponent } from './product.component';
 
-describe('ProductTemplateCreationComponent', () => {
-  let component: ProductTemplateCreationComponent;
-  let fixture: ComponentFixture<ProductTemplateCreationComponent>;
+describe('ProductComponent', () => {
+  let component: ProductComponent;
+  let fixture: ComponentFixture<ProductComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProductTemplateCreationComponent ],
+      declarations: [ ProductComponent ],
       imports: [ HttpClientTestingModule ],
       providers: [ FormBuilder ]
     })
@@ -19,7 +19,7 @@ describe('ProductTemplateCreationComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProductTemplateCreationComponent);
+    fixture = TestBed.createComponent(ProductComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

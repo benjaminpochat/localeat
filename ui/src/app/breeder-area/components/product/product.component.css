@@ -1,4 +1,4 @@
-.product-template-creation-form {
+.product-form {
   display: block;
   position: absolute;
   z-index: 2;
@@ -9,22 +9,22 @@
   height: 100%;
 }
 
-.product-template-creation-form__title {
+.product-form__title {
   font-family: 'Acme';
   font-size: 1rem;
   background-color: darkolivegreen;
   color: white;
  }
 
-.product-template-creation-form__photo > img {
+.product-form__photo > img {
   max-height: 15rem;
   max-width: 100%
 }
 
-.product-template-creation-form__name > *,
-.product-template-creation-form__description > * ,
-.product-template-creation-form__unit-price,
-.product-template-creation-form__net-weight > * {
+.product-form__name > *,
+.product-form__description > * ,
+.product-form__unit-price,
+.product-form__net-weight > * {
   display: inline-block;
   margin: 2rem;
   width: 90%;

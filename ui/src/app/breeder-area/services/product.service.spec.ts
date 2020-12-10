@@ -1,10 +1,10 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
-import { ProductTemplateService } from './product-template.service';
+import { ProductService } from './product.service';
 
-describe('ProductTemplateService', () => {
-  let service: ProductTemplateService;
+describe('ProductService', () => {
+  let service: ProductService;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
@@ -12,7 +12,7 @@ describe('ProductTemplateService', () => {
       imports: [HttpClientTestingModule]
     });
     httpMock = TestBed.inject(HttpTestingController);
-    service = TestBed.inject(ProductTemplateService);
+    service = TestBed.inject(ProductService);
   });
 
   it('should be created', () => {

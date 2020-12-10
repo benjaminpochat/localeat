@@ -1,4 +1,4 @@
-<div *ngIf="delivery" class="delivery-creation-form">
+<div *ngIf="delivery && !productComponent.product" class="delivery-creation-form">
   <div class="delivery-creation-form__title">
     <div class="delivery-creation-form__title-text">Votre livraison de viande</div>
     <div class="delivery-creation-form__subtitle">Animal abattu le {{slaughter.slaughterDate | date: 'shortDate'}}</div>
@@ -59,9 +59,13 @@
     <mat-step [stepControl]="batchesForm">
       <form [formGroup]="batchesForm">
         <ng-template matStepLabel>Définissez les colis mis en vente</ng-template>
-        <app-delivery-batch *ngFor="let batch of delivery.availableBatches" [batch]="batch" class="delivery-creation-form__batches"></app-delivery-batch>
+        <app-delivery-batch *ngFor="let batch of delivery.availableBatches"
+          [batch]="batch"
+          (changeProductEvent)="changeProduct($event)"
+          class="delivery-creation-form__batches"></app-delivery-batch>
         <div>
           <button mat-button matStepperNext>Suivant</button>
+          <button mat-button (click)="createProduct()">Créer un nouveau colis</button>
         </div>
       </form>
     </mat-step>
@@ -72,5 +76,5 @@
   <button mat-button (click)="save()">Valider</button>
   <button mat-button (click)='cancel()'>Annuler</button>
   <div class='user-alert'>{{userAlert}}</div>
-
 </div>
+<app-product (saveProductTemplateEvent)=addBatch($event)></app-product>

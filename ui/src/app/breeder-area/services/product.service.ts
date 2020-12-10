@@ -8,15 +8,19 @@ import { UrlService } from 'src/app/commons/services/url.service';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductTemplateService {
+export class ProductService {
 
   constructor(
     private http: HttpClient,
     private urlService: UrlService
   ) { }
 
+  saveProduct(product: Product): Observable<Product> {
+    return this.http.post<Product>(this.urlService.getAuthenticatedUrl(['products']), product);
+  }
+
   saveProductTemplate(product: ProductTemplate): Observable<ProductTemplate> {
-    return this.http.post<Product>(this.urlService.getAuthenticatedUrl(['productTemplates']), product);
+    return this.http.post<ProductTemplate>(this.urlService.getAuthenticatedUrl(['productTemplates']), product);
   }
 
   public getProductTemplates(): Observable<ProductTemplate[]> {
