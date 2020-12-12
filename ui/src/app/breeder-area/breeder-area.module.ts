@@ -28,6 +28,7 @@ import { ProductComponent } from './components/product/product.component';
 import { MatIconModule } from '@angular/material/icon';
 import { DeliveryBatchComponent } from './components/delivery-batch/delivery-batch.component';
 import { DeliveryOrdersComponent } from './components/delivery-orders/delivery-orders.component';
+import { PieChartComponent } from './components/piechart/piechart.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { DeliveryOrdersComponent } from './components/delivery-orders/delivery-o
     ProductTemplatesListComponent,
     DeliveryBatchComponent,
     DeliveryOrdersComponent,
+    PieChartComponent
   ],
   imports: [
     CommonModule,

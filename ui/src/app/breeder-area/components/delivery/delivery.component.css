@@ -1,4 +1,4 @@
-.sale-card {
+.delivery {
   margin: 5px;
   background-color: floralwhite;
   border-style: solid;
@@ -6,6 +6,21 @@
   border-color: darkolivegreen
 }
 
+.delivery--details {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.delivery--details--orders,
+.delivery--details--quantities {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
 table {
   width: 100%;
 }
+

@@ -45,6 +45,8 @@ export class SlaughterCreationComponent implements OnInit {
       this.slaughter.slaughterDate = this.slaughterForm.value.slaughterDate;
       this.slaughter.cuttingDate = this.slaughterForm.value.cuttingDate;
       this.slaughter.animal.liveWeight = this.slaughterForm.value.liveWeight;
+      //source rendement moyen : https://www.la-viande.fr/economie-metiers/economie/chiffres-cles-viande-bovine/rendement-type-vache-allaitante
+      this.slaughter.animal.meatWeight = this.slaughterForm.value.liveWeight * 0.36;
       this.slaughterService.saveSlaughter(this.slaughter).subscribe(slaughter => {
         this.createSlaughterEvent.emit(slaughter);
         this.resetComponenent();

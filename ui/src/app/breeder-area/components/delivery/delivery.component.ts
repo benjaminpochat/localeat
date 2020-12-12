@@ -2,8 +2,9 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Order } from 'src/app/commons/models/order.model';
 import { Slaughter } from 'src/app/commons/models/slaughter.model';
 import { DeliveryService } from '../../services/delivery.service';
-import { DeliveryCreationComponent } from '../delivery-creation/delivery-creation.component';
 import { DeliveryOrdersComponent } from '../delivery-orders/delivery-orders.component';
+import { PieChartComponent } from '../piechart/piechart.component';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-delivery',
@@ -20,10 +21,16 @@ export class DeliveryComponent implements OnInit {
   @ViewChild(DeliveryOrdersComponent)
   deliveryOrdersComponent: DeliveryOrdersComponent;
 
+  @ViewChild(PieChartComponent)
+  pieChartComponent: PieChartComponent;
+
+  backgroundImage: string;
+
   netWeightSold: number;
 
   constructor(
-    private deliveryService: DeliveryService
+    private deliveryService: DeliveryService,
+    private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit(): void {
@@ -37,6 +44,8 @@ export class DeliveryComponent implements OnInit {
           });
           const netWeightSoldCalculator = (accumulator: number, order: Order): number => accumulator + order.totalNetWeight;
           this.netWeightSold = this.slaughter.delivery.orders.reduce(netWeightSoldCalculator, 0);
+          this.pieChartComponent.setRadius(this.slaughter.animal.meatWeight > 0  && this.netWeightSold > 0 ? (360 * this.netWeightSold / this.slaughter.animal.meatWeight) : 0);
+
         });
       }
   }
