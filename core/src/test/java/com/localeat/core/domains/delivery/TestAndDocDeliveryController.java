@@ -1,5 +1,6 @@
 package com.localeat.core.domains.delivery;
 
+import com.localeat.core.domains.order.Order;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,6 +18,7 @@ import org.springframework.web.context.WebApplicationContext;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -240,4 +242,25 @@ public class TestAndDocDeliveryController {
                         preprocessResponse(prettyPrint())));
     }
 
+    @Test
+    public void saveDeliveryOrder() throws Exception {
+        // given
+        String requestBody =
+                "{\n" +
+                "  \"id\" : 1,\n" +
+                "  \"status\" : \"PAYED\""+
+                "  }";
+
+        // when, then
+        this.mockMvc
+                .perform(post("/accounts/1/deliveries/1/orders")
+                        .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(requestBody))
+                .andExpect(status().isOk())
+                .andDo(document(
+                        "get-orders-by-delivery-with-unauthorized-account",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint())));
+    }
 }

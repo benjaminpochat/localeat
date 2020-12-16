@@ -36,4 +36,8 @@ export class DeliveryService {
     order.totalNetWeight = order.orderedItems.reduce(reducer, 0);
   }
 
+  public saveOrder(order: Order): Observable<Order> {
+    return this.http.post<Order>(this.urlService.getAuthenticatedUrl(['deliveries', order.delivery.id.toString(), 'orders']), order);
+  }
+
 }

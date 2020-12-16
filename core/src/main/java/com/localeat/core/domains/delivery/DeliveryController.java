@@ -5,13 +5,13 @@ import com.localeat.core.domains.order.*;
 import com.localeat.core.domains.product.Batch;
 import com.localeat.core.domains.product.BatchRepository;
 import com.localeat.core.domains.security.Account;
+import com.localeat.core.domains.slaughter.Slaughter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -43,6 +43,17 @@ public class DeliveryController {
 
     @GetMapping(path = "/accounts/{account}/deliveries/{delivery}/orders")
     public Iterable<Order> getDeliveryOrders(@PathVariable Account account, @PathVariable Delivery delivery){
+        checkDeliveryAccount(account, delivery);
+        return orderRepository.getOrdersByDelivery(delivery);
+    }
+
+    @PostMapping(path = "/accounts/{account}/deliveries/{delivery}/orders")
+    public Order saveDeliveryOrder(@PathVariable Account account, @PathVariable Delivery delivery, @Valid @RequestBody Order order){
+        checkDeliveryAccount(account, delivery);
+        return orderRepository.save(order);
+    }
+
+    private void checkDeliveryAccount(@PathVariable Account account, @PathVariable Delivery delivery) {
         Breeder breeder = (Breeder) account.getActor();
         Iterable<Delivery> authorizedDeliveries = deliveryRepository.findByFarm(breeder.getFarm());
         if (StreamSupport.stream(authorizedDeliveries.spliterator(), false).noneMatch(delivery::equals)) {
@@ -50,8 +61,8 @@ public class DeliveryController {
                     HttpStatus.UNAUTHORIZED,
                     String.format("account #{} not authorized to access delivery #{}", new Object[]{account.getId(), delivery.getId()}));
         }
-        return orderRepository.getOrdersByDelivery(delivery);
     }
+
 
     public void updateQuantitySoldInBatches(Delivery delivery) {
         StreamSupport.stream(orderItemRepository.findByDelivery(delivery).spliterator(), false)

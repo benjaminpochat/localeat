@@ -6,6 +6,7 @@ import { Type } from '@angular/core';
 import { OrderComponent } from './order.component';
 import { environment } from 'src/environments/environment';
 import { UrlService } from 'src/app/commons/services/url.service';
+import { OrderStatus } from 'src/app/commons/models/order-status.model';
 
 describe('OrderComponent', () => {
   let orderComponent: OrderComponent;
@@ -36,6 +37,7 @@ describe('OrderComponent', () => {
       orderedItems: [],
       totalNetWeight: 0,
       totalPrice: 0,
+      status: OrderStatus.BOOKED,
       delivery: {
         id: 1,
         deliveryAddress: {

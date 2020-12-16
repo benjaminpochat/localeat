@@ -30,6 +30,10 @@
   width: 100%;
 }
 
+.delivery-orders__list-body {
+  padding: 0.5rem;
+}
+
 .delivery-orders__list-header {
   color: gray;
   font-size: small;

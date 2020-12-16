@@ -13,15 +13,15 @@
     <div class="delivery-orders__list-body__order-summary">{{order.id}}</div>
     <div class="delivery-orders__list-body__order-summary">{{order.customer.name}} {{order.customer.firstName}}</div>
     <div class="delivery-orders__list-body__order-summary">{{order.totalNetWeight}} kg / {{order.totalPrice}} €</div>
-    <div class="delivery-orders__list-body__order-summary">réservé</div>
+    <div class="delivery-orders__list-body__order-summary">{{getLabelOrderStatus(order.status)}}</div>
     <div class="delivery-orders__list-body__order-details">
       <div *ngFor="let item of order.orderedItems">
         {{item.batch.product.name}} x{{item.quantity}}
       </div>
     </div>
     <div class="delivery-orders__list-body__order-actions">
-      <button mat-flat-button color="primary">Valider le paiement</button>
-      <!--button mat-flat-button color="primary">Valider la livraison</button-->
+      <button *ngIf="isOrderBooked(order)" (click)="setOrderPayed(order)" mat-flat-button color="primary">Valider le paiement</button>
+      <button *ngIf="isOrderPayed(order)" (click)="setOrderDelivered(order)" mat-flat-button color="primary">Valider la livraison</button>
   </div>
 </div>
   <button mat-button (click)="close()">Retour à l'accueil</button>

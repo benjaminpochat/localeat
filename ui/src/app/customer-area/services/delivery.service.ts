@@ -2,7 +2,6 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { Delivery } from 'src/app/commons/models/delivery.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Animal } from 'src/app/commons/models/animal.model';
 
 @Injectable({
   providedIn: 'root'
