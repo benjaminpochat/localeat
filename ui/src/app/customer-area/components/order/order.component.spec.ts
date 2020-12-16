@@ -1,4 +1,5 @@
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Type } from '@angular/core';
 
@@ -14,7 +15,7 @@ describe('OrderComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ OrderComponent ],
-      imports: [HttpClientTestingModule]
+      imports: [HttpClientTestingModule, MatSnackBarModule]
     })
     .compileComponents();
   }));
