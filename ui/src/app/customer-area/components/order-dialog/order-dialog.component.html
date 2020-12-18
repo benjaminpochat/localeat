@@ -150,29 +150,43 @@
         </form>
       </mat-step>
 
-      <mat-step [stepControl]="paymentForm" [editable]="!orderStored">
-        <form [formGroup]="paymentForm">
-          <ng-template matStepLabel>{{paymentStepLabel}}</ng-template>
+      <mat-step [stepControl]="confirmationForm" [editable]="!orderStored">
+        <form [formGroup]="confirmationForm">
+          <ng-template matStepLabel>{{confirmationStepLabel}}</ng-template>
           <div>
-            <input matInput formControlName="payed" hidden="true">
+            <div>
+              En validant ma commande je m'engage à :
+              <ol>
+                <li>procéder au paiement de ma commande par chèque ou en espèce auprès du vendeur, au plus tard 48h après ma commande, et 48h avant la livraison</li>
+                <li>venir chercher la marchandise au rendez-vous fixé  :
+                  <ul>
+                    <li>le {{order.delivery.deliveryStart | date: 'shortDate'}} entre {{order.delivery.deliveryStart | date: 'shortTime'}} et {{order.delivery.deliveryEnd | date: 'shortTime'}}</li>
+                    <li>à l'adresse suivante :  <br>
+                      <div *ngIf="order.delivery.deliveryAddress.addressLine1">{{order.delivery.deliveryAddress.addressLine1}}</div>
+                      <div *ngIf="order.delivery.deliveryAddress.addressLine2">{{order.delivery.deliveryAddress.addressLine2}}</div>
+                      <div *ngIf="order.delivery.deliveryAddress.addressLine3">{{order.delivery.deliveryAddress.addressLine3}}</div>
+                      <div *ngIf="order.delivery.deliveryAddress.addressLine4">{{order.delivery.deliveryAddress.addressLine4}}</div>
+                      <div *ngIf="order.delivery.deliveryAddress.zipCode">{{order.delivery.deliveryAddress.zipCode}}</div>
+                      <div *ngIf="order.delivery.deliveryAddress.city">{{order.delivery.deliveryAddress.city}}</div>
+                    </li>
+                  </ul>
+                </li>
+                <li>respecter la chaîne du froid dès la réception de la marchandise</li>
+              </ol>
+            </div>
+            <mat-checkbox [disabled]="orderStored" [checked]="understood" (change)="setUnderstood($event.checked)">J'ai compris</mat-checkbox>
           </div>
           <div>
+            <input matInput formControlName="confirmed" hidden="true">
             <button
               mat-flat-button
               color="accent"
-              (click)="pay(); stepper.next();">
-                Accéder au paiement
+              [disabled]="!understood || orderStored"
+              (click)="confirmOrder(); stepper.next();">
+                {{confirmationButtonLabel}}
             </button>
           </div>
         </form>
-      </mat-step>
-
-      <mat-step>
-        <ng-template matStepLabel>Vos références</ng-template>
-        <button
-          mat-flat-button>
-          Télécharger la facture
-        </button>
       </mat-step>
 
     </mat-vertical-stepper>

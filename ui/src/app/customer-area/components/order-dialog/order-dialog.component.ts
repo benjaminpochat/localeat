@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject, Output } from '@angular/core';
 import { Authentication } from 'src/app/commons/models/authentication.model';
 import { AuthenticationService } from 'src/app/commons/services/authentication.service';
-import { FormGroup, FormBuilder, Validators, ValidatorFn, ValidationErrors, AbstractControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { MatRadioChange } from '@angular/material/radio';
 import { Actor } from 'src/app/commons/models/actor.model';
 import { AccountService } from 'src/app/commons/services/account.service';
@@ -22,18 +22,25 @@ export class OrderDialogComponent implements OnInit {
 
   @Output()
   createOrderEvent = new EventEmitter<Order>();
+
   authentication: Authentication;
+
   productSelectionForm: FormGroup;
   authenticationForm: FormGroup;
-  paymentForm: FormGroup;
-  existingAccount = true;
-  orderStored = false;
+  confirmationForm: FormGroup;
+
   productSelectionStepLabel: string;
   authenticationStepLabel: string;
-  paymentStepLabel: string;
+  confirmationStepLabel: string;
   productSelectionButtonLabel: string;
+  confirmationButtonLabel: string;
+
   authenticationFailureMessage: string;
   accountCreationFailureMessage: string;
+
+  existingAccount = true;
+  understood = false;
+  orderStored = false;
   authenticationSubmitted = false;
 
   constructor(
@@ -65,7 +72,8 @@ export class OrderDialogComponent implements OnInit {
   private initLabels() {
     this.productSelectionStepLabel = 'Sélectionnez la quantité de viande commandée (en kg)';
     this.productSelectionButtonLabel = 'Je valide la quantité';
-    this.paymentStepLabel = 'Procédez au paiement';
+    this.confirmationStepLabel = 'Validez votre commande';
+    this.confirmationButtonLabel = 'Je valide ma commande';
   }
 
   private initAuthentication() {
@@ -97,8 +105,8 @@ export class OrderDialogComponent implements OnInit {
       creatingPasswordConfirmed: ['', Validators.required]
     }, {validators: this.passwordConfirmedValidator});
     this.productSelectionForm = this.formBuilder.group({});
-    this.paymentForm = this.formBuilder.group({
-      payed: [false, Validators.requiredTrue]
+    this.confirmationForm = this.formBuilder.group({
+      confirmed: [false, Validators.requiredTrue]
     });
   }
 
@@ -189,18 +197,30 @@ export class OrderDialogComponent implements OnInit {
     return result;
   }
 
-  pay(){
-    //TODO : remplacer ça par un vrai paiement
-    this.paymentForm.patchValue({payed : true});
+  setUnderstood(understood: boolean ): void{
+    this.understood = understood;
+  }
+
+  confirmOrder(){
+    this.confirmationForm.patchValue({payed : true});
     this.order.orderedItems = this.order.orderedItems.filter(orderedItem => orderedItem.quantity > 0);
     this.orderService.saveOrder(this.order).subscribe((order: Order) => {
-      this.paymentStepLabel = 'C\'est payé';
+      this.confirmationStepLabel = 'C\'est validé';
       this.orderStored = true;
       this.createOrderEvent.emit(this.order);
     });
+    this.confirmationButtonLabel = 'La commande est réservée';
   }
 
   close(){
+    this.resetComponentProperties();
+  }
+
+  private resetComponentProperties() {
     this.order = null;
+    this.orderStored = false;
+    this.existingAccount = true;
+    this.authenticationSubmitted = false;
+    this.understood = false;
   }
 }
