@@ -10,6 +10,7 @@ import { OrderService } from '../../services/order.service';
 import { Order } from 'src/app/commons/models/order.model';
 import { OrderItem } from 'src/app/commons/models/order-item.model';
 import { EventEmitter } from '@angular/core';
+import { OrderStatus } from 'src/app/commons/models/order-status.model';
 
 @Component({
   selector: 'app-order-dialog',
@@ -58,6 +59,7 @@ export class OrderDialogComponent implements OnInit {
 
   public initOrder(delivery: Delivery) {
     this.order = new Order();
+    this.order.status = OrderStatus.BOOKED;
     this.order.orderedItems = delivery.availableBatches
       .map(batch => {
         const orderItem = new OrderItem();
