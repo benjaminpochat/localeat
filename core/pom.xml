@@ -15,11 +15,12 @@
         <spring-security-version>5.2.4.RELEASE</spring-security-version>
         <spring-restdocs-asciidoctor-version>2.0.4.RELEASE</spring-restdocs-asciidoctor-version>
         <jaxb-version>2.3.0</jaxb-version>
+        <javamail-version>1.5.0-b01</javamail-version>
         <postgre-version>42.2.5</postgre-version>
         <h2.version>1.4.200</h2.version>
         <slf4j-version>1.7.26</slf4j-version>
         <log4j-version>1.2.17</log4j-version>
-        <junit-version>5.3.2</junit-version>
+        <junit-version>5.6.3</junit-version>
         <assertj-version>3.14.0</assertj-version>
         <mockito-version>3.1.0</mockito-version>
         <compiler-version>3.8.0</compiler-version>
@@ -60,6 +61,11 @@
         <dependency>
             <groupId>javax.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
         </dependency>
 
         <dependency>
@@ -244,6 +250,13 @@
                 <artifactId>jaxb-api</artifactId>
                 <version>${jaxb-version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>javax.mail</groupId>
+                <artifactId>mail</artifactId>
+                <version>${javamail-version}</version>
+            </dependency>
+
 
             <dependency>
                 <groupId>org.postgresql</groupId>

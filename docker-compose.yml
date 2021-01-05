@@ -25,6 +25,8 @@ services:
       - localeat_datasource_url=jdbc:postgresql://localhost:5432/localeat
       - localeat_datasource_username=localeat
       - localeat_datasource_password=localeat
+      - localeat_smtp_username=la.viande.en.direct@gmail.com
+      - localeat_smtp_username=localeat
 
   ui:
     build:

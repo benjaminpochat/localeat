@@ -1,4 +1,4 @@
-package com.localeat.commons;
+package com.localeat.core.commons;
 
 import java.util.ArrayList;
 import java.util.List;

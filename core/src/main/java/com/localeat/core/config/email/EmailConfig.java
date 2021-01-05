@@ -1,16 +1,28 @@
 package com.localeat.core.config.email;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
 
 import java.util.Properties;
 
-@ConfigurationProperties("localeat.smtp")
-public class EmailProperties {
+@Configuration
+@ConfigurationProperties(prefix = "localeat.smtp")
+public class EmailConfig {
     private boolean authentication;
     private boolean startTls;
     private String host;
     private String port;
     private String sslTrust;
+    private String userName;
+    private String password;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
 
     public boolean isAuthentication() {
         return authentication;
@@ -50,6 +62,14 @@ public class EmailProperties {
 
     public void setSslTrust(String sslTrust) {
         this.sslTrust = sslTrust;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Properties getProperties() {

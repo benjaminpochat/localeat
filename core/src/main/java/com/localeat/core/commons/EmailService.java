@@ -1,19 +1,17 @@
 package com.localeat.core.commons;
 
 import com.localeat.core.config.email.EmailConfig;
-import com.localeat.core.config.security.LocalEatRSAKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-
+import org.springframework.stereotype.Service;
 import javax.mail.*;
 import javax.mail.internet.MimeMessage;
 
-@Controller
-public class EmailController {
+@Service
+public class EmailService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(EmailController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(EmailService.class);
 
     @Autowired
     EmailConfig emailConfig;

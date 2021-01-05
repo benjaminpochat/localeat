@@ -1,6 +1,6 @@
 package com.localeat.core.domains.slaughter;
 
-import com.localeat.commons.GenericBuilder;
+import com.localeat.core.commons.GenericBuilder;
 import com.localeat.core.domains.farm.Farm;
 import com.localeat.core.domains.farm.FarmRepository;
 import org.junit.jupiter.api.BeforeEach;

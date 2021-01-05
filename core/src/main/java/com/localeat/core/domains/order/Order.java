@@ -7,6 +7,9 @@ import com.localeat.core.domains.delivery.Delivery;
 import javax.persistence.*;
 import java.util.Set;
 
+import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.FetchType.EAGER;
+
 @Entity
 @Table(name = "orders")
 public class Order {
@@ -20,7 +23,7 @@ public class Order {
     @ManyToOne
     private Customer customer;
 
-    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "order")
+    @OneToMany(fetch = EAGER, cascade = {ALL}, mappedBy = "order")
     @JsonManagedReference
     private Set<OrderItem> orderedItems;
 
