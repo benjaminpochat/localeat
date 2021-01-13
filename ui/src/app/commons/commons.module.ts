@@ -1,4 +1,5 @@
 import { AuthenticationComponent } from './components/authentication/authentication.component';
+import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule  } from '@angular/material/dialog';
@@ -15,14 +16,17 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SideMenuComponent } from './components/side-menu/side-menu.component';
+import { PasswordRenewalComponent } from './components/password-renewal/password-renewal.component';
 
 @NgModule({
   declarations: [
     AuthenticationComponent,
     MainMenuComponent,
-    SideMenuComponent
+    SideMenuComponent,
+    PasswordRenewalComponent,
   ],
   imports: [
+    CommonModule,
     HttpClientModule,
     FormsModule,
     MatButtonModule,

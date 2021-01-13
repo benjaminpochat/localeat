@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
@@ -51,6 +52,14 @@ public class AccountController {
             return account;
         }
         return null;
+    }
+
+    @PostMapping(path = "/accounts/{account}/passwords")
+    @Transactional
+    public void savePassword(@PathVariable Account account, @Valid @RequestBody String newPassword) {
+        UserDetailsManager userDetailsManager = new JdbcUserDetailsManager(dataSource);
+        UserDetails user = userDetailsManager.loadUserByUsername(account.getUsername());
+        userDetailsManager.changePassword(user.getPassword(), passwordEncoder.encode(newPassword));
     }
 
     private void isAccountContextValid(@RequestBody @Valid AccountContext userContext) {

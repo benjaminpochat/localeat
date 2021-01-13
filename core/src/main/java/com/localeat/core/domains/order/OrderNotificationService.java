@@ -7,14 +7,19 @@ import com.localeat.core.domains.product.Batch;
 import com.localeat.core.domains.product.BatchRepository;
 import com.localeat.core.domains.slaughter.Slaughter;
 import com.localeat.core.domains.slaughter.SlaughterRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @Service
 public class OrderNotificationService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(OrderNotificationService.class);
 
     @Autowired
     private BatchRepository batchRepository;
@@ -57,6 +62,10 @@ public class OrderNotificationService {
     }
 
     void sendMail(String recipient, String subject, String body) {
-        emailService.sendMail(recipient, subject, body);
+        try {
+            emailService.sendMail(recipient, subject, body);
+        } catch (MessagingException messagingException) {
+            LOGGER.error("An exception occured while sending an email.", messagingException);
+        }
     }
 }

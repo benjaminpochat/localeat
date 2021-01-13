@@ -11,7 +11,8 @@ import { Authentication } from 'src/app/commons/models/authentication.model';
 //TODO : des tests unitaires !
 export class AuthenticationService {
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient) { }
 
   authentication = new BehaviorSubject(this.getAuthenticationFromCookie());
   currentAuthentication = this.authentication.asObservable();
@@ -25,6 +26,21 @@ export class AuthenticationService {
       withCredentials : true
     };
     const response = this.http.get(environment.localeatCoreUrl + '/authentication', httpOptions);
+    response.subscribe(() => this.authentication.next(this.getAuthenticationFromCookie()));
+    return response;
+  }
+
+  public refreshAuthenticationFromBackend(token: string): Observable<string> {
+    const authentication: Authentication = decodeJwt(token);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization : 'Bearer ' + token
+      }),
+      responseType : 'text' as 'text',
+      withCredentials : true
+    };
+    const url = environment.localeatCoreUrl + '/accounts/' + authentication.account.id + '/authentication';
+    const response = this.http.get(url, httpOptions);
     response.subscribe(() => this.authentication.next(this.getAuthenticationFromCookie()));
     return response;
   }
@@ -69,5 +85,9 @@ export class AuthenticationService {
       return decodeJwt(encodedJwtValue);
     }
     return undefined;
+  }
+
+  public renewPassword(email: string, destinationRoute: string): Observable<any> {
+    return this.http.get(environment.localeatCoreUrl + '/passwordRenewal/' + email + destinationRoute);
   }
 }

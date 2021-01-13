@@ -11,4 +11,5 @@ public interface AccountRepository extends CrudRepository<Account, Long> {
             "INNER JOIN a.actor act " +
             "WHERE act.email = :email")
     Iterable<Account> findByEmail(@Param("email") String email);
+
 }

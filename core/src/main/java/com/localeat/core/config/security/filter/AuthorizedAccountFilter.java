@@ -1,10 +1,9 @@
-package com.localeat.core.config.security;
+package com.localeat.core.config.security.filter;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.filter.OncePerRequestFilter;
-import org.springframework.web.server.ResponseStatusException;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -16,7 +15,7 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-class AuthorizedAccountFilter extends OncePerRequestFilter {
+public class AuthorizedAccountFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String accountIdInUri = getAccountIdInUri(request);

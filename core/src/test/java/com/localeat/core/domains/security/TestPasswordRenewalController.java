@@ -2,16 +2,18 @@ package com.localeat.core.domains.security;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.jdbc.Sql;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@EnableConfigurationProperties
+@Profile("test")
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, args = "--localeat.smtp.disableEmailNotifications=true")
 @Sql(value = {
         "/sql/create/com/localeat/domains/security/schema.sql",
         "/sql/create/com/localeat/domains/security/security_test_data.sql",
@@ -30,13 +32,8 @@ public class TestPasswordRenewalController {
 
     @Test
     public void renewPassword_should_return_401_if_email_not_known(){
-        // given
-        HttpHeaders headers = new HttpHeaders();
-        headers.add(HttpHeaders.CONTENT_TYPE, "application/json");
-        HttpEntity request = new HttpEntity(null, headers);
-
         // when
-        ResponseEntity<String> response = restTemplate.postForEntity("/passwordRenewal/bob.marcel@gmail.com", request, String.class);
+        ResponseEntity<String> response = restTemplate.getForEntity("/passwordRenewal/bob.marcel@gmail.com/customer-area", String.class);
 
         // then
         assertThat(response.getStatusCodeValue()).isEqualTo(403);
@@ -45,17 +42,10 @@ public class TestPasswordRenewalController {
 
     @Test
     public void renewPassword_should_return_200_if_email_known(){
-        // given
-        HttpHeaders headers = new HttpHeaders();
-        headers.add(HttpHeaders.CONTENT_TYPE, "application/json");
-        HttpEntity request = new HttpEntity(null, headers);
-
         // when
-        ResponseEntity<String> response = restTemplate
-                .postForEntity("/passwordRenewal/benjamin@ferme-du-ruisseau.fr", request, String.class);
+        ResponseEntity<String> response = restTemplate.getForEntity("/passwordRenewal/benjamin@ferme-du-ruisseau.fr/customer-area", String.class);
 
         // then
         assertThat(response.getStatusCodeValue()).isEqualTo(200);
-        assertThat(response.getBody()).contains("An email has been sent to benjamin@ferme-du-ruisseau.fr.");
     }
 }

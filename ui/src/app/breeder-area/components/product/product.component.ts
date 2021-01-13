@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Injectable, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProductTemplate } from 'src/app/commons/models/product-template.model';
 import { Product } from 'src/app/commons/models/product.model';

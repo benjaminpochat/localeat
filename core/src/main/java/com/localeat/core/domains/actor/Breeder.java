@@ -2,6 +2,7 @@ package com.localeat.core.domains.actor;
 
 
 import com.localeat.core.domains.farm.Farm;
+import com.localeat.core.domains.security.Role;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -20,5 +21,10 @@ public class Breeder extends Actor {
 
     public void setFarm(Farm farm) {
         this.farm = farm;
+    }
+
+    @Override
+    public Role getRole() {
+        return Role.BREEDER;
     }
 }

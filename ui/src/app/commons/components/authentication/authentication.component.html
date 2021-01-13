@@ -1,7 +1,9 @@
 <div class='authentication-form'>
   <div class='authentication-title'>Viande direct</div>
   <div class='authentication-subtitle'>connexion</div>
-  <mat-card>
+
+  <mat-card *ngIf="!renewPasswordMode">
+    <div *ngIf="authenticationInfoMessage">{{authenticationInfoMessage}}</div>
     <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
       <mat-form-field>
         <input matInput formControlName="email" placeholder="E-mail">
@@ -11,6 +13,18 @@
       </mat-form-field>
       <button type="submit" mat-raised-button color="primary" [disabled]="!loginForm.valid">Connexion</button>
     </form>
-    <div *ngIf="authenticationErrorMessage">{{authenticationErrorMessage}}</div>
+    <button mat-raised-button color="link" (click)="startPasswordRenewal()">J'ai oublié mon mot de passe</button>
   </mat-card>
+
+  <mat-card *ngIf="renewPasswordMode">
+    <div *ngIf="authenticationInfoMessage">{{authenticationInfoMessage}}</div>
+    <form [formGroup]="renewPasswordForm" (ngSubmit)="renewPassword(renewPasswordForm.value)">
+      <mat-form-field>
+        <input matInput formControlName="email" placeholder="E-mail">
+      </mat-form-field>
+      <button type="submit" mat-raised-button color="primary" [disabled]="!renewPasswordForm.valid">Recevoir un mail de renouvellement</button>
+    </form>
+    <button mat-raised-button color="link" (click)="cancelPasswordRenewal()">Abandonner</button>
+  </mat-card>
+
 </div>

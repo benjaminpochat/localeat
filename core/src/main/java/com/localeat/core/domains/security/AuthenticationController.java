@@ -1,69 +1,77 @@
 package com.localeat.core.domains.security;
 
-import com.localeat.core.config.security.LocalEatRSAKey;
-import com.nimbusds.jose.JOSEException;
-import com.nimbusds.jose.JWSAlgorithm;
-import com.nimbusds.jose.JWSHeader;
-import com.nimbusds.jose.JWSSigner;
-import com.nimbusds.jose.crypto.RSASSASigner;
-import com.nimbusds.jwt.JWTClaimsSet;
-import com.nimbusds.jwt.SignedJWT;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.localeat.core.config.security.LoginPasswordSecurityConfig;
+import com.localeat.core.config.security.TokenSecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
-import java.util.stream.Collectors;
+
+import java.time.Duration;
+
+import static com.localeat.core.domains.security.JSONWebTokenService.ONE_HOUR;
 
 @RestController
 public class AuthenticationController {
 
-    private final Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
-
     @Autowired
     AccountRepository accountRepository;
+
+    @Autowired
+    JSONWebTokenService jsonWebTokenService;
 
     private Account getAccount(UserDetails userDetails){
         return accountRepository.getAccountByUsername(userDetails.getUsername());
     }
 
+    /**
+     * The path of this resource is protected in {@link LoginPasswordSecurityConfig}.
+     * It is allowed only if the request has a valid couple login / password.
+     *
+     * It should be accessed when the user logs in for the first time.
+     *
+     * @param response
+     */
     @GetMapping(path = "/authentication")
     public void authenticate(HttpServletResponse response){
         SecurityContext securityContext = SecurityContextHolder.getContext();
         Authentication authentication = securityContext.getAuthentication();
         Account account = getAccount((UserDetails) securityContext.getAuthentication().getPrincipal());
-        String jwt = generateJSONWebToken(authentication, account);
+        String jwt = jsonWebTokenService.generateJSONWebToken(account, authentication, ONE_HOUR);
+        response.addCookie(getJwtCookie(jwt, ONE_HOUR));
+
+    }
+
+    /**
+     * The path of this resource is protected in {@link TokenSecurityConfig}.
+     * It is allowed only if the request has a valid token.
+     *
+     * It should be accessed when the valid token is close to expire,
+     * in order to get a new valid token with the expiration postponed.
+     *
+     * @param response
+     */
+    @GetMapping(path= "/accounts/{id}/authentication")
+    public void refreshAuthentication(HttpServletResponse response) {
+        JwtAuthenticationToken jwtAuthenticationToken = (JwtAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+        String jwtAuthenticationTokenRefreshed = jsonWebTokenService.generateJSONWebToken(jwtAuthenticationToken.getToken().getClaims(), ONE_HOUR);
+        Cookie cookie = getJwtCookie(jwtAuthenticationTokenRefreshed, ONE_HOUR);
+        cookie.setPath("/");
+        response.addCookie(cookie);
+    }
+
+    private Cookie getJwtCookie(String jwt, Duration expirationDelay) {
         Cookie jwtCookie = new Cookie("jwt", jwt);
         jwtCookie.setHttpOnly(false);
         jwtCookie.setSecure(false);
-        jwtCookie.setMaxAge(24 * 60 * 60); // in seconds
-        response.addCookie(jwtCookie);
-    }
-
-    private String generateJSONWebToken(Authentication authentication, Account account){
-        List<String> authenticationsAsString = authentication.getAuthorities().stream().map(authority -> authority.toString()).collect(Collectors.toList());
-        JWSSigner signer = new RSASSASigner(LocalEatRSAKey.getRSAPrivateKey());
-        JWTClaimsSet claimsSet = new JWTClaimsSet.Builder()
-                .claim("name", authentication.getName())
-                .claim("authorities", authenticationsAsString)
-                .claim("account", account)
-                .build();
-        SignedJWT signedJWT = new SignedJWT(
-                new JWSHeader.Builder(JWSAlgorithm.RS256).build(),
-                claimsSet);
-        try {
-            signedJWT.sign(signer);
-        } catch (JOSEException e) {
-            logger.error("Error while signing Json Web Token", e);
-        }
-        return signedJWT.serialize();
+        jwtCookie.setMaxAge(Long.valueOf(expirationDelay.getSeconds()).intValue());
+        return jwtCookie;
     }
 }

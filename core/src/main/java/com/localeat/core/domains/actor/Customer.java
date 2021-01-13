@@ -1,6 +1,7 @@
 package com.localeat.core.domains.actor;
 
 import com.localeat.core.domains.order.Order;
+import com.localeat.core.domains.security.Role;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -21,4 +22,10 @@ public class Customer extends Actor {
     public void setOrders(Collection<Order> orders) {
         this.orders = orders;
     }
+
+    @Override
+    public Role getRole() {
+        return Role.CUSTOMER;
+    }
+
 }

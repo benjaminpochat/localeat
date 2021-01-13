@@ -1,5 +1,7 @@
 package com.localeat.core.config.security;
 
+import com.localeat.core.config.security.filter.AuthorizedAccountFilter;
+import com.localeat.core.config.security.filter.NotExpiredTokenFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -29,6 +31,7 @@ public class TokenSecurityConfig  extends WebSecurityConfigurerAdapter {
                 .antMatcher("/accounts/**")
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
                 .addFilterAfter(new AuthorizedAccountFilter(), BearerTokenAuthenticationFilter.class)
+                .addFilterAfter(new NotExpiredTokenFilter(), BearerTokenAuthenticationFilter.class)
                 ;
     }
 

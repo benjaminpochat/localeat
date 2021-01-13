@@ -3,6 +3,7 @@ package com.localeat.core.domains.actor;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.localeat.core.domains.security.Role;
 
 import static com.fasterxml.jackson.annotation.JsonTypeInfo.As.PROPERTY;
 import static com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME;
@@ -72,5 +73,13 @@ public class Actor {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    /**
+     * This method should be called on children classes
+     * @return
+     */
+    public Role getRole() {
+        throw new IllegalStateException("The role for Actor class cannot be determined");
     }
 }

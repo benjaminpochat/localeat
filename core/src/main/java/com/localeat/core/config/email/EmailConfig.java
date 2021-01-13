@@ -15,6 +15,7 @@ public class EmailConfig {
     private String sslTrust;
     private String userName;
     private String password;
+    private boolean disableEmailNotifications;
 
     public String getUserName() {
         return userName;
@@ -70,6 +71,14 @@ public class EmailConfig {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isDisableEmailNotifications() {
+        return disableEmailNotifications;
+    }
+
+    public void setDisableEmailNotifications(boolean disableEmailNotifications) {
+        this.disableEmailNotifications = disableEmailNotifications;
     }
 
     public Properties getProperties() {
