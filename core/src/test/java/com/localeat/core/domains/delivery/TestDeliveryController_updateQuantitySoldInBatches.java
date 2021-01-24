@@ -21,6 +21,9 @@ import org.springframework.transaction.annotation.Transactional;
         "/sql/create/com/localeat/domains/delivery/delivery_test_data.sql",
         "/sql/create/com/localeat/domains/order/order_test_data.sql",
 })
+@Sql(value = {
+        "/sql/delete/com/localeat/domains/order/test_data.sql"
+}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 public class TestDeliveryController_updateQuantitySoldInBatches {
 
     @Autowired
