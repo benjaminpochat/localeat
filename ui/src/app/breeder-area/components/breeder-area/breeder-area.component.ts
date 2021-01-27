@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, EventEmitter, Output } from '@angular/core';
-import { AuthenticationService } from '../../../commons/services/authentication.service';
 import { Router } from '@angular/router';
+
+import { AuthenticationService } from '../../../commons/services/authentication.service';
 import { SideMenuComponent } from 'src/app/commons/components/side-menu/side-menu.component';
 import { Delivery } from 'src/app/commons/models/delivery.model';
 import { Slaughter } from 'src/app/commons/models/slaughter.model';

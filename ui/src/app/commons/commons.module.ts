@@ -17,6 +17,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SideMenuComponent } from './components/side-menu/side-menu.component';
 import { PasswordRenewalComponent } from './components/password-renewal/password-renewal.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { PasswordRenewalComponent } from './components/password-renewal/password
     MainMenuComponent,
     SideMenuComponent,
     PasswordRenewalComponent,
+    FooterComponent,
   ],
   imports: [
     CommonModule,
@@ -45,7 +47,8 @@ import { PasswordRenewalComponent } from './components/password-renewal/password
   exports: [
     AuthenticationComponent,
     MainMenuComponent,
-    SideMenuComponent
+    SideMenuComponent,
+    FooterComponent
   ]
 })
 export class CommonsModule { }

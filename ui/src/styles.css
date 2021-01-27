@@ -6,6 +6,11 @@ html,body{
   font-family: Lato-regular;
 }
 
+a {
+  color:inherit;
+  text-decoration: none;
+ }
+
 .field-description {
   font-family: Lato-regular;
 }

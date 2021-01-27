@@ -1,0 +1,15 @@
+.footer {
+  font-size: 0.8rem;
+  background-color: black;
+  color: gray;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, max-content));
+  justify-content: space-around;
+  justify-items: center;
+  margin-top: 5rem;
+  padding: 1rem;
+}
+
+.footer > a {
+  color: gray;
+}

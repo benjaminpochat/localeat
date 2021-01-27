@@ -20,6 +20,7 @@ export class CustomerAreaComponent implements OnInit {
   deliveries: Delivery[];
   orders: Order[];
   orderListTitle: string;
+  deliveryListTitle: string;
 
   @ViewChild(OrderDialogComponent)
   private orderComponent: OrderDialogComponent;
@@ -46,7 +47,15 @@ export class CustomerAreaComponent implements OnInit {
 
   private refreshDeliveries() {
     const refreshDeliveriesEvent = new EventEmitter<Delivery[]>();
-    refreshDeliveriesEvent.subscribe(deliveries => this.deliveries = deliveries);
+    refreshDeliveriesEvent.subscribe(deliveries => {
+        this.deliveries = deliveries;
+        if (this.deliveries.length > 0) {
+          this.deliveryListTitle = 'Les prochaines livraisons';
+        } else {
+          this.deliveryListTitle = 'Aucune livraison n\'est planifiée prochainement.';
+        }
+
+    });
     this.deliveryService.getDeliveries(refreshDeliveriesEvent);
   }
 
@@ -59,7 +68,6 @@ export class CustomerAreaComponent implements OnInit {
       } else {
         this.orderListTitle = 'Vous n\'avez pas de commandes en cours';
       }
-
     });
     this.orderService.getCustomerCurrentOrders(refreshOrdersEvent);
   }
