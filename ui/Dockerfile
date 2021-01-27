@@ -4,9 +4,9 @@ RUN apk update
 WORKDIR /app
 COPY ./ui .
 RUN cd /app && npm set progress=false && npm install
-RUN npm run build -- --configuration staging
+RUN npm run build -- --configuration prod
 
-# STEP 2 build a small apache image with static website
+# STEP 2 build an apache image with static website
 FROM httpd:2.4.41-alpine
 RUN rm /usr/local/apache2/htdocs/index.html
 COPY ./ui/localeat-httpd.conf /usr/local/apache2/conf/httpd.conf
