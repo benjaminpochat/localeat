@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import * as decodeJwt from 'jwt-decode';
 import { Authentication } from 'src/app/commons/models/authentication.model';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ import { Authentication } from 'src/app/commons/models/authentication.model';
 export class AuthenticationService {
 
   constructor(
-    private http: HttpClient) { }
+    private http: HttpClient,
+    private cookieService: CookieService) { }
 
   authentication = new BehaviorSubject(this.getAuthenticationFromCookie());
   currentAuthentication = this.authentication.asObservable();
@@ -45,9 +47,15 @@ export class AuthenticationService {
     return response;
   }
 
-  public deleteAuthentication(): void {
-    document.cookie = 'jwt=';
-    this.authentication.next(undefined);
+  public deleteAuthentication(): Observable<Object> {
+    let jwt = this.cookieService.get('jwt');
+    const authentication: Authentication = decodeJwt(jwt);
+    const httpOptions = {
+      withCredentials : true
+    };
+    const response = this.http.delete(environment.localeatCoreUrl + '/accounts/' + authentication.account.id +  '/authentication', httpOptions);
+    response.subscribe(() => this.authentication.next(this.getAuthenticationFromCookie()));
+    return response;
   }
 
   public isAuthenticated(): boolean {

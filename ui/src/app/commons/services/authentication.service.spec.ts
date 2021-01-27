@@ -24,9 +24,9 @@ describe('AuthenticationService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('getAuthenticationFromCookie decode the json web token correcty', async () => {
+  it('getAuthenticationFromCookie decode the json web token correctly', async () => {
     // given
-    document.cookie = 'jwt=eyJhbGciOiJSUzI1NiJ9.eyJuYW1lIjoiZWxldmV1ciIsImF1dGhvcml0aWVzIjpbIkJSRUVERVIiXX0.c0kRZNGLGoRrS8A3W5NxVmORGlJl6KNKghZLptxOZNOM3vrC6C5LHc4ff6psu6DUsGMYfBEUvDQEYChVS_KRkBpqaFUqu22g4BrDoDxlL1ZcjEgnWC-8UG0eACZ7IQ231LvwEOzt6OtsLClqOAsVfZFlKM5E0k70lrQlVjTTgqVc9FJ0mYNh5Nz-IugA-Fa-4BUx5NV5W6y3BzLd-LPZVysENY0u9VStMeFI8fnHEAA_XMkEdLXFnNV3dMGtHUaf5i2pBqiH0f_HKokK5-xIdMPmT0juMbr1aOWRwLtNrARNAkLNt3zc033htSoUhL2yD5NmribJbTzStxYByMeQbw; Max-Age=3600; Expires=Mon, 29-Jun-2020 20:39:40 GMT';
+    document.cookie = 'jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZWxldmV1ciIsImF1dGhvcml0aWVzIjpbIkJSRUVERVIiXSwiYWNjb3VudCI6eyJpZCI6IjEiLCJhY3RvciI6eyJuYW1lIjoiREFMSU4iLCJmaXJzdE5hbWUiOiJDaGFybGllIn19fQ.gQhlzTzxmesl3kRyryy90xu1rEEG71vwR64J_bursTo; Max-Age=3600; Expires=Mon, 29-Jun-2020 20:39:40 GMT';
 
     // when
     const authentication: Authentication = service.getAuthenticationFromCookie();
@@ -37,6 +37,6 @@ describe('AuthenticationService', () => {
   });
 
   afterEach(() => {
-    service.deleteAuthentication();
+    //service.deleteAuthentication();
   });
 });
