@@ -15,6 +15,10 @@ export class ProductComponent implements OnInit {
 
   constructor(private sanitizer: DomSanitizer) { }
 
+  getPrductDescrption(): string {
+    return this.product.description.replace(new RegExp('\n', 'g'), '<br/>');
+  }
+
   ngOnInit(): void {
   }
 
