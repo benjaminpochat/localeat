@@ -32,4 +32,8 @@ export class DeliveryBatchComponent implements OnInit {
   changeProduct() {
     this.changeProductEvent.emit(this.batch.product);
   }
+
+  getProductDescription(productDescription: string): string {
+    return productDescription.replace(new RegExp('\n', 'g'), '<br/>');
+  }
 }

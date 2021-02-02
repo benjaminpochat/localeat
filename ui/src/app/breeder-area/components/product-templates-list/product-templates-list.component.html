@@ -12,7 +12,7 @@
     </ng-container>
     <ng-container matColumnDef="description">
       <th mat-header-cell *matHeaderCellDef>Description</th>
-      <td mat-cell *matCellDef="let productTemplate"> {{productTemplate.description}} </td>
+      <td mat-cell *matCellDef="let productTemplate" [innerHtml]="getProductDescription(productTemplate.description)"></td>
     </ng-container>
     <ng-container matColumnDef="unitPrice">
       <th mat-header-cell *matHeaderCellDef>Prix suggéré</th>

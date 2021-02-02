@@ -1,7 +1,7 @@
 <div class="batch">
   <div class="batch__product" (click)="changeProduct()">
     <div class="batch__product__name">{{batch.product.name}}</div>
-    <div class="batch__product__description">{{batch.product.description}}</div>
+    <div class="batch__product__description" [innerHtml]="getProductDescription(batch.product.description)"></div>
     <div class="batch__product__net-weight">{{batch.product.netWeight}} kg</div>
     <div class="batch__product__unit-price">{{batch.product.unitPrice}} €HT/kg</div>
   </div>

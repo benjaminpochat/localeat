@@ -31,4 +31,8 @@ export class ProductTemplatesListComponent implements OnInit {
   refreshProductTemplatesList() {
     this.productService.getProductTemplates().subscribe(productTemplates => this.productTemplates = productTemplates);
   }
+
+  getProductDescription(productDescription: string): string {
+    return productDescription.replace(new RegExp('\n', 'g'), '<br/>');
+  }
 }
