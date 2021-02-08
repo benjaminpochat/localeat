@@ -1,6 +1,7 @@
 package com.localeat.core.domains.product;
 
 import com.localeat.core.domains.farm.Farm;
+import com.localeat.core.domains.image.Image;
 
 import javax.persistence.*;
 
@@ -18,7 +19,7 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_id_generator")
-    @SequenceGenerator(name="product_id_generator", sequenceName = "product_id_seq", allocationSize = 1)
+    @SequenceGenerator(name = "product_id_generator", sequenceName = "product_id_seq", allocationSize = 1)
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
@@ -30,9 +31,8 @@ public class Product {
 
     private float netWeight;
 
-    /** the product's photo, base64 encoded  */
-    @Lob
-    private String photo;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Image photo;
 
     @ManyToOne
     private Farm farm;
@@ -76,11 +76,11 @@ public class Product {
         this.unitPrice = unitPrice;
     }
 
-    public String getPhoto() {
+    public Image getPhoto() {
         return photo;
     }
 
-    public void setPhoto(String photo) {
+    public void setPhoto(Image photo) {
         this.photo = photo;
     }
 

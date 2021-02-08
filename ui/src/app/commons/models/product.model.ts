@@ -1,4 +1,5 @@
 import { Farm } from './farm.model';
+import { Image } from './image.model';
 
 export class Product {
   id: number;
@@ -6,6 +7,6 @@ export class Product {
   description: string;
   unitPrice: number;
   netWeight: number;
-  photo: string;
+  photo: Image;
   farm: Farm;
 }

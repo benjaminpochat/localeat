@@ -4,6 +4,7 @@ import com.localeat.core.domains.order.Order;
 import com.localeat.core.domains.security.Role;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.Collection;
@@ -12,7 +13,7 @@ import java.util.Collection;
 @Table(name = "customers")
 public class Customer extends Actor {
 
-    @OneToMany
+        @OneToMany(fetch = FetchType.EAGER)
     private Collection<Order> orders;
 
     public Collection<Order> getOrders() {

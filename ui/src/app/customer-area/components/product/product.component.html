@@ -6,6 +6,6 @@
       <div class="product__net-weight"> ~ {{product.netWeight}} kg</div>
       <i class="icon euro-icon"></i>
       <div class="product__unit-price">{{product.unitPrice}} €TTC/kg</div>
-      <img *ngIf="this.product.photo" [src]="this.product.photo" class="product__photo">
+      <img *ngIf="this.product.photo && this.product.photo.content" [src]="this.product.photo.content" class="product__photo">
   </div>
 </div>

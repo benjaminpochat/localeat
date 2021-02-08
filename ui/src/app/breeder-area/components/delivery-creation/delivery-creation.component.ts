@@ -10,6 +10,7 @@ import { Batch } from 'src/app/commons/models/batch.model';
 import { ProductTemplate } from 'src/app/commons/models/product-template.model';
 import { ProductComponent } from '../product/product.component';
 import { ViewChild } from '@angular/core';
+import { Image } from '../../../commons/models/image.model';
 
 @Component({
   selector: 'app-delivery-creation',
@@ -83,9 +84,7 @@ export class DeliveryCreationComponent implements OnInit {
     this.delivery.availableBatches = [];
     this.delivery.orders = [];
     this.productService.getProductTemplates().subscribe(productTemplates => {
-      productTemplates.forEach(productTemplate => {
-        this.addBatch(productTemplate);
-      });
+      productTemplates.forEach(productTemplate => this.addBatch(productTemplate));
     });
     this.createDeliveryEvent = createDeliveryEvent;
   }
@@ -96,7 +95,12 @@ export class DeliveryCreationComponent implements OnInit {
     product.unitPrice = productTemplate.unitPrice;
     product.netWeight = productTemplate.netWeight;
     product.description = productTemplate.description;
-    product.photo = productTemplate.photo;
+    this.productService.loadProductTemplatePhoto(productTemplate).subscribe(photo => {
+      if (photo) {
+        product.photo = new Image();
+        product.photo.content = photo.content;
+      }
+    });
     product.farm = productTemplate.farm;
     const batch = new Batch();
     batch.quantity = 0;

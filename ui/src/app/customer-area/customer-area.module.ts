@@ -26,6 +26,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ProductComponent } from './components/product/product.component';
 import { ProductSelectorComponent } from './components/product-selector/product-selector.component';
 import { OrderItemComponent } from './components/order-item/order-item.component';
+import { MatProgressSpinner, MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { OrderItemComponent } from './components/order-item/order-item.component
     MatInputModule,
     MatListModule,
     MatNativeDateModule,
+    MatProgressSpinnerModule,
     MatRadioModule,
     MatSliderModule,
     MatSlideToggleModule,

@@ -2,7 +2,7 @@ insert into product_templates (
     id,
     name,
     description,
-    photo,
+    photo_id,
     unit_price,
     farm_id,
     net_weight)

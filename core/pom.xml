@@ -14,6 +14,7 @@
         <spring-version>2.2.7.RELEASE</spring-version>
         <spring-security-version>5.2.4.RELEASE</spring-security-version>
         <spring-restdocs-asciidoctor-version>2.0.4.RELEASE</spring-restdocs-asciidoctor-version>
+        <jackson-version>2.10.4</jackson-version>
         <jaxb-version>2.3.0</jaxb-version>
         <javamail-version>1.5.0-b01</javamail-version>
         <postgre-version>42.2.5</postgre-version>
@@ -58,6 +59,7 @@
             <artifactId>spring-security-oauth2-jose</artifactId>
         </dependency>
 
+
         <dependency>
             <groupId>javax.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>
@@ -68,15 +70,24 @@
             <artifactId>mail</artifactId>
         </dependency>
 
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-hibernate5</artifactId>
+        </dependency>
+
+
         <dependency>
             <groupId>org.springframework.restdocs</groupId>
             <artifactId>spring-restdocs-mockmvc</artifactId>
         </dependency>
 
+
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
         </dependency>
+
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -255,6 +266,13 @@
                 <groupId>javax.mail</groupId>
                 <artifactId>mail</artifactId>
                 <version>${javamail-version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.datatype</groupId>
+                <artifactId>jackson-datatype-hibernate5</artifactId>
+                <version>${jackson-version}</version>
             </dependency>
 
 

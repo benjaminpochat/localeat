@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
-import { Batch } from 'src/app/commons/models/batch.model';
+import { ProductService } from 'src/app/breeder-area/services/product.service';
+import { Image } from 'src/app/commons/models/image.model';
 import { Product } from 'src/app/commons/models/product.model';
 
 @Component({
@@ -13,13 +13,18 @@ export class ProductComponent implements OnInit {
   @Input()
   product: Product;
 
-  constructor(private sanitizer: DomSanitizer) { }
+  image: Image;
+
+  constructor(
+    private productService: ProductService
+  ) { }
 
   getProductDescription(): string {
     return this.product.description.replace(new RegExp('\n', 'g'), '<br/>');
   }
 
   ngOnInit(): void {
+    this.productService.loadProductPhoto(this.product).subscribe(photo => this.product.photo = photo);
   }
 
 }

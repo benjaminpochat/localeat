@@ -57,7 +57,6 @@ public class TestAndDocProductController {
                         "  \"description\" : \"un assortiment de steaks, de rotis, et de morceaux a bouillir\",\n" +
                         "  \"unitPrice\" : 13.5,\n" +
                         "  \"netWeight\" : 10,\n" +
-                        "  \"photo\" : null,\n" +
                         "  \"farm\" : {\n" +
                         "    \"id\" : 1,\n" +
                         "    \"name\" : \"La ferme de la Riviere\",\n" +
@@ -78,8 +77,8 @@ public class TestAndDocProductController {
                 "  \"name\" : \"colis 'miam miam'\",\n" +
                 "  \"description\" : \"un assortiment de viandes succulentes\",\n" +
                 "  \"unitPrice\" : 11.0,\n" +
+                "  \"photo\" : {},\n" +
                 "  \"netWeight\" : 5,\n" +
-                "  \"photo\" : null,\n" +
                 "  \"farm\" : {\n" +
                 "    \"id\" : 1,\n" +
                 "    \"name\" : \"La ferme de la Riviere\",\n" +
@@ -112,7 +111,6 @@ public class TestAndDocProductController {
                         "  \"description\" : \"un assortiment de steaks, de rotis, et de morceaux a bouillir\",\n" +
                         "  \"unitPrice\" : 13.5,\n" +
                         "  \"netWeight\" : 10,\n" +
-                        "  \"photo\" : null,\n" +
                         "  \"farm\" : {\n" +
                         "    \"id\" : 1,\n" +
                         "    \"name\" : \"La ferme de la Riviere\",\n" +
@@ -132,8 +130,8 @@ public class TestAndDocProductController {
                 "  \"name\" : \"colis 'miam miam'\",\n" +
                 "  \"description\" : \"un assortiment de viandes succulentes\",\n" +
                 "  \"unitPrice\" : 11.0,\n" +
+                "  \"photo\" : {},\n" +
                 "  \"netWeight\" : 5,\n" +
-                "  \"photo\" : null,\n" +
                 "  \"farm\" : {\n" +
                 "    \"id\" : 1,\n" +
                 "    \"name\" : \"La ferme de la Riviere\",\n" +

@@ -1,5 +1,7 @@
 package com.localeat.core.domains.delivery;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.localeat.core.domains.order.Order;
 import com.localeat.core.domains.product.Batch;
 import com.localeat.core.domains.product.Product;
@@ -25,11 +27,11 @@ public class Delivery {
 
     private LocalDateTime deliveryEnd;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name="delivery_available_batches")
     private Set<Batch> availableBatches;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Order> orders;
 
     public Long getId() {

@@ -59,7 +59,7 @@ public class DeliveryController {
         if (StreamSupport.stream(authorizedDeliveries.spliterator(), false).noneMatch(delivery::equals)) {
             throw new ResponseStatusException(
                     HttpStatus.UNAUTHORIZED,
-                    String.format("account #{} not authorized to access delivery #{}", new Object[]{account.getId(), delivery.getId()}));
+                    String.format("account %s not authorized to access delivery %s", account.getId(), delivery.getId()));
         }
     }
 

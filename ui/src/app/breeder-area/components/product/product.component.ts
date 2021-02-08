@@ -1,8 +1,10 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { observable, Observable } from 'rxjs';
 import { ProductTemplate } from 'src/app/commons/models/product-template.model';
 import { Product } from 'src/app/commons/models/product.model';
 import { ProductService } from '../../services/product.service';
+import { Image } from '../../../commons/models/image.model';
 
 @Component({
   selector: 'app-product',
@@ -31,7 +33,12 @@ export class ProductComponent implements OnInit {
 
   setProduct(product: Product | ProductTemplate) {
     this.product = product;
-    this.productForm.setValue(product);
+    this.productForm.patchValue(product);
+    if (this.product instanceof Product) {
+      this.productService.loadProductPhoto(this.product).subscribe(photo => this.product.photo = photo);
+    } else {
+      this.productService.loadProductTemplatePhoto(this.product).subscribe(photo => this.product.photo = photo);
+    }
   }
 
   initProductForm(){
@@ -54,7 +61,10 @@ export class ProductComponent implements OnInit {
     this.product.unitPrice = this.productForm.value.unitPrice;
     this.product.netWeight = this.productForm.value.netWeight;
 
-    const saveProduct = product => {
+    const saveProduct: (
+        (product: Product) => Observable<Product>)
+        | ((product: ProductTemplate) => Observable<ProductTemplate>
+      ) = product => {
       if (this.product instanceof Product) {
         return this.productService.saveProduct(product);
       } else {
@@ -82,7 +92,8 @@ export class ProductComponent implements OnInit {
     const reader = new FileReader();
 
     reader.onload = (e: any) => {
-      this.product.photo = e.target.result;
+      this.product.photo = new Image();
+      this.product.photo.content = e.target.result;
     };
 
     reader.readAsDataURL(inputNode.files[0]);

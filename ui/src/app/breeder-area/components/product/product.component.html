@@ -27,10 +27,10 @@
       </mat-form-field>
     </div>
     <div class="product-form__photo">
-      <img *ngIf="product.photo" [src]="product.photo" class="">
+      <img *ngIf="product.photo && product.photo.content" [src]="this.product.photo.content">
       <br>
       <button type="button" mat-button (click)="fileInput.click()">{{this.photoUrl ? 'Modifiez la photo' : 'Ajoutez une photo'}}</button>
-      <input hidden (change)="uploadPhoto()" #fileInput type="file" id="file" accept="image/png, image/jpeg">
+      <input type="file" hidden (change)="uploadPhoto()" #fileInput id="file" accept="image/png, image/jpeg">
     </div>
   </form>
 

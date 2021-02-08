@@ -1,6 +1,7 @@
 package com.localeat.core.domains.product;
 
 import com.localeat.core.domains.farm.Farm;
+import com.localeat.core.domains.image.Image;
 
 import javax.persistence.*;
 
@@ -25,9 +26,8 @@ public class ProductTemplate {
 
     private float netWeight;
 
-    /** the product's photo, base64 encoded  */
-    @Lob
-    private String photo;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Image photo;
 
     @ManyToOne
     private Farm farm;
@@ -79,11 +79,11 @@ public class ProductTemplate {
         this.netWeight = netWeight;
     }
 
-    public String getPhoto() {
+    public Image getPhoto() {
         return photo;
     }
 
-    public void setPhoto(String photo) {
+    public void setPhoto(Image photo) {
         this.photo = photo;
     }
 

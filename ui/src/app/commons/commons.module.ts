@@ -9,15 +9,17 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { MainMenuComponent } from './components/main-menu/main-menu.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MainMenuComponent } from './components/main-menu/main-menu.component';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SideMenuComponent } from './components/side-menu/side-menu.component';
 import { PasswordRenewalComponent } from './components/password-renewal/password-renewal.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { ImageGaleryComponent } from './components/image-galery/image-galery.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { FooterComponent } from './components/footer/footer.component';
     SideMenuComponent,
     PasswordRenewalComponent,
     FooterComponent,
+    ImageGaleryComponent,
   ],
   imports: [
     CommonModule,
@@ -39,6 +42,7 @@ import { FooterComponent } from './components/footer/footer.component';
     MatGridListModule,
     MatIconModule,
     MatInputModule,
+    MatProgressSpinnerModule,
     MatSidenavModule,
     MatToolbarModule,
     MatTableModule,
@@ -46,9 +50,10 @@ import { FooterComponent } from './components/footer/footer.component';
   ],
   exports: [
     AuthenticationComponent,
+    FooterComponent,
+    ImageGaleryComponent,
     MainMenuComponent,
     SideMenuComponent,
-    FooterComponent
   ]
 })
 export class CommonsModule { }

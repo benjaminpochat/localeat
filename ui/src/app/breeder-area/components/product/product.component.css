@@ -11,7 +11,7 @@
 
 .product-form__title {
   font-family: 'Acme';
-  font-size: 1rem;
+  font-size: var(--main-menu-font-size);
   background-color: darkolivegreen;
   color: white;
  }
