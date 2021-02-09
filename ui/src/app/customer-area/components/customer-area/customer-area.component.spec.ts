@@ -24,7 +24,7 @@ describe('CustomerAreaComponent', () => {
     component = fixture.componentInstance;
     let authenticationService = fixture.debugElement.injector.get<AuthenticationService>(AuthenticationService as Type<AuthenticationService>);
     const authenticationServiceMock = new AuthenticationServiceMock();
-    authenticationServiceMock.mockAuthenticationService(authenticationService);
+    authenticationServiceMock.mockGetAuthenticationWithNonNullReturnValue(authenticationService);
     fixture.detectChanges();
   });
 

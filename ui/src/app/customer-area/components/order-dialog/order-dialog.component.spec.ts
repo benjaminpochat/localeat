@@ -21,9 +21,6 @@ import { MatTableModule } from '@angular/material/table';
 import { Type } from '@angular/core';
 
 import { AuthenticationService } from 'src/app/commons/services/authentication.service';
-import { Authentication } from 'src/app/commons/models/authentication.model';
-import { Account } from 'src/app/commons/models/account.model';
-import { Actor } from 'src/app/commons/models/actor.model';
 import { CommonsModule } from 'src/app/commons/commons.module';
 import { OrderDialogComponent } from './order-dialog.component';
 import { Delivery } from 'src/app/commons/models/delivery.model';
@@ -80,7 +77,6 @@ describe('OrderDialogComponent', () => {
     let fixture: ComponentFixture<OrderDialogComponent>;
     let authenticationService: AuthenticationService;
 
-
     beforeEach(() => {
       TestBed.configureTestingModule({
         declarations: [
@@ -104,7 +100,8 @@ describe('OrderDialogComponent', () => {
       fixture = TestBed.createComponent(OrderDialogComponent);
       component = fixture.componentInstance;
       authenticationService = fixture.debugElement.injector.get<AuthenticationService>(AuthenticationService as Type<AuthenticationService>);
-      authenticationService.deleteAuthentication();
+      const authenticationServiceMock = new AuthenticationServiceMock();
+      authenticationServiceMock.mockGetAuthenticationWithNullReturnValue(authenticationService);
       fixture.detectChanges();
     });
 
@@ -144,7 +141,7 @@ describe('OrderDialogComponent', () => {
       component = fixture.componentInstance;
       authenticationService = fixture.debugElement.injector.get<AuthenticationService>(AuthenticationService as Type<AuthenticationService>);
       const authenticationServiceMock = new AuthenticationServiceMock();
-      authenticationServiceMock.mockAuthenticationService(authenticationService);
+      authenticationServiceMock.mockGetAuthenticationWithNonNullReturnValue(authenticationService);
       fixture.detectChanges();
     });
 

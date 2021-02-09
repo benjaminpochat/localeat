@@ -21,7 +21,12 @@ export class AuthenticationServiceMock {
     return authentication;
   }
 
-  public mockAuthenticationService(authenticationService: AuthenticationService): void {
+  public mockGetAuthenticationWithNonNullReturnValue(authenticationService: AuthenticationService): void {
     authenticationService.getAuthenticationFromCookie = this.getAuthentication;
   }
+
+  public mockGetAuthenticationWithNullReturnValue(authenticationService: AuthenticationService): void {
+    authenticationService.getAuthenticationFromCookie = () => null;
+  }
+
 }
