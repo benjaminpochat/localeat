@@ -50,6 +50,19 @@ public class TestOrderNotificationService {
         verify(spyedService).sendMail(
                 eq("benjamin@ferme-du-ruisseau.fr"),
                 eq("nouvelle commande !"),
-                eq("<div>La commande n° 1 a été enregistrée</div><div><ul><li>Montant de la commande : 1350.0 €TTC</li><li>Quantité commandée : 100.0 kg</li></ul></div>"));
+                eq("<div>La commande n° 1 a été enregistrée</div>" +
+                        "<div>" +
+                            "<ul>" +
+                                "<li>Client :" +
+                                    "<ul>" +
+                                        "<li>Nom : Virginie WALTER</li>" +
+                                        "<li>Email : virginie@mail.fr</li>" +
+                                        "<li>Téléphone : 04 32 10 98 87</li>" +
+                                    "</ul>" +
+                                "</li>" +
+                                "<li>Montant de la commande : 1350.0 €TTC</li>" +
+                                "<li>Quantité commandée : 100.0 kg</li>" +
+                            "</ul>" +
+                        "</div>"));
     }
 }

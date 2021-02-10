@@ -42,12 +42,25 @@ public class OrderNotificationService {
         String recipient = StreamSupport.stream(breeders.spliterator(), false).map(Breeder::getEmail).collect(Collectors.joining(","));
         String subject = "nouvelle commande !";
         String body = String.format(
-                "<div>La commande n° %s a été enregistrée</div>"
-                        + "<div><ul>"
-                        + "<li>Montant de la commande : %s €TTC</li>"
-                        + "<li>Quantité commandée : %s kg</li>"
-                        + "</ul></div>",
+                "<div>La commande n° %s a été enregistrée</div>" +
+                "<div>" +
+                    "<ul>" +
+                        "<li>Client :" +
+                            "<ul>" +
+                                "<li>Nom : %s %s</li>" +
+                                "<li>Email : %s</li>" +
+                                "<li>Téléphone : %s</li>" +
+                            "</ul>" +
+                        "</li>" +
+                        "<li>Montant de la commande : %s €TTC</li>" +
+                        "<li>Quantité commandée : %s kg</li>" +
+                    "</ul>" +
+                "</div>",
                 order.getId(),
+                order.getCustomer().getFirstName(),
+                order.getCustomer().getName(),
+                order.getCustomer().getEmail(),
+                order.getCustomer().getPhoneNumber(),
                 order.getOrderedItems().stream()
                         .mapToDouble(item -> {
                             Batch batch = batchRepository.findById(item.getBatch().getId()).orElseThrow();
