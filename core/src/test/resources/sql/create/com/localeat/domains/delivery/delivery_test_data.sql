@@ -1,8 +1,8 @@
 insert into deliveries (
     id,
     delivery_address_id,
-    delivery_end,
-    delivery_start)
+    delivery_start,
+    delivery_end)
 values (
     1,
     1,
@@ -13,8 +13,8 @@ values (
 insert into deliveries (
     id,
     delivery_address_id,
-    delivery_end,
-    delivery_start)
+    delivery_start,
+    delivery_end)
 values (
     2,
     1,

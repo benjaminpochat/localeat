@@ -28,7 +28,10 @@ public class OrderController {
     private DeliveryController deliveryController;
 
     @Autowired
-    private OrderNotificationService orderNotificationService;
+    private OrderNotificationToCustomerService orderNotificationToCustomerService;
+
+    @Autowired
+    private OrderNotificationToBreederService orderNotificationToBreederService;
 
     @PostMapping(path = "/accounts/{account}/orders")
     public Order createOrder(@PathParam("account") Account account, @RequestBody Order order){
@@ -37,7 +40,8 @@ public class OrderController {
         Delivery delivery = deliveryRepository.findById(order.getDelivery().getId()).orElseThrow();
         deliveryController.updateQuantitySoldInBatches(delivery);
         Order orderSaved = orderRepository.save(order);
-        orderNotificationService.notifyByMail(orderSaved);
+        orderNotificationToBreederService.notify(orderSaved);
+        orderNotificationToCustomerService.notify(orderSaved);
         return orderSaved;
     }
 

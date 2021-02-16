@@ -137,13 +137,13 @@ public class TestAndDocOrderController {
                         "      \"name\" : \"Chez Bob\",\n" +
                         "      \"city\" : \"Atlantic\",\n" +
                         "      \"zipCode\" : \"10000\",\n" +
-                        "      \"addressLine1\" : \"2 rue des pommier\",\n" +
+                        "      \"addressLine1\" : \"2 rue des pommiers\",\n" +
                         "      \"addressLine2\" : null,\n" +
                         "      \"addressLine3\" : null,\n" +
                         "      \"addressLine4\" : null\n" +
                         "    },\n" +
-                        "    \"deliveryStart\" : \"2020-01-01T20:00:00\",\n" +
-                        "    \"deliveryEnd\" : \"2020-01-01T18:00:00\",\n" +
+                        "    \"deliveryStart\" : \"2020-01-01T18:00:00\",\n" +
+                        "    \"deliveryEnd\" : \"2020-01-01T20:00:00\",\n" +
                         "    \"availableBatches\" : [ {\n" +
                         "      \"id\" : 1,\n" +
                         "      \"quantity\" : 50,\n" +
@@ -204,13 +204,13 @@ public class TestAndDocOrderController {
                         "      \"name\" : \"Chez Bob\",\n" +
                         "      \"city\" : \"Atlantic\",\n" +
                         "      \"zipCode\" : \"10000\",\n" +
-                        "      \"addressLine1\" : \"2 rue des pommier\",\n" +
+                        "      \"addressLine1\" : \"2 rue des pommiers\",\n" +
                         "      \"addressLine2\" : null,\n" +
                         "      \"addressLine3\" : null,\n" +
                         "      \"addressLine4\" : null\n" +
                         "    },\n" +
-                        "    \"deliveryStart\" : \"2020-01-08T20:00:00\",\n" +
-                        "    \"deliveryEnd\" : \"2020-01-08T18:00:00\",\n" +
+                        "    \"deliveryStart\" : \"2020-01-08T18:00:00\",\n" +
+                        "    \"deliveryEnd\" : \"2020-01-08T20:00:00\",\n" +
                         "    \"availableBatches\" : [ {\n" +
                         "      \"id\" : 1,\n" +
                         "      \"quantity\" : 50,\n" +

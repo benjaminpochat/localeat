@@ -9,7 +9,7 @@ insert into addresses (
     zip_code)
 values (
     1,
-    '2 rue des pommier',
+    '2 rue des pommiers',
     null,
     null,
     null,
