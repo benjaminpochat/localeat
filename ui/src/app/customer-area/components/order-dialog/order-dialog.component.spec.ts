@@ -30,6 +30,7 @@ import { Farm } from 'src/app/commons/models/farm.model';
 import { DeliveryAddress } from 'src/app/commons/models/delivery-address.model';
 import { AuthenticationServiceMock } from 'src/app/commons/services/authentication.service.mock';
 import { Batch } from 'src/app/commons/models/batch.model';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 describe('OrderDialogComponent', () => {
 
@@ -84,7 +85,8 @@ describe('OrderDialogComponent', () => {
         ],
         imports: [
           HttpClientTestingModule,
-          CommonsModule
+          CommonsModule,
+          MatSnackBarModule
         ].concat(
           basicAngularImports,
           materialImports),
@@ -123,7 +125,8 @@ describe('OrderDialogComponent', () => {
         ],
         imports: [
           HttpClientTestingModule,
-          CommonsModule
+          CommonsModule,
+          MatSnackBarModule
         ].concat(
           basicAngularImports,
           materialImports

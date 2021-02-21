@@ -36,3 +36,12 @@
 .order__subtitle > div {
   padding-right: 2rem;
 }
+
+.order__confirmation-button{
+  display: flex;
+  align-items: center;
+}
+
+.order__confirmation-button > div {
+  padding-left: 0.5em;
+}

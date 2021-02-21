@@ -11,6 +11,7 @@ import { Order } from 'src/app/commons/models/order.model';
 import { OrderItem } from 'src/app/commons/models/order-item.model';
 import { EventEmitter } from '@angular/core';
 import { OrderStatus } from 'src/app/commons/models/order-status.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-order-dialog',
@@ -43,12 +44,14 @@ export class OrderDialogComponent implements OnInit {
   understood = false;
   orderStored = false;
   authenticationSubmitted = false;
+  orderUnderProcess = false;
 
   constructor(
     private authenticationService: AuthenticationService,
     private userService: AccountService,
     private orderService: OrderService,
-    private formBuilder: FormBuilder) {}
+    private formBuilder: FormBuilder,
+    private messageInfo: MatSnackBar) {}
 
   ngOnInit(): void {
     this.initLabels();
@@ -209,9 +212,24 @@ export class OrderDialogComponent implements OnInit {
     this.orderService.saveOrder(this.order).subscribe((order: Order) => {
       this.confirmationStepLabel = 'C\'est validé';
       this.orderStored = true;
+      this.orderUnderProcess = false;
+      this.confirmationButtonLabel = 'La commande est réservée';
+      this.displayConfirmationMessage();
       this.createOrderEvent.emit(this.order);
     });
-    this.confirmationButtonLabel = 'La commande est réservée';
+    this.orderUnderProcess = true;
+    this.confirmationButtonLabel = 'Traitement en cours...';
+  }
+
+  private displayConfirmationMessage() {
+    this.messageInfo.open(
+      'Votre commande est enregistrée. Merci :)',
+      'X',
+      {
+        duration: 3000,
+        horizontalPosition: 'center',
+        verticalPosition: 'top'
+      });
   }
 
   close(){
@@ -221,6 +239,7 @@ export class OrderDialogComponent implements OnInit {
   private resetComponentProperties() {
     this.order = null;
     this.orderStored = false;
+    this.orderUnderProcess = false;
     this.existingAccount = true;
     this.authenticationSubmitted = false;
     this.understood = false;

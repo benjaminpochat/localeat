@@ -9,7 +9,7 @@
 
   <div>
     <mat-vertical-stepper #stepper linear="true">
-      <mat-step [stepControl]="productSelectionForm" [editable]="!orderStored">
+      <mat-step [stepControl]="productSelectionForm" [editable]="!orderStored && !orderUnderProcess">
         <form [formGroup]="productSelectionForm">
           <ng-template matStepLabel>{{productSelectionStepLabel}}</ng-template>
           <div class="order__batches">
@@ -25,7 +25,7 @@
         </form>
       </mat-step>
 
-      <mat-step [stepControl]="authenticationForm" [completed]="authentication" [editable]="!orderStored">
+      <mat-step [stepControl]="authenticationForm" [completed]="authentication" [editable]="!orderStored && !orderUnderProcess">
         <form [formGroup]="authenticationForm">
           <ng-template matStepLabel>{{authenticationStepLabel}}</ng-template>
           <div *ngIf="!authentication">
@@ -150,7 +150,7 @@
         </form>
       </mat-step>
 
-      <mat-step [stepControl]="confirmationForm" [editable]="!orderStored">
+      <mat-step [stepControl]="confirmationForm" [editable]="!orderStored && !orderUnderProcess">
         <form [formGroup]="confirmationForm">
           <ng-template matStepLabel>{{confirmationStepLabel}}</ng-template>
           <div>
@@ -174,17 +174,20 @@
                 <li>respecter la chaîne du froid dès la réception de la marchandise</li>
               </ol>
             </div>
-            <mat-checkbox [disabled]="orderStored" [checked]="understood" (change)="setUnderstood($event.checked)">J'ai compris</mat-checkbox>
+            <mat-checkbox [disabled]="orderStored || orderUnderProcess" [checked]="understood" (change)="setUnderstood($event.checked)">J'ai compris</mat-checkbox>
           </div>
-          <div>
+          <div class="order__confirmation-button">
             <input matInput formControlName="confirmed" hidden="true">
             <button
               mat-flat-button
               color="accent"
-              [disabled]="!understood || orderStored"
+              [disabled]="!understood || orderStored || orderUnderProcess"
               (click)="confirmOrder(); stepper.next();">
                 {{confirmationButtonLabel}}
             </button>
+            <div>
+              <mat-spinner diameter="25" *ngIf="orderUnderProcess"></mat-spinner>
+            </div>
           </div>
         </form>
       </mat-step>
