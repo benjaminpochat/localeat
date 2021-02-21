@@ -16,7 +16,7 @@ services:
     build:
       context: "."
       dockerfile: ./core/Dockerfile
-    image: benjaminpochat/localeat-core:${DOCKER_IMAGE_TAG:-latest}
+    image: benjaminpochat/localeat-core-staging:${DOCKER_IMAGE_TAG:-latest}
     networks:
       - hostnet
     depends_on:
@@ -32,17 +32,15 @@ services:
     build:
       context: "."
       dockerfile: ./ui/Dockerfile
-    image: benjaminpochat/localeat-ui:${DOCKER_IMAGE_TAG:-latest}
+    image: benjaminpochat/localeat-ui-staging:${DOCKER_IMAGE_TAG:-latest}
     networks:
       - hostnet
     depends_on:
       - core
     environment:
-      - localeat_environment_type=production
+      - localeat_environment_type=staging
 
 networks:
   hostnet:
     external: true
     name: host
-
-
