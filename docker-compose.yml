@@ -16,29 +16,29 @@ services:
     build:
       context: "."
       dockerfile: ./core/Dockerfile
+      args:
+        - localeat_datasource_url=jdbc:postgresql://localhost:5432/localeat
+        - localeat_datasource_username=localeat
+        - localeat_datasource_password=localeat
+        - localeat_smtp_username=la.viande.en.direct@gmail.com
+        - localeat_smtp_password=localeat
     image: benjaminpochat/localeat-core:${DOCKER_IMAGE_TAG:-latest}
     networks:
       - hostnet
     depends_on:
       - database
-    environment:
-      - localeat_datasource_url=jdbc:postgresql://localhost:5432/localeat
-      - localeat_datasource_username=localeat
-      - localeat_datasource_password=localeat
-      - localeat_smtp_username=la.viande.en.direct@gmail.com
-      - localeat_smtp_password=localeat
 
   ui:
     build:
       context: "."
       dockerfile: ./ui/Dockerfile
+      args:
+        - localeat_environment_type=production
     image: benjaminpochat/localeat-ui:${DOCKER_IMAGE_TAG:-latest}
     networks:
       - hostnet
     depends_on:
       - core
-    environment:
-      - localeat_environment_type=production
 
 networks:
   hostnet:
