@@ -28,17 +28,18 @@ services:
       - localeat_smtp_username=la.viande.en.direct@gmail.com
       - localeat_smtp_password=localeat
 
+
   ui:
     build:
       context: "."
       dockerfile: ./ui/Dockerfile
+      args:
+        - localeat_environment_type=staging
     image: benjaminpochat/localeat-ui-staging:${DOCKER_IMAGE_TAG:-latest}
     networks:
       - hostnet
     depends_on:
       - core
-    environment:
-      - localeat_environment_type=staging
 
 networks:
   hostnet:

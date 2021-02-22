@@ -1,5 +1,8 @@
 # STEP 1 build static website
 FROM node:14.4-alpine as node
+
+ARG localeat_environment_type
+
 RUN apk update
 WORKDIR /app
 COPY ./ui .
