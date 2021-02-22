@@ -15,11 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import java.time.Duration;
 
-import static com.localeat.core.domains.security.JSONWebTokenService.FIFTEEN_MINUTES;
-import static com.localeat.core.domains.security.JSONWebTokenService.ONE_HOUR;
+import static com.localeat.core.domains.security.JSONWebTokenService.ONE_WEEK;
 
 @RestController
 public class AuthenticationController {
@@ -47,8 +45,8 @@ public class AuthenticationController {
         SecurityContext securityContext = SecurityContextHolder.getContext();
         Authentication authentication = securityContext.getAuthentication();
         Account account = getAccount((UserDetails) securityContext.getAuthentication().getPrincipal());
-        String jwt = jsonWebTokenService.generateJSONWebToken(account, authentication, ONE_HOUR);
-        response.addCookie(getJwtCookie(jwt, ONE_HOUR));
+        String jwt = jsonWebTokenService.generateJSONWebToken(account, authentication, ONE_WEEK);
+        response.addCookie(getJwtCookie(jwt, ONE_WEEK));
     }
 
     /**
@@ -63,8 +61,8 @@ public class AuthenticationController {
     @GetMapping(path= "/accounts/{id}/authentication")
     public void refreshAuthentication(HttpServletResponse response) {
         JwtAuthenticationToken jwtAuthenticationToken = (JwtAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
-        String jwtAuthenticationTokenRefreshed = jsonWebTokenService.generateJSONWebToken(jwtAuthenticationToken.getToken().getClaims(), ONE_HOUR);
-        Cookie cookie = getJwtCookie(jwtAuthenticationTokenRefreshed, ONE_HOUR);
+        String jwtAuthenticationTokenRefreshed = jsonWebTokenService.generateJSONWebToken(jwtAuthenticationToken.getToken().getClaims(), ONE_WEEK);
+        Cookie cookie = getJwtCookie(jwtAuthenticationTokenRefreshed, ONE_WEEK);
         response.addCookie(cookie);
     }
 

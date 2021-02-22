@@ -30,6 +30,7 @@ public class JSONWebTokenService {
     private static final Logger LOGGER = LoggerFactory.getLogger(AuthenticationController.class);
     public static final Duration FIFTEEN_MINUTES = Duration.ofMinutes(15);
     public static final Duration ONE_HOUR = Duration.ofHours(1);
+    public static final Duration ONE_WEEK = Duration.ofDays(7);
 
     public String generateJSONWebToken(Map<String, Object> claims, Duration expirationDelay) {
         JWSSigner signer = new RSASSASigner(LocalEatRSAKey.getRSAPrivateKey());

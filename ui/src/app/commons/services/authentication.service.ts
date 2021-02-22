@@ -22,7 +22,7 @@ export class AuthenticationService {
   public getAuthenticationFromBackend(identifier: string, password: string ): Observable<string> {
     const httpOptions = {
       headers: new HttpHeaders({
-        Authorization : 'Basic ' + btoa(identifier + ':' + password)
+        Authorization : 'Basic ' + btoa(identifier.toLowerCase() + ':' + password)
       }),
       responseType : 'text' as 'text',
       withCredentials : true
