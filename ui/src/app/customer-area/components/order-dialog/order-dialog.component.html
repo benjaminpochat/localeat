@@ -133,15 +133,20 @@
                 La confirmation du mot de passe est différente du mot de passe.
               </span>
             </div>
-            <div>
-              <button
-                mat-flat-button
-                matStepperNext
-                color="accent"
-                (click)="createCustomerAccount()"
-                [disabled]="!areFormFieldsValid(authenticationForm, ['creatingFirstName', 'creatingName', 'creatingEmail', 'creatingPhone', 'creatingPassword', 'creatingPasswordConfirmed'])">
-                  Créer un compte
-              </button>
+            <div class="order__account-creation-button">
+              <div>
+                <button
+                  mat-flat-button
+                  matStepperNext
+                  color="accent"
+                  (click)="createCustomerAccount()"
+                  [disabled]="!areFormFieldsValid(authenticationForm, ['creatingFirstName', 'creatingName', 'creatingEmail', 'creatingPhone', 'creatingPassword', 'creatingPasswordConfirmed']) || accountCreationUnderProcess">
+                    Créer un compte
+                </button>
+              </div>
+              <div>
+                <mat-spinner diameter="25" *ngIf="accountCreationUnderProcess"></mat-spinner>
+              </div>
               <div *ngIf="accountCreationFailureMessage">
                 {{accountCreationFailureMessage}}
               </div>

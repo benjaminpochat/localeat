@@ -37,11 +37,13 @@
   padding-right: 2rem;
 }
 
-.order__confirmation-button{
+.order__confirmation-button,
+.order__account-creation-button {
   display: flex;
   align-items: center;
 }
 
-.order__confirmation-button > div {
+.order__confirmation-button > div,
+.order__account-creation-button > div {
   padding-left: 0.5em;
 }

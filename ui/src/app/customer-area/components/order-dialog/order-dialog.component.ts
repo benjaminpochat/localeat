@@ -44,7 +44,9 @@ export class OrderDialogComponent implements OnInit {
   understood = false;
   orderStored = false;
   authenticationSubmitted = false;
+
   orderUnderProcess = false;
+  accountCreationUnderProcess = false;
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -163,6 +165,7 @@ export class OrderDialogComponent implements OnInit {
     this.userService.createCustomerAccount(actor, password).subscribe(
       () => {
         console.log('Account created');
+        this.accountCreationUnderProcess = false;
         this.login(actor.email, password);
       },
       (error) => {
@@ -171,9 +174,11 @@ export class OrderDialogComponent implements OnInit {
         } else {
           this.accountCreationFailureMessage = 'Impossible de créer un compte avec ces informations.';
         }
+        this.accountCreationUnderProcess = false;
         console.error('account creation failed !');
       }
     );
+    this.accountCreationUnderProcess = true;
   }
 
   passwordConfirmedValidator: ValidatorFn = (formGroup: FormGroup): ValidationErrors | null => {
