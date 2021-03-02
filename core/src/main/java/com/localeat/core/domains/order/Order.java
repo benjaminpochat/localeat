@@ -5,6 +5,8 @@ import com.localeat.core.domains.actor.Customer;
 import com.localeat.core.domains.delivery.Delivery;
 
 import javax.persistence.*;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
 import static javax.persistence.CascadeType.ALL;
@@ -25,7 +27,7 @@ public class Order {
 
     @OneToMany(fetch = EAGER, cascade = {ALL}, mappedBy = "order")
     @JsonManagedReference
-    private Set<OrderItem> orderedItems;
+    private Set<OrderItem> orderedItems = new HashSet<>();
 
     @OneToOne
     private Delivery delivery;
@@ -50,11 +52,16 @@ public class Order {
     }
 
     public Set<OrderItem> getOrderedItems() {
-        return orderedItems;
+        return Collections.unmodifiableSet(orderedItems);
     }
 
     public void setOrderedItems(Set<OrderItem> orderedItems) {
-        this.orderedItems = orderedItems;
+        this.orderedItems.clear();
+        this.orderedItems.addAll(orderedItems);
+    }
+
+    public void addToOrderedItems(OrderItem orderedItem) {
+        this.orderedItems.add(orderedItem);
     }
 
     public Delivery getDelivery() {
