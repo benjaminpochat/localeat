@@ -70,9 +70,10 @@ public class DeliveryController {
                 .collect(Collectors.groupingBy(OrderItem::getBatch, Collectors.summingInt(OrderItem::getQuantity)))  // Map<Batch, Long>
                 .entrySet()
                 .forEach(entry -> {
-                    Batch batch = entry.getKey();
-                    batch.setQuantitySold(entry.getValue().intValue());
-                    batchRepository.save(batch);
+                    Batch summingBatch = entry.getKey();
+                    Batch deliveryBatch = delivery.getAvailableBatches().stream().filter(batch -> batch.getId().equals(summingBatch.getId())).findFirst().orElseThrow();
+                    deliveryBatch.setQuantitySold(entry.getValue().intValue());
+                    batchRepository.save(deliveryBatch);
                 });
     }
 }

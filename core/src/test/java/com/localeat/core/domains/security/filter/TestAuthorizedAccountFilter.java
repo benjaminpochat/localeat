@@ -29,12 +29,7 @@ import static org.assertj.core.api.Assertions.assertThat;
         "/sql/create/com/localeat/domains/order/order_test_data.sql",
 }, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(value = {
-        "/sql/delete/com/localeat/domains/order/test_data.sql",
-        "/sql/delete/com/localeat/domains/delivery/test_data.sql",
-        "/sql/delete/com/localeat/domains/slaughter/test_data.sql",
-        "/sql/delete/com/localeat/domains/actor/test_data.sql",
-        "/sql/delete/com/localeat/domains/farm/test_data.sql",
-        "/sql/delete/com/localeat/domains/security/test_data.sql"
+        "/sql/delete/com/localeat/domains/clear_data.sql"
 }, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 public class TestAuthorizedAccountFilter {
 

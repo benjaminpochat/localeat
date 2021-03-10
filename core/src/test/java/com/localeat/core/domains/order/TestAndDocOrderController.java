@@ -46,7 +46,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         "/sql/create/com/localeat/domains/order/order_test_data.sql",
 }, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(value = {
-        "/sql/delete/com/localeat/domains/order/test_data.sql"
+        "/sql/delete/com/localeat/domains/clear_data.sql"
 }, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 
 public class TestAndDocOrderController {

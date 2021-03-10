@@ -33,12 +33,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @ExtendWith({RestDocumentationExtension.class, SpringExtension.class})
 @Transactional
-@Sql({
+@Sql(value = {
         "/sql/create/com/localeat/domains/security/schema.sql",
         "/sql/create/com/localeat/domains/security/security_test_data.sql",
         "/sql/create/com/localeat/domains/farm/farm_test_data.sql",
         "/sql/create/com/localeat/domains/actor/breeder_test_data.sql"
-})
+}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+@Sql(value = {
+        "/sql/delete/com/localeat/domains/clear_data.sql"
+}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 public class TestAndDocSlaughterController {
     private MockMvc mockMvc;
 

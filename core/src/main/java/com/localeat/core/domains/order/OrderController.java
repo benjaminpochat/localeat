@@ -4,6 +4,7 @@ import com.localeat.core.domains.actor.Customer;
 import com.localeat.core.domains.delivery.Delivery;
 import com.localeat.core.domains.delivery.DeliveryController;
 import com.localeat.core.domains.delivery.DeliveryRepository;
+import com.localeat.core.domains.product.BatchRepository;
 import com.localeat.core.domains.security.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,9 +38,10 @@ public class OrderController {
     public Order createOrder(@PathParam("account") Account account, @RequestBody Order order){
         Customer customer = (Customer) account.getActor();
         order.setCustomer(customer);
+        order.getOrderedItems().forEach(orderItem -> orderItem.setOrder(order));
         Delivery delivery = deliveryRepository.findById(order.getDelivery().getId()).orElseThrow();
-        deliveryController.updateQuantitySoldInBatches(delivery);
         Order orderSaved = orderRepository.save(order);
+        deliveryController.updateQuantitySoldInBatches(delivery);
         orderNotificationToBreederService.notify(orderSaved);
         orderNotificationToCustomerService.notify(orderSaved);
         return orderSaved;

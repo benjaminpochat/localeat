@@ -23,8 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         "/sql/create/com/localeat/domains/security/schema.sql"
 }, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(value = {
-        "/sql/delete/com/localeat/domains/actor/test_data.sql",
-        "/sql/delete/com/localeat/domains/security/test_data.sql"
+        "/sql/delete/com/localeat/domains/clear_data.sql"
 }, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 @SpringBootTest
 @ExtendWith({RestDocumentationExtension.class, SpringExtension.class})

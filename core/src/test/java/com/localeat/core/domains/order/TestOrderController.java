@@ -1,6 +1,5 @@
 package com.localeat.core.domains.order;
 
-import com.localeat.core.domains.actor.Customer;
 import com.localeat.core.domains.delivery.Delivery;
 import com.localeat.core.domains.product.Batch;
 import com.localeat.core.domains.product.BatchRepository;
@@ -10,10 +9,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.test.context.jdbc.Sql;
-
-import java.util.HashSet;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Sql(value = {
@@ -29,7 +25,7 @@ import java.util.HashSet;
         "/sql/create/com/localeat/domains/order/order_test_data.sql",
 }, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(value = {
-        "/sql/delete/com/localeat/domains/order/test_data.sql"
+        "/sql/delete/com/localeat/domains/clear_data.sql"
 }, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 public class TestOrderController {
 
