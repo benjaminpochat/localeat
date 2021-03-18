@@ -121,39 +121,53 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .placeholder-icon {
   background: url(assets/images/icons/svg/placeholder.svg);
   background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .time-icon {
   background: url(assets/images/icons/svg/time.svg);
   background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .calendar-icon {
   background: url(assets/images/icons/svg/calendar.svg);
   background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .cow-icon {
   background: url(assets/images/icons/svg/cow.svg);
   background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .euro-icon {
   background: url(assets/images/icons/svg/euro.svg);
   background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .steak-icon {
   background: url(assets/images/icons/svg/steak.svg);
   background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .farm-icon {
   background: url(assets/images/icons/svg/farm.svg);
   background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .weight-icon {
   background: url(assets/images/icons/svg/weight.svg);
   background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.label-icon {
+  background: url(assets/images/icons/svg/label.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
 }

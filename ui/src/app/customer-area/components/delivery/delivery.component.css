@@ -14,10 +14,12 @@
 }
 
 .delivery-card__address,
-.delivery-card__date {
+.delivery-card__date,
+.delivery-card__animal,
+.delivery-card__animal-id {
   display: grid;
   grid-template-columns: 2rem 1fr;
-  padding: 1rem;
+  padding: 0.3rem;
 }
 
 

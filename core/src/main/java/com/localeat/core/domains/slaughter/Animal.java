@@ -15,6 +15,10 @@ public class Animal {
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
+    @Enumerated(EnumType.STRING)
+    private AnimalBreed breed;
+
+    @Enumerated(EnumType.STRING)
     private AnimalType animalType;
 
     private float liveWeight;
@@ -32,6 +36,14 @@ public class Animal {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public AnimalBreed getBreed() {
+        return breed;
+    }
+
+    public void setBreed(AnimalBreed breed) {
+        this.breed = breed;
     }
 
     public AnimalType getAnimalType() {

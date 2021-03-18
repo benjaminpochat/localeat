@@ -28,6 +28,18 @@
           et {{delivery.deliveryEnd | date: 'shortTime'}}
         </span>
       </div>
+      <div *ngIf="getAnimalLabel()" class="delivery-card__animal">
+        <i class="icon cow-icon"></i>
+        <span>
+          {{getAnimalLabel()}}
+        </span>
+      </div>
+      <div *ngIf="animal.identificationNumber" class="delivery-card__animal-id">
+        <i class="icon label-icon"></i>
+        <span>
+          {{animal.identificationNumber}}
+        </span>
+      </div>
     </div>
     <div class="delivery-card__batch-list">
       <app-product *ngFor="let batch of delivery.availableBatches" [product]="batch.product">

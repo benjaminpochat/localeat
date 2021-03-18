@@ -65,7 +65,8 @@ public class TestAndDocSlaughterController {
         Farm farm1 = farmRepository.findById(1L).orElse(null);
         Farm farm2 = farmRepository.findById(2L).orElse(null);
         var animal1 = GenericBuilder.of(Animal::new)
-                .with(Animal::setAnimalType, AnimalType.BEEF_CHAROLLAIS)
+                .with(Animal::setAnimalType, AnimalType.BEEF_HEIFER)
+                .with(Animal::setBreed, AnimalBreed.BEEF_CHAROLLAIS)
                 .with(Animal::setFinalFarm, farm1)
                 .with(Animal::setIdentificationNumber, "ABCD")
                 .build();
@@ -74,7 +75,8 @@ public class TestAndDocSlaughterController {
                 .with(Slaughter::setAnimal, animal1)
                 .build();
         var animal2 = GenericBuilder.of(Animal::new)
-                .with(Animal::setAnimalType, AnimalType.BEEF_LIMOUSINE)
+                .with(Animal::setAnimalType, AnimalType.BEEF_COW)
+                .with(Animal::setBreed, AnimalBreed.BEEF_LIMOUSINE)
                 .with(Animal::setFinalFarm, farm2)
                 .with(Animal::setIdentificationNumber, "EFGH")
                 .build();
@@ -83,7 +85,8 @@ public class TestAndDocSlaughterController {
                 .with(Slaughter::setAnimal, animal2)
                 .build();
         var animal3 = GenericBuilder.of(Animal::new)
-                .with(Animal::setAnimalType, AnimalType.BEEF_LIMOUSINE)
+                .with(Animal::setAnimalType, AnimalType.BEEF_BULL)
+                .with(Animal::setBreed, AnimalBreed.BEEF_LIMOUSINE)
                 .with(Animal::setFinalFarm, farm1)
                 .with(Animal::setIdentificationNumber, "IJKL")
                 .build();

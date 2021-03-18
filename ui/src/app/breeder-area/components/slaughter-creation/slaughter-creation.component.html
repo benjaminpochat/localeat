@@ -5,13 +5,45 @@
   </div>
 
   <form [formGroup]="slaughterForm" (ngSubmit)="save()">
-    <div class="slaughter-creation-form__slaughter-date">
+
+    <div class="slaughter-creation-form__identification-number">
       <mat-form-field>
-        <input matInput formControlName="slaughterDate" [matDatepicker]="slaughterDatePicker" placeholder="Date d'abattage">
-        <mat-datepicker-toggle matSuffix [for]="slaughterDatePicker"></mat-datepicker-toggle>
-        <mat-datepicker #slaughterDatePicker disabled="false"></mat-datepicker>
+        <input matInput formControlName="identificationNumber" placeholder="Numéro d'identification" required>
       </mat-form-field>
     </div>
+
+    <div class="slaughter-creation-form__animal-type">
+      <mat-form-field>
+        <mat-label required>Type d'animal</mat-label>
+        <select matNativeControl formControlName="animalType">
+          <option selected></option>
+          <option *ngFor="let animalType of getAnimalTypes()" [value]="animalType">
+            {{getAnimalTypeLabel(animalType)}}
+          </option>
+        </select>
+      </mat-form-field>
+    </div>
+
+    <div class="slaughter-creation-form__animal-breed">
+      <mat-form-field>
+        <mat-label required>Race</mat-label>
+        <select matNativeControl formControlName="breed">
+          <option selected></option>
+          <option *ngFor="let breed of getAnimalBreeds()" [value]="breed">
+            {{getAnimalBreedLabel(breed)}}
+          </option>
+        </select>
+      </mat-form-field>
+    </div>
+
+    <div class="slaughter-creation-form__live-weight">
+      <mat-form-field>
+        <input matInput formControlName="liveWeight" placeholder="Poids vif estimé">
+        <mat-slider min="0" max="1000" step="50" tickInterval="10" thumbLabel #liveWeightSlider
+          (change)="setLiveWeight($event)"></mat-slider>
+      </mat-form-field>
+    </div>
+
     <div class="slaughter-creation-form__cutting-date">
       <mat-form-field>
         <input matInput formControlName="cuttingDate" [matDatepicker]="cuttingDatePicker" placeholder="Date découpe">
@@ -19,10 +51,13 @@
         <mat-datepicker #cuttingDatePicker disabled="false"></mat-datepicker>
       </mat-form-field>
     </div>
-    <div class="slaughter-creation-form__live-weight">
+
+    <div class="slaughter-creation-form__slaughter-date">
       <mat-form-field>
-        <input matInput formControlName="liveWeight" placeholder="Poids vif estimé">
-        <mat-slider min="0" max="1000" step="50" tickInterval="10" thumbLabel #liveWeightSlider (change)="setLiveWeight($event)"></mat-slider>
+        <input matInput formControlName="slaughterDate" [matDatepicker]="slaughterDatePicker"
+          placeholder="Date d'abattage">
+        <mat-datepicker-toggle matSuffix [for]="slaughterDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #slaughterDatePicker disabled="false"></mat-datepicker>
       </mat-form-field>
     </div>
     <button mat-button type="submit">Enregistrer</button>

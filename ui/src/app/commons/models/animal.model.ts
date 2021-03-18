@@ -1,3 +1,5 @@
+import { AnimalBreed } from './animal-breed.model';
+import { AnimalType } from './animal-type.model';
 import { Farm } from './farm.model';
 
 export class Animal {
@@ -6,4 +8,6 @@ export class Animal {
   meatWeight: number;
   finalFarm: Farm;
   identificationNumber: string;
+  breed: AnimalBreed;
+  animalType: AnimalType;
 }

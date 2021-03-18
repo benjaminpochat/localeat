@@ -6,6 +6,7 @@ import { CommonsModule } from '../commons/commons.module';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -29,6 +30,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { DeliveryBatchComponent } from './components/delivery-batch/delivery-batch.component';
 import { DeliveryOrdersComponent } from './components/delivery-orders/delivery-orders.component';
 import { PieChartComponent } from './components/piechart/piechart.component';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -47,6 +49,7 @@ import { PieChartComponent } from './components/piechart/piechart.component';
     CommonModule,
     FormsModule,
     HttpClientModule,
+    MatAutocompleteModule,
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
@@ -59,6 +62,7 @@ import { PieChartComponent } from './components/piechart/piechart.component';
     MatInputModule,
     MatListModule,
     MatNativeDateModule,
+    MatRadioModule,
     MatSliderModule,
     MatSlideToggleModule,
     MatStepperModule,

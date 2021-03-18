@@ -1,4 +1,4 @@
-.subtitle div {
+.subtitle > div {
   display: inline-block;
 }
 
@@ -8,4 +8,30 @@
   border-style: solid;
   border-width: 2px;
   border-color: darkolivegreen
+}
+
+.slaughter-card-content {
+  display: flex;
+  justify-content: space-around;
+}
+
+.slaughter-card-content--identification-number {
+  transform: rotate(-45deg);
+  position: relative;
+  overflow: hidden;
+  height: 3rem;
+  width: 3rem;
+  padding: 1rem 1rem 0 1rem;
+  font-size: 0.8rem;
+}
+
+.slaughter-card-content--identification-number:before {
+  content: "";
+  background-image: url(../../../../assets/images/icons/svg/label.svg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  height: inherit;
+  width: inherit;
+  position: absolute;
+  transform: rotate(+45deg) translate(-1rem, -0.4rem);;
 }

@@ -11,11 +11,20 @@
       <mat-card-title>Abattage du {{slaughter.slaughterDate | date: 'longDate'}}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      Date de l'abattage : {{slaughter.slaughterDate | date}}
-      <br>
-      Date de la découpe : {{slaughter.cuttingDate | date}}
-      <br>
-      Poids vif estimé : {{slaughter.animal.liveWeight}} kg
+      <div class="slaughter-card-content">
+        <div class="slaughter-card-content--description">
+          {{getAnimalDescription(slaughter.animal)}}
+          <br *ngIf="getAnimalDescription(slaughter.animal)">
+          Date de l'abattage : {{slaughter.slaughterDate | date}}
+          <br>
+          Date de la découpe : {{slaughter.cuttingDate | date}}
+          <br>
+          Poids vif estimé : {{slaughter.animal.liveWeight}} kg
+        </div>
+        <div class="slaughter-card-content--identification-number">
+          {{slaughter.animal.identificationNumber ? slaughter.animal.identificationNumber : "????"}}
+        </div>
+      </div>
     </mat-card-content>
     <mat-card-actions>
       <button mat-button *ngIf='!slaughter.delivery' (click)="showDeliveryCreation(slaughter)">Publier la vente</button>

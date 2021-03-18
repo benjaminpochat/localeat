@@ -23,6 +23,9 @@
   font-size: var(--main-menu-font-size);
 }
 
+.slaughter-creation-form__identification-number > *,
+.slaughter-creation-form__animal-type > *,
+.slaughter-creation-form__animal-breed > *,
 .slaughter-creation-form__slaughter-date > *,
 .slaughter-creation-form__cutting-date > *,
 .slaughter-creation-form__live-weight > * {
