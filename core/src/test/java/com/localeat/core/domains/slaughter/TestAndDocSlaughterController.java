@@ -4,6 +4,7 @@ import com.localeat.core.commons.GenericBuilder;
 import com.localeat.core.domains.farm.Farm;
 import com.localeat.core.domains.farm.FarmRepository;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -102,42 +103,43 @@ public class TestAndDocSlaughterController {
         this.mockMvc
                 .perform(get("/accounts/1/slaughters"))
                 .andExpect(status().isOk())
-                .andExpect(content().json("[" +
-                        "{" +
-                            "\"id\":3," +
-                            "\"animal\":{" +
-                                "\"id\":3," +
-                                "\"animalType\":\"BEEF_CHAROLLAIS\"," +
-                                "\"liveWeight\":0.0," +
-                                "\"meatWeight\":0.0," +
-                                "\"finalFarm\":{" +
-                                    "\"id\":1," +
-                                    "\"name\":\"La ferme de la Riviere\"," +
-                                    "\"description\":\"La ferme de la Riviere est un elevage d'excellence\"" +
-                                "}," +
-                                "\"identificationNumber\":\"ABCD\"" +
-                            "}," +
-                            "\"delivery\":null," +
-                            "\"slaughterDate\":\"2020-01-01\"," +
-                            "\"cuttingDate\":null" +
-                        "},{" +
-                            "\"id\":5," +
-                            "\"animal\":{" +
-                                "\"id\":5," +
-                                "\"animalType\":\"BEEF_LIMOUSINE\"," +
-                                "\"liveWeight\":0.0," +
-                                "\"meatWeight\":0.0," +
-                                "\"finalFarm\":{" +
-                                    "\"id\":1," +
-                                    "\"name\":\"La ferme de la Riviere\"," +
-                                    "\"description\":\"La ferme de la Riviere est un elevage d'excellence\"" +
-                                "}," +
-                                "\"identificationNumber\":\"IJKL\"" +
-                            "}," +
-                            "\"delivery\":null," +
-                            "\"slaughterDate\":\"2020-01-15\"," +
-                            "\"cuttingDate\":null" +
-                        "}]"))
+                .andExpect(content().json("[ {\n" +
+                        "  \"id\" : 1,\n" +
+                        "  \"animal\" : {\n" +
+                        "    \"id\" : 1,\n" +
+                        "    \"breed\" : \"BEEF_CHAROLLAIS\",\n" +
+                        "    \"animalType\" : \"BEEF_HEIFER\",\n" +
+                        "    \"liveWeight\" : 0.0,\n" +
+                        "    \"meatWeight\" : 0.0,\n" +
+                        "    \"finalFarm\" : {\n" +
+                        "      \"id\" : 1,\n" +
+                        "      \"name\" : \"La ferme de la Riviere\",\n" +
+                        "      \"description\" : \"La ferme de la Riviere est un elevage d'excellence\"\n" +
+                        "    },\n" +
+                        "    \"identificationNumber\" : \"ABCD\"\n" +
+                        "  },\n" +
+                        "  \"delivery\" : null,\n" +
+                        "  \"slaughterDate\" : \"2020-01-01\",\n" +
+                        "  \"cuttingDate\" : null\n" +
+                        "}, {\n" +
+                        "  \"id\" : 3,\n" +
+                        "  \"animal\" : {\n" +
+                        "    \"id\" : 3,\n" +
+                        "    \"breed\" : \"BEEF_LIMOUSINE\",\n" +
+                        "    \"animalType\" : \"BEEF_BULL\",\n" +
+                        "    \"liveWeight\" : 0.0,\n" +
+                        "    \"meatWeight\" : 0.0,\n" +
+                        "    \"finalFarm\" : {\n" +
+                        "      \"id\" : 1,\n" +
+                        "      \"name\" : \"La ferme de la Riviere\",\n" +
+                        "      \"description\" : \"La ferme de la Riviere est un elevage d'excellence\"\n" +
+                        "    },\n" +
+                        "    \"identificationNumber\" : \"IJKL\"\n" +
+                        "  },\n" +
+                        "  \"delivery\" : null,\n" +
+                        "  \"slaughterDate\" : \"2020-01-15\",\n" +
+                        "  \"cuttingDate\" : null\n" +
+                        "} ]"))
                 .andDo(document(
                         "get-all-slaughters",
                         preprocessRequest(prettyPrint()),
@@ -149,8 +151,9 @@ public class TestAndDocSlaughterController {
         // given
         var requestBody = "{\n" +
                 "  \"animal\" : {\n" +
-                "    \"animalType\" : \"BEEF_CHAROLLAIS\",\n" +
-                "    \"finalFarm\" : {\"id\" : 1},\n" +
+                "    \"animalType\" : \"BEEF_VEAL\",\n" +
+                "    \"animalBreed\" : \"BEEF_CHAROLLAIS\",\n" +
+                "    \"finalFarm\" : {\"id\" : 2},\n" +
                 "    \"identificationNumber\" : \"ABCD\"\n" +
                 "  },\n" +
                 "  \"slaughterDate\" : \"2020-01-01\"\n" +
@@ -158,7 +161,7 @@ public class TestAndDocSlaughterController {
 
         // when, then
         this.mockMvc
-                .perform(post("/accounts/1/slaughters")
+                .perform(post("/accounts/2/slaughters")
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestBody))
@@ -170,6 +173,7 @@ public class TestAndDocSlaughterController {
     }
 
     @Test
+    //@Disabled
     public void createSlaughterWithDelivery() throws Exception {
         // given
         var requestBody = "{" +
@@ -177,7 +181,7 @@ public class TestAndDocSlaughterController {
                 "   \"animalType\":null," +
                 "   \"liveWeight\":200," +
                 "   \"meatWeight\":80," +
-                "   \"finalFarm\":null," +
+                "    \"finalFarm\" : {\"id\" : 2},\n" +
                 "   \"identificationNumber\":null" +
                 "   }," +
                 "\"delivery\":{" +

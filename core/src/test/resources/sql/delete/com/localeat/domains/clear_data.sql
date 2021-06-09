@@ -15,6 +15,8 @@ delete from addresses;
 -- slaughter domain
 delete from slaughters;
 delete from animals;
+alter sequence slaughter_id_seq restart with 1;
+alter sequence animal_id_seq restart with 1;
 
 -- actor domain
 delete from breeders ;

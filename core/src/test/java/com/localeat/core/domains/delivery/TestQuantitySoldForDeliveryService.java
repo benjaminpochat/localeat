@@ -3,9 +3,11 @@ package com.localeat.core.domains.delivery;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.transaction.annotation.Transactional;
 
+@SpringBootTest
 @Transactional
 @Sql({
         "/sql/create/com/localeat/domains/security/schema.sql",
@@ -24,12 +26,11 @@ import org.springframework.transaction.annotation.Transactional;
 public class TestQuantitySoldForDeliveryService {
 
     @Autowired
-    private DeliveryRepository deliveryRepository;
+    private QuantitySoldForDeliveryService quantitySoldForDeliveryService;
 
     @Test
     public void calculatePercentageSold_should_return_the_right_quantity(){
         // given
-        var quantitySoldForDeliveryService = new QuantitySoldForDeliveryService();
         var delivery = new Delivery();
         delivery.setId(1L);
 
@@ -37,6 +38,6 @@ public class TestQuantitySoldForDeliveryService {
         Float quantitySold = quantitySoldForDeliveryService.calculatePercentageSold(delivery);
 
         // then
-        Assertions.assertThat(quantitySold).isEqualTo(300f);
+        Assertions.assertThat(quantitySold).isEqualTo(0.75f);
     }
 }
