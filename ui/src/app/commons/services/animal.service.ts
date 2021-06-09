@@ -9,7 +9,7 @@ import { Animal } from 'src/app/commons/models/animal.model';
 export class AnimalService {
 
   getAnimalDescription(animal: Animal) {
-    return AnimalTypeUtils.getAnimalTypeLabel(animal.animalType)
-      + (AnimalBreedUtils.getAnimalBreedLabel(animal.breed) ? ' race ' + AnimalBreedUtils.getAnimalBreedLabel(animal.breed) : '')
+    return AnimalTypeUtils.getAnimalTypeLabel(animal?.animalType)
+      + (AnimalBreedUtils.getAnimalBreedLabel(animal?.breed) ? ' race ' + AnimalBreedUtils.getAnimalBreedLabel(animal.breed) : '')
   }
 }

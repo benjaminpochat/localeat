@@ -34,7 +34,7 @@
           {{getAnimalLabel()}}
         </span>
       </div>
-      <div *ngIf="animal.identificationNumber" class="delivery-card__animal-id">
+      <div *ngIf="animal?.identificationNumber" class="delivery-card__animal-id">
         <i class="icon label-icon"></i>
         <span>
           {{animal.identificationNumber}}
