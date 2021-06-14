@@ -16,10 +16,64 @@
 .delivery-card__address,
 .delivery-card__date,
 .delivery-card__animal,
-.delivery-card__animal-id {
+.delivery-card__animal-id,
+.delivery-card__quantity-sold {
   display: grid;
   grid-template-columns: 2rem 1fr;
   padding: 0.3rem;
 }
 
+.delivery-card__quantity-sold {
+  position: absolute;
+}
 
+.delivery-card__quantity-sold > div {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+}
+
+.delivery-card__quantity-sold > div > div {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.delivery-card__quantity-sold > div > div > div:nth-child(n+2) {
+  font-size: small;
+}
+
+@media (min-width:600px) {
+  .delivery-card__quantity-sold app-piechart {
+    width: 5rem;
+    height: 5rem;
+  }
+
+  .delivery-card__quantity-sold {
+    top: 0.5rem;
+    right: 2rem;
+  }
+
+  .delivery-card__content {
+    padding-right: 5rem;
+  }
+}
+
+@media (max-width:600px) {
+  .delivery-card__quantity-sold app-piechart {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .delivery-card__quantity-sold {
+    top: 0.5rem;
+    right: 1rem;
+  }
+
+  .delivery-card__title {
+    padding-right: 3rem;
+  }
+}

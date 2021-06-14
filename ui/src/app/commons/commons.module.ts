@@ -9,7 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -20,6 +20,7 @@ import { SideMenuComponent } from './components/side-menu/side-menu.component';
 import { PasswordRenewalComponent } from './components/password-renewal/password-renewal.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ImageGaleryComponent } from './components/image-galery/image-galery.component';
+import { PieChartComponent } from './components/piechart/piechart.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ImageGaleryComponent } from './components/image-galery/image-galery.com
     MainMenuComponent,
     SideMenuComponent,
     PasswordRenewalComponent,
+    PieChartComponent,
     FooterComponent,
     ImageGaleryComponent,
   ],
@@ -53,7 +55,8 @@ import { ImageGaleryComponent } from './components/image-galery/image-galery.com
     FooterComponent,
     ImageGaleryComponent,
     MainMenuComponent,
-    SideMenuComponent,
+    PieChartComponent,
+    SideMenuComponent
   ]
 })
 export class CommonsModule { }

@@ -173,7 +173,6 @@ public class TestAndDocSlaughterController {
     }
 
     @Test
-    //@Disabled
     public void createSlaughterWithDelivery() throws Exception {
         // given
         var requestBody = "{" +

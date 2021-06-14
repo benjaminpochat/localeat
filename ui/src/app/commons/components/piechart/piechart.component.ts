@@ -1,4 +1,4 @@
-import { ViewChild } from '@angular/core';
+import { OnInit, ViewChild } from '@angular/core';
 import { Input } from '@angular/core';
 import { Component } from '@angular/core';
 
@@ -7,8 +7,8 @@ import { Component } from '@angular/core';
   template: `
   <style>
     .pie-chart {
-      width: 3rem;
-      height: 3rem;
+      width: 100%;
+      height: 100%;
       border-radius: 50%;
     }
   </style>
@@ -23,7 +23,7 @@ export class PieChartComponent {
   radius = 25;
 
   @ViewChild('piechart')
-  pieChart
+  pieChart;
 
   public setRadius(radius){
     this.pieChart.nativeElement.style.setProperty('background-image', 'conic-gradient(darkolivegreen ' + radius.toString() + 'deg , lightgrey ' + radius.toString() + 'deg 360deg)');

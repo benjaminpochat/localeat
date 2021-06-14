@@ -29,7 +29,7 @@ import { ProductComponent } from './components/product/product.component';
 import { MatIconModule } from '@angular/material/icon';
 import { DeliveryBatchComponent } from './components/delivery-batch/delivery-batch.component';
 import { DeliveryOrdersComponent } from './components/delivery-orders/delivery-orders.component';
-import { PieChartComponent } from './components/piechart/piechart.component';
+import { PieChartComponent } from '../commons/components/piechart/piechart.component';
 import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
@@ -42,8 +42,7 @@ import { MatRadioModule } from '@angular/material/radio';
     ProductComponent,
     ProductTemplatesListComponent,
     DeliveryBatchComponent,
-    DeliveryOrdersComponent,
-    PieChartComponent
+    DeliveryOrdersComponent
   ],
   imports: [
     CommonModule,

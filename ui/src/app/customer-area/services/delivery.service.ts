@@ -20,4 +20,8 @@ export class DeliveryService {
   getAnimalForDelivery(delivery: Delivery): Observable<Animal> {
     return this.http.get<Animal>(environment.localeatCoreUrl + '/deliveries/' + delivery.id + '/animals');
   }
+
+  getQuantitySoldForDelivery(delivery: Delivery): Observable<number> {
+    return this.http.get<number>(environment.localeatCoreUrl + '/deliveries/' + delivery.id + '/quantitySold');
+  }
 }

@@ -3,7 +3,7 @@ import { Order } from 'src/app/commons/models/order.model';
 import { Slaughter } from 'src/app/commons/models/slaughter.model';
 import { DeliveryService } from '../../services/delivery.service';
 import { DeliveryOrdersComponent } from '../delivery-orders/delivery-orders.component';
-import { PieChartComponent } from '../piechart/piechart.component';
+import { PieChartComponent } from '../../../commons/components/piechart/piechart.component';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({

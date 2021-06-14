@@ -1,12 +1,22 @@
 <mat-card class="delivery-card">
   <mat-card-header>
-    <mat-card-title>
+    <mat-card-title class="delivery-card__title">
       <span>
         Livraison du {{delivery.deliveryStart | date: 'shortDate'}}
       </span>
       <span>
         - {{delivery.deliveryAddress.city}} - {{delivery.deliveryAddress.name}}
       </span>
+      <div class="delivery-card__quantity-sold">
+        <div>
+          <app-piechart dirWithStyleBinding></app-piechart>
+          <div>
+            <div>{{quantitySold | percent}}</div>
+            <div>déjà</div>
+            <div>vendu</div>
+          </div>
+        </div>
+      </div>
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
