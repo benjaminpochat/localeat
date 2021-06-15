@@ -37,11 +37,12 @@ export class DeliveryComponent implements OnInit {
   ngOnInit(): void {
     this.deliveryService.getAnimalForDelivery(this.delivery).subscribe(
       animal => this.animal = animal);
-    this.deliveryService.getQuantitySoldForDelivery(this.delivery).subscribe(
+    this.deliveryService.getQuantitySoldForDelivery(this.delivery).then(
       quantitySold => {
         this.pieChartComponent.setRadius(360 * quantitySold);
         this.quantitySold = quantitySold;
-      });
+      }
+    );
   }
 
   showOrderComponent(delivery: Delivery) {

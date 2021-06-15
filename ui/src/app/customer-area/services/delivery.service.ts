@@ -21,7 +21,7 @@ export class DeliveryService {
     return this.http.get<Animal>(environment.localeatCoreUrl + '/deliveries/' + delivery.id + '/animals');
   }
 
-  getQuantitySoldForDelivery(delivery: Delivery): Observable<number> {
-    return this.http.get<number>(environment.localeatCoreUrl + '/deliveries/' + delivery.id + '/quantitySold');
+  async getQuantitySoldForDelivery(delivery: Delivery): Promise<number> {
+    return fetch(environment.localeatCoreUrl + '/deliveries/' + delivery.id + '/quantitySold').then(response => response.json());
   }
 }
