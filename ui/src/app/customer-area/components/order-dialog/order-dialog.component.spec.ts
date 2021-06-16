@@ -13,9 +13,11 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
 import { Type } from '@angular/core';
@@ -30,7 +32,6 @@ import { Farm } from 'src/app/commons/models/farm.model';
 import { DeliveryAddress } from 'src/app/commons/models/delivery-address.model';
 import { AuthenticationServiceMock } from 'src/app/commons/services/authentication.service.mock';
 import { Batch } from 'src/app/commons/models/batch.model';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 describe('OrderDialogComponent', () => {
 
@@ -55,6 +56,7 @@ describe('OrderDialogComponent', () => {
     MatSliderModule,
     MatSlideToggleModule,
     MatStepperModule,
+    MatSnackBarModule,
     MatTableModule,
   ];
 
@@ -85,8 +87,7 @@ describe('OrderDialogComponent', () => {
         ],
         imports: [
           HttpClientTestingModule,
-          CommonsModule,
-          MatSnackBarModule
+          CommonsModule
         ].concat(
           basicAngularImports,
           materialImports),
@@ -126,7 +127,8 @@ describe('OrderDialogComponent', () => {
         imports: [
           HttpClientTestingModule,
           CommonsModule,
-          MatSnackBarModule
+          MatSnackBarModule,
+          MatProgressSpinnerModule
         ].concat(
           basicAngularImports,
           materialImports

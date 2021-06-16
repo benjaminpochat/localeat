@@ -2,6 +2,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
+import { MatFormField } from '@angular/material/form-field';
 import { RouterTestingModule } from '@angular/router/testing';
 import { PasswordRenewalComponent } from './password-renewal.component';
 
@@ -12,7 +13,7 @@ describe('PasswordRenewalComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PasswordRenewalComponent ],
+      declarations: [ PasswordRenewalComponent, MatFormField ],
       imports: [HttpClientTestingModule, RouterTestingModule],
       providers: [FormBuilder]
     })

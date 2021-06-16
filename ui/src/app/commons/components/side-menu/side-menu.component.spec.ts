@@ -1,4 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatIcon } from '@angular/material/icon';
+import { MatSidenav } from '@angular/material/sidenav';
 
 import { SideMenuComponent } from './side-menu.component';
 
@@ -8,7 +10,7 @@ describe('SideMenuComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SideMenuComponent ]
+      declarations: [ SideMenuComponent, MatIcon, MatSidenav ]
     })
     .compileComponents();
   }));

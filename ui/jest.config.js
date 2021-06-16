@@ -1,10 +1,7 @@
-const {defaults} = require('jest-config');
-
+// jest.config.js
 module.exports = {
   verbose: true,
   collectCoverage: true,
-  collectCoverageFrom: ["src/**/*.ts"],
-  moduleNameMapper: {
-    'src/(.*)': '<rootDir>/src/$1',
-  },
-}
+  preset: 'jest-preset-angular',
+  setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
+};

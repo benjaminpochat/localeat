@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatIcon } from '@angular/material/icon';
 
 import { ProductSelectorComponent } from './product-selector.component';
 
@@ -8,7 +9,7 @@ describe('ProductSelectorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProductSelectorComponent ]
+      declarations: [ ProductSelectorComponent, MatIcon ]
     })
     .compileComponents();
   }));

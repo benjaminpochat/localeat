@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatSpinner } from '@angular/material/progress-spinner';
 
 import { ImageGaleryComponent } from './image-galery.component';
 
@@ -8,7 +9,7 @@ describe('ImageGaleryComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ImageGaleryComponent ]
+      declarations: [ ImageGaleryComponent, MatSpinner ]
     })
     .compileComponents();
   }));

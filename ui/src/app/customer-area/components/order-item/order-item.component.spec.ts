@@ -1,4 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ProductComponent } from 'src/app/breeder-area/components/product/product.component';
+import { CommonsModule } from 'src/app/commons/commons.module';
 
 import { OrderItemComponent } from './order-item.component';
 
