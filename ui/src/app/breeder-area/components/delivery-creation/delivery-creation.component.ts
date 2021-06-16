@@ -4,13 +4,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Delivery } from 'src/app/commons/models/delivery.model';
 import { DeliveryAddress } from 'src/app/commons/models/delivery-address.model';
 import { Product } from 'src/app/commons/models/product.model';
-import { SlaughterService } from '../../services/slaughter.service';
-import { ProductService } from '../../services/product.service';
+import { SlaughterService } from 'src/app/breeder-area/services/slaughter.service';
+import { ProductService } from 'src/app/breeder-area/services/product.service';
 import { Batch } from 'src/app/commons/models/batch.model';
 import { ProductTemplate } from 'src/app/commons/models/product-template.model';
 import { ProductComponent } from '../product/product.component';
 import { ViewChild } from '@angular/core';
-import { Image } from '../../../commons/models/image.model';
+import { Image } from 'src/app/commons/models/image.model';
 
 @Component({
   selector: 'app-delivery-creation',

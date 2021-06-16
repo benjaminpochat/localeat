@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { SlaughterService } from '../../services/slaughter.service';
+import { SlaughterService } from 'src/app/breeder-area/services/slaughter.service';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Slaughter } from 'src/app/commons/models/slaughter.model';
 import { MatSliderChange } from '@angular/material/slider';

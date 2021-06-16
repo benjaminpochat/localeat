@@ -5,8 +5,8 @@ import { Authentication } from 'src/app/commons/models/authentication.model';
 import { Delivery } from 'src/app/commons/models/delivery.model';
 import { Order } from 'src/app/commons/models/order.model';
 import { AuthenticationService } from 'src/app/commons/services/authentication.service';
-import { DeliveryService } from '../../services/delivery.service';
-import { OrderService } from '../../services/order.service';
+import { DeliveryService } from 'src/app/customer-area/services/delivery.service';
+import { OrderService } from 'src/app/customer-area/services/order.service';
 import { OrderDialogComponent } from '../order-dialog/order-dialog.component';
 
 @Component({

@@ -1,13 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SlaughtersListComponent } from './slaughters-list.component';
-import { HttpTestingController, HttpClientTestingModule } from '@angular/common/http/testing';
-import { SlaughterService } from '../../services/slaughter.service';
-import { Type } from '@angular/core';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { SlaughterService } from 'src/app/breeder-area/services/slaughter.service';
 import { FormBuilder } from '@angular/forms';
 
-import { environment } from 'src/environments/environment';
-import { UrlService } from 'src/app/commons/services/url.service';
 
 describe('SlaughtersListComponent', () => {
   let slaughtersListComponent: SlaughtersListComponent;

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProductTemplate } from 'src/app/commons/models/product-template.model';
-import { ProductService } from '../../services/product.service';
+import { ProductService } from 'src/app/breeder-area/services/product.service';
 import { ProductComponent } from '../product/product.component';
 
 @Component({

@@ -25,7 +25,7 @@ describe('ProductTemplatesLisComponent', () => {
     productTemplatesListComponent = fixture.componentInstance;
     httpMock = fixture.debugElement.injector.get<HttpTestingController>(HttpTestingController as Type<HttpTestingController>);
     urlService = fixture.debugElement.injector.get<UrlService>(UrlService as Type<UrlService>);
-    spyOn(urlService, 'getAuthenticatedUrl').and.returnValue(environment.localeatCoreUrl + '/accounts/1/products');
+    jest.spyOn(urlService, 'getAuthenticatedUrl').mockImplementation(() => environment.localeatCoreUrl + '/accounts/1/products');
     fixture.detectChanges();
   });
 

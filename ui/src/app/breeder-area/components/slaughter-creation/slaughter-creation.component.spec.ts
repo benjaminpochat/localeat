@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SlaughterCreationComponent } from './slaughter-creation.component';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { SlaughterService } from '../../services/slaughter.service';
+import { SlaughterService } from 'src/app/breeder-area/services/slaughter.service';
 import { Type } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 

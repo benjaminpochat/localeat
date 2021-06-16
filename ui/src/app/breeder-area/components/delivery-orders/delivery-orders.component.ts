@@ -3,7 +3,7 @@ import { Delivery } from 'src/app/commons/models/delivery.model';
 import { OrderStatus } from 'src/app/commons/models/order-status.model';
 import { Order } from 'src/app/commons/models/order.model';
 import { Slaughter } from 'src/app/commons/models/slaughter.model';
-import { DeliveryService } from '../../services/delivery.service';
+import { DeliveryService } from 'src/app/breeder-area/services/delivery.service';
 
 @Component({
   selector: 'app-delivery-orders',

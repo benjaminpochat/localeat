@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AuthenticationService } from '../../../commons/services/authentication.service';
+import { AuthenticationService } from 'src/app/commons/services/authentication.service';
 import { SideMenuComponent } from 'src/app/commons/components/side-menu/side-menu.component';
 import { Delivery } from 'src/app/commons/models/delivery.model';
 import { Slaughter } from 'src/app/commons/models/slaughter.model';
-import { DeliveryService } from '../../services/delivery.service';
-import { SlaughterService } from '../../services/slaughter.service';
+import { DeliveryService } from 'src/app/breeder-area/services/delivery.service';
+import { SlaughterService } from 'src/app/breeder-area/services/slaughter.service';
 
 @Component({
   selector: 'app-breeder-area',

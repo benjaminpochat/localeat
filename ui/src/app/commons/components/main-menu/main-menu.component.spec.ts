@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MainMenuComponent } from './main-menu.component';
 import { HttpTestingController, HttpClientTestingModule } from '@angular/common/http/testing';
 import { Type } from '@angular/core';
-import { AuthenticationService } from '../../services/authentication.service';
+import { AuthenticationService } from 'src/app/commons/services/authentication.service';
 import { RouterTestingModule } from '@angular/router/testing';
 
 describe('MainMenuComponent', () => {

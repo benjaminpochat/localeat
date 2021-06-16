@@ -1,6 +1,6 @@
-import { Account } from '../models/account.model';
-import { Actor } from '../models/actor.model';
-import { Authentication } from '../models/authentication.model';
+import { Account } from 'src/app/commons/models/account.model';
+import { Actor } from 'src/app/commons/models/actor.model';
+import { Authentication } from 'src/app/commons/models/authentication.model';
 import { AuthenticationService } from './authentication.service';
 
 export class AuthenticationServiceMock {

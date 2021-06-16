@@ -6,7 +6,7 @@ import { MatRadioChange } from '@angular/material/radio';
 import { Actor } from 'src/app/commons/models/actor.model';
 import { AccountService } from 'src/app/commons/services/account.service';
 import { Delivery } from 'src/app/commons/models/delivery.model';
-import { OrderService } from '../../services/order.service';
+import { OrderService } from 'src/app/customer-area/services/order.service';
 import { Order } from 'src/app/commons/models/order.model';
 import { OrderItem } from 'src/app/commons/models/order-item.model';
 import { EventEmitter } from '@angular/core';

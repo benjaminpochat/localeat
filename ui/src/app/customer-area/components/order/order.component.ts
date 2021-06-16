@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Order } from 'src/app/commons/models/order.model';
-import { OrderService } from '../../services/order.service';
+import { OrderService } from 'src/app/customer-area/services/order.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({

@@ -1,9 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
-
-import { ProductComponent } from './product.component';
+import { ProductComponent } from 'src/app/breeder-area/components/product/product.component';
 
 describe('ProductComponent', () => {
   let component: ProductComponent;

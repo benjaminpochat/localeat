@@ -1,10 +1,10 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { observable, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ProductTemplate } from 'src/app/commons/models/product-template.model';
 import { Product } from 'src/app/commons/models/product.model';
-import { ProductService } from '../../services/product.service';
-import { Image } from '../../../commons/models/image.model';
+import { ProductService } from 'src/app/breeder-area/services/product.service';
+import { Image } from 'src/app/commons/models/image.model';
 
 @Component({
   selector: 'app-product',

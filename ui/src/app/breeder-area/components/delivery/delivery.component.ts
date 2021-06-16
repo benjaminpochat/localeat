@@ -1,9 +1,9 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Order } from 'src/app/commons/models/order.model';
 import { Slaughter } from 'src/app/commons/models/slaughter.model';
-import { DeliveryService } from '../../services/delivery.service';
+import { DeliveryService } from 'src/app/breeder-area/services/delivery.service';
 import { DeliveryOrdersComponent } from '../delivery-orders/delivery-orders.component';
-import { PieChartComponent } from '../../../commons/components/piechart/piechart.component';
+import { PieChartComponent } from 'src/app/commons/components/piechart/piechart.component';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({

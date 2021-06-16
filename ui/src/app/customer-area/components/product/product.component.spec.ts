@@ -1,7 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { ProductComponent } from './product.component';
+import { ProductComponent } from 'src/app/customer-area/components/product/product.component';
 
 describe('ProductComponent', () => {
   let productComponent: ProductComponent;

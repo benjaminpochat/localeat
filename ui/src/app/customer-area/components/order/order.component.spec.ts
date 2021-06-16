@@ -26,7 +26,7 @@ describe('OrderComponent', () => {
     orderComponent = fixture.componentInstance;
     mockOrder();
     urlService = fixture.debugElement.injector.get<UrlService>(UrlService as Type<UrlService>);
-    spyOn(urlService, 'getAuthenticatedUrl').and.returnValue(environment.localeatCoreUrl + '/accounts/1/orders');
+    jest.spyOn(urlService, 'getAuthenticatedUrl').mockImplementation(() => environment.localeatCoreUrl + '/accounts/1/orders');
     fixture.detectChanges();
   });
 

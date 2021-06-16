@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AccountService } from '../../services/account.service';
-import { AuthenticationService } from '../../services/authentication.service';
+import { AccountService } from 'src/app/commons/services/account.service';
+import { AuthenticationService } from 'src/app/commons/services/authentication.service';
 
 @Component({
   selector: 'app-password-renewal',

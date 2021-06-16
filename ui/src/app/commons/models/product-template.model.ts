@@ -1,5 +1,5 @@
 import { Farm } from './farm.model';
-import { Image } from '../../commons/models/image.model';
+import { Image } from 'src/app/commons/models/image.model';
 
 export class ProductTemplate {
   id: number;

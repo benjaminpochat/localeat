@@ -5,7 +5,7 @@ import { AnimalTypeUtils } from 'src/app/commons/models/animal-type.model';
 import { Animal } from 'src/app/commons/models/animal.model';
 import { Slaughter } from 'src/app/commons/models/slaughter.model';
 import { AnimalService } from 'src/app/commons/services/animal.service';
-import { SlaughterService } from '../../services/slaughter.service';
+import { SlaughterService } from 'src/app/breeder-area/services/slaughter.service';
 import { DeliveryCreationComponent } from '../delivery-creation/delivery-creation.component';
 import { SlaughterCreationComponent } from '../slaughter-creation/slaughter-creation.component';
 

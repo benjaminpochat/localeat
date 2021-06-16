@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthenticationService } from './authentication.service';
 import * as decodeJwt from 'jwt-decode';
-import { Authentication } from '../models/authentication.model';
+import { Authentication } from 'src/app/commons/models/authentication.model';
 
 @Injectable({
   providedIn: 'root'

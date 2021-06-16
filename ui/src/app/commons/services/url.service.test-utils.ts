@@ -4,7 +4,7 @@ import { UrlService } from './url.service';
 export class UrlServiceTestUtils {
 
   static mockUrlService(urlService: UrlService) {
-    spyOn(urlService, 'getAuthenticatedUrl').and.callFake(
+    jest.spyOn(urlService, 'getAuthenticatedUrl').mockImplementation(
       ([...uriElements]) => environment.localeatCoreUrl + '/accounts/1/' + uriElements.join('/')
     );
   }
