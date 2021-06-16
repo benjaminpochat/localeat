@@ -29,7 +29,7 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Build, and test with "ng test"
-        run: npm set progress=false && npm install && npm run test --coverage
+        run: npm set progress=false && npm install && npm build && npm run test --coverage
         working-directory: ./ui
 
       - name: Publish coverage to Coveralls
