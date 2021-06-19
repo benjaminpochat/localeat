@@ -33,9 +33,3 @@ jobs:
           COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
         run: npm set progress=false && npm install && npm run test --coverage && node ./node_modules/coveralls/bin/coveralls.js < ./coverage/lcov.info
         working-directory: ./ui
-
-#      - name: Publish coverage to Coveralls
-#        uses: coverallsapp/github-action@master
-#        with:
-#          github-token: ${{ secrets.GITHUB_TOKEN }}
-#          path-to-lcov: ./ui/coverage/lcov.info
