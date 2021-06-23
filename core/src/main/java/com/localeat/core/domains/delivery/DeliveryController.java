@@ -82,16 +82,5 @@ public class DeliveryController {
     }
 
 
-    public void updateQuantitySoldInBatches(Delivery delivery) {
-        StreamSupport.stream(orderItemRepository.findByDelivery(delivery).spliterator(), false)
-                .filter(orderItem -> !OrderStatus.CANCELLED.equals(orderItem.getOrder().getStatus()))                // Stream<Order>
-                .collect(Collectors.groupingBy(OrderItem::getBatch, Collectors.summingInt(OrderItem::getQuantity)))  // Map<Batch, Long>
-                .entrySet()
-                .forEach(entry -> {
-                    Batch summingBatch = entry.getKey();
-                    Batch deliveryBatch = delivery.getAvailableBatches().stream().filter(batch -> batch.getId().equals(summingBatch.getId())).findFirst().orElseThrow();
-                    deliveryBatch.setQuantitySold(entry.getValue().intValue());
-                    batchRepository.save(deliveryBatch);
-                });
-    }
+
 }

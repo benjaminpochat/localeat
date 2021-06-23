@@ -27,11 +27,13 @@ import { ProductComponent } from './components/product/product.component';
 import { ProductSelectorComponent } from './components/product-selector/product-selector.component';
 import { OrderItemComponent } from './components/order-item/order-item.component';
 import { MatProgressSpinner, MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { OrderDetailsComponent } from './components/order-details/order-details.component';
 
 @NgModule({
   declarations: [
     CustomerAreaComponent,
     DeliveryComponent,
+    OrderDetailsComponent,
     OrderDialogComponent,
     OrderComponent,
     OrderItemComponent,

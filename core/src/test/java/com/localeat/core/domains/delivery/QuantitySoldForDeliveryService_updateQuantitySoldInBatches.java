@@ -25,10 +25,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Sql(value = {
         "/sql/delete/com/localeat/domains/clear_data.sql"
 }, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-public class TestDeliveryController_updateQuantitySoldInBatches {
+public class QuantitySoldForDeliveryService_updateQuantitySoldInBatches {
 
     @Autowired
-    private DeliveryController deliveryController;
+    private QuantitySoldForDeliveryService quantitySoldForDeliveryService;
 
     @Autowired
     private DeliveryRepository deliveryRepository;
@@ -42,7 +42,7 @@ public class TestDeliveryController_updateQuantitySoldInBatches {
         Delivery delivery = deliveryRepository.findById(1L).orElseThrow();
 
         // when
-        deliveryController.updateQuantitySoldInBatches(delivery);
+        quantitySoldForDeliveryService.updateQuantitySoldInBatches(delivery);
 
         // then
         Batch batch = batchRepository.findById(1L).orElseThrow();

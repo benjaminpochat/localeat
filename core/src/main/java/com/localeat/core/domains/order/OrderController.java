@@ -1,10 +1,8 @@
 package com.localeat.core.domains.order;
 
 import com.localeat.core.domains.actor.Customer;
-import com.localeat.core.domains.delivery.Delivery;
 import com.localeat.core.domains.delivery.DeliveryController;
 import com.localeat.core.domains.delivery.DeliveryRepository;
-import com.localeat.core.domains.product.BatchRepository;
 import com.localeat.core.domains.security.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,16 +32,13 @@ public class OrderController {
     @Autowired
     private OrderNotificationToBreederService orderNotificationToBreederService;
 
+    @Autowired
+    private OrderService createOrderService;
+
     @PostMapping(path = "/accounts/{account}/orders")
     public Order createOrder(@PathParam("account") Account account, @RequestBody Order order){
         Customer customer = (Customer) account.getActor();
-        order.setCustomer(customer);
-        order.getOrderedItems().forEach(orderItem -> orderItem.setOrder(order));
-        Delivery delivery = deliveryRepository.findById(order.getDelivery().getId()).orElseThrow();
-        Order orderSaved = orderRepository.save(order);
-        deliveryController.updateQuantitySoldInBatches(delivery);
-        orderNotificationToBreederService.notify(orderSaved);
-        orderNotificationToCustomerService.notify(orderSaved);
+        Order orderSaved = createOrderService.createOrder(order, customer);
         return orderSaved;
     }
 
@@ -54,5 +49,16 @@ public class OrderController {
             return orderRepository.findByCustomer(customer);
         }
         throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "customer account expected");
+    }
+
+    @GetMapping(path= "/accounts/{account}/orders/{order}")
+    public Order getOrders(@PathParam("account") Account account, @PathParam("order") Order order) {
+        if (!(account.getActor() instanceof Customer)) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "customer account expected");
+        }
+        if (!order.getCustomer().equals(account.getActor())) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "no access to this order");
+        }
+        return order;
     }
 }

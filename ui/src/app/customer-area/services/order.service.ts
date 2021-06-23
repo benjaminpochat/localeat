@@ -24,9 +24,12 @@ export class OrderService {
     response.subscribe(orders => refreshOrdersEvent.emit(orders));
   }
 
-
   getTotalPrice(order: Order): number {
     return order.orderedItems.map(item => item.quantity * item.batch.product.netWeight * item.unitPrice).reduce( (sum, itemPrice) => sum + itemPrice, 0);
   }
 
+  getOrder(orderId: string): Observable<Order> {
+    const response = this.httpClient.get<Order>(this.urlService.getAuthenticatedUrl(['orders', orderId])).pipe(share());
+    return response;
+  }
 }

@@ -40,6 +40,9 @@ public class OrderNotificationToBreederService implements NotificationService<Or
     private EmailService emailService;
 
     @Autowired
+    private OrderService orderService;
+
+    @Autowired
     HttpConfig httpConfig;
 
     @Override
@@ -73,25 +76,9 @@ public class OrderNotificationToBreederService implements NotificationService<Or
                 order.getCustomer().getName(),
                 order.getCustomer().getEmail(),
                 order.getCustomer().getPhoneNumber(),
-                getTotalPrice(order),
-                getTotalWeight(order)
+                orderService.getTotalPrice(order),
+                orderService.getTotalWeight(order)
         };
         return templateValues;
-    }
-
-    private double getTotalPrice(Order order) {
-        return order.getOrderedItems().stream()
-                .mapToDouble(item -> {
-                    Batch batch = batchRepository.findById(item.getBatch().getId()).orElseThrow();
-                    return item.getQuantity() * batch.getProduct().getUnitPrice() * batch.getProduct().getNetWeight();
-                })
-                .sum();
-    }
-
-    private double getTotalWeight(Order order) {
-        return order.getOrderedItems().stream().mapToDouble(item -> {
-            Batch batch = batchRepository.findById(item.getBatch().getId()).orElseThrow();
-            return item.getQuantity() * batch.getProduct().getNetWeight();
-        }).sum();
     }
 }

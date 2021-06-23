@@ -38,6 +38,9 @@ public class OrderNotificationToCustomerService implements NotificationService<O
     private EmailService emailService;
 
     @Autowired
+    private OrderService orderService;
+
+    @Autowired
     HttpConfig httpConfig;
 
     @Override
@@ -67,8 +70,8 @@ public class OrderNotificationToCustomerService implements NotificationService<O
         Object[] bodyTemplateValues = {
                 order.getId(),
                 httpConfig.getUserInterfaceUrl(),
-                getTotalPrice(order),
-                getTotalWeight(order),
+                orderService.getTotalPrice(order),
+                orderService.getTotalWeight(order),
                 delivery.getDeliveryStart(),
                 delivery.getDeliveryEnd(),
                 delivery.getDeliveryAddress().getName(),
@@ -80,21 +83,5 @@ public class OrderNotificationToCustomerService implements NotificationService<O
                 delivery.getDeliveryAddress().getCity()
         };
         return bodyTemplateValues;
-    }
-
-    private double getTotalPrice(Order order) {
-        return order.getOrderedItems().stream()
-                .mapToDouble(item -> {
-                    Batch batch = batchRepository.findById(item.getBatch().getId()).orElseThrow();
-                    return item.getQuantity() * batch.getProduct().getUnitPrice() * batch.getProduct().getNetWeight();
-                })
-                .sum();
-    }
-
-    private double getTotalWeight(Order order) {
-        return order.getOrderedItems().stream().mapToDouble(item -> {
-            Batch batch = batchRepository.findById(item.getBatch().getId()).orElseThrow();
-            return item.getQuantity() * batch.getProduct().getNetWeight();
-        }).sum();
     }
 }

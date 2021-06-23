@@ -1,13 +1,16 @@
 package com.localeat.core.domains.delivery;
 
-import com.localeat.core.domains.order.Order;
-import com.localeat.core.domains.order.OrderRepository;
+import com.localeat.core.domains.order.*;
+import com.localeat.core.domains.product.Batch;
+import com.localeat.core.domains.product.BatchRepository;
 import com.localeat.core.domains.slaughter.SlaughterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class QuantitySoldForDeliveryService {
@@ -18,6 +21,12 @@ public class QuantitySoldForDeliveryService {
     @Autowired
     private SlaughterRepository slaughterRepository;
 
+    @Autowired
+    private OrderItemRepository orderItemRepository;
+
+    @Autowired
+    private BatchRepository batchRepository;
+
     public float calculatePercentageSold(Delivery delivery) {
         List<Order> orders = new ArrayList<>();
         orderRepository.getOrdersByDelivery(delivery).spliterator().forEachRemaining(orders::add);
@@ -27,5 +36,18 @@ public class QuantitySoldForDeliveryService {
                 .reduce(0f, Float::sum);
         float totalWeightToSold = slaughterRepository.findByDelivery(delivery).getAnimal().getMeatWeight();
         return totalWeightSold / totalWeightToSold;
+    }
+
+    public void updateQuantitySoldInBatches(Delivery delivery) {
+        StreamSupport.stream(orderItemRepository.findByDelivery(delivery).spliterator(), false)
+                .filter(orderItem -> !OrderStatus.CANCELLED.equals(orderItem.getOrder().getStatus()))                // Stream<Order>
+                .collect(Collectors.groupingBy(OrderItem::getBatch, Collectors.summingInt(OrderItem::getQuantity)))  // Map<Batch, Long>
+                .entrySet()
+                .forEach(entry -> {
+                    Batch summingBatch = entry.getKey();
+                    Batch deliveryBatch = delivery.getAvailableBatches().stream().filter(batch -> batch.getId().equals(summingBatch.getId())).findFirst().orElseThrow();
+                    deliveryBatch.setQuantitySold(entry.getValue().intValue());
+                    batchRepository.save(deliveryBatch);
+                });
     }
 }
