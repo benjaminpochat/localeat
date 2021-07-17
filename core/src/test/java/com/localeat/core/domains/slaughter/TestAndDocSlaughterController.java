@@ -77,7 +77,7 @@ public class TestAndDocSlaughterController {
                 .build();
         var animal2 = GenericBuilder.of(Animal::new)
                 .with(Animal::setAnimalType, AnimalType.BEEF_COW)
-                .with(Animal::setBreed, AnimalBreed.BEEF_LIMOUSINE)
+                .with(Animal::setBreed, AnimalBreed.BEEF_LIMOUSIN)
                 .with(Animal::setFinalFarm, farm2)
                 .with(Animal::setIdentificationNumber, "EFGH")
                 .build();
@@ -87,7 +87,7 @@ public class TestAndDocSlaughterController {
                 .build();
         var animal3 = GenericBuilder.of(Animal::new)
                 .with(Animal::setAnimalType, AnimalType.BEEF_BULL)
-                .with(Animal::setBreed, AnimalBreed.BEEF_LIMOUSINE)
+                .with(Animal::setBreed, AnimalBreed.BEEF_LIMOUSIN)
                 .with(Animal::setFinalFarm, farm1)
                 .with(Animal::setIdentificationNumber, "IJKL")
                 .build();
@@ -125,7 +125,7 @@ public class TestAndDocSlaughterController {
                         "  \"id\" : 3,\n" +
                         "  \"animal\" : {\n" +
                         "    \"id\" : 3,\n" +
-                        "    \"breed\" : \"BEEF_LIMOUSINE\",\n" +
+                        "    \"breed\" : \"BEEF_LIMOUSIN\",\n" +
                         "    \"animalType\" : \"BEEF_BULL\",\n" +
                         "    \"liveWeight\" : 0.0,\n" +
                         "    \"meatWeight\" : 0.0,\n" +

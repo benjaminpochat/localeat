@@ -22,6 +22,9 @@ describe('AuthenticationService', () => {
 
   it('should be created', () => {
     expect(service).toBeTruthy();
+
+    const requestGetConfiguration = httpMock.expectOne('/assets/config/config.json');
+    expect(requestGetConfiguration.request.method).toEqual('GET');
   });
 
   it('getAuthenticationFromCookie decode the json web token correctly', async () => {
@@ -34,6 +37,9 @@ describe('AuthenticationService', () => {
     // then
     expect(authentication.name).toBe('eleveur');
     expect(authentication.authorities).toEqual(['BREEDER']);
+
+    const requestGetConfiguration = httpMock.expectOne('/assets/config/config.json');
+    expect(requestGetConfiguration.request.method).toEqual('GET');
   });
 
   afterEach(() => {

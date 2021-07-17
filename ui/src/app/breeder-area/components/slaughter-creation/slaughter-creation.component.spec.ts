@@ -35,6 +35,9 @@ describe('SlaughterCreationComponent', () => {
 
     it('should create', () => {
       expect(slaughterCreationComponent).toBeTruthy();
+
+      const requestGetConfiguration = httpMock.expectOne('/assets/config/config.json');
+      expect(requestGetConfiguration.request.method).toEqual('GET');
     });
   });
 });

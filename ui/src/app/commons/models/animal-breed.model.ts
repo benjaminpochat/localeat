@@ -1,6 +1,6 @@
 export enum AnimalBreed {
-  BeefLimousine = 'BEEF_LIMOUSIN',
-  BeefCharollais = 'BEEF_CHAROLLAIS'
+  BeefLimousin = 'BEEF_LIMOUSIN',
+  BeefCharollais = 'BEEF_CHAROLAIS'
 }
 
 export class AnimalBreedUtils {
@@ -8,7 +8,7 @@ export class AnimalBreedUtils {
     switch (breed) {
       case AnimalBreed.BeefCharollais:
         return 'Charollaise';
-      case AnimalBreed.BeefLimousine:
+      case AnimalBreed.BeefLimousin:
         return 'Limousine';
       default:
         return '';

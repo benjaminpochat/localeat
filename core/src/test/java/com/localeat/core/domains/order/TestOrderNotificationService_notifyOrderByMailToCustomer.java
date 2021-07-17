@@ -72,6 +72,6 @@ public class TestOrderNotificationService_notifyOrderByMailToCustomer {
                         "Atlantic<br>" +
                     "</li>" +
                 "</ul>" +
-            "</div>", httpConfig.getUserInterfaceUrl()));
+            "</div>", httpConfig.getFrontendUrl()));
     }
 }

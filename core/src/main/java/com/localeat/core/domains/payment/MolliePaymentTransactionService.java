@@ -1,20 +1,16 @@
 package com.localeat.core.domains.payment;
 
-import com.localeat.core.commons.RestTemplateLoggingInterceptor;
+import com.localeat.core.config.http.HttpConfig;
 import com.localeat.core.domains.order.Order;
 import com.localeat.core.domains.order.OrderService;
-import com.localeat.core.domains.order.OrderStatus;
 import com.localeat.core.domains.security.Account;
 import com.localeat.core.domains.security.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigurationMetadata;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
-import java.util.List;
 
 import static com.localeat.core.domains.order.OrderStatus.BOOKED;
 import static com.localeat.core.domains.payment.MolliePaymentTransaction.Currency.EUR;
@@ -34,6 +30,9 @@ public class MolliePaymentTransactionService {
 
     @Autowired
     private AccountRepository accountRepository;
+
+    @Autowired
+    HttpConfig httpConfig;
 
     public Payment createPayment(Account account, Order order) {
         var payment = new Payment();
@@ -67,11 +66,8 @@ public class MolliePaymentTransactionService {
         MolliePaymentTransaction transaction = new MolliePaymentTransaction();
         transaction.setAmount(payment.getAmount(), EUR);
         transaction.setDescription(String.format("payment for order %s", payment.getOrder().getId()));
-        //TODO : implémenter la route
-        //TODO : mettre la racine de l'url dans un paramètre externe
-        transaction.setRedirectUrl(String.format("http://viandeendirect.eu/customer-area/orders/%s", payment.getOrder().getId()));
-        //TODO : mettre la racine de l'url dans un paramètre externe
-        transaction.setWebhookUrl("http://viandeendirect.eu:8080/paymentTransactions/");
+        transaction.setRedirectUrl(String.format("%s/customer-area/orders/%s", httpConfig.getFrontendUrl(), payment.getOrder().getId()));
+        transaction.setWebhookUrl(String.format("%s/paymentTransactions/", httpConfig.getBackendUrl()));
         return transaction;
     }
 

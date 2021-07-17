@@ -1,17 +1,23 @@
 import { Injectable } from '@angular/core';
 import { AuthenticationService } from './authentication.service';
-import { environment } from 'src/environments/environment';
+import { ConfigurationService } from './configuration.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UrlService {
 
-  constructor(private authenticationService: AuthenticationService) {
+  private localeatCoreUrl: string;
+
+  constructor(
+    private authenticationService: AuthenticationService,
+    private configurationService: ConfigurationService,
+    ) {
+      this.configurationService.loadConfiguration().subscribe(configuration => this.localeatCoreUrl = configuration.coreUrl);
   }
 
-  public getAuthenticatedUrl(uriPathElements: string[]): string{
-    return environment.localeatCoreUrl
+  public getAuthenticatedUrl(uriPathElements: string[]): string {
+    return this.localeatCoreUrl
     + '/accounts/'
     + this.authenticationService.getAuthenticationFromCookie().account.id
     + '/'
@@ -19,7 +25,7 @@ export class UrlService {
   }
 
   public getAnonymousUrl(uriPathElements: string[]): string{
-    return environment.localeatCoreUrl
+    return this.localeatCoreUrl
     + '/'
     + uriPathElements.join('/');
   }

@@ -1,0 +1,4 @@
+{
+  "coreUrl": "http://localhost:8080",
+  "environmentType" : "dev"
+}

@@ -21,7 +21,7 @@ export class AccountService {
     const account = new Account();
     account.actor = actor;
     account.username = actor.email;
-    return this.http.post<string>(environment.localeatCoreUrl + '/account', {
+    return this.http.post<string>(this.urlService.getAnonymousUrl(['account']), {
       'password': password,
       'role': Role.Customer,
       'account': account,

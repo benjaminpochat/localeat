@@ -4,9 +4,8 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { RouterTestingModule } from '@angular/router/testing';
 import { AuthenticationService } from 'src/app/commons/services/authentication.service';
 import { Type } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 import { UrlService } from 'src/app/commons/services/url.service';
-import { environment } from 'src/environments/environment';
 import { UrlServiceTestUtils } from 'src/app/commons/services/url.service.test-utils';
 
 describe('BreederAreaComponent', () => {
@@ -44,11 +43,14 @@ describe('BreederAreaComponent', () => {
     });
 
     it('should create', () => {
-      const requestGetDeliveries = httpMock.expectOne(environment.localeatCoreUrl + '/accounts/1/deliveries');
+      const requestGetDeliveries = httpMock.expectOne('http://localhost:8080/accounts/1/deliveries');
       expect(requestGetDeliveries.request.method).toEqual('GET');
 
-      const requestGetSlaughters = httpMock.expectOne(environment.localeatCoreUrl + '/accounts/1/slaughters');
+      const requestGetSlaughters = httpMock.expectOne('http://localhost:8080/accounts/1/slaughters');
       expect(requestGetSlaughters.request.method).toEqual('GET');
+
+      const requestGetConfiguration = httpMock.expectOne('/assets/config/config.json');
+      expect(requestGetConfiguration.request.method).toEqual('GET');
 
       expect(breederAreaComponent).toBeTruthy();
     });

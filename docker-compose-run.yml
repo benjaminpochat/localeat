@@ -1,0 +1,36 @@
+version: '3.7'
+services:
+
+  database:
+    image: postgres:12.2-alpine
+    volumes:
+      - <path_to_postgres_datafile_folder_on_real_server>:/var/lib/postgresql/data/pgdata
+    environment:
+      - POSTGRES_USER=localeat
+      - POSTGRES_PASSWORD=<password>
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    ports:
+      - <published_postgres_port>:5432
+
+  core:
+    image: benjaminpochat/localeat-core:${DOCKER_IMAGE_TAG:-latest}
+    depends_on:
+      - database
+    environment:
+      - localeat_datasource_url=jdbc:postgresql://database:5432/localeat
+      - localeat_datasource_username=localeat
+      - localeat_datasource_password=<password>
+      - localeat_smtp_username=la.viande.en.direct@gmail.com
+      - localeat_smtp_password=localeat
+      - localeat_http_domainname=<domain_name_for_localeat_server>
+    ports:
+      - <published_backend_port>:8080
+
+  ui:
+    image: benjaminpochat/localeat-ui:${DOCKER_IMAGE_TAG:-latest}
+    depends_on:
+      - core
+    volumes:
+      - <path_to_folder_containing_localeat_ui_config_file_on_real_server>:/usr/local/apache2/htdocs/assets/config
+    ports:
+      - <published_frontend_port>:80

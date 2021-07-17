@@ -1,0 +1,1 @@
+docker run -p 80:80 -v <path_to_nginx_config_folder_on_real_server>:/etc/nginx/conf.d -d nginx

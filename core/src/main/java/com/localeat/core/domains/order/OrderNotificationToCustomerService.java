@@ -69,7 +69,7 @@ public class OrderNotificationToCustomerService implements NotificationService<O
         Delivery delivery = deliveryRepository.findById(slaughter.getDelivery().getId()).orElseThrow();
         Object[] bodyTemplateValues = {
                 order.getId(),
-                httpConfig.getUserInterfaceUrl(),
+                httpConfig.getFrontendUrl(),
                 orderService.getTotalPrice(order),
                 orderService.getTotalWeight(order),
                 delivery.getDeliveryStart(),

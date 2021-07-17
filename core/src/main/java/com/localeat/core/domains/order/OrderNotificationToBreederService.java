@@ -71,7 +71,7 @@ public class OrderNotificationToBreederService implements NotificationService<Or
     public Object[] getTemplateValues(Order order) {
         Object[] templateValues = {
                 order.getId(),
-                httpConfig.getUserInterfaceUrl(),
+                httpConfig.getFrontendUrl(),
                 order.getCustomer().getFirstName(),
                 order.getCustomer().getName(),
                 order.getCustomer().getEmail(),

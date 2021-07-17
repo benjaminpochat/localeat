@@ -5,7 +5,7 @@ export class UrlServiceTestUtils {
 
   static mockUrlService(urlService: UrlService) {
     jest.spyOn(urlService, 'getAuthenticatedUrl').mockImplementation(
-      ([...uriElements]) => environment.localeatCoreUrl + '/accounts/1/' + uriElements.join('/')
+      ([...uriElements]) => 'http://localhost:8080/accounts/1/' + uriElements.join('/')
     );
   }
 }

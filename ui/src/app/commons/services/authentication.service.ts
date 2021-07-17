@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import * as decodeJwt from 'jwt-decode';
 import { CookieService } from 'ngx-cookie-service';
 import { Authentication } from 'src/app/commons/models/authentication.model';
-import { environment } from 'src/environments/environment';
+import { ConfigurationService } from './configuration.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,10 +14,16 @@ export class AuthenticationService {
 
   constructor(
     private http: HttpClient,
-    private cookieService: CookieService) { }
+    private cookieService: CookieService,
+    private configurationService: ConfigurationService) {
+      this.configurationService.loadConfiguration().subscribe(configuration => this.localeatCoreUrl = configuration.coreUrl);
+    }
 
   authentication = new BehaviorSubject(this.getAuthenticationFromCookie());
+
   currentAuthentication = this.authentication.asObservable();
+
+  private localeatCoreUrl: string;
 
   public getAuthenticationFromBackend(identifier: string, password: string ): Observable<string> {
     const httpOptions = {
@@ -27,7 +33,7 @@ export class AuthenticationService {
       responseType : 'text' as 'text',
       withCredentials : true
     };
-    const response = this.http.get(environment.localeatCoreUrl + '/authentication', httpOptions);
+    const response = this.http.get(this.localeatCoreUrl + '/authentication', httpOptions);
     response.subscribe(() => this.authentication.next(this.getAuthenticationFromCookie()));
     return response;
   }
@@ -41,19 +47,20 @@ export class AuthenticationService {
       responseType : 'text' as 'text',
       withCredentials : true
     };
-    const url = environment.localeatCoreUrl + '/accounts/' + authentication.account.id + '/authentication';
+    const url = this.localeatCoreUrl + '/accounts/' + authentication.account.id + '/authentication';
     const response = this.http.get(url, httpOptions);
     response.subscribe(() => this.authentication.next(this.getAuthenticationFromCookie()));
     return response;
   }
 
   public deleteAuthentication(): Observable<Object> {
-    let jwt = this.cookieService.get('jwt');
+    const jwt = this.cookieService.get('jwt');
     const authentication: Authentication = decodeJwt(jwt);
     const httpOptions = {
       withCredentials : true
     };
-    const response = this.http.delete(environment.localeatCoreUrl + '/accounts/' + authentication.account.id +  '/authentication', httpOptions);
+    const url = this.localeatCoreUrl + '/accounts/' + authentication.account.id + '/authentication';
+    const response = this.http.delete(url, httpOptions);
     response.subscribe(() => this.authentication.next(this.getAuthenticationFromCookie()));
     return response;
   }
@@ -96,6 +103,7 @@ export class AuthenticationService {
   }
 
   public renewPassword(email: string, destinationRoute: string): Observable<any> {
-    return this.http.get(environment.localeatCoreUrl + '/passwordRenewal/' + email + destinationRoute);
+    const url = this.localeatCoreUrl + '/passwordRenewal/' + email + '/' + destinationRoute;
+    return this.http.get(url);
   }
 }

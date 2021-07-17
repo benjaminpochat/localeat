@@ -5,18 +5,20 @@ services:
     image: postgres:12.2-alpine
     networks:
       - hostnet
-    volumes:
-      - /var/lib/postgresql/data/pgdata:/var/lib/postgresql/data/pgdata
     environment:
       - POSTGRES_USER=localeat
       - POSTGRES_PASSWORD=localeat
       - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - /var/lib/postgresql/data/pgdata:/var/lib/postgresql/data/pgdata
+    ports:
+      - 5432:5432
 
   core:
     build:
       context: "."
       dockerfile: ./core/Dockerfile
-    image: benjaminpochat/localeat-core-staging:${DOCKER_IMAGE_TAG:-latest}
+    image: benjaminpochat/localeat-core:${DOCKER_IMAGE_TAG:-latest}
     networks:
       - hostnet
     depends_on:
@@ -27,19 +29,25 @@ services:
       - localeat_datasource_password=localeat
       - localeat_smtp_username=la.viande.en.direct@gmail.com
       - localeat_smtp_password=localeat
-
+      - localeat_http_domainname=http://localhost:4200
+    ports:
+      - 8080:8080
 
   ui:
     build:
       context: "."
       dockerfile: ./ui/Dockerfile
       args:
-        - localeat_environment_type=staging
-    image: benjaminpochat/localeat-ui-staging:${DOCKER_IMAGE_TAG:-latest}
+        - localeat_environment_type=production
+    image: benjaminpochat/localeat-ui:${DOCKER_IMAGE_TAG:-latest}
     networks:
       - hostnet
     depends_on:
       - core
+    volumes:
+      - /home/benjamin/Documents/workspace/localeat/test/localeat-ui-config:/usr/local/apache2/htdocs/assets/config
+    ports:
+      - 80:80
 
 networks:
   hostnet:

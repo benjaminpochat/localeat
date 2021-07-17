@@ -32,7 +32,7 @@ export class ProductService {
   //TODO : à déplacer dans commons
   loadProductPhoto(product: Product): Observable<Image> {
     if (product.id){
-      return this.http.get<Image>(environment.localeatCoreUrl + '/products/' + product.id + '/photo');
+      return this.http.get<Image>(this.urlService.getAnonymousUrl(['products', String(product.id), 'photo']));
     }
   }
 

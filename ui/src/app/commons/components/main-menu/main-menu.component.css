@@ -13,6 +13,11 @@
   padding-left: 1rem;
 }
 
+.main-menu__environment-type {
+  transform: rotate(-15deg);
+  color: red;
+}
+
 .main-menu__spacer{
   flex: 1 1 auto;
 }

@@ -36,6 +36,9 @@ describe('AuthenticationComponent', () => {
 
     it('should create', () => {
       expect(authenticationComponent).toBeTruthy();
+
+      const requestGetConfiguration = httpMock.expectOne('/assets/config/config.json');
+      expect(requestGetConfiguration.request.method).toEqual('GET');
     });
   });
 });

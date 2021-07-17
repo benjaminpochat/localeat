@@ -60,6 +60,6 @@ public class PasswordRenewalController {
                 account,
                 authenticationName,
                 Arrays.asList(account.getActor().getRole().name()), FIFTEEN_MINUTES);
-        return String.format("%s/password-renewal?token=%s&destinationRoute=%s", httpConfig.getUserInterfaceUrl(), jwt, destinationRoute);
+        return String.format("%s/password-renewal?token=%s&destinationRoute=%s", httpConfig.getFrontendUrl(), jwt, destinationRoute);
     }
 }

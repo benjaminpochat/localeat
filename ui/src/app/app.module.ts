@@ -1,8 +1,7 @@
-import { NgModule, LOCALE_ID } from '@angular/core';
+import { NgModule, LOCALE_ID, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { registerLocaleData } from '@angular/common';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthenticationInterceptor } from './commons/services/authentication-interceptor.service';
@@ -11,7 +10,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CustomerAreaModule } from './customer-area/customer-area.module';
 
 import localeFr from '@angular/common/locales/fr';
+import { ConfigurationService } from './commons/services/configuration.service';
 registerLocaleData(localeFr);
+
+const appInitializer = (configurationService: ConfigurationService) => {
+  return () => {
+    return configurationService.loadConfiguration().toPromise();
+  };
+};
 
 @NgModule({
   declarations: [
@@ -29,7 +35,8 @@ registerLocaleData(localeFr);
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true },
-    { provide: LOCALE_ID, useValue: 'fr-FR' }
+    { provide: LOCALE_ID, useValue: 'fr-FR' },
+    { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [ConfigurationService]}
   ],
   bootstrap: [
     AppComponent

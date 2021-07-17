@@ -69,6 +69,6 @@ public class TestOrderNotificationService_notifyOrderByMailToBreeder {
                         "<li>Montant de la commande : 1350.0 €TTC</li>" +
                         "<li>Quantité commandée : 100.0 kg</li>" +
                     "</ul>" +
-                "</div>", httpConfig.getUserInterfaceUrl()));
+                "</div>", httpConfig.getFrontendUrl()));
     }
 }

@@ -3,7 +3,6 @@ import { Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Slaughter } from 'src/app/commons/models/slaughter.model';
 import { UrlService } from 'src/app/commons/services/url.service';
-import { environment } from 'src/environments/environment';
 
 import { DeliveryComponent } from './delivery.component';
 
@@ -18,7 +17,7 @@ describe('DeliveryComponent', () => {
     beforeEach(async(() => {
       TestBed.configureTestingModule({
         imports: [ HttpClientTestingModule ],
-        declarations: [ DeliveryComponent ],
+        declarations: [ DeliveryComponent ]
       })
       .compileComponents();
     }));
@@ -59,7 +58,7 @@ describe('DeliveryComponent', () => {
       httpMock = fixture.debugElement.injector.get<HttpTestingController>(HttpTestingController as Type<HttpTestingController>);
       urlService = fixture.debugElement.injector.get<UrlService>(UrlService as Type<UrlService>);
       jest.spyOn(urlService, 'getAuthenticatedUrl').mockImplementation(
-        () => environment.localeatCoreUrl + '/accounts/1/deliveries/1/orders');
+        () => 'http://localhost:8080/accounts/1/deliveries/1/orders');
       fixture.detectChanges();
     });
 
@@ -69,11 +68,14 @@ describe('DeliveryComponent', () => {
 
     it('should create', () => {
       // given
-      const request = httpMock.expectOne(environment.localeatCoreUrl + '/accounts/1/deliveries/1/orders');
+      const request = httpMock.expectOne('http://localhost:8080/accounts/1/deliveries/1/orders');
       expect(request.request.method).toEqual('GET');
       request.flush({data: [{id: 1}, {id: 2}]});
 
       // when, then
+      const requestGetConfiguration = httpMock.expectOne('/assets/config/config.json');
+      expect(requestGetConfiguration.request.method).toEqual('GET');
+
       expect(deliveryComponent).toBeTruthy();
     });
   });

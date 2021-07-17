@@ -33,6 +33,9 @@ describe('MainMenuComponent', () => {
 
     it('should create', () => {
       expect(mainMenuComponent).toBeTruthy();
+
+      const requestGetConfiguration = httpMock.expectOne('/assets/config/config.json');
+      expect(requestGetConfiguration.request.method).toEqual('GET');
     });
   });
 });
