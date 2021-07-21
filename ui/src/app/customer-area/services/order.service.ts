@@ -3,6 +3,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { share } from 'rxjs/operators';
 import { Order } from 'src/app/commons/models/order.model';
+import { Payment } from 'src/app/commons/models/payment.model';
 import { UrlService } from 'src/app/commons/services/url.service';
 
 @Injectable({
@@ -30,6 +31,11 @@ export class OrderService {
 
   getOrder(orderId: string): Observable<Order> {
     const response = this.httpClient.get<Order>(this.urlService.getAuthenticatedUrl(['orders', orderId])).pipe(share());
+    return response;
+  }
+
+  startPayment(order: Order): Observable<Payment> {
+    const response = this.httpClient.post<Payment>(this.urlService.getAuthenticatedUrl(['orders', String(order.id), 'payments']), null).pipe(share());
     return response;
   }
 }

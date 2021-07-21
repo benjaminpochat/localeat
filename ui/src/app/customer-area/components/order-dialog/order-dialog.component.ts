@@ -11,7 +11,7 @@ import { Order } from 'src/app/commons/models/order.model';
 import { OrderItem } from 'src/app/commons/models/order-item.model';
 import { EventEmitter } from '@angular/core';
 import { OrderStatus } from 'src/app/commons/models/order-status.model';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatVerticalStepper } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-order-dialog',
@@ -30,12 +30,15 @@ export class OrderDialogComponent implements OnInit {
   productSelectionForm: FormGroup;
   authenticationForm: FormGroup;
   confirmationForm: FormGroup;
+  paymentForm: FormGroup;
 
   productSelectionStepLabel: string;
   authenticationStepLabel: string;
   confirmationStepLabel: string;
+  paymentStepLabel: string;
   productSelectionButtonLabel: string;
   confirmationButtonLabel: string;
+  paymentButtonLabel: string;
 
   authenticationFailureMessage: string;
   accountCreationFailureMessage: string;
@@ -43,17 +46,18 @@ export class OrderDialogComponent implements OnInit {
   existingAccount = true;
   understood = false;
   orderStored = false;
+  orderPayed = false;
   authenticationSubmitted = false;
 
   orderUnderProcess = false;
   accountCreationUnderProcess = false;
+  paymentUnderProcess = false;
 
   constructor(
     private authenticationService: AuthenticationService,
     private userService: AccountService,
     private orderService: OrderService,
-    private formBuilder: FormBuilder,
-    private messageInfo: MatSnackBar) {}
+    private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
     this.initLabels();
@@ -77,10 +81,12 @@ export class OrderDialogComponent implements OnInit {
   }
 
   private initLabels() {
-    this.productSelectionStepLabel = 'Sélectionnez la quantité de viande commandée (en kg)';
+    this.productSelectionStepLabel = 'Sélectionnez les produits commandés';
     this.productSelectionButtonLabel = 'Je valide la quantité';
-    this.confirmationStepLabel = 'Validez votre commande';
-    this.confirmationButtonLabel = 'Je valide ma commande';
+    this.confirmationStepLabel = 'Accepetez les conditions';
+    this.confirmationButtonLabel = 'J\'accepte les conditions';
+    this.paymentStepLabel = 'Payez votre commande';
+    this.paymentButtonLabel = 'Je paie ma commande';
   }
 
   private initAuthentication() {
@@ -115,6 +121,7 @@ export class OrderDialogComponent implements OnInit {
     this.confirmationForm = this.formBuilder.group({
       confirmed: [false, Validators.requiredTrue]
     });
+    this.paymentForm = this.formBuilder.group({});
   }
 
   updateOrderItems(): void {
@@ -194,11 +201,11 @@ export class OrderDialogComponent implements OnInit {
       && formField.touched;
   }
 
-  isOrderNotEmpty(){
+  isOrderNotEmpty(): boolean {
     return this.order.orderedItems.length > 0;
   }
 
-  areFormFieldsValid(formGroup: FormGroup, formFieldNames: string[]){
+  areFormFieldsValid(formGroup: FormGroup, formFieldNames: string[]): boolean{
     let result = formGroup.errors === null;
     formFieldNames.forEach((fieldName) => {
       const formField = formGroup.get(fieldName);
@@ -211,39 +218,40 @@ export class OrderDialogComponent implements OnInit {
     this.understood = understood;
   }
 
-  confirmOrder(){
+  confirmOrder(): void {
     this.confirmationForm.patchValue({payed : true});
     this.order.orderedItems = this.order.orderedItems.filter(orderedItem => orderedItem.quantity > 0);
     this.orderService.saveOrder(this.order).subscribe((order: Order) => {
-      this.confirmationStepLabel = 'C\'est validé';
+      this.order = order;
+      this.confirmationStepLabel = 'Les conditions sont acceptées';
       this.orderStored = true;
       this.orderUnderProcess = false;
-      this.confirmationButtonLabel = 'La commande est réservée';
-      this.displayConfirmationMessage();
+      this.confirmationButtonLabel = 'Il n\'y a plus qu\'à payer';
+      // TODO : Déplacer ça à la confirmation du payment
       this.createOrderEvent.emit(this.order);
     });
     this.orderUnderProcess = true;
     this.confirmationButtonLabel = 'Traitement en cours...';
   }
 
-  private displayConfirmationMessage() {
-    this.messageInfo.open(
-      'Votre commande est enregistrée. Merci :)',
-      'X',
-      {
-        duration: 3000,
-        horizontalPosition: 'center',
-        verticalPosition: 'top'
-      });
+  payOrder(): void {
+    this.orderService.startPayment(this.order).subscribe(payment => {
+      window.location.replace(payment.paymentUrl);
+      this.paymentUnderProcess = false;
+    }, error => {
+      this.paymentUnderProcess = false;
+    });
+    this.paymentUnderProcess = true;
   }
 
-  close(){
+  close(): void {
     this.resetComponentProperties();
   }
 
-  private resetComponentProperties() {
+  private resetComponentProperties(): void {
     this.order = null;
     this.orderStored = false;
+    this.orderPayed = false;
     this.orderUnderProcess = false;
     this.existingAccount = true;
     this.authenticationSubmitted = false;

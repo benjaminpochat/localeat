@@ -1,5 +1,6 @@
 package com.localeat.core.domains.payment;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -38,6 +39,9 @@ public class MolliePaymentTransaction implements PaymentTransaction {
     private String redirectUrl;
 
     private String webhookUrl;
+
+    @JsonAlias("_links")
+    private Links links;
 
     public String getId() {
         return id;
@@ -93,8 +97,22 @@ public class MolliePaymentTransaction implements PaymentTransaction {
     }
 
 
+    public Links getLinks() {
+        return links;
+    }
+
+    public void setLinks(Links links) {
+        this.links = links;
+    }
+
+    @JsonIgnore
+    public String getPaymentUrl() {
+        return links.getPaymentUrl().getHref();
+    }
+
     @Embeddable
     public class Amount {
+
         private String value;
 
         private Currency currency;
@@ -121,6 +139,48 @@ public class MolliePaymentTransaction implements PaymentTransaction {
 
         public void setCurrency(Currency currency) {
             this.currency = currency;
+        }
+    }
+
+    @Embeddable
+    public class Links {
+        @JsonAlias("checkout")
+        private Link paymentUrl;
+
+        public Links() {
+        }
+
+        public Link getPaymentUrl() {
+            return paymentUrl;
+        }
+
+        public void setPaymentUrl(Link paymentUrl) {
+            this.paymentUrl = paymentUrl;
+        }
+
+        @Embeddable
+        public class Link {
+            private String href;
+            private String type;
+
+            public Link() {
+            }
+
+            public String getHref() {
+                return href;
+            }
+
+            public void setHref(String href) {
+                this.href = href;
+            }
+
+            public String getType() {
+                return type;
+            }
+
+            public void setType(String type) {
+                this.type = type;
+            }
         }
     }
 

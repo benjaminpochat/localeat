@@ -26,6 +26,8 @@ public class Payment {
 
     private float amount;
 
+    private String paymentUrl;
+
     public Long getId() {
         return id;
     }
@@ -76,5 +78,13 @@ public class Payment {
 
     public void setAmount(float amount) {
         this.amount = amount;
+    }
+
+    public void setPaymentUrl(String paymentUrl) {
+        this.paymentUrl = paymentUrl;
+    }
+
+    public String getPaymentUrl() {
+        return paymentUrl;
     }
 }

@@ -1,6 +1,8 @@
 package com.localeat.core.domains.payment;
 
+import com.localeat.core.commons.RestTemplateLoggingInterceptor;
 import com.localeat.core.config.http.HttpConfig;
+import com.localeat.core.config.payment.PaymentConfig;
 import com.localeat.core.domains.order.Order;
 import com.localeat.core.domains.order.OrderService;
 import com.localeat.core.domains.security.Account;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
+import java.util.List;
 
 import static com.localeat.core.domains.order.OrderStatus.BOOKED;
 import static com.localeat.core.domains.payment.MolliePaymentTransaction.Currency.EUR;
@@ -34,12 +37,17 @@ public class MolliePaymentTransactionService {
     @Autowired
     HttpConfig httpConfig;
 
+    @Autowired
+    PaymentConfig paymentConfig;
+
     public Payment createPayment(Account account, Order order) {
         var payment = new Payment();
         payment.setOrder(order);
         payment.setAmount(orderService.getTotalPrice(order));
         payment.setStatus(PaymentStatus.PROCESSING);
-        payment.setTransactionId(createMolliePaymentTransaction(payment, account).getId());
+        MolliePaymentTransaction molliePaymentTransaction = createMolliePaymentTransaction(payment, account);
+        payment.setTransactionId(molliePaymentTransaction.getId());
+        payment.setPaymentUrl(molliePaymentTransaction.getPaymentUrl());
         return paymentRepository.save(payment);
     }
 
@@ -49,9 +57,9 @@ public class MolliePaymentTransactionService {
      */
     private MolliePaymentTransaction createMolliePaymentTransaction(Payment payment, Account account){
         RestTemplate restTemplate = new RestTemplate();
+        //restTemplate.setInterceptors(List.of(new RestTemplateLoggingInterceptor()));
         HttpHeaders requestHeaders = new HttpHeaders();
-        //TODO : mettre la clé dans un paramètre externe
-        requestHeaders.add(HttpHeaders.AUTHORIZATION, "Bearer test_Wqwg9z7fDfCd9tRJQKfwQCh6TMrxfy");
+        requestHeaders.add(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", paymentConfig.getMolliePaymentAPIKey()));
         MolliePaymentTransaction transaction = getMolliePaymentTransaction(payment, account);
         var request = RequestEntity.post(URI.create("https://api.mollie.com/v2/payments"))
                 .headers(requestHeaders)
@@ -96,8 +104,7 @@ public class MolliePaymentTransactionService {
     private PaymentTransaction fetchPaymentStatus(String transactionId){
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders requestHeaders = new HttpHeaders();
-        //TODO : mettre la clé dans un paramètre externe
-        requestHeaders.add(HttpHeaders.AUTHORIZATION, "Bearer test_Wqwg9z7fDfCd9tRJQKfwQCh6TMrxfy");
+        requestHeaders.add(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", paymentConfig.getMolliePaymentAPIKey()));
         var httpEntity = new HttpEntity<>(requestHeaders);
         MolliePaymentTransaction transaction = restTemplate.exchange(String.format("https://api.mollie.com/v2/payments/%s",transactionId), HttpMethod.GET, httpEntity, MolliePaymentTransaction.class).getBody();
         return transaction;

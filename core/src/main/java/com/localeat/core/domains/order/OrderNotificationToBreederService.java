@@ -5,7 +5,6 @@ import com.localeat.core.commons.NotificationService;
 import com.localeat.core.config.http.HttpConfig;
 import com.localeat.core.domains.actor.Breeder;
 import com.localeat.core.domains.actor.BreederRepository;
-import com.localeat.core.domains.product.Batch;
 import com.localeat.core.domains.product.BatchRepository;
 import com.localeat.core.domains.slaughter.Slaughter;
 import com.localeat.core.domains.slaughter.SlaughterRepository;
@@ -14,11 +13,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.mail.MessagingException;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
