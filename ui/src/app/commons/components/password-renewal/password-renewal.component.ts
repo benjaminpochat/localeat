@@ -47,7 +47,7 @@ export class PasswordRenewalComponent implements OnInit {
     }
   }
 
-  createRenewPasswordForm():void {
+  createRenewPasswordForm(): void {
     this.renewPasswordForm = this.formBuilder.group({
       newPassword: ['', [Validators.required, Validators.minLength(6)]],
       newPasswordConfirmed: ['', [Validators.required]],

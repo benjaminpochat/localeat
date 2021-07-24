@@ -103,7 +103,7 @@ export class AuthenticationService {
   }
 
   public renewPassword(email: string, destinationRoute: string): Observable<any> {
-    const url = this.localeatCoreUrl + '/passwordRenewal/' + email + '/' + destinationRoute;
+    const url = this.localeatCoreUrl + '/passwordRenewal/' + email + '/' + destinationRoute.replace(/^\//, '');
     return this.http.get(url);
   }
 }
