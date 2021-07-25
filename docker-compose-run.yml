@@ -17,12 +17,14 @@ services:
     depends_on:
       - database
     environment:
-      - localeat_datasource_url=jdbc:postgresql://database:5432/localeat
-      - localeat_datasource_username=localeat
-      - localeat_datasource_password=<password>
+      - spring_datasource_url=jdbc:postgresql://database:5432/localeat
+      - spring_datasource_username=localeat
+      - spring_datasource_password=<password>
+      - spring_jpa_properties_hibernate_dialect=org.hibernate.dialect.PostgresPlusDialect
       - localeat_smtp_username=la.viande.en.direct@gmail.com
       - localeat_smtp_password=localeat
       - localeat_http_domainname=<domain_name_for_localeat_server>
+      - localeat.payment.molliepaymentapikey=<mollie_api_key>
     ports:
       - <published_backend_port>:8080
 

@@ -12,10 +12,13 @@ WORKDIR /home/localeat
 
 COPY ./core ./core
 
-RUN mvn clean install -s /usr/share/maven/ref/settings-docker.xml -f ./core/pom.xml
+RUN mvn -s /usr/share/maven/ref/settings-docker.xml -f ./core/pom.xml dependency:go-offline
+RUN mvn install -s /usr/share/maven/ref/settings-docker.xml -f ./core/pom.xml
 RUN mvn exec:java -s /usr/share/maven/ref/settings-docker.xml -f ./core/pom.xml -Dexec.skip=true
 
 USER localeat
+
+ENV spring_profiles_active=database-postgre
 
 # Wait for Postgre database (localhost:5432)
 # and then start java core application
@@ -29,7 +32,6 @@ ENTRYPOINT ["wait-for-it", \
     "/usr/share/maven/ref/settings-docker.xml", \
     "-f", \
     "./core/pom.xml", \
-    "-Dspring.profiles.active=prod", \
     "-Ddatasource_url=${localeat_datasource_url}", \
     "-Ddatasource_username=${localeat_datasource_username}", \
     "-Ddatasource_password=${localeat_datasource_password}", \
