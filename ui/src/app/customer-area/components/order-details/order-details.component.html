@@ -1,1 +1,61 @@
-<p>Commande n° {{order.id}} pour la livraison du {{order.delivery.deliveryStart | date: 'shortDate'}}</p>
+<div class="order__title">
+  <div class="order__title-text">Votre commande de viande</div>
+  <div class="order__subtitle">
+    <div>Livraison du {{order.delivery.deliveryStart | date: 'shortDate'}}</div>
+    <div>{{order.delivery.deliveryAddress.name}}</div>
+  </div>
+</div>
+
+<div class="order__paragraph">
+  <div class="order__subtitle">Statut de la commande</div>
+  <div>{{getStatusLabel()}}</div>
+  <div *ngIf="isStatusCancelled()" class="order__status_cancelled">Votre commande a été annulée</div>
+  <div *ngIf="isStatusBooked()" class="order__status_booked">Votre commande n'est pas encore validée. Elle sera annulée si le paiement n'est pas finalisé.</div>
+  <div *ngIf="isStatusValidated()" class="order__status_validated">Merci de votre confiance !</div>
+</div>
+
+<div *ngIf="isStatusValidated()" class="order__paragraph">
+  <div class="order__subtitle">
+    Date de la livraison
+  </div>
+  <div>
+    le {{order.delivery.deliveryStart | date: 'shortDate'}} entre {{order.delivery.deliveryStart | date: 'shortTime'}} et {{order.delivery.deliveryEnd | date: 'shortTime'}}
+  </div>
+</div>
+
+<div *ngIf="isStatusValidated()" class="order__paragraph">
+  <div class="order__subtitle">
+    Adresse de la livraison :
+  </div>
+  <div>
+    <ul><li *ngFor="let addressElement of getDeliveryAddressElements()">{{addressElement}}</li></ul>
+  </div>
+</div>
+
+<div *ngIf="isStatusValidated()" class="order__paragraph">
+  <div class="order__subtitle">
+    Montant de la commande
+  </div>
+  <div>{{getTotalPrice() | number: '0.2-2'}} €TTC</div>
+</div>
+
+<div *ngIf="isStatusValidated()" class="order__paragraph">
+  <div class="order__subtitle">
+    Colis commandés
+  </div>
+  <div>
+    <ul>
+      <li *ngFor="let orderItem of order.orderedItems">
+        <div>Type de colis : {{orderItem.batch.product.name}}</div>
+        <div>Description : {{orderItem.batch.product.description}}</div>
+        <div>Poids net : {{orderItem.batch.product.netWeight}} kg</div>
+        <div>Quantité commandée : {{orderItem.quantity}}</div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="order__paragraph">
+  <button mat-flat-button color="accent" (click)="goHome()">Revenir à l'accueil</button>
+  <button mat-flat-button (click)="print()">Imprimer cette page</button>
+</div>

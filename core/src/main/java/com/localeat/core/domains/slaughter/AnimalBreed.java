@@ -2,5 +2,5 @@ package com.localeat.core.domains.slaughter;
 
 public enum AnimalBreed {
     BEEF_LIMOUSIN,
-    BEEF_CHAROLLAIS;
+    BEEF_CHAROLAIS;
 }

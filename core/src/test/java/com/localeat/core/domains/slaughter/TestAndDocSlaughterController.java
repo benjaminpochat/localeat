@@ -4,7 +4,6 @@ import com.localeat.core.commons.GenericBuilder;
 import com.localeat.core.domains.farm.Farm;
 import com.localeat.core.domains.farm.FarmRepository;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,7 +66,7 @@ public class TestAndDocSlaughterController {
         Farm farm2 = farmRepository.findById(2L).orElse(null);
         var animal1 = GenericBuilder.of(Animal::new)
                 .with(Animal::setAnimalType, AnimalType.BEEF_HEIFER)
-                .with(Animal::setBreed, AnimalBreed.BEEF_CHAROLLAIS)
+                .with(Animal::setBreed, AnimalBreed.BEEF_CHAROLAIS)
                 .with(Animal::setFinalFarm, farm1)
                 .with(Animal::setIdentificationNumber, "ABCD")
                 .build();
@@ -107,7 +106,7 @@ public class TestAndDocSlaughterController {
                         "  \"id\" : 1,\n" +
                         "  \"animal\" : {\n" +
                         "    \"id\" : 1,\n" +
-                        "    \"breed\" : \"BEEF_CHAROLLAIS\",\n" +
+                        "    \"breed\" : \"BEEF_CHAROLAIS\",\n" +
                         "    \"animalType\" : \"BEEF_HEIFER\",\n" +
                         "    \"liveWeight\" : 0.0,\n" +
                         "    \"meatWeight\" : 0.0,\n" +
@@ -152,7 +151,7 @@ public class TestAndDocSlaughterController {
         var requestBody = "{\n" +
                 "  \"animal\" : {\n" +
                 "    \"animalType\" : \"BEEF_VEAL\",\n" +
-                "    \"animalBreed\" : \"BEEF_CHAROLLAIS\",\n" +
+                "    \"animalBreed\" : \"BEEF_CHAROLAIS\",\n" +
                 "    \"finalFarm\" : {\"id\" : 2},\n" +
                 "    \"identificationNumber\" : \"ABCD\"\n" +
                 "  },\n" +

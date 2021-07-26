@@ -57,7 +57,6 @@ public class MolliePaymentTransactionService {
      */
     private MolliePaymentTransaction createMolliePaymentTransaction(Payment payment, Account account){
         RestTemplate restTemplate = new RestTemplate();
-        //restTemplate.setInterceptors(List.of(new RestTemplateLoggingInterceptor()));
         HttpHeaders requestHeaders = new HttpHeaders();
         requestHeaders.add(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", paymentConfig.getMolliePaymentAPIKey()));
         MolliePaymentTransaction transaction = getMolliePaymentTransaction(payment, account);
