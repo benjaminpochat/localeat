@@ -35,8 +35,8 @@ export class OrderDetailsComponent implements OnInit {
     return OrderStatus.CANCELLED === this.order.status;
   }
 
-  isStatusBooked(): boolean {
-    return OrderStatus.BOOKED === this.order.status;
+  isStatusSubmitted(): boolean {
+    return OrderStatus.SUBMITTED === this.order.status;
   }
 
   getTotalPrice(): number {

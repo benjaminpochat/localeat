@@ -3,6 +3,7 @@ import { EventEmitter } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { Authentication } from 'src/app/commons/models/authentication.model';
 import { Delivery } from 'src/app/commons/models/delivery.model';
+import { OrderStatus } from 'src/app/commons/models/order-status.model';
 import { Order } from 'src/app/commons/models/order.model';
 import { AuthenticationService } from 'src/app/commons/services/authentication.service';
 import { DeliveryService } from 'src/app/customer-area/services/delivery.service';
@@ -61,8 +62,8 @@ export class CustomerAreaComponent implements OnInit {
 
   private refreshOrders() {
     const refreshOrdersEvent = new EventEmitter<Order[]>();
-    refreshOrdersEvent.subscribe(orders => {
-      this.orders = orders;
+    refreshOrdersEvent.subscribe((orders: [Order]) => {
+      this.orders = orders.filter((order: Order) => [OrderStatus.BOOKED, OrderStatus.PAYED].includes(order.status));
       if (this.orders.length > 0) {
         this.orderListTitle = 'Vos commandes en cours';
       } else {

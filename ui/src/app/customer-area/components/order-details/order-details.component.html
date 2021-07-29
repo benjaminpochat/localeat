@@ -10,7 +10,7 @@
   <div class="order__subtitle">Statut de la commande</div>
   <div>{{getStatusLabel()}}</div>
   <div *ngIf="isStatusCancelled()" class="order__status_cancelled">Votre commande a été annulée</div>
-  <div *ngIf="isStatusBooked()" class="order__status_booked">Votre commande n'est pas encore validée. Elle sera annulée si le paiement n'est pas finalisé.</div>
+  <div *ngIf="isStatusSubmitted()" class="order__status_booked">Votre commande n'est pas encore validée. Elle sera annulée si le paiement n'est pas finalisé.</div>
   <div *ngIf="isStatusValidated()" class="order__status_validated">Merci de votre confiance !</div>
 </div>
 

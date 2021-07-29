@@ -68,7 +68,6 @@ export class OrderDialogComponent implements OnInit {
 
   public initOrder(delivery: Delivery) {
     this.order = new Order();
-    this.order.status = OrderStatus.BOOKED;
     this.order.orderedItems = delivery.availableBatches
       .map(batch => {
         const orderItem = new OrderItem();

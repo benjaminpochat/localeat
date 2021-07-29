@@ -14,6 +14,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.websocket.server.PathParam;
 
+import static com.localeat.core.domains.order.OrderStatus.SUBMITTED;
+
 @RestController
 public class OrderController {
 
@@ -38,6 +40,7 @@ public class OrderController {
     @PostMapping(path = "/accounts/{account}/orders")
     public Order createOrder(@PathParam("account") Account account, @RequestBody Order order){
         Customer customer = (Customer) account.getActor();
+        order.setStatus(SUBMITTED);
         Order orderSaved = createOrderService.createOrder(order, customer);
         return orderSaved;
     }

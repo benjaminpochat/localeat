@@ -1,4 +1,5 @@
 export enum OrderStatus {
+  SUBMITTED = "SUBMITTED",
   BOOKED = "BOOKED",
   PAYED = "PAYED",
   DELIVERED = "DELIVERED",
@@ -9,8 +10,10 @@ export enum OrderStatus {
 export class OrderStatusUtils {
   static getOrderStatusLabel(orderStatus: OrderStatus) {
     switch (orderStatus) {
+      case OrderStatus.SUBMITTED:
+        return 'en cours d\'enregistrement';
       case OrderStatus.BOOKED:
-        return 'réservée';
+        return 'réservée, non payée';
       case OrderStatus.PAYED:
         return 'payée';
       case OrderStatus.DELIVERED:

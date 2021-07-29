@@ -16,6 +16,7 @@ import java.net.URI;
 import java.util.List;
 
 import static com.localeat.core.domains.order.OrderStatus.BOOKED;
+import static com.localeat.core.domains.order.OrderStatus.SUBMITTED;
 import static com.localeat.core.domains.payment.MolliePaymentTransaction.Currency.EUR;
 
 
@@ -88,9 +89,9 @@ public class MolliePaymentTransactionService {
         Order order = payment.getOrder();
         payment.setStatus(transaction.getPaymentStatus());
         payment = paymentRepository.save(payment);
-        if (order.getStatus().equals(BOOKED) && payment.isValidated()) {
+        if (order.getStatus().equals(SUBMITTED) && payment.isValidated()) {
             orderService.confirmOrder(payment.getOrder());
-        } else if (order.getStatus().equals(BOOKED) && payment.isFailed()) {
+        } else if (order.getStatus().equals(SUBMITTED) && payment.isFailed()) {
             orderService.abortOrder(payment.getOrder());
         }
     }
