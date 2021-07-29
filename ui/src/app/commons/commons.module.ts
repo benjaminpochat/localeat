@@ -21,6 +21,7 @@ import { PasswordRenewalComponent } from './components/password-renewal/password
 import { FooterComponent } from './components/footer/footer.component';
 import { ImageGaleryComponent } from './components/image-galery/image-galery.component';
 import { PieChartComponent } from './components/piechart/piechart.component';
+import { AuthenticationService } from './services/authentication.service';
 
 @NgModule({
   declarations: [

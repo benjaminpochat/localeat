@@ -8,14 +8,22 @@ import { AuthenticationInterceptor } from './commons/services/authentication-int
 import { BreederAreaModule } from './breeder-area/breeder-area.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CustomerAreaModule } from './customer-area/customer-area.module';
+import { CommonsModule } from './commons/commons.module';
 
 import localeFr from '@angular/common/locales/fr';
 import { ConfigurationService } from './commons/services/configuration.service';
+import { JwtVerificationService } from './commons/services/jwt-verification.service';
 registerLocaleData(localeFr);
 
-const appInitializer = (configurationService: ConfigurationService) => {
+const configurationLoader = (configurationService: ConfigurationService) => {
   return () => {
     return configurationService.loadConfiguration().toPromise();
+  };
+};
+
+const jwtVerifyer = (jwtVerificationService: JwtVerificationService) => {
+  return () => {
+    return jwtVerificationService.verifyJwt();
   };
 };
 
@@ -32,11 +40,13 @@ const appInitializer = (configurationService: ConfigurationService) => {
     // localeat modules
     BreederAreaModule,
     CustomerAreaModule,
+    CommonsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true },
     { provide: LOCALE_ID, useValue: 'fr-FR' },
-    { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [ConfigurationService]}
+    { provide: APP_INITIALIZER, useFactory: configurationLoader, multi: true, deps: [ConfigurationService]},
+    { provide: APP_INITIALIZER, useFactory: jwtVerifyer, multi: true, deps: [JwtVerificationService]}
   ],
   bootstrap: [
     AppComponent

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import * as decodeJwt from 'jwt-decode';
@@ -15,8 +15,9 @@ export class AuthenticationService {
   constructor(
     private http: HttpClient,
     private cookieService: CookieService,
-    private configurationService: ConfigurationService) {
-      this.configurationService.loadConfiguration().subscribe(configuration => this.localeatCoreUrl = configuration.coreUrl);
+    private injector: Injector) {
+      const configurationService = this.injector.get(ConfigurationService);
+      configurationService.loadConfiguration().subscribe(configuration => this.localeatCoreUrl = configuration.coreUrl);
     }
 
   authentication = new BehaviorSubject(this.getAuthenticationFromCookie());
@@ -49,11 +50,11 @@ export class AuthenticationService {
     };
     const url = this.localeatCoreUrl + '/accounts/' + authentication.account.id + '/authentication';
     const response = this.http.get(url, httpOptions);
-    response.subscribe(() => this.authentication.next(this.getAuthenticationFromCookie()));
+    response.subscribe(() => this.authentication.next(this.getAuthenticationFromCookie()), () => this.deleteAuthenticationAnnoymously());
     return response;
   }
 
-  public deleteAuthentication(): Observable<Object> {
+  public deleteAuthentication(): Observable<object> {
     const jwt = this.cookieService.get('jwt');
     const authentication: Authentication = decodeJwt(jwt);
     const httpOptions = {
@@ -61,6 +62,16 @@ export class AuthenticationService {
     };
     const url = this.localeatCoreUrl + '/accounts/' + authentication.account.id + '/authentication';
     const response = this.http.delete(url, httpOptions);
+    response.subscribe(() => this.authentication.next(this.getAuthenticationFromCookie()));
+    return response;
+  }
+
+  public deleteAuthenticationAnnoymously(): Observable<object> {
+    const httpOptions = {
+      withCredentials : true
+    };
+    const url = this.localeatCoreUrl + '/clearAuthentication';
+    const response = this.http.get(url, httpOptions);
     response.subscribe(() => this.authentication.next(this.getAuthenticationFromCookie()));
     return response;
   }

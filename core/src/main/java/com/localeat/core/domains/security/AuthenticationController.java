@@ -66,6 +66,12 @@ public class AuthenticationController {
         response.addCookie(cookie);
     }
 
+    @GetMapping(path = "/clearAuthentication")
+    public void clearAuthenticationAnonymously(HttpServletRequest request, HttpServletResponse response) {
+        clearJwtCookie(response);
+        clearSession(request);
+    }
+
     @DeleteMapping(path = "/accounts/{id}/authentication")
     public void clearAuthentication(HttpServletRequest request, HttpServletResponse response) {
         clearJwtCookie(response);
