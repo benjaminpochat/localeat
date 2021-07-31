@@ -21,8 +21,12 @@ export class OrderComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getOrderTotalPrice(){
+  getOrderTotalPrice(): number {
     return this.orderService.getTotalPrice(this.order);
+  }
+
+  goToOrderDetails(): void {
+    window.location.replace('./customer-area/orders/' + this.order.id);
   }
 
   downloadCalendarFile() {

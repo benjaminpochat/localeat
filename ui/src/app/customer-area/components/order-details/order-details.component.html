@@ -10,11 +10,12 @@
   <div class="order__subtitle">Statut de la commande</div>
   <div>{{getStatusLabel()}}</div>
   <div *ngIf="isStatusCancelled()" class="order__status_cancelled">Votre commande a été annulée</div>
-  <div *ngIf="isStatusSubmitted()" class="order__status_booked">Votre commande n'est pas encore validée. Elle sera annulée si le paiement n'est pas finalisé.</div>
+  <div *ngIf="isStatusSubmitted()" class="order__status_submitted">Votre commande n'est pas encore validée. Elle sera annulée si le paiement n'est pas finalisé.</div>
   <div *ngIf="isStatusValidated()" class="order__status_validated">Merci de votre confiance !</div>
+  <div *ngIf="isStatusBooked()" class="order__status_booked">Votre commande n'a pas été payée, mais elle est réservée. Nous comptons sur vous !</div>
 </div>
 
-<div *ngIf="isStatusValidated()" class="order__paragraph">
+<div *ngIf="isStatusValidated() || isStatusBooked()" class="order__paragraph">
   <div class="order__subtitle">
     Date de la livraison
   </div>
@@ -23,7 +24,7 @@
   </div>
 </div>
 
-<div *ngIf="isStatusValidated()" class="order__paragraph">
+<div *ngIf="isStatusValidated() || isStatusBooked()" class="order__paragraph">
   <div class="order__subtitle">
     Adresse de la livraison :
   </div>
@@ -32,14 +33,14 @@
   </div>
 </div>
 
-<div *ngIf="isStatusValidated()" class="order__paragraph">
+<div *ngIf="isStatusValidated() || isStatusBooked()" class="order__paragraph">
   <div class="order__subtitle">
     Montant de la commande
   </div>
   <div>{{getTotalPrice() | number: '0.2-2'}} €TTC</div>
 </div>
 
-<div *ngIf="isStatusValidated()" class="order__paragraph">
+<div *ngIf="isStatusValidated() || isStatusBooked()" class="order__paragraph">
   <div class="order__subtitle">
     Colis commandés
   </div>

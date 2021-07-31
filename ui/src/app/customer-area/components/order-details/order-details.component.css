@@ -33,6 +33,10 @@
   color: orangered;
 }
 
+.order__status_submitted {
+  color: orangered;
+}
+
 .order__status_validated {
   color: olivedrab;
 }

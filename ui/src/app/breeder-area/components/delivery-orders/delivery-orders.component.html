@@ -6,12 +6,14 @@
   <div class="delivery-orders__list-header">
     <div>N°</div>
     <div>Nom</div>
+    <div>Téléphone</div>
     <div>Description</div>
     <div>Statut</div>
   </div>
   <div *ngFor="let order of delivery.orders" class="delivery-orders__list-body">
     <div class="delivery-orders__list-body__order-summary">{{order.id}}</div>
     <div class="delivery-orders__list-body__order-summary">{{order.customer.name}} {{order.customer.firstName}}</div>
+    <div class="delivery-orders__list-body__order-summary"><a href="tel:{{order.customer.phoneNumber}}">{{order.customer.phoneNumber}}</a></div>
     <div class="delivery-orders__list-body__order-summary">{{order.totalNetWeight}} kg / {{order.totalPrice}} €</div>
     <div class="delivery-orders__list-body__order-summary">{{getLabelOrderStatus(order.status)}}</div>
     <div class="delivery-orders__list-body__order-details">

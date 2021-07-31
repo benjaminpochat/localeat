@@ -31,6 +31,10 @@ export class OrderDetailsComponent implements OnInit {
     return (OrderStatus.PAYED === this.order.status) || (OrderStatus.DELIVERED === this.order.status);
   }
 
+  isStatusBooked(): boolean {
+    return (OrderStatus.BOOKED === this.order.status);
+  }
+
   isStatusCancelled(): boolean {
     return OrderStatus.CANCELLED === this.order.status;
   }
