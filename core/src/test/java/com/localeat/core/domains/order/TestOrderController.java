@@ -1,15 +1,19 @@
 package com.localeat.core.domains.order;
 
 import com.localeat.core.domains.delivery.Delivery;
+import com.localeat.core.domains.payment.Payment;
+import com.localeat.core.domains.payment.PaymentController;
 import com.localeat.core.domains.product.Batch;
 import com.localeat.core.domains.product.BatchRepository;
 import com.localeat.core.domains.security.Account;
 import com.localeat.core.domains.security.AccountRepository;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
+
+import static com.localeat.core.domains.order.OrderStatus.SUBMITTED;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Sql(value = {
@@ -33,13 +37,16 @@ public class TestOrderController {
     private OrderController orderController;
 
     @Autowired
+    private PaymentController paymentController;
+
+    @Autowired
     private AccountRepository accountRepository;
 
     @Autowired
     private BatchRepository batchRepository;
 
     @Test
-    public void createOrder_should_increase_quantity_sold() {
+    public void createOrder_should_not_increase_quantity_sold_before_payment() {
         // given
         Account account = accountRepository.findById(3L).orElseThrow();
 
@@ -62,7 +69,7 @@ public class TestOrderController {
 
         // then
         Batch batchLoaded = batchRepository.findById(1L).orElseThrow();
-        Assertions.assertThat(batchLoaded.getQuantitySold()).isEqualTo(32);
-
+        assertThat(batchLoaded.getQuantitySold()).isEqualTo(30);
+        assertThat(order.getStatus()).isEqualTo(SUBMITTED);
     }
 }

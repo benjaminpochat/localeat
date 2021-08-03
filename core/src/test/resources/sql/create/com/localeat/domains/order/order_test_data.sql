@@ -1,11 +1,13 @@
 insert into orders (
     id,
     customer_id,
-    delivery_id)
+    delivery_id,
+    status)
 values (
     nextval('order_id_seq'),
     3,
-    1)
+    1,
+    'BOOKED')
 ;
 
 insert into order_items (
