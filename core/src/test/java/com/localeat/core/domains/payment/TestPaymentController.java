@@ -38,7 +38,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 }, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 /**
  * Uses the {@link MockPaymentTransactionService} implementation for {@link PaymentTransactionService} bean,
- * which rejects the payment if an order contains 1 order item,
+ * activated by "test" Spring profile.<br>
+ *
+ * {@link MockPaymentTransactionService} rejects the payment if an order contains 1 order item,
  * and accepts the payment id an order contains more than 1 item.
  */
 public class TestPaymentController {
