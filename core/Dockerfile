@@ -10,10 +10,11 @@ RUN chmod -R a+rwx /usr/share/maven
 RUN useradd --create-home localeat
 WORKDIR /home/localeat
 
-COPY ./core ./core
+COPY ./core/pom.xml ./pom.xml
+RUN mvn -s /usr/share/maven/ref/settings-docker.xml -f ./pom.xml dependency:go-offline
 
-RUN mvn -s /usr/share/maven/ref/settings-docker.xml -f ./core/pom.xml dependency:go-offline
-RUN mvn install -s /usr/share/maven/ref/settings-docker.xml -f ./core/pom.xml
+COPY ./core ./core
+RUN mvn install -Dspring.profiles.active=test -s /usr/share/maven/ref/settings-docker.xml -f ./core/pom.xml
 RUN mvn exec:java -s /usr/share/maven/ref/settings-docker.xml -f ./core/pom.xml -Dexec.skip=true
 
 USER localeat
