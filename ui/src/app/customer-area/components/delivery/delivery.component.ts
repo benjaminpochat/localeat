@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Animal } from 'src/app/commons/models/animal.model';
 import { AnimalService } from 'src/app/commons/services/animal.service';
 import { PieChartComponent } from 'src/app/commons/components/piechart/piechart.component';
+import { Farm } from 'src/app/commons/models/farm.model';
 
 @Component({
   selector: 'app-delivery',
@@ -21,6 +22,10 @@ export class DeliveryComponent implements OnInit {
 
   @Output()
   createOrderEvent = new EventEmitter<Delivery>();
+
+  @Output()
+  showSlideshowEvent = new EventEmitter<Farm>();
+
 
   animal: Animal;
 
@@ -51,5 +56,9 @@ export class DeliveryComponent implements OnInit {
 
   getAnimalLabel(): string {
     return this.animalService.getAnimalDescription(this.animal);
+  }
+
+  showFarmSlideshow() {
+    this.showSlideshowEvent.emit(this.animal.finalFarm);
   }
 }

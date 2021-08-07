@@ -14,7 +14,7 @@ public class Farm {
 
     String name;
 
-    String description;
+    String slideshowUrl;
 
     public void setId(Long id) {
         this.id = id;
@@ -32,11 +32,11 @@ public class Farm {
         return name;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setSlideshowUrl(String slideshowUrl) {
+        this.slideshowUrl = slideshowUrl;
     }
 
-    public String getDescription() {
-        return description;
+    public String getSlideshowUrl() {
+        return slideshowUrl;
     }
 }

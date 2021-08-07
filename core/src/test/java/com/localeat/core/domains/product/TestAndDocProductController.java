@@ -62,8 +62,7 @@ public class TestAndDocProductController {
                         "  \"netWeight\" : 10,\n" +
                         "  \"farm\" : {\n" +
                         "    \"id\" : 1,\n" +
-                        "    \"name\" : \"La ferme de la Riviere\",\n" +
-                        "    \"description\" : \"La ferme de la Riviere est un elevage d'excellence\"\n" +
+                        "    \"name\" : \"La ferme de la Riviere\"\n" +
                         "  }\n" +
                         "} ]"))
                 .andDo(document(
@@ -84,8 +83,7 @@ public class TestAndDocProductController {
                 "  \"netWeight\" : 5,\n" +
                 "  \"farm\" : {\n" +
                 "    \"id\" : 1,\n" +
-                "    \"name\" : \"La ferme de la Riviere\",\n" +
-                "    \"description\" : \"La ferme de la Riviere est un elevage d'excellence\"\n" +
+                "    \"name\" : \"La ferme de la Riviere\"\n" +
                 "  }\n" +
                 "}";
 
@@ -116,8 +114,7 @@ public class TestAndDocProductController {
                         "  \"netWeight\" : 10,\n" +
                         "  \"farm\" : {\n" +
                         "    \"id\" : 1,\n" +
-                        "    \"name\" : \"La ferme de la Riviere\",\n" +
-                        "    \"description\" : \"La ferme de la Riviere est un elevage d'excellence\"\n" +
+                        "    \"name\" : \"La ferme de la Riviere\"\n" +
                         "  }\n" +
                         "} ]"))
                 .andDo(document(
@@ -137,8 +134,7 @@ public class TestAndDocProductController {
                 "  \"netWeight\" : 5,\n" +
                 "  \"farm\" : {\n" +
                 "    \"id\" : 1,\n" +
-                "    \"name\" : \"La ferme de la Riviere\",\n" +
-                "    \"description\" : \"La ferme de la Riviere est un elevage d'excellence\"\n" +
+                "    \"name\" : \"La ferme de la Riviere\"\n" +
                 "  }\n" +
                 "}";
 

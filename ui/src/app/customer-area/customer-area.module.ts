@@ -28,6 +28,7 @@ import { ProductSelectorComponent } from './components/product-selector/product-
 import { OrderItemComponent } from './components/order-item/order-item.component';
 import { MatProgressSpinner, MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
+import { SlideshowComponent } from './components/slideshow/slideshow.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { OrderDetailsComponent } from './components/order-details/order-details.
     OrderItemComponent,
     ProductComponent,
     ProductSelectorComponent,
+    SlideshowComponent,
   ],
   imports: [
     CommonModule,

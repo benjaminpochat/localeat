@@ -17,6 +17,7 @@
 .delivery-card__date,
 .delivery-card__animal,
 .delivery-card__animal-id,
+.delivery-card__farm,
 .delivery-card__quantity-sold {
   display: grid;
   grid-template-columns: 2rem 1fr;

@@ -50,6 +50,12 @@
           {{animal.identificationNumber}}
         </span>
       </div>
+      <div *ngIf="animal?.finalFarm" class="delivery-card__farm">
+        <i class="icon farm-icon"></i>
+        <span>
+          {{animal.finalFarm.name}}
+        </span>
+      </div>
     </div>
     <div class="delivery-card__batch-list">
       <app-product *ngFor="let batch of delivery.availableBatches" [product]="batch.product">
@@ -58,5 +64,6 @@
   </mat-card-content>
   <mat-card-actions>
     <button mat-flat-button color='primary' (click)="showOrderComponent(delivery)">Je commande</button>
+    <button *ngIf="animal?.finalFarm?.slideshowUrl" mat-flat-button (click)="showFarmSlideshow()">Je visite la ferme</button>
   </mat-card-actions>
 </mat-card>

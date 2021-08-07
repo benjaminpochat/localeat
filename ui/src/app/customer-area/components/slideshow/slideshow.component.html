@@ -1,0 +1,9 @@
+<div *ngIf="farm" class="overlay" (click)="close()">
+  <div class="slideshow">
+    <div class="slideshow__menu">
+      <div class="slideshow__title">{{farm.name}}</div>
+      <button mat-flat-button (click)="close()">Quitter la visite</button>
+    </div>
+    <iframe [src]="getSlideshowUrl()" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" width="100%" height="100%"></iframe>
+  </div>
+</div>

@@ -20,10 +20,12 @@
 
   <div class="subtitle">
     <div>{{ deliveryListTitle }}</div>
-    <app-delivery *ngFor="let delivery of deliveries" [delivery]="delivery" (createOrderEvent)="openOrderDialog($event)"></app-delivery>
+    <app-delivery *ngFor="let delivery of deliveries" [delivery]="delivery" (createOrderEvent)="openOrderDialog($event)" (showSlideshowEvent)="showSlideshow($event)"></app-delivery>
   </div>
 
   <app-order-dialog (createOrderEvent)="refreshCustomerArea()"></app-order-dialog>
+
+  <app-slideshow></app-slideshow>
 
   <app-footer></app-footer>
 

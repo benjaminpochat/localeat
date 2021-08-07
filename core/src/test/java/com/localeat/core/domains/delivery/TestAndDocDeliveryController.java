@@ -108,8 +108,7 @@ public class TestAndDocDeliveryController {
                         "        \"photo\" : null,\n" +
                         "        \"farm\" : {\n" +
                         "           \"id\" : 1,\n" +
-                        "           \"name\" : \"La ferme de la Riviere\",\n" +
-                        "           \"description\" : \"La ferme de la Riviere est un elevage d'excellence\"\n" +
+                        "           \"name\" : \"La ferme de la Riviere\"\n" +
                         "        }\n" +
                         "      }\n" +
                         "    },\n" +
@@ -143,8 +142,7 @@ public class TestAndDocDeliveryController {
                         "        \"photo\" : null,\n" +
                         "        \"farm\" : {\n" +
                         "           \"id\" : 1,\n" +
-                        "           \"name\" : \"La ferme de la Riviere\",\n" +
-                        "           \"description\" : \"La ferme de la Riviere est un elevage d'excellence\"\n" +
+                        "           \"name\" : \"La ferme de la Riviere\"\n" +
                         "        }\n" +
                         "      }\n" +
                         "    } ],\n" +
@@ -175,8 +173,7 @@ public class TestAndDocDeliveryController {
                         "        \"photo\" : null,\n" +
                         "        \"farm\" : {\n" +
                         "           \"id\" : 1,\n" +
-                        "           \"name\" : \"La ferme de la Riviere\",\n" +
-                        "           \"description\" : \"La ferme de la Riviere est un elevage d'excellence\"\n" +
+                        "           \"name\" : \"La ferme de la Riviere\"\n" +
                         "        }\n" +
                         "      }\n" +
                         "    },\n" +
@@ -210,8 +207,7 @@ public class TestAndDocDeliveryController {
                         "        \"photo\" : null,\n" +
                         "        \"farm\" : {\n" +
                         "           \"id\" : 1,\n" +
-                        "           \"name\" : \"La ferme de la Riviere\",\n" +
-                        "           \"description\" : \"La ferme de la Riviere est un elevage d'excellence\"\n" +
+                        "           \"name\" : \"La ferme de la Riviere\"\n" +
                         "        }\n" +
                         "      }\n" +
                         "    } ],\n" +
