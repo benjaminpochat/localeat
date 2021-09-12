@@ -4,6 +4,7 @@ import com.localeat.core.domains.farm.Farm;
 import com.localeat.core.domains.image.Image;
 
 import javax.persistence.*;
+import java.util.HashMap;
 
 /**
  * A product is something that can be sold by a {@link Farm}.
@@ -30,6 +31,15 @@ public class Product {
     private float unitPrice;
 
     private float netWeight;
+
+    @ElementCollection
+    @CollectionTable(name = "product_elements",
+            joinColumns = {@JoinColumn(name = "product_id", referencedColumnName = "id")})
+    @MapKeyColumn(name = "piece_category")
+    @Column(name = "shaping")
+    @MapKeyEnumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)
+    private Map<PieceCategory, Shaping> elements = new HashMap<>();
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Image photo;
@@ -100,4 +110,23 @@ public class Product {
         this.netWeight = netWeight;
     }
 
+    public Map<PieceCategory, Shaping> getElements() {
+        return elements;
+    }
+
+    public void setElements(Map<PieceCategory, Shaping> elements) {
+        this.elements = elements;
+    }
+
+    public void setShaping(PieceCategory pieceCategory, Shaping shaping) {
+        elements.put(pieceCategory, shaping);
+    }
+
+    public Shaping getShaping(PieceCategory pieceCategory) {
+        return elements.get(pieceCategory);
+    }
+
+    public Collection<PieceCategory> getPieceCategories() {
+        return elements.keySet();
+    }
 }

@@ -11,6 +11,7 @@ import { ProductTemplate } from 'src/app/commons/models/product-template.model';
 import { ProductComponent } from '../product/product.component';
 import { ViewChild } from '@angular/core';
 import { Image } from 'src/app/commons/models/image.model';
+import { PieceCategory } from 'src/app/commons/models/piece-category.model';
 import { AccessControlType, AccessControlTypeUtils } from 'src/app/commons/models/access-control-type.model';
 
 @Component({
@@ -61,10 +62,10 @@ export class DeliveryCreationComponent implements OnInit {
   }
 
   save(): void{
-    if ( this.deliveryDateForm.valid 
-      && this.deliveryPlaceForm.valid 
+    if ( this.deliveryDateForm.valid
+      && this.deliveryPlaceForm.valid
       && this.accessControlForm.valid
-      && this.batchesForm.valid 
+      && this.batchesForm.valid
       ){
         this.delivery.name = this.deliveryDateForm.value.deliveryName;
         this.delivery.deliveryStart = new Date(this.deliveryDateForm.value.deliveryDate + 'T' + this.deliveryDateForm.value.deliveryStartHour + 'Z');
@@ -86,7 +87,7 @@ export class DeliveryCreationComponent implements OnInit {
     }
   }
 
-  cancel(): void{
+  cancel(): void {
     this.resetComponent();
   }
 
@@ -101,7 +102,7 @@ export class DeliveryCreationComponent implements OnInit {
     this.createDeliveryEvent = createDeliveryEvent;
   }
 
-  addBatch(productTemplate: ProductTemplate): void{
+  addBatch(productTemplate: ProductTemplate): void {
     const product = new Product();
     product.name = productTemplate.name;
     product.unitPrice = productTemplate.unitPrice;
@@ -114,6 +115,12 @@ export class DeliveryCreationComponent implements OnInit {
       }
     });
     product.farm = productTemplate.farm;
+    if(productTemplate.elements){
+      product.elements = new Map();
+      for(const pieceCategory of productTemplate.elements.keys()) {
+        product.elements.set(pieceCategory, productTemplate.elements.get(pieceCategory));
+      }
+    }
     const batch = new Batch();
     batch.quantity = 0;
     batch.product = product;

@@ -1,11 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ProductTemplate } from 'src/app/commons/models/product-template.model';
+import { ProductTemplate, ProductTemplateUtils } from 'src/app/commons/models/product-template.model';
 import { Product } from 'src/app/commons/models/product.model';
 import { Image } from 'src/app/commons/models/image.model';
 import { UrlService } from 'src/app/commons/services/url.service';
 import { environment } from 'src/environments/environment';
+import { map } from 'rxjs/operators';
+import { PieceCategory } from 'src/app/commons/models/piece-category.model';
+import { Shaping } from 'src/app/commons/models/shaping.model';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +29,16 @@ export class ProductService {
   }
 
   public getProductTemplates(): Observable<ProductTemplate[]> {
-    return this.http.get<ProductTemplate[]>(this.urlService.getAuthenticatedUrl(['productTemplates']));
+    return this.http.get<ProductTemplate[]>(this.urlService.getAuthenticatedUrl(['productTemplates']))
+      .pipe(map((productTemplates: ProductTemplate[]) => {
+          (<ProductTemplate[]>productTemplates).forEach(
+            productTemplate => {
+              const elementsAsArrays = Object.entries(productTemplate.elements);
+              productTemplate.elements = new Map<PieceCategory, Shaping>();
+              elementsAsArrays.forEach(elementAsArrays => ProductTemplateUtils.setShaping(productTemplate, elementAsArrays[0], elementAsArrays[1]));
+            });
+          return productTemplates;
+      }));
   }
 
   //TODO : à déplacer dans commons

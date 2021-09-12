@@ -1,9 +1,13 @@
 package com.localeat.core.domains.product;
 
+import com.localeat.core.domains.cutting.PieceCategory;
+import com.localeat.core.domains.cutting.Shaping;
 import com.localeat.core.domains.farm.Farm;
 import com.localeat.core.domains.image.Image;
 
 import javax.persistence.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A product template facilitates the creation of a new {@link Product} to be sold.
@@ -25,6 +29,15 @@ public class ProductTemplate {
     private float unitPrice;
 
     private float netWeight;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "product_template_elements",
+            joinColumns = {@JoinColumn(name = "product_id", referencedColumnName = "id")})
+    @MapKeyColumn(name = "piece_category")
+    @Column(name = "shaping")
+    @MapKeyEnumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)
+    private Map<PieceCategory, Shaping> elements = new HashMap<>();
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Image photo;
@@ -93,5 +106,13 @@ public class ProductTemplate {
 
     public void setFarm(Farm farm) {
         this.farm = farm;
+    }
+
+    public Map<PieceCategory, Shaping> getElements() {
+        return elements;
+    }
+
+    public void setElements(Map<PieceCategory, Shaping> elements) {
+        this.elements = elements;
     }
 }

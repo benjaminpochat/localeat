@@ -16,3 +16,35 @@ values (
     10)
 ;
 
+insert into product_template_elements (
+    product_id,
+    piece_category,
+    shaping)
+values (
+    1,
+    'FAUX_FILET',
+    'TRANCHE'
+)
+;
+
+insert into product_template_elements (
+    product_id,
+    piece_category,
+    shaping)
+values (
+    1,
+    'COTE',
+    'TRANCHE'
+)
+;
+
+insert into product_template_elements (
+    product_id,
+    piece_category,
+    shaping)
+values (
+    1,
+    'BASSE_COTE',
+    'STEAK_HACHE'
+)
+;

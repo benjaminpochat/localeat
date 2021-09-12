@@ -5,6 +5,8 @@ import { ProductTemplate } from 'src/app/commons/models/product-template.model';
 import { Product } from 'src/app/commons/models/product.model';
 import { ProductService } from 'src/app/breeder-area/services/product.service';
 import { Image } from 'src/app/commons/models/image.model';
+import { PieceCategory, PieceCategoryUtils } from 'src/app/commons/models/piece-category.model';
+import { Shaping, ShapingUtils } from 'src/app/commons/models/shaping.model';
 
 @Component({
   selector: 'app-product',
@@ -34,11 +36,15 @@ export class ProductComponent implements OnInit {
   setProduct(product: Product | ProductTemplate) {
     this.product = product;
     this.productForm.patchValue(product);
-    if (this.product instanceof Product) {
-      this.productService.loadProductPhoto(this.product).subscribe(photo => this.product.photo = photo);
-    } else {
-      this.productService.loadProductTemplatePhoto(this.product).subscribe(photo => this.product.photo = photo);
+    if(this.product.photo) {
+      if (this.product instanceof Product) {
+        this.productService.loadProductPhoto(this.product).subscribe(photo => this.product.photo = photo);
+      } else {
+        this.productService.loadProductTemplatePhoto(this.product).subscribe(photo => this.product.photo = photo);
+      }
     }
+    this.product.elements = new Map<PieceCategory, Shaping>();
+    Object.keys(PieceCategory).forEach(pieceCategory => this.product.elements[pieceCategory] = null);
   }
 
   initProductForm(){
@@ -87,7 +93,7 @@ export class ProductComponent implements OnInit {
     });
   }
 
-  uploadPhoto() {
+  uploadPhoto():void {
     const inputNode: any = document.querySelector('#file');
     const reader = new FileReader();
 
@@ -97,5 +103,9 @@ export class ProductComponent implements OnInit {
     };
 
     reader.readAsDataURL(inputNode.files[0]);
+  }
+
+  getPieceCategories(): string[] {
+    return Object.keys(PieceCategory);
   }
 }

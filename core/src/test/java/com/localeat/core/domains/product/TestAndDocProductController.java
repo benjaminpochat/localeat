@@ -52,7 +52,12 @@ public class TestAndDocProductController {
                         "  \"farm\" : {\n" +
                         "    \"id\" : 1,\n" +
                         "    \"name\" : \"La ferme de la Riviere\"\n" +
-                        "  }\n" +
+                        "  },\n" +
+                        " \"elements\" : {\n" +
+                        "    \"FAUX_FILET\":\"TRANCHE\"," +
+                        "    \"BASSE_COTE\":\"STEAK_HACHE\"," +
+                        "    \"COTE\":\"TRANCHE\"" +
+                        "  }" +
                         "} ]"));
     }
 

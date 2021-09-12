@@ -30,7 +30,9 @@ delete from breeders ;
 delete from customers ;
 
 -- product domain
+delete from product_elements;
 delete from products;
+delete from product_template_elements;
 delete from product_templates;
 alter sequence product_id_seq restart with 1;
 alter sequence product_template_id_seq restart with 1;
