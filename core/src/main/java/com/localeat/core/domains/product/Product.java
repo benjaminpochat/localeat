@@ -1,10 +1,14 @@
 package com.localeat.core.domains.product;
 
+import com.localeat.core.domains.cutting.PieceCategory;
+import com.localeat.core.domains.cutting.Shaping;
 import com.localeat.core.domains.farm.Farm;
 import com.localeat.core.domains.image.Image;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A product is something that can be sold by a {@link Farm}.

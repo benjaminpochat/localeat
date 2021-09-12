@@ -6,6 +6,7 @@ import com.localeat.core.domains.product.Batch;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -29,10 +30,10 @@ public class Delivery {
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name="delivery_available_batches")
-    private Set<Batch> availableBatches;
+    private Set<Batch> availableBatches = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Order> orders;
+    private Set<Order> orders = new HashSet<>();
 
     @OneToOne(cascade = CascadeType.ALL)
     private DeliveryAccessControl accessControl;
@@ -69,12 +70,20 @@ public class Delivery {
         this.availableBatches = availableBatches;
     }
 
+    public void addToAvailableBatchs(Batch availableBatch) {
+        getAvailableBatches().add(availableBatch);
+    }
+
     public Set<Order> getOrders() {
         return orders;
     }
 
     public void setOrders(Set<Order> orders) {
         this.orders = orders;
+    }
+
+    public void addToOrders(Order order) {
+        orders.add(order);
     }
 
     public LocalDateTime getDeliveryStart() {

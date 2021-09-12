@@ -2,3 +2,6 @@ databaseChangeLog:
   - include:
       relativeToChangelogFile: true
       file: changelog-2022-03-52-add_liquibase.yaml
+  - include:
+      relativeToChangelogFile: true
+      file: changelog-2022-03-55-cutting_plan_feature.yaml

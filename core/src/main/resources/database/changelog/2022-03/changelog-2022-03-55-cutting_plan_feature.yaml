@@ -1,0 +1,161 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1648669730513-11
+      author: benjamin (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_cuttingplan
+                  name: id
+                  type: BIGINT
+            tableName: cutting_plan
+  - changeSet:
+      id: 1648669730513-12
+      author: benjamin (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_cuttingplanelement
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: piece_category
+                  type: INT
+              - column:
+                  name: shaping
+                  type: INT
+              - column:
+                  name: weight
+                  type: FLOAT
+            tableName: cutting_plan_element
+  - changeSet:
+      id: 1648669730513-13
+      author: benjamin (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                  name: cutting_plan_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: elements_id
+                  type: BIGINT
+            tableName: cutting_plan_elements
+  - changeSet:
+      id: 1648669730513-16
+      author: benjamin (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_product_elements
+                  name: product_id
+                  type: BIGINT
+              - column:
+                  name: shaping
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_product_elements
+                  name: piece_category
+                  type: VARCHAR(255)
+            tableName: product_elements
+  - changeSet:
+      id: 1648669730513-17
+      author: benjamin (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_product_template_elements
+                  name: product_id
+                  type: BIGINT
+              - column:
+                  name: shaping
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_product_template_elements
+                  name: piece_category
+                  type: VARCHAR(255)
+            tableName: product_template_elements
+  - changeSet:
+      id: 1648669730513-18
+      author: benjamin (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addUniqueConstraint:
+            columnNames: elements_id
+            constraintName: uc_cutting_plan_elements_elements
+            tableName: cutting_plan_elements
+  - changeSet:
+      id: 1648669730513-21
+      author: benjamin (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: cutting_plan_id
+            baseTableName: cutting_plan_elements
+            constraintName: fk_cutplaele_on_cutting_plan
+            referencedColumnNames: id
+            referencedTableName: cutting_plan
+  - changeSet:
+      id: 1648669730513-22
+      author: benjamin (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: elements_id
+            baseTableName: cutting_plan_elements
+            constraintName: fk_cutplaele_on_cutting_plan_element
+            referencedColumnNames: id
+            referencedTableName: cutting_plan_element
+  - changeSet:
+      id: 1648669730513-23
+      author: benjamin (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: product_id
+            baseTableName: product_elements
+            constraintName: fk_product_elements_on_product
+            referencedColumnNames: id
+            referencedTableName: products
+  - changeSet:
+      id: 1648669730513-24
+      author: benjamin (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: product_id
+            baseTableName: product_template_elements
+            constraintName: fk_product_template_elements_on_product_template
+            referencedColumnNames: id
+            referencedTableName: product_templates
