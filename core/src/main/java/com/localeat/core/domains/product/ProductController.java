@@ -53,7 +53,7 @@ public class ProductController {
 
     @GetMapping(path = "/products/{product}/photo")
     public Image getProductPhoto(@PathVariable Product product) {
-        return product.getPhoto();
+        return imageRepository.findById(product.getPhoto().getId()).get();
     }
 
     @GetMapping(path = "/accounts/{account}/productTemplates/{productTemplate}/photo")
