@@ -20,44 +20,51 @@
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <div class="delivery-card__content">
-      <div class="delivery-card__address">
-        <i class="icon placeholder-icon"></i>
-        <span>
-          Adresse de livraison :<br>
-          {{delivery.deliveryAddress.name}}<br>
-          {{delivery.deliveryAddress.addressLine1}}<br>
-          {{delivery.deliveryAddress.zipCode}}<br>
-          {{delivery.deliveryAddress.city}}
-        </span>
+    <div class="delivery-card__general-information">
+      <div class="delivery-card__delivery-information">
+        <div class="delivery-card__address">
+          <i class="icon placeholder-icon"></i>
+          <span>
+            Adresse de livraison :<br>
+            {{delivery.deliveryAddress.name}}<br>
+            {{delivery.deliveryAddress.addressLine1}}<br>
+            {{delivery.deliveryAddress.zipCode}}<br>
+            {{delivery.deliveryAddress.city}}
+          </span>
+        </div>
+        <div class="delivery-card__date">
+          <i class="icon time-icon"></i>
+          <span>
+            Livré entre {{delivery.deliveryStart | date: 'shortTime'}}
+            et {{delivery.deliveryEnd | date: 'shortTime'}}
+          </span>
+        </div>
       </div>
-      <div class="delivery-card__date">
-        <i class="icon time-icon"></i>
-        <span>
-          Livré entre {{delivery.deliveryStart | date: 'shortTime'}}
-          et {{delivery.deliveryEnd | date: 'shortTime'}}
-        </span>
-      </div>
-      <div *ngIf="getAnimalLabel()" class="delivery-card__animal">
-        <i class="icon cow-icon"></i>
-        <span>
-          {{getAnimalLabel()}}
-        </span>
-      </div>
-      <div *ngIf="animal?.identificationNumber" class="delivery-card__animal-id">
-        <i class="icon label-icon"></i>
-        <span>
-          {{animal.identificationNumber}}
-        </span>
-      </div>
-      <div *ngIf="animal?.finalFarm" class="delivery-card__farm">
-        <i class="icon farm-icon"></i>
-        <span>
-          {{animal.finalFarm.name}}
-        </span>
+      <div class="delivery-card__animal-information">
+        <div *ngIf="isCertifiedLabelRouge()" class="delivery-card__certification-logo">
+          <i class="icon certified-label-rouge-icon"></i>
+        </div>
+        <div *ngIf="getAnimalLabel()" class="delivery-card__animal">
+          <i class="icon cow-icon"></i>
+          <span>
+            {{getAnimalLabel()}}
+          </span>
+        </div>
+        <div *ngIf="animal?.identificationNumber" class="delivery-card__animal-id">
+          <i class="icon label-icon"></i>
+          <span>
+            {{animal.identificationNumber}}
+          </span>
+        </div>
+        <div *ngIf="animal?.finalFarm" class="delivery-card__farm">
+          <i class="icon farm-icon"></i>
+          <span>
+            {{animal.finalFarm.name}}
+          </span>
+        </div>
       </div>
     </div>
-    <div class="delivery-card__batch-list">
+    <div class="delivery-card__product-batch-list">
       <app-product *ngFor="let batch of delivery.availableBatches" [product]="batch.product">
       </app-product>
     </div>

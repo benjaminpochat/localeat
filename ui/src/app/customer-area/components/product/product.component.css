@@ -15,6 +15,7 @@
   font-size: large;
   grid-column: 1 / -1;
   padding: 0.2rem;
+  font-weight: 500;
 }
 
 .product__description {

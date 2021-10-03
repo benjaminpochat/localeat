@@ -58,6 +58,10 @@ export class DeliveryComponent implements OnInit {
     return this.animalService.getAnimalDescription(this.animal);
   }
 
+  isCertifiedLabelRouge(): boolean {
+    return this.animal?.certifiedLabelRouge;
+  }
+
   showFarmSlideshow() {
     this.showSlideshowEvent.emit(this.animal.finalFarm);
   }

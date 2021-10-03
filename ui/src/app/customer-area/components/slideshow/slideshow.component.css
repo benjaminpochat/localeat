@@ -36,3 +36,13 @@
   font-family: Acme;
   font-size: 1.5rem;
 }
+
+@media (max-width:600px) {
+  .slideshow__title {
+    font-size: 1rem;
+  }
+
+  .slideshow {
+    width: 100%;
+  }
+}

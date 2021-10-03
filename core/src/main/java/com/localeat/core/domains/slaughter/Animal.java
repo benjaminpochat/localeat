@@ -30,6 +30,8 @@ public class Animal {
 
     private String identificationNumber;
 
+    private Boolean certifiedLabelRouge;
+
     public Long getId() {
         return id;
     }
@@ -84,5 +86,13 @@ public class Animal {
 
     public void setFinalFarm(Farm finalFarm) {
         this.finalFarm = finalFarm;
+    }
+
+    public Boolean isCertifiedLabelRouge() {
+        return certifiedLabelRouge;
+    }
+
+    public void setCertifiedLabelRouge(Boolean certifiedLabelRouge) {
+        this.certifiedLabelRouge = certifiedLabelRouge;
     }
 }

@@ -6,8 +6,18 @@
   border-color: darkolivegreen;
 }
 
-.delivery-card__content,
-.delivery-card__batch-list {
+.delivery-card__title {
+  font-family: acme;
+  font-size: 1.8rem;
+}
+
+.delivery-card__general-information {
+  display: flex;
+  flex-flow: wrap;
+  justify-content: space-between;
+}
+
+.delivery-card__product-batch-list {
   display: flex;
   flex-flow: wrap;
   justify-content: left;
@@ -18,7 +28,8 @@
 .delivery-card__animal,
 .delivery-card__animal-id,
 .delivery-card__farm,
-.delivery-card__quantity-sold {
+.delivery-card__quantity-sold,
+.delivery-card__certification-logo {
   display: grid;
   grid-template-columns: 2rem 1fr;
   padding: 0.3rem;
@@ -26,6 +37,7 @@
 
 .delivery-card__quantity-sold {
   position: absolute;
+  font-size: 1.2rem;
 }
 
 .delivery-card__quantity-sold > div {
@@ -47,6 +59,11 @@
   font-size: small;
 }
 
+.certified-label-rouge-icon {
+  width: 4rem;
+  height: 4rem;
+}
+
 @media (min-width:600px) {
   .delivery-card__quantity-sold app-piechart {
     width: 5rem;
@@ -58,7 +75,7 @@
     right: 2rem;
   }
 
-  .delivery-card__content {
+  .delivery-card__general-information {
     padding-right: 5rem;
   }
 }
@@ -72,9 +89,11 @@
   .delivery-card__quantity-sold {
     top: 0.5rem;
     right: 1rem;
+    font-size: 0.8rem;
   }
 
   .delivery-card__title {
     padding-right: 3rem;
+    font-size: 1rem;
   }
 }

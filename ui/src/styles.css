@@ -171,3 +171,15 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   background-size: contain;
   background-repeat: no-repeat;
 }
+
+.certified-label-rouge-icon {
+  background: url(assets/images/icons/svg/label_rouge.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.certified-agriculture-biologique-icon {
+  background: url(assets/images/icons/svg/agriculture_biologique.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+}

@@ -10,4 +10,5 @@ export class Animal {
   identificationNumber: string;
   breed: AnimalBreed;
   animalType: AnimalType;
+  certifiedLabelRouge: boolean 
 }
