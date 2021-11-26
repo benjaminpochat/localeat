@@ -14,14 +14,13 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
+import static org.hamcrest.Matchers.*;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
 @SpringBootTest
@@ -55,7 +54,7 @@ public class TestAndDocDeliveryController {
     }
 
     @Test
-    public void getAllPublicDeliveries() throws Exception {
+    public void getAllPublicDeliveriesWithoutAccessKey() throws Exception {
         // given
         // -> See SQL files executed
 
@@ -65,9 +64,31 @@ public class TestAndDocDeliveryController {
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                //.andExpect(content().json()
+                .andExpect(jsonPath("$[?(@.id==1)]", not(empty())))
+                .andExpect(jsonPath("$[?(@.id==2)]", not(empty())))
+                .andExpect(jsonPath("$[?(@.id==3)]", empty()))
                 .andDo(document(
                         "get-public-deliveries",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint())));
+    }
+
+    @Test
+    public void getAllPublicDeliveriesWithAccessKey() throws Exception {
+        // given
+        // -> See SQL files executed
+
+        // when, then
+        this.mockMvc
+                .perform(get("/deliveries?sharedKey=ACCESS")
+                        .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[?(@.id==1)]", not(empty())))
+                .andExpect(jsonPath("$[?(@.id==2)]", not(empty())))
+                .andExpect(jsonPath("$[?(@.id==3)]", not(empty())))
+                .andDo(document(
+                        "get-public-deliveries-with-access-key",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint())));
     }
@@ -127,8 +148,8 @@ public class TestAndDocDeliveryController {
                         "      \"addressLine3\" : null,\n" +
                         "      \"addressLine4\" : null\n" +
                         "    },\n" +
-                        "    \"deliveryStart\" : \"2020-01-01T18:00:00\",\n" +
-                        "    \"deliveryEnd\" : \"2020-01-01T20:00:00\",\n" +
+                        "    \"deliveryStart\" : \"2050-01-01T18:00:00\",\n" +
+                        "    \"deliveryEnd\" : \"2050-01-01T20:00:00\",\n" +
                         "    \"availableBatches\" : [ {\n" +
                         "      \"id\" : 1,\n" +
                         "      \"quantity\" : 50,\n" +
@@ -192,8 +213,8 @@ public class TestAndDocDeliveryController {
                         "      \"addressLine3\" : null,\n" +
                         "      \"addressLine4\" : null\n" +
                         "    },\n" +
-                        "    \"deliveryStart\" : \"2020-01-01T18:00:00\",\n" +
-                        "    \"deliveryEnd\" : \"2020-01-01T20:00:00\",\n" +
+                        "    \"deliveryStart\" : \"2050-01-01T18:00:00\",\n" +
+                        "    \"deliveryEnd\" : \"2050-01-01T20:00:00\",\n" +
                         "    \"availableBatches\" : [ {\n" +
                         "      \"id\" : 1,\n" +
                         "      \"quantity\" : 50,\n" +
@@ -242,9 +263,9 @@ public class TestAndDocDeliveryController {
         // given
         String requestBody =
                 "{\n" +
-                "  \"id\" : 1,\n" +
-                "  \"status\" : \"PAYED\""+
-                "  }";
+                        "  \"id\" : 1,\n" +
+                        "  \"status\" : \"PAYED\"" +
+                        "  }";
 
         // when, then
         this.mockMvc

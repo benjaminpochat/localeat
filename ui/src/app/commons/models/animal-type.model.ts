@@ -14,9 +14,9 @@ export class AnimalTypeUtils {
         return 'Génisse';
       case AnimalType.BeefBull:
         return 'Taureau';
-        case AnimalType.BeefVeal:
-          return 'Veau';
-            default:
+      case AnimalType.BeefVeal:
+        return 'Veau';
+      default:
         return '';
     }
   }

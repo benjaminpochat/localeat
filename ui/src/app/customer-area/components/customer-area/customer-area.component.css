@@ -52,6 +52,24 @@
   font-size: larger;
 }
 
+.subtitle__deliverylist {
+  display: flex;
+  justify-content: space-between;
+}
+
+.subtitle__deliveryList__sharedKey {
+  font-family: 'Roboto';
+  font-size: smaller;
+}
+
+.subtitle__deliveryList__sharedKey > * {
+  margin: 0.2rem;
+}
+
+.subtitle__deliveryList__sharedKey > input {
+  width: 5rem;
+}
+
 .welcome {
   padding: 1rem;
 }

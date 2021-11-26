@@ -44,14 +44,6 @@
       </mat-form-field>
     </div>
 
-    <div class="slaughter-creation-form__cutting-date">
-      <mat-form-field>
-        <input matInput formControlName="cuttingDate" [matDatepicker]="cuttingDatePicker" placeholder="Date découpe">
-        <mat-datepicker-toggle matSuffix [for]="cuttingDatePicker"></mat-datepicker-toggle>
-        <mat-datepicker #cuttingDatePicker disabled="false"></mat-datepicker>
-      </mat-form-field>
-    </div>
-
     <div class="slaughter-creation-form__slaughter-date">
       <mat-form-field>
         <input matInput formControlName="slaughterDate" [matDatepicker]="slaughterDatePicker"
@@ -60,6 +52,15 @@
         <mat-datepicker #slaughterDatePicker disabled="false"></mat-datepicker>
       </mat-form-field>
     </div>
+
+    <div class="slaughter-creation-form__cutting-date">
+      <mat-form-field>
+        <input matInput formControlName="cuttingDate" [matDatepicker]="cuttingDatePicker" placeholder="Date découpe">
+        <mat-datepicker-toggle matSuffix [for]="cuttingDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #cuttingDatePicker disabled="false"></mat-datepicker>
+      </mat-form-field>
+    </div>
+
     <button mat-button type="submit">Enregistrer</button>
     <button mat-button (click)="cancel()">Annuler</button>
   </form>

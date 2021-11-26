@@ -1,10 +1,8 @@
 package com.localeat.core.domains.delivery;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.localeat.core.domains.order.Order;
 import com.localeat.core.domains.product.Batch;
-import com.localeat.core.domains.product.Product;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -33,6 +31,9 @@ public class Delivery {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Order> orders;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private DeliveryAccessControl accessControl;
 
     public Long getId() {
         return id;
@@ -80,5 +81,13 @@ public class Delivery {
 
     public void setDeliveryEnd(LocalDateTime deliveryEnd) {
         this.deliveryEnd = deliveryEnd;
+    }
+
+    public DeliveryAccessControl getAccessControl() {
+        return accessControl;
+    }
+
+    public void setAccessControl(DeliveryAccessControl accessControl) {
+        this.accessControl = accessControl;
     }
 }

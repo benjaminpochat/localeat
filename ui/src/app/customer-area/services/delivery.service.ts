@@ -15,8 +15,9 @@ export class DeliveryService {
     private http: HttpClient,
     private urlService: UrlService) { }
 
-  getDeliveries(loopBack: EventEmitter<Delivery[]>): void {
-    const response = this.http.get<Delivery[]>(this.urlService.getAnonymousUrl(['deliveries']));
+  getDeliveries(loopBack: EventEmitter<Delivery[]>, sharedKey?: string): void {
+    const sharedKeyQueryParam = sharedKey ? `?sharedKey=${sharedKey}` : '';
+    const response = this.http.get<Delivery[]>(this.urlService.getAnonymousUrl(['deliveries' + sharedKeyQueryParam]));
     response.subscribe(deliveriesCollected => loopBack.emit(deliveriesCollected));
   }
 

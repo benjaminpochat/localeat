@@ -12,6 +12,12 @@ delete from products;
 update slaughters set delivery_id = null;
 delete from deliveries;
 delete from addresses;
+delete from shared_key_delivery_access_control;
+delete from public_delivery_access_control;
+delete from shared_delivery_access_key;
+delete from public_delivery_access_control;
+alter sequence delivery_access_key_id_seq restart with 1;
+alter sequence delivery_access_control_id_seq restart with 1;
 
 -- slaughter domain
 delete from slaughters;

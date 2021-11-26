@@ -65,7 +65,8 @@ describe('OrderComponent', () => {
           quantity: 10,
           quantitySold: 0
         }],
-        orders: []
+        orders: [],
+        accessControl: undefined
       }
     };
   }

@@ -53,7 +53,8 @@ describe('DeliveryComponent', () => {
           quantity: 10,
           quantitySold: 0
         }],
-        orders: []
+        orders: [],
+        accessControl: undefined
       };
       httpMock = fixture.debugElement.injector.get<HttpTestingController>(HttpTestingController as Type<HttpTestingController>);
       urlService = fixture.debugElement.injector.get<UrlService>(UrlService as Type<UrlService>);

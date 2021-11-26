@@ -11,6 +11,7 @@ import { ProductTemplate } from 'src/app/commons/models/product-template.model';
 import { ProductComponent } from '../product/product.component';
 import { ViewChild } from '@angular/core';
 import { Image } from 'src/app/commons/models/image.model';
+import { AccessControlType, AccessControlTypeUtils } from 'src/app/commons/models/access-control-type.model';
 
 @Component({
   selector: 'app-delivery-creation',
@@ -27,6 +28,7 @@ export class DeliveryCreationComponent implements OnInit {
   createDeliveryEvent = new EventEmitter<Slaughter>();
   deliveryDateForm: FormGroup;
   deliveryPlaceForm: FormGroup;
+  accessControlForm: FormGroup;
   batchesForm: FormGroup;
   userAlert: string;
 
@@ -50,22 +52,30 @@ export class DeliveryCreationComponent implements OnInit {
       city: ['', Validators.required],
       zipCode: ['', Validators.required]
     });
-    this.batchesForm = this.formBuilder.group({
+    this.accessControlForm = this.formBuilder.group({
+      accessControlType: ['', Validators.required],
+      sharedKey: [''],
     });
+    this.batchesForm = this.formBuilder.group({});
   }
 
   save(): void{
-    if ( this.deliveryDateForm.valid && this.deliveryPlaceForm.valid && this.batchesForm.valid ){
-      this.delivery.deliveryStart = new Date(this.deliveryDateForm.value.deliveryDate + 'T' + this.deliveryDateForm.value.deliveryStartHour + 'Z');
-      this.delivery.deliveryEnd = new Date(this.deliveryDateForm.value.deliveryDate + 'T' + this.deliveryDateForm.value.deliveryEndHour + 'Z');
-      this.delivery.deliveryAddress = new DeliveryAddress();
-      this.delivery.deliveryAddress.name = this.deliveryPlaceForm.value.addressName;
-      this.delivery.deliveryAddress.addressLine1 = this.deliveryPlaceForm.value.addressLine1;
-      this.delivery.deliveryAddress.zipCode = this.deliveryPlaceForm.value.zipCode;
-      this.delivery.deliveryAddress.city = this.deliveryPlaceForm.value.city;
-      this.slaughter.delivery = this.delivery;
-      this.slaughter.delivery.availableBatches = this.delivery.availableBatches.filter(batch => batch.quantity > 0);
-      this.slaughterService.saveSlaughter(this.slaughter).subscribe(slaughter => {
+    if ( this.deliveryDateForm.valid 
+      && this.deliveryPlaceForm.valid 
+      && this.accessControlForm.valid
+      && this.batchesForm.valid 
+      ){
+        this.delivery.deliveryStart = new Date(this.deliveryDateForm.value.deliveryDate + 'T' + this.deliveryDateForm.value.deliveryStartHour + 'Z');
+        this.delivery.deliveryEnd = new Date(this.deliveryDateForm.value.deliveryDate + 'T' + this.deliveryDateForm.value.deliveryEndHour + 'Z');
+        this.delivery.accessControl = AccessControlTypeUtils.getAccessControlBuilder(this.accessControlForm.value.accessControlType)(this.accessControlForm.value.sharedKey);
+        this.delivery.deliveryAddress = new DeliveryAddress();
+        this.delivery.deliveryAddress.name = this.deliveryPlaceForm.value.addressName;
+        this.delivery.deliveryAddress.addressLine1 = this.deliveryPlaceForm.value.addressLine1;
+        this.delivery.deliveryAddress.zipCode = this.deliveryPlaceForm.value.zipCode;
+        this.delivery.deliveryAddress.city = this.deliveryPlaceForm.value.city;
+        this.slaughter.delivery = this.delivery;
+        this.slaughter.delivery.availableBatches = this.delivery.availableBatches.filter(batch => batch.quantity > 0);
+        this.slaughterService.saveSlaughter(this.slaughter).subscribe(slaughter => {
           this.createDeliveryEvent.emit(slaughter);
           this.resetComponent();
       });
@@ -112,6 +122,7 @@ export class DeliveryCreationComponent implements OnInit {
     this.delivery = null;
     this.deliveryDateForm.reset();
     this.deliveryPlaceForm.reset();
+    this.accessControlForm.reset();
     this.batchesForm.reset();
   }
 
@@ -121,5 +132,21 @@ export class DeliveryCreationComponent implements OnInit {
 
   changeProduct(product: Product): void {
     this.productComponent.setProduct(product);
+  }
+
+  getAccessControlTypes(): string[] {
+    return Object.keys(AccessControlType).map(key => AccessControlType[key]);
+  }
+
+  getAccessControlTypeLabel(accessControlType: AccessControlType) {
+    return AccessControlTypeUtils.getAccessControlTypeLabel(accessControlType);
+  }
+
+  getAccessControlTypeDetails() {
+    return AccessControlTypeUtils.getAccessControlTypeDetails(this.accessControlForm.value.accessControlType);
+  }
+
+  isAccessControlledBySharedKey() {
+    return this.accessControlForm.value.accessControlType === AccessControlType.SharedKey;
   }
 }

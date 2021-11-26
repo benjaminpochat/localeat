@@ -19,7 +19,14 @@
   </div>
 
   <div class="subtitle">
-    <div>{{ deliveryListTitle }}</div>
+    <div class="subtitle__deliverylist">
+      <div>{{ deliveryListTitle }}</div>
+      <div class="subtitle__deliveryList__sharedKey">
+        <label>Code d'accès</label>
+        <input id="sharedKeyInput" type="text">
+        <button mat-flat-button color="primary" (click)="validateSharedKey()">valider</button>
+      </div>
+    </div>
     <app-delivery *ngFor="let delivery of deliveries" [delivery]="delivery" (createOrderEvent)="openOrderDialog($event)" (showSlideshowEvent)="showSlideshow($event)"></app-delivery>
   </div>
 

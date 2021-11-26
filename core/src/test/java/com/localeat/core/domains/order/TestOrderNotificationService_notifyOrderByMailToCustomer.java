@@ -61,7 +61,7 @@ public class TestOrderNotificationService_notifyOrderByMailToCustomer {
                 "<ul>" +
                     "<li>Montant de la commande : 1350.0 €TTC</li>" +
                     "<li>Quantité commandée : 100.0 kg</li>" +
-                    "<li>Date et heure de la livraison : le 01/01/2020 entre 18:00 et 20:00</li>" +
+                    "<li>Date et heure de la livraison : le 01/01/2050 entre 18:00 et 20:00</li>" +
                     "<li>Adresse de la livraison :<br>" +
                         "Chez Bob<br>" +
                         "2 rue des pommiers<br>" +

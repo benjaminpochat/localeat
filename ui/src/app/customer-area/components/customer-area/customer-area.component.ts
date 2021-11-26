@@ -25,6 +25,7 @@ export class CustomerAreaComponent implements OnInit {
   orderListTitle: string;
   deliveryListTitle: string;
   slideshowShown = false;
+  sharedKey: string;
 
   @ViewChild(OrderDialogComponent)
   private orderComponent: OrderDialogComponent;
@@ -63,7 +64,7 @@ export class CustomerAreaComponent implements OnInit {
         }
 
     });
-    this.deliveryService.getDeliveries(refreshDeliveriesEvent);
+    this.deliveryService.getDeliveries(refreshDeliveriesEvent, this.sharedKey);
   }
 
   private refreshOrders() {
@@ -90,5 +91,10 @@ export class CustomerAreaComponent implements OnInit {
 
   showSlideshow(farm: Farm){
     this.slideshowComponent.farm = farm;
+  }
+
+  validateSharedKey() {
+    this.sharedKey = (document.querySelector('#sharedKeyInput') as HTMLInputElement).value;
+    this.refreshDeliveries();
   }
 }

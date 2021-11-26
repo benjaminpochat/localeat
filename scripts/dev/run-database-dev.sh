@@ -1,1 +1,1 @@
-docker-compose -f docker-compose-run.yml run --name database --service-ports database
+docker-compose -f docker-compose-run.yml run -d --name database --service-ports database
