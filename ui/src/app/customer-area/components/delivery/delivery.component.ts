@@ -6,6 +6,7 @@ import { Animal } from 'src/app/commons/models/animal.model';
 import { AnimalService } from 'src/app/commons/services/animal.service';
 import { PieChartComponent } from 'src/app/commons/components/piechart/piechart.component';
 import { Farm } from 'src/app/commons/models/farm.model';
+import { Batch } from 'src/app/commons/models/batch.model';
 
 @Component({
   selector: 'app-delivery',
@@ -64,5 +65,21 @@ export class DeliveryComponent implements OnInit {
 
   showFarmSlideshow() {
     this.showSlideshowEvent.emit(this.animal.finalFarm);
+  }
+
+  getAddress(): string {
+    return "Adresse de livraison<br>" 
+    + [this.delivery.deliveryAddress.name,
+      this.delivery.deliveryAddress.addressLine1,
+      this.delivery.deliveryAddress.addressLine2,
+      this.delivery.deliveryAddress.addressLine3,
+      this.delivery.deliveryAddress.addressLine4,
+      this.delivery.deliveryAddress.zipCode,
+      this.delivery.deliveryAddress.city]
+      .filter(addressElement => addressElement).join("<br>")
+  }
+
+  getBatches(): Batch[] {
+    return this.delivery.availableBatches.sort((batch1, batch2) => batch1.product.name.localeCompare(batch2.product.name));
   }
 }

@@ -8,12 +8,12 @@
   <span *ngIf="isNotProductionEnvironment()" class="main-menu__environment-type">{{environmentType}}</span>
   <span class="main-menu__spacer"></span>
   <div [hidden]="authentication">
-    <button (click)="goToLoginPage()" mat-icon-button aria-label="login">
+    <button (click)="goToLoginPage()" mat-icon-button aria-label="login" title="connexion">
       <mat-icon>login</mat-icon>
     </button>
   </div>
   <div [hidden]="!authentication">
-    <button (click)="logout()" mat-icon-button aria-label="login">
+    <button (click)="logout()" mat-icon-button aria-label="login" title="déconnexion">
       <mat-icon>logout</mat-icon>
     </button>
   </div>

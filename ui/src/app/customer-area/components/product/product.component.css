@@ -28,11 +28,17 @@ i {
   grid-column: 1;
 }
 
+.product__total-price,
 .product__unit-price,
 .product__net-weight {
   grid-column: 2 / -1;
   padding: 0.2rem;
 }
+
+.product__unit-price{
+  font-size: smaller;
+}
+
 
 .product__photo {
   grid-column: 1 / -1;

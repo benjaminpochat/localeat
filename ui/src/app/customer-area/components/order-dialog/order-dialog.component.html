@@ -82,7 +82,7 @@
             <div>
             <mat-form-field>
               <mat-label>Nom</mat-label>
-              <input matInput formControlName="creatingName" required>
+              <input matInput formControlName="creatingName" required oninput="this.value = this.value.toUpperCase()">
             </mat-form-field>
             <span *ngIf="isErrorMessageDisplayed('creatingName', 'required')">
               Le nom est obligatoire.
@@ -107,6 +107,9 @@
               </mat-form-field>
               <span *ngIf="isErrorMessageDisplayed('creatingPhone', 'required')">
                 Le téléphone est obligatoire.
+              </span>
+              <span *ngIf="isErrorMessageDisplayed('creatingPhone', 'pattern', true)">
+                Le téléphone est erronné.
               </span>
             </div>
             <div>
@@ -162,18 +165,10 @@
             <div>
               En validant ma commande je m'engage à :
               <ol>
-                <li>procéder au paiement de ma commande à la livraison</li>
                 <li>venir chercher la marchandise au rendez-vous fixé  :
                   <ul>
                     <li>le {{order.delivery.deliveryStart | date: 'shortDate'}} entre {{order.delivery.deliveryStart | date: 'shortTime'}} et {{order.delivery.deliveryEnd | date: 'shortTime'}}</li>
-                    <li>à l'adresse suivante :  <br>
-                      <div *ngIf="order.delivery.deliveryAddress.addressLine1">{{order.delivery.deliveryAddress.addressLine1}}</div>
-                      <div *ngIf="order.delivery.deliveryAddress.addressLine2">{{order.delivery.deliveryAddress.addressLine2}}</div>
-                      <div *ngIf="order.delivery.deliveryAddress.addressLine3">{{order.delivery.deliveryAddress.addressLine3}}</div>
-                      <div *ngIf="order.delivery.deliveryAddress.addressLine4">{{order.delivery.deliveryAddress.addressLine4}}</div>
-                      <div *ngIf="order.delivery.deliveryAddress.zipCode">{{order.delivery.deliveryAddress.zipCode}}</div>
-                      <div *ngIf="order.delivery.deliveryAddress.city">{{order.delivery.deliveryAddress.city}}</div>
-                    </li>
+                    <li [innerHtml]="getAddress()"></li>
                   </ul>
                 </li>
                 <li>respecter la chaîne du froid dès la réception de la marchandise</li>

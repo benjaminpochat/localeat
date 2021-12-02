@@ -2,10 +2,11 @@
   <div>
       <div class="product__name">{{product.name}}</div>
       <div class="product__description" [innerHtml]=getProductDescription()></div>
+      <i class="icon euro-icon"></i>
+      <div class="product__total-price">{{product.netWeight * product.unitPrice}} €TTC</div>
+      <div class="product__unit-price">({{product.unitPrice}} €TTC/kg)</div>
       <i class="icon weight-icon"></i>
       <div class="product__net-weight"> ~ {{product.netWeight}} kg</div>
-      <i class="icon euro-icon"></i>
-      <div class="product__unit-price">{{product.unitPrice}} €TTC/kg</div>
       <img *ngIf="this.product.photo && this.product.photo.content" [src]="this.product.photo.content" class="product__photo">
   </div>
 </div>

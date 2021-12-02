@@ -24,13 +24,7 @@
       <div class="delivery-card__delivery-information">
         <div class="delivery-card__address">
           <i class="icon placeholder-icon"></i>
-          <span>
-            Adresse de livraison :<br>
-            {{delivery.deliveryAddress.name}}<br>
-            {{delivery.deliveryAddress.addressLine1}}<br>
-            {{delivery.deliveryAddress.zipCode}}<br>
-            {{delivery.deliveryAddress.city}}
-          </span>
+          <span [innerHtml]="getAddress()"></span>
         </div>
         <div class="delivery-card__date">
           <i class="icon time-icon"></i>
@@ -65,7 +59,7 @@
       </div>
     </div>
     <div class="delivery-card__product-batch-list">
-      <app-product *ngFor="let batch of delivery.availableBatches" [product]="batch.product">
+      <app-product *ngFor="let batch of getBatches()" [product]="batch.product">
       </app-product>
     </div>
   </mat-card-content>

@@ -10,8 +10,6 @@ import { OrderService } from 'src/app/customer-area/services/order.service';
 import { Order } from 'src/app/commons/models/order.model';
 import { OrderItem } from 'src/app/commons/models/order-item.model';
 import { EventEmitter } from '@angular/core';
-import { OrderStatus } from 'src/app/commons/models/order-status.model';
-import { MatVerticalStepper } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-order-dialog',
@@ -112,7 +110,7 @@ export class OrderDialogComponent implements OnInit {
       creatingName: ['', Validators.required],
       creatingFirstName: ['', Validators.required],
       creatingEmail: ['', [Validators.required, Validators.email]],
-      creatingPhone: ['', Validators.required],
+      creatingPhone: ['', [Validators.required, Validators.pattern(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im)]],
       creatingPassword: ['', [Validators.required, Validators.minLength(6)]],
       creatingPasswordConfirmed: ['', Validators.required]
     }, {validators: this.passwordConfirmedValidator});
@@ -188,6 +186,9 @@ export class OrderDialogComponent implements OnInit {
   }
 
   passwordConfirmedValidator: ValidatorFn = (formGroup: FormGroup): ValidationErrors | null => {
+    if (this.existingAccount) {
+      return null;
+    }
     const creatingPasswordField = formGroup.get('creatingPassword');
     const creatingPasswordConfirmedField = formGroup.get('creatingPasswordConfirmed');
     return creatingPasswordField.value === creatingPasswordConfirmedField.value ? null : { passwordConfirmationFailed: true };
@@ -255,5 +256,20 @@ export class OrderDialogComponent implements OnInit {
     this.existingAccount = true;
     this.authenticationSubmitted = false;
     this.understood = false;
+  }
+
+  getAddress(): string {
+    const address = this.order.delivery.deliveryAddress;
+    return "à l'adresse suivante :<br>" + 
+    [address.name,
+      address.addressLine1,
+      address.addressLine2,
+      address.addressLine3,
+      address.addressLine4,
+      address.zipCode,
+      address.city]
+      .filter(addressElement => addressElement)
+      .map(addressElement => `<div>${addressElement}</div>`)
+      .join('')
   }
 }
