@@ -9,15 +9,14 @@
   <mat-card-content>
     <ul>
       <li>
-      Montant de la commande : {{ getOrderTotalPrice() }} €TTC
+      Montant de la commande : {{ getOrderTotalPrice() }} € <sup>TTC</sup>
       </li>
       <li>
-      Numero de commande : {{order.id}}
+      Numéro de commande : {{order.id}}
       </li>
     </ul>
   </mat-card-content>
   <mat-card-actions>
     <button mat-flat-button (click)="goToOrderDetails()">Voir le détail</button>
-    <button mat-flat-button (click)="downloadCalendarFile()">J'enregistre le rendez-vous</button>
   </mat-card-actions>
 </mat-card>

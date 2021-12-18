@@ -80,7 +80,7 @@ export class OrderDialogComponent implements OnInit {
   private initLabels() {
     this.productSelectionStepLabel = 'Sélectionnez les produits commandés';
     this.productSelectionButtonLabel = 'Je valide la quantité';
-    this.confirmationStepLabel = 'Accepetez les conditions';
+    this.confirmationStepLabel = 'Acceptez les conditions';
     this.confirmationButtonLabel = 'J\'accepte les conditions';
     this.paymentStepLabel = 'Payez votre commande';
     this.paymentButtonLabel = 'Je paie ma commande';
@@ -126,7 +126,7 @@ export class OrderDialogComponent implements OnInit {
     const totalPrice = this.order.orderedItems
       .map(orderItem => orderItem.batch.product.unitPrice * orderItem.batch.product.netWeight * orderItem.quantity)
       .reduce( (total, itemPrice) => total + itemPrice );
-    this.productSelectionButtonLabel = 'Je valide ma commande pour ' + totalPrice + ' €TTC';
+    this.productSelectionButtonLabel = 'Je valide ma commande pour ' + totalPrice + ' € TTC';
   }
 
   isOrderEmpty(): boolean {

@@ -21,7 +21,7 @@ public class SharedKeyDeliveryAccessControl extends DeliveryAccessControl<Shared
 
     @Override
     public boolean isAllowed(SharedDeliveryAccessKey key) {
-        return this.sharedKey != null && this.sharedKey.getKey().equals(key.getKey());
+        return this.sharedKey != null && this.sharedKey.getKey().equalsIgnoreCase(key.getKey());
     }
 
     @Override

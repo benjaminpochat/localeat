@@ -37,7 +37,7 @@
   <div class="order__subtitle">
     Montant de la commande
   </div>
-  <div>{{getTotalPrice() | number: '0.2-2'}} €TTC</div>
+  <div>{{getTotalPrice() | number: '0.2-2'}} € <sup>TTC</sup></div>
 </div>
 
 <div *ngIf="isStatusValidated() || isStatusBooked()" class="order__paragraph">
