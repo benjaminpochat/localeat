@@ -10,7 +10,7 @@ import { Order } from 'src/app/commons/models/order.model';
 import { AuthenticationService } from 'src/app/commons/services/authentication.service';
 import { DeliveryService } from 'src/app/customer-area/services/delivery.service';
 import { OrderService } from 'src/app/customer-area/services/order.service';
-import { FarmService } from '../../services/farm.service';
+import { FarmService } from 'src/app/customer-area/services/farm.service';
 import { OrderDialogComponent } from '../order-dialog/order-dialog.component';
 import { SlideshowComponent } from '../slideshow/slideshow.component';
 
