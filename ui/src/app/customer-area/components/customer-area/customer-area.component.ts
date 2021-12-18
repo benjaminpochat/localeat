@@ -1,6 +1,7 @@
 import { ViewChild } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Authentication } from 'src/app/commons/models/authentication.model';
 import { Delivery } from 'src/app/commons/models/delivery.model';
 import { Farm } from 'src/app/commons/models/farm.model';
@@ -9,6 +10,7 @@ import { Order } from 'src/app/commons/models/order.model';
 import { AuthenticationService } from 'src/app/commons/services/authentication.service';
 import { DeliveryService } from 'src/app/customer-area/services/delivery.service';
 import { OrderService } from 'src/app/customer-area/services/order.service';
+import { FarmService } from '../../services/farm.service';
 import { OrderDialogComponent } from '../order-dialog/order-dialog.component';
 import { SlideshowComponent } from '../slideshow/slideshow.component';
 
@@ -24,8 +26,11 @@ export class CustomerAreaComponent implements OnInit {
   orders: Order[];
   orderListTitle: string;
   deliveryListTitle: string;
+  deliveryListGuideline: string;
   slideshowShown = false;
   sharedKey: string;
+  hasDeliveries: boolean;
+  randomSlideshowUrl: SafeUrl;
 
   @ViewChild(OrderDialogComponent)
   private orderComponent: OrderDialogComponent;
@@ -37,6 +42,8 @@ export class CustomerAreaComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private deliveryService: DeliveryService,
     private orderService: OrderService,
+    private farmService: FarmService,
+    private domSanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
@@ -45,6 +52,7 @@ export class CustomerAreaComponent implements OnInit {
     if (this.authentication) {
       this.refreshOrders();
     }
+    this.getRandomSlideshowUrl();
   }
 
   private initAuthentication() {
@@ -55,16 +63,20 @@ export class CustomerAreaComponent implements OnInit {
 
   private refreshDeliveries() {
     const refreshDeliveriesEvent = new EventEmitter<Delivery[]>();
-    refreshDeliveriesEvent.subscribe(deliveries => {
+    refreshDeliveriesEvent.subscribe( deliveries => {
         this.deliveries = deliveries;
+        this.hasDeliveries = deliveries.length > 0;
         if (this.deliveries.length > 0) {
           this.deliveryListTitle = 'Les prochaines livraisons';
+          this.deliveryListGuideline = null;
         } else {
-          this.deliveryListTitle = 'Aucune livraison n\'est planifiée prochainement.';
+          this.deliveryListTitle = 'Aucune livraison n\'est planifiée.';
+          this.deliveryListGuideline = 'Consultez régulièrement cette page pour connaitre les prochaines livraisons, ou saisissez un code d\'accès pour accéder aux ventes privées.';
         }
 
     });
     this.deliveryService.getDeliveries(refreshDeliveriesEvent, this.sharedKey);
+    
   }
 
   private refreshOrders() {
@@ -96,5 +108,9 @@ export class CustomerAreaComponent implements OnInit {
   validateSharedKey() {
     this.sharedKey = (document.querySelector('#sharedKeyInput') as HTMLInputElement).value;
     this.refreshDeliveries();
+  }
+
+  getRandomSlideshowUrl(): void {
+    this.farmService.getRandomFarmSlideshowUrl().then(url => this.randomSlideshowUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(url));
   }
 }

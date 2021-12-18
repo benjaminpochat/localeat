@@ -52,24 +52,43 @@
   font-size: larger;
 }
 
-.subtitle__deliverylist {
+.subtitle__delivery-list {
   display: flex;
   justify-content: space-between;
 }
 
-.subtitle__deliveryList__sharedKey {
+.subtitle__delivery-list-shared-key {
   font-family: 'Roboto';
   font-size: smaller;
 }
 
-.subtitle__deliveryList__sharedKey > * {
+.subtitle__delivery-list-shared-key > * {
   margin: 0.2rem;
 }
 
-.subtitle__deliveryList__sharedKey > input {
+.subtitle__delivery-list-shared-key > input {
   width: 5rem;
 }
 
 .welcome {
   padding: 1rem;
+}
+
+.random-slideshow-container {
+  position: relative;
+  padding-top: 60%;
+  margin-top: 1rem;
+}
+
+.random-slideshow-container > iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.delivery-list-guideline {
+  font-size: small;
+  font-family: Roboto;
 }

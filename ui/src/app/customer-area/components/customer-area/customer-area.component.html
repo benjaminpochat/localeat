@@ -19,15 +19,21 @@
   </div>
 
   <div class="subtitle">
-    <div class="subtitle__deliverylist">
-      <div>{{ deliveryListTitle }}</div>
-      <div class="subtitle__deliveryList__sharedKey">
+    <div class="subtitle__delivery-list">
+      <div>
+        <div>{{ deliveryListTitle }}</div>
+        <div class="delivery-list-guideline" *ngIf="deliveryListGuideline">{{ deliveryListGuideline }}</div>
+      </div>
+      <div class="subtitle__delivery-list-shared-key">
         <label>Code d'accès</label>
         <input id="sharedKeyInput" type="text">
         <button mat-flat-button color="primary" (click)="validateSharedKey()">valider</button>
       </div>
     </div>
     <app-delivery *ngFor="let delivery of deliveries" [delivery]="delivery" (createOrderEvent)="openOrderDialog($event)" (showSlideshowEvent)="showSlideshow($event)"></app-delivery>
+    <div *ngIf="!hasDeliveries" class="random-slideshow-container">
+      <iframe *ngIf="randomSlideshowUrl" [src]="randomSlideshowUrl" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" width="100%" height="100%"></iframe>
+    </div>
   </div>
 
   <app-order-dialog (createOrderEvent)="refreshCustomerArea()"></app-order-dialog>
