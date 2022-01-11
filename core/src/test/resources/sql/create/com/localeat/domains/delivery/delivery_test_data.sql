@@ -63,7 +63,7 @@ values (
 
 -- delivery 3, shared key access control
 
-insert into shared_delivery_access_key (id, key) values (nextval('delivery_access_key_id_seq'), 'ACCESS');
+insert into shared_delivery_access_key (id, "key") values (nextval('delivery_access_key_id_seq'), 'ACCESS');
 
 insert into shared_key_delivery_access_control (id, shared_key_id) values (nextval('delivery_access_control_id_seq'), currval('delivery_access_key_id_seq'));
 
