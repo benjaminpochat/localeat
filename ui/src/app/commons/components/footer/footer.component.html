@@ -1,10 +1,23 @@
 <div class="footer">
   <div>
-    <div><a href="./customer-area">Espace clients</a></div>
-    <div><a href="./breeder-area">Espace éleveurs</a></div>
+    <div class="footer-regroupement"><a (click)="showRulesComponent()">Conditions générales de vente</a></div>
+    <div class="footer-regroupement"><a href="./customer-area">Espace clients</a></div>
+    <div class="footer-regroupement"><a href="./breeder-area">Espace éleveurs</a></div>
   </div>
-  <div>
-    <div>Contact : <a href="mailto:la.viande.en.direct@gmail.com">la.viande.en.direct@gmail.com</a></div>
+  <div class="footer-regroupement">
+    <div>EARL EMIFLOREST</div>
+    <div>5 rue des Marronniers 57580 BECHY</div>
+    <div>Email : <a href="mailto:la.viande.en.direct@gmail.com">la.viande.en.direct@gmail.com</a></div>
+    <div class="footer-contact">
+      <div>Téléphone : </div>
+      <img src="../../../../assets/images/contact.svg">
+    </div>
+    <div>Siren : 319903431</div>
+    <div>N° TVA : FR65319903431</div>
+  </div>
+  <div class="footer-regroupement">
     <div>Icones par <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> sur <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
   </div>
+
+  <app-rules></app-rules>
 </div>

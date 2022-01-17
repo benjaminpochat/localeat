@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { RulesComponent } from '../rules/rules.component';
 
 @Component({
   selector: 'app-footer',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
+  @ViewChild(RulesComponent)
+  private rulesComponent: RulesComponent;
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  showRulesComponent() {
+    this.rulesComponent.displayed = true;
+  }
 }

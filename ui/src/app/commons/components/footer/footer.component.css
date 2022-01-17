@@ -5,11 +5,26 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, max-content));
   justify-content: space-around;
-  justify-items: center;
   margin-top: 5rem;
   padding: 1rem;
 }
 
-.footer > a {
+.footer a {
   color: gray;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.footer-regroupement {
+  margin-bottom: 1rem;
+}
+
+.footer-contact {
+  display: inline-flex;
+  align-items: center;
+}
+
+.footer-contact img {
+  filter: contrast(0.1);
+  height: 1.4rem;
 }

@@ -76,7 +76,7 @@
 
 .random-slideshow-container {
   position: relative;
-  padding-top: 80%;
+  padding-top: min(80%, 380px);
   margin-top: 1rem;
 }
 

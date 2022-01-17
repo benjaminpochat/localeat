@@ -1,0 +1,31 @@
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: floralwhite;
+    z-index: 3;
+    color: black;
+}
+
+h1, h2 {
+    font-family: "Acme";
+    font-weight: normal;
+}
+
+h1 {
+    background-color: darkolivegreen;
+    color: white;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    padding-left: 1rem;
+}
+
+.rules-content {
+    padding: 1rem;
+}
+
+.rules-actions {
+    padding: 1rem;
+}

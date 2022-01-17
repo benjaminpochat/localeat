@@ -22,6 +22,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ImageGaleryComponent } from './components/image-galery/image-galery.component';
 import { PieChartComponent } from './components/piechart/piechart.component';
 import { AuthenticationService } from './services/authentication.service';
+import { RulesComponent } from './components/rules/rules.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { AuthenticationService } from './services/authentication.service';
     PieChartComponent,
     FooterComponent,
     ImageGaleryComponent,
+    RulesComponent,
   ],
   imports: [
     CommonModule,
