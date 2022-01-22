@@ -8,7 +8,12 @@
 
     <mat-step [stepControl]="deliveryDateForm">
       <form [formGroup]="deliveryDateForm">
-        <ng-template matStepLabel>Fixez la date et l'heure de livraison</ng-template>
+        <ng-template matStepLabel>Fixez le nome, la date et l'heure de livraison</ng-template>
+        <mat-form-field>
+          <mat-label>Nom de la livraison</mat-label>          
+          <input matInput placeholder="Ex. : offre spécial comité entreprise" formControlName="deliveryName" required>
+        </mat-form-field>
+        <br>
         <mat-form-field>
           <mat-label>Date de livraison</mat-label>
           <input matInput formControlName="deliveryDate" [matDatepicker]="deliveryDatePicker" placeholder="jj/mm/aaaa">
@@ -34,7 +39,7 @@
       <form [formGroup]="deliveryPlaceForm">
         <ng-template matStepLabel>Définissez un lieu de livraison</ng-template>
         <mat-form-field>
-          <mat-label>Nom du lieu de livraison</mat-label>
+          <mat-label>Nom de l'adresse de livraison</mat-label>
           <input matInput placeholder="Ex. : la Ferme des Pommiers" formControlName="addressName" required>
         </mat-form-field>
         <br>

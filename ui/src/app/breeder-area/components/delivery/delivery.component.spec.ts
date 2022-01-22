@@ -28,6 +28,7 @@ describe('DeliveryComponent', () => {
       deliveryComponent.slaughter = new Slaughter();
       deliveryComponent.slaughter.delivery = {
         id: 1,
+        name: 'Offre super',
         deliveryAddress: {
           name: 'Chez Bob',
           city: 'Atlantic',

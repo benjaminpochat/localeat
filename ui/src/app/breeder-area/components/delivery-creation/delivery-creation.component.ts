@@ -42,6 +42,7 @@ export class DeliveryCreationComponent implements OnInit {
 
   initForms(): void {
     this.deliveryDateForm = this.formBuilder.group({
+      deliveryName: ['', Validators.required],
       deliveryDate: [this.slaughter.cuttingDate, Validators.required],
       deliveryStartHour: ['18:00', Validators.required],
       deliveryEndHour: ['20:00', Validators.required]
@@ -65,6 +66,7 @@ export class DeliveryCreationComponent implements OnInit {
       && this.accessControlForm.valid
       && this.batchesForm.valid 
       ){
+        this.delivery.name = this.deliveryDateForm.value.deliveryName;
         this.delivery.deliveryStart = new Date(this.deliveryDateForm.value.deliveryDate + 'T' + this.deliveryDateForm.value.deliveryStartHour + 'Z');
         this.delivery.deliveryEnd = new Date(this.deliveryDateForm.value.deliveryDate + 'T' + this.deliveryDateForm.value.deliveryEndHour + 'Z');
         this.delivery.accessControl = AccessControlTypeUtils.getAccessControlBuilder(this.accessControlForm.value.accessControlType)(this.accessControlForm.value.sharedKey);

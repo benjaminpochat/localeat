@@ -17,6 +17,8 @@ public class Delivery {
     @SequenceGenerator(name="delivery_id_generator", sequenceName = "delivery_id_seq", allocationSize = 1)
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
+    
+    private String name;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Address deliveryAddress;
@@ -41,6 +43,14 @@ public class Delivery {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Address getDeliveryAddress() {

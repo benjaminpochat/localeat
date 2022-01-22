@@ -27,6 +27,7 @@ describe('DeliveryComponent', () => {
   function mockDelivery(): void {
     deliveryComponent.delivery = {
       id: 1,
+      name: 'Offre super',
       deliveryAddress: {
         name: 'Chez Bob',
         city: 'Atlantic',

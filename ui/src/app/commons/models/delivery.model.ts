@@ -7,6 +7,7 @@ import { SharedKeyDeliveryAccessControl } from './shared-key-access-control.mode
 
 export class Delivery {
   id: number;
+  name: string;
   deliveryAddress: DeliveryAddress;
   deliveryStart: Date;
   deliveryEnd: Date;
