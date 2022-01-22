@@ -57,6 +57,8 @@ export class DeliveryOrdersComponent implements OnInit {
         return "livré"
       case OrderStatus.CANCELLED:
         return "annulé"
+      case OrderStatus.SUBMITTED:
+        return "soumis"
       default:
         throw "order.orderStatus unknown"
     }
