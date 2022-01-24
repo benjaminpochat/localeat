@@ -190,7 +190,7 @@ public class MolliePaymentTransaction implements PaymentTransaction {
 
     public enum MolliePaymentStatus {
         open(PROCESSING),
-        cancelled(PROCESSING),
+        canceled(ABORTED),
         pending(PROCESSING),
         authorized(PROCESSING),
         expired(ABORTED),
