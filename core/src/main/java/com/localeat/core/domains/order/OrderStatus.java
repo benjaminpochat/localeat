@@ -6,4 +6,8 @@ public enum OrderStatus {
     PAYED,
     DELIVERED,
     CANCELLED;
+
+    public boolean isSold() {
+        return this.equals(BOOKED) || this.equals(PAYED) || this.equals(DELIVERED);
+    }
 }

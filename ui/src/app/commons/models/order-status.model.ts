@@ -24,4 +24,8 @@ export class OrderStatusUtils {
         return '';
     }
   }
+
+  static isSold(orderStatus: OrderStatus) {
+    return [OrderStatus.BOOKED, OrderStatus.PAYED, OrderStatus.BOOKED].includes(orderStatus);
+  }
 }

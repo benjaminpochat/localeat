@@ -5,6 +5,7 @@ import { DeliveryService } from 'src/app/breeder-area/services/delivery.service'
 import { DeliveryOrdersComponent } from '../delivery-orders/delivery-orders.component';
 import { PieChartComponent } from 'src/app/commons/components/piechart/piechart.component';
 import { DomSanitizer } from '@angular/platform-browser';
+import { OrderStatusUtils } from 'src/app/commons/models/order-status.model';
 
 @Component({
   selector: 'app-delivery',
@@ -43,9 +44,8 @@ export class DeliveryComponent implements OnInit {
             this.deliveryService.setOrderTotalPrice(order);
           });
           const netWeightSoldCalculator = (accumulator: number, order: Order): number => accumulator + order.totalNetWeight;
-          this.netWeightSold = this.slaughter.delivery.orders.reduce(netWeightSoldCalculator, 0);
+          this.netWeightSold = this.slaughter.delivery.orders.filter(order => OrderStatusUtils.isSold(order.status)).reduce(netWeightSoldCalculator, 0);
           this.pieChartComponent.setRadius(this.slaughter.animal.meatWeight > 0  && this.netWeightSold > 0 ? (360 * this.netWeightSold / this.slaughter.animal.meatWeight) : 0);
-
         });
       }
   }
