@@ -1,0 +1,4 @@
+databaseChangeLog:
+  - include:
+      relativeToChangelogFile: true
+      file: changelog-2023-02-19-add_properties_for_labels.yaml

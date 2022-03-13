@@ -1,0 +1,4 @@
+databaseChangeLog:
+  - include:
+      relativeToChangelogFile: true
+      file: changelog-2023-03-07-add_properties_for_bill.yaml

@@ -10,7 +10,10 @@
             {{slaughter.delivery.orders.length}} commandes clients
           </div>
           <div>
-            <button mat-button (click)="showDeliveryOrders()">Voir le détail</button>
+            <button mat-button (click)="showDeliveryOrders()">Commandes</button>
+            <button mat-button (click)="generateBills()">Factures</button>
+            <button mat-button (click)="generateOrdersLabels()">Etiquettes des commandes</button>
+            <button mat-button (click)="generateProductElementsLabels()">Etiquette des paquets</button>
           </div>
         </div>
         <div class="delivery--details--quantities">

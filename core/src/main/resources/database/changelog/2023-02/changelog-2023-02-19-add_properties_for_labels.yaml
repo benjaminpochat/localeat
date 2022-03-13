@@ -1,0 +1,32 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20230219-1
+      author: benjamin
+      changes:
+        - addColumn:
+            tableName: animals
+            columns:
+              - column:
+                  name: birth_date
+                  type: date
+              - column:
+                  name: birth_place
+                  type: varchar(255)
+              - column:
+                  name: birth_farm
+                  type: varchar(255)
+        - addColumn:
+            tableName: slaughters
+            columns:
+              - column:
+                  name: slaughter_place
+                  type: varchar(255)
+              - column:
+                  name: slaughter_house
+                  type: varchar(255)
+              - column:
+                  name: cutting_place
+                  type: varchar(255)
+              - column:
+                  name: cutting_butcher
+                  type: varchar(255)

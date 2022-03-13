@@ -1,5 +1,7 @@
 package com.localeat.core.domains.farm;
 
+import com.localeat.core.domains.delivery.Address;
+
 import javax.persistence.*;
 
 @Entity
@@ -15,6 +17,12 @@ public class Farm {
     String name;
 
     String slideshowUrl;
+
+    @ManyToOne
+    Address address;
+
+    String identificationNumber;
+    private String phoneNumber;
 
     public void setId(Long id) {
         this.id = id;
@@ -38,5 +46,29 @@ public class Farm {
 
     public String getSlideshowUrl() {
         return slideshowUrl;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public void setIdentificationNumber(String identificationNumber) {
+        this.identificationNumber = identificationNumber;
+    }
+
+    public String getIdentificationNumber() {
+        return identificationNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 }

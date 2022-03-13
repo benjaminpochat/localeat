@@ -39,4 +39,16 @@ export class DeliveryService {
   public saveOrder(order: Order): Observable<Order> {
     return this.http.post<Order>(this.urlService.getAuthenticatedUrl(['deliveries', order.delivery.id.toString(), 'orders']), order);
   }
+
+  public generateBills(delivery: Delivery): Observable<any> {
+    return this.http.get(this.urlService.getAuthenticatedUrl(['deliveries', delivery.id.toString(), 'bills']), {responseType: 'blob'})
+  }
+
+  public generateOrdersLabels(delivery: Delivery): Observable<any> {
+    return this.http.get(this.urlService.getAuthenticatedUrl(['deliveries', delivery.id.toString(), 'ordersLabels']), {responseType: 'blob'})
+  }
+
+  public generateProductElementsLabels(delivery: Delivery, elementsNames: string): Observable<any> {
+    return this.http.get(this.urlService.getAuthenticatedUrl(['deliveries', delivery.id.toString(), 'productElementsLabels', elementsNames]), {responseType: 'blob'})
+  }
 }

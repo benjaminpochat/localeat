@@ -33,6 +33,7 @@
         <coveralls-version>4.3.0</coveralls-version>
         <asciidoctor-version>1.6.0</asciidoctor-version>
         <surefire-version>3.0.0-M4</surefire-version>
+        <openhtml.version>1.0.10</openhtml.version>
         <snippetsDirectory>${project.build.directory}/generated-snippets</snippetsDirectory>
     </properties>
 
@@ -117,6 +118,22 @@
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-ui</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.openhtmltopdf</groupId>
+            <artifactId>openhtmltopdf-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.openhtmltopdf</groupId>
+            <artifactId>openhtmltopdf-pdfbox</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.openhtmltopdf</groupId>
+            <artifactId>openhtmltopdf-slf4j</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -373,6 +390,25 @@
                 <version>${mockito-version}</version>
                 <scope>test</scope>
             </dependency>
+
+            <dependency>
+                <groupId>com.openhtmltopdf</groupId>
+                <artifactId>openhtmltopdf-core</artifactId>
+                <version>${openhtml.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.openhtmltopdf</groupId>
+                <artifactId>openhtmltopdf-pdfbox</artifactId>
+                <version>${openhtml.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.openhtmltopdf</groupId>
+                <artifactId>openhtmltopdf-slf4j</artifactId>
+                <version>${openhtml.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

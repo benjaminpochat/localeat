@@ -1,6 +1,9 @@
 package com.localeat.core.domains.delivery;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Entity
 @Table(name = "addresses")
@@ -19,6 +22,14 @@ public class Address {
     private String addressLine2;
     private String addressLine3;
     private String addressLine4;
+
+    public Address() {}
+
+    public Address(String addressLine1, String city, String zipCode) {
+        this.addressLine1 = addressLine1;
+        this.city = city;
+        this.zipCode = zipCode;
+    }
 
     public Long getId() {
         return id;
@@ -82,5 +93,9 @@ public class Address {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<String> getAddressLines() {
+        return Stream.of(addressLine1, addressLine2, addressLine3, addressLine4).filter(line -> line != null).collect(Collectors.toList());
     }
 }

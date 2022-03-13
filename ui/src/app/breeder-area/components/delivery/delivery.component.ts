@@ -53,4 +53,29 @@ export class DeliveryComponent implements OnInit {
   showDeliveryOrders(): void {
     this.deliveryOrdersComponent.initDelivery(this.slaughter);
   }
+
+  generateBills(): void {
+    this.deliveryService.generateBills(this.slaughter.delivery).subscribe(data => this.downloadFile(data, 'factures.pdf'));
+  }
+
+  generateOrdersLabels(): void {
+    this.deliveryService.generateOrdersLabels(this.slaughter.delivery).subscribe(data => this.downloadFile(data, 'etiquettes_commandes.pdf'));
+  }
+
+  generateProductElementsLabels(): void {
+    const elementsNames = "Bavette§Bourguignon§Côte§Faux filet§Filet§Hampe§Queue§Jarret§Joues§Onglet§Paleron§Pot-au-feu§Rosbeef§Roti§Rumsteak§Steaks§Steaks burger"
+    this.deliveryService.generateProductElementsLabels(this.slaughter.delivery, elementsNames).subscribe(data => this.downloadFile(data, 'etiquettes_paquets.pdf'));
+  }
+
+  downloadFile(response: any, filename: string) {
+    let dataType = response.type;
+    let binaryData = [];
+    binaryData.push(response);
+    let downloadLink = document.createElement('a');
+    downloadLink.target = '_blank'
+    downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+    downloadLink.download = filename
+    document.body.appendChild(downloadLink);
+    downloadLink.click();  
+  }
 }

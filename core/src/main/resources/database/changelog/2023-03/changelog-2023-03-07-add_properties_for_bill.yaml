@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20230307-1
+      author: benjamin
+      changes:
+        - addColumn:
+            tableName: farms
+            columns:
+              - column:
+                  name: address_id
+                  type: bigint
+              - column:
+                  name: identification_number
+                  type: varchar(255)
+              - column:
+                  name: phone_number
+                  type: varchar(255)
+        - addColumn:
+            tableName: orders
+            columns:
+              - column:
+                  name: payment_date
+                  type: datetime

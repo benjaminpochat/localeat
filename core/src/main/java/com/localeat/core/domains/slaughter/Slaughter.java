@@ -25,6 +25,10 @@ public class Slaughter {
     private LocalDate slaughterDate;
 
     private LocalDate cuttingDate;
+    private String slaughterPlace;
+    private String slaughterHouse;
+    private String cuttingPlace;
+    private String cuttingButcher;
 
     public Long getId() {
         return id;
@@ -64,5 +68,37 @@ public class Slaughter {
 
     public void setCuttingDate(LocalDate cuttingDate) {
         this.cuttingDate = cuttingDate;
+    }
+
+    public String getSlaughterPlace() {
+        return slaughterPlace;
+    }
+
+    public void setSlaughterPlace(String slaughterPlace) {
+        this.slaughterPlace = slaughterPlace;
+    }
+
+    public String getSlaughterHouse() {
+        return slaughterHouse;
+    }
+
+    public void setSlaughterHouse(String slaughterHouse) {
+        this.slaughterHouse = slaughterHouse;
+    }
+
+    public String getCuttingPlace() {
+        return cuttingPlace;
+    }
+
+    public void setCuttingPlace(String cuttingPlace) {
+        this.cuttingPlace = cuttingPlace;
+    }
+
+    public String getCuttingButcher() {
+        return cuttingButcher;
+    }
+
+    public void setCuttingButcher(String cuttingButcher) {
+        this.cuttingButcher = cuttingButcher;
     }
 }

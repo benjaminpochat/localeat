@@ -4,6 +4,7 @@ package com.localeat.core.domains.slaughter;
 import com.localeat.core.domains.farm.Farm;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "animals")
@@ -31,6 +32,9 @@ public class Animal {
     private String identificationNumber;
 
     private Boolean certifiedLabelRouge;
+    private LocalDate birthDate;
+    private String birthPlace;
+    private String birthFarm;
 
     public Long getId() {
         return id;
@@ -94,5 +98,29 @@ public class Animal {
 
     public void setCertifiedLabelRouge(Boolean certifiedLabelRouge) {
         this.certifiedLabelRouge = certifiedLabelRouge;
+    }
+
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public String getBirthPlace() {
+        return birthPlace;
+    }
+
+    public void setBirthPlace(String birthPlace) {
+        this.birthPlace = birthPlace;
+    }
+
+    public String getBirthFarm() {
+        return birthFarm;
+    }
+
+    public void setBirthFarm(String birthFarm) {
+        this.birthFarm = birthFarm;
     }
 }

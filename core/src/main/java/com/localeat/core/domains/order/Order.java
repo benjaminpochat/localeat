@@ -5,6 +5,8 @@ import com.localeat.core.domains.actor.Customer;
 import com.localeat.core.domains.delivery.Delivery;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -34,6 +36,8 @@ public class Order {
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
+
+    private LocalDateTime paymentDate;
 
     public Long getId() {
         return id;
@@ -80,4 +84,11 @@ public class Order {
         this.status = status;
     }
 
+    public LocalDateTime getPaymentDate() {
+        return paymentDate;
+    }
+
+    public void setPaymentDate(LocalDateTime paymentDate) {
+        this.paymentDate = paymentDate;
+    }
 }
