@@ -5,26 +5,23 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.restdocs.RestDocumentationContextProvider;
-import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import static org.hamcrest.Matchers.*;
-import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
-import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
-import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
-import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
 @SpringBootTest
-@ExtendWith({RestDocumentationExtension.class, SpringExtension.class})
+@ExtendWith({SpringExtension.class})
 @Sql(value = {
         "/sql/create/com/localeat/domains/security/security_test_data.sql",
         "/sql/create/com/localeat/domains/farm/farm_test_data.sql",
@@ -44,10 +41,8 @@ public class TestAndDocDeliveryController {
     private MockMvc mockMvc;
 
     @BeforeEach
-    public void setUp(WebApplicationContext webApplicationContext,
-                      RestDocumentationContextProvider restDocumentation) {
+    public void setUp(WebApplicationContext webApplicationContext) {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
-                .apply(documentationConfiguration(restDocumentation))
                 .build();
     }
 
@@ -64,11 +59,7 @@ public class TestAndDocDeliveryController {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[?(@.id==1)]", not(empty())))
                 .andExpect(jsonPath("$[?(@.id==2)]", not(empty())))
-                .andExpect(jsonPath("$[?(@.id==3)]", empty()))
-                .andDo(document(
-                        "get-public-deliveries",
-                        preprocessRequest(prettyPrint()),
-                        preprocessResponse(prettyPrint())));
+                .andExpect(jsonPath("$[?(@.id==3)]", empty()));
     }
 
     @Test
@@ -84,11 +75,7 @@ public class TestAndDocDeliveryController {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[?(@.id==1)]", not(empty())))
                 .andExpect(jsonPath("$[?(@.id==2)]", not(empty())))
-                .andExpect(jsonPath("$[?(@.id==3)]", not(empty())))
-                .andDo(document(
-                        "get-public-deliveries-with-access-key",
-                        preprocessRequest(prettyPrint()),
-                        preprocessResponse(prettyPrint())));
+                .andExpect(jsonPath("$[?(@.id==3)]", not(empty())));
     }
 
     @Test
@@ -232,11 +219,7 @@ public class TestAndDocDeliveryController {
                         "    } ],\n" +
                         "    \"orders\" : [ ]\n" +
                         "  }\n" +
-                        "} ]"))
-                .andDo(document(
-                        "get-orders-by-delivery",
-                        preprocessRequest(prettyPrint()),
-                        preprocessResponse(prettyPrint())));
+                        "} ]"));
     }
 
     @Test
@@ -249,11 +232,7 @@ public class TestAndDocDeliveryController {
                 .perform(get("/accounts/2/deliveries/1/orders")
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isUnauthorized())
-                .andDo(document(
-                        "get-orders-by-delivery-with-unauthorized-account",
-                        preprocessRequest(prettyPrint()),
-                        preprocessResponse(prettyPrint())));
+                .andExpect(status().isUnauthorized());
     }
 
     @Test
@@ -261,9 +240,9 @@ public class TestAndDocDeliveryController {
         // given
         String requestBody =
                 "{\n" +
-                        "  \"id\" : 1,\n" +
-                        "  \"status\" : \"PAYED\"" +
-                        "  }";
+                "  \"id\" : 1,\n" +
+                "  \"status\" : \"PAYED\""+
+                "  }";
 
         // when, then
         this.mockMvc
@@ -271,10 +250,6 @@ public class TestAndDocDeliveryController {
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestBody))
-                .andExpect(status().isOk())
-                .andDo(document(
-                        "get-orders-by-delivery-with-unauthorized-account",
-                        preprocessRequest(prettyPrint()),
-                        preprocessResponse(prettyPrint())));
+                .andExpect(status().isOk());
     }
 }

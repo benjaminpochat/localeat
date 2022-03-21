@@ -13,7 +13,9 @@
         <java.version>14</java.version>
         <spring-version>2.2.7.RELEASE</spring-version>
         <spring-security-version>5.2.4.RELEASE</spring-security-version>
-        <spring-restdocs-asciidoctor-version>2.0.4.RELEASE</spring-restdocs-asciidoctor-version>
+        <springboot-maven-plugin-version>2.3.4.RELEASE</springboot-maven-plugin-version>
+        <springdoc-openapi-maven-plugin-version>1.3</springdoc-openapi-maven-plugin-version>
+        <spring-openapi-version>1.6.6</spring-openapi-version>
         <springboot-maven-plugin-version>2.3.4.RELEASE</springboot-maven-plugin-version>
         <liquibase-version>4.8.0</liquibase-version>
         <jackson-version>2.10.4</jackson-version>
@@ -76,11 +78,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.restdocs</groupId>
-            <artifactId>spring-restdocs-mockmvc</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
         </dependency>
@@ -115,6 +112,11 @@
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -142,26 +144,14 @@
             </plugin>
 
             <plugin>
-                <groupId>org.asciidoctor</groupId>
-                <artifactId>asciidoctor-maven-plugin</artifactId>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-maven-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>generate-docs</id>
-                        <phase>package</phase>
+                        <id>integration-test</id>
                         <goals>
-                            <goal>process-asciidoc</goal>
+                            <goal>generate</goal>
                         </goals>
-                        <configuration>
-                            <backend>html</backend>
-                            <doctype>book</doctype>
-                            <attributes>
-                                <snippets>${snippetsDirectory}</snippets>
-                                <preserveDirectories>true</preserveDirectories>
-                                <toc/>
-                            </attributes>
-                            <sourceDirectory>src/docs/asciidocs</sourceDirectory>
-                            <outputDirectory>target/generated-docs</outputDirectory>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
@@ -205,11 +195,6 @@
                     </configuration>
                 </plugin>
                 <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>exec-maven-plugin</artifactId>
-                    <version>${exec-version}</version>
-                </plugin>
-                <plugin>
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
                     <version>${jacoco-version}</version>
@@ -228,6 +213,16 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>${surefire-version}</version>
+                    <configuration>
+                        <environmentVariables>
+                            <spring.jpa.properties.hibernate.dialect>org.hibernate.dialect.H2Dialect</spring.jpa.properties.hibernate.dialect>
+                        </environmentVariables>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.springdoc</groupId>
+                    <artifactId>springdoc-openapi-maven-plugin</artifactId>
+                    <version>${springdoc-openapi-maven-plugin-version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.liquibase</groupId>
@@ -342,13 +337,6 @@
                         <artifactId>junit</artifactId>
                     </exclusion>
                 </exclusions>
-            </dependency>
-
-            <dependency>
-                <groupId>org.springframework.restdocs</groupId>
-                <artifactId>spring-restdocs-mockmvc</artifactId>
-                <version>${spring-restdocs-asciidoctor-version}</version>
-                <scope>test</scope>
             </dependency>
 
             <dependency>
