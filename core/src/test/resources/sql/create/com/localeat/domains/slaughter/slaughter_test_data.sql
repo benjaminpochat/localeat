@@ -23,9 +23,9 @@ insert into slaughters (
 values (
     1,
     1,
-    '20200901',
+    '2020-09-01',
     null,
-    '20200921')
+    '2020-09-21')
 ;
 
 insert into animals (
@@ -53,9 +53,9 @@ insert into slaughters (
 values (
     2,
     2,
-    '20211201',
+    '2021-12-01',
     null,
-    '20211221')
+    '2021-12-21')
 ;
 
 insert into animals (
@@ -83,7 +83,7 @@ insert into slaughters (
 values (
     3,
     3,
-    '20220101',
+    '2022-01-01',
     null,
-    '20220121')
+    '2022-01-21')
 ;

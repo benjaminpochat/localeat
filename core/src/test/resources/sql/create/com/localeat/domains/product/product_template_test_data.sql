@@ -7,7 +7,7 @@ insert into product_templates (
     farm_id,
     net_weight)
 values (
-    1,
+    next value for product_template_id_seq,
     'colis ''tutti frutti''',
     'un assortiment de steaks, de rotis, et de morceaux a bouillir',
     null,

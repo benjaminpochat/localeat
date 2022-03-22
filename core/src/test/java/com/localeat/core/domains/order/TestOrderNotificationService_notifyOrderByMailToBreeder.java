@@ -12,7 +12,6 @@ import static org.mockito.Mockito.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Sql(value = {
-        "/sql/create/com/localeat/domains/security/schema.sql",
         "/sql/create/com/localeat/domains/security/security_test_data.sql",
         "/sql/create/com/localeat/domains/farm/farm_test_data.sql",
         "/sql/create/com/localeat/domains/actor/customer_test_data.sql",

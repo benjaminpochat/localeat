@@ -15,7 +15,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Profile("test")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, args = "--localeat.smtp.disableEmailNotifications=true")
 @Sql(value = {
-        "/sql/create/com/localeat/domains/security/schema.sql",
         "/sql/create/com/localeat/domains/security/security_test_data.sql",
         "/sql/create/com/localeat/domains/farm/farm_test_data.sql",
         "/sql/create/com/localeat/domains/actor/breeder_test_data.sql"

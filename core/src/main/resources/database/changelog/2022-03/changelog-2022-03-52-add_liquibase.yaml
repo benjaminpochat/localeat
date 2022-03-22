@@ -1,0 +1,1255 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1647977756683-1
+      author: benjamin
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: users_pkey
+                  name: username
+                  type: VARCHAR(50)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: password
+                  type: VARCHAR(100)
+              - column:
+                  constraints:
+                    nullable: false
+                  defaultValueBoolean: true
+                  name: enabled
+                  type: BOOLEAN
+            tableName: users
+  - changeSet:
+      id: 1647977756683-2
+      author: benjamin
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                  name: username
+                  type: VARCHAR(50)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: authority
+                  type: VARCHAR(50)
+            tableName: authorities
+  - changeSet:
+      id: 1647977756683-3
+      author: benjamin
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: deliveries_orders_pkey
+                  name: delivery_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: deliveries_orders_pkey
+                  name: orders_id
+                  type: BIGINT
+            tableName: deliveries_orders
+  - changeSet:
+      id: 1647977756683-4
+      author: benjamin
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                  name: customer_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: orders_id
+                  type: BIGINT
+            tableName: customers_orders
+  - changeSet:
+      id: 1647977756683-5
+      author: benjamin
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: username
+              - column:
+                  name: authority
+            indexName: ix_auth_username
+            tableName: authorities
+            unique: true
+  - changeSet:
+      id: 1647977756683-6
+      author: benjamin
+      changes:
+        - addUniqueConstraint:
+            columnNames: orders_id
+            constraintName: uk_2uauq9cqhqnwrdqiosdxgv2i9
+            tableName: deliveries_orders
+  - changeSet:
+      id: 1647977756683-7
+      author: benjamin
+      changes:
+        - addUniqueConstraint:
+            columnNames: orders_id
+            constraintName: uk_c23uaum5y9y2r1f0a3jprvu19
+            tableName: customers_orders
+  - changeSet:
+      id: 1647977756683-8
+      author: benjamin
+      changes:
+        - createSequence:
+            cacheSize: 1
+            cycle: false
+            incrementBy: 1
+            sequenceName: account_id_seq
+            startValue: 1
+  - changeSet:
+      id: 1647977756683-9
+      author: benjamin
+      changes:
+        - createSequence:
+            cacheSize: 1
+            cycle: false
+            incrementBy: 1
+            sequenceName: actor_id_seq
+            startValue: 1
+  - changeSet:
+      id: 1647977756683-10
+      author: benjamin
+      changes:
+        - createSequence:
+            cacheSize: 1
+            cycle: false
+            incrementBy: 1
+            sequenceName: address_id_seq
+            startValue: 1
+  - changeSet:
+      id: 1647977756683-11
+      author: benjamin
+      changes:
+        - createSequence:
+            cacheSize: 1
+            cycle: false
+            incrementBy: 1
+            sequenceName: animal_id_seq
+            startValue: 1
+  - changeSet:
+      id: 1647977756683-12
+      author: benjamin
+      changes:
+        - createSequence:
+            cacheSize: 1
+            cycle: false
+            incrementBy: 1
+            sequenceName: batch_id_seq
+            startValue: 1
+  - changeSet:
+      id: 1647977756683-13
+      author: benjamin
+      changes:
+        - createSequence:
+            cacheSize: 1
+            cycle: false
+            incrementBy: 1
+            sequenceName: customer_id_seq
+            startValue: 1
+  - changeSet:
+      id: 1647977756683-14
+      author: benjamin
+      changes:
+        - createSequence:
+            cacheSize: 1
+            cycle: false
+            incrementBy: 1
+            sequenceName: delivery_access_control_id_seq
+            startValue: 1
+  - changeSet:
+      id: 1647977756683-15
+      author: benjamin
+      changes:
+        - createSequence:
+            cacheSize: 1
+            cycle: false
+            incrementBy: 1
+            sequenceName: delivery_access_key_id_seq
+            startValue: 1
+  - changeSet:
+      id: 1647977756683-16
+      author: benjamin
+      changes:
+        - createSequence:
+            cacheSize: 1
+            cycle: false
+            incrementBy: 1
+            sequenceName: delivery_id_seq
+            startValue: 1
+  - changeSet:
+      id: 1647977756683-17
+      author: benjamin
+      changes:
+        - createSequence:
+            cacheSize: 1
+            cycle: false
+            incrementBy: 1
+            sequenceName: farm_id_seq
+            startValue: 1
+  - changeSet:
+      id: 1647977756683-18
+      author: benjamin
+      changes:
+        - createSequence:
+            cacheSize: 1
+            cycle: false
+            incrementBy: 1
+            sequenceName: image_id_seq
+            startValue: 1
+  - changeSet:
+      id: 1647977756683-19
+      author: benjamin
+      changes:
+        - createSequence:
+            cacheSize: 1
+            cycle: false
+            incrementBy: 1
+            sequenceName: order_id_seq
+            startValue: 1
+  - changeSet:
+      id: 1647977756683-20
+      author: benjamin
+      changes:
+        - createSequence:
+            cacheSize: 1
+            cycle: false
+            incrementBy: 1
+            sequenceName: order_item_id_seq
+            startValue: 1
+  - changeSet:
+      id: 1647977756683-21
+      author: benjamin
+      changes:
+        - createSequence:
+            cacheSize: 1
+            cycle: false
+            incrementBy: 1
+            sequenceName: payment_id_seq
+            startValue: 1
+  - changeSet:
+      id: 1647977756683-22
+      author: benjamin
+      changes:
+        - createSequence:
+            cacheSize: 1
+            cycle: false
+            incrementBy: 1
+            sequenceName: product_id_seq
+            startValue: 1
+  - changeSet:
+      id: 1647977756683-23
+      author: benjamin
+      changes:
+        - createSequence:
+            cacheSize: 1
+            cycle: false
+            incrementBy: 1
+            sequenceName: product_template_id_seq
+            startValue: 1
+  - changeSet:
+      id: 1647977756683-24
+      author: benjamin
+      changes:
+        - createSequence:
+            cacheSize: 1
+            cycle: false
+            incrementBy: 1
+            sequenceName: slaughter_id_seq
+            startValue: 1
+  - changeSet:
+      id: 1647977756683-25
+      author: benjamin
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: accounts_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: username
+                  type: VARCHAR(255)
+              - column:
+                  name: actor_id
+                  type: BIGINT
+            tableName: accounts
+  - changeSet:
+      id: 1647977756683-26
+      author: benjamin
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: actor_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: email
+                  type: VARCHAR(255)
+              - column:
+                  name: first_name
+                  type: VARCHAR(255)
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: phone_number
+                  type: VARCHAR(255)
+            tableName: actor
+  - changeSet:
+      id: 1647977756683-27
+      author: benjamin
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: addresses_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: address_line1
+                  type: VARCHAR(255)
+              - column:
+                  name: address_line2
+                  type: VARCHAR(255)
+              - column:
+                  name: address_line3
+                  type: VARCHAR(255)
+              - column:
+                  name: address_line4
+                  type: VARCHAR(255)
+              - column:
+                  name: city
+                  type: VARCHAR(255)
+              - column:
+                  name: zip_code
+                  type: VARCHAR(255)
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+            tableName: addresses
+  - changeSet:
+      id: 1647977756683-28
+      author: benjamin
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: animals_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: animal_type
+                  type: VARCHAR(255)
+              - column:
+                  name: final_farm
+                  type: VARCHAR(255)
+              - column:
+                  name: identification_number
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: live_weight
+                  type: FLOAT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: meat_weight
+                  type: FLOAT
+              - column:
+                  name: final_farm_id
+                  type: BIGINT
+              - column:
+                  name: breed
+                  type: VARCHAR(255)
+              - column:
+                  name: certified_label_rouge
+                  type: BOOLEAN
+            tableName: animals
+  - changeSet:
+      id: 1647977756683-29
+      author: benjamin
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: batches_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: quantity
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: quantity_sold
+                  type: INTEGER
+              - column:
+                  name: product_id
+                  type: BIGINT
+            tableName: batches
+  - changeSet:
+      id: 1647977756683-30
+      author: benjamin
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: breeders_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: email
+                  type: VARCHAR(255)
+              - column:
+                  name: first_name
+                  type: VARCHAR(255)
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: phone_number
+                  type: VARCHAR(255)
+              - column:
+                  name: farm_id
+                  type: BIGINT
+            tableName: breeders
+  - changeSet:
+      id: 1647977756683-31
+      author: benjamin
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: customers_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: email
+                  type: VARCHAR(255)
+              - column:
+                  name: first_name
+                  type: VARCHAR(255)
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: phone_number
+                  type: VARCHAR(255)
+            tableName: customers
+  - changeSet:
+      id: 1647977756683-32
+      author: benjamin
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: deliveries_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: delivery_address_id
+                  type: BIGINT
+              - column:
+                  name: delivery_end
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  name: delivery_start
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  name: access_control_id
+                  type: BIGINT
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+            tableName: deliveries
+  - changeSet:
+      id: 1647977756683-33
+      author: benjamin
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: delivery_available_batches_pkey
+                  name: delivery_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: delivery_available_batches_pkey
+                  name: available_batches_id
+                  type: BIGINT
+            tableName: delivery_available_batches
+  - changeSet:
+      id: 1647977756683-34
+      author: benjamin
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: farms_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: description
+                  type: VARCHAR(255)
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: slideshow_url
+                  type: VARCHAR(255)
+            tableName: farms
+  - changeSet:
+      id: 1647977756683-35
+      author: benjamin
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: images_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: content
+                  type: TEXT
+            tableName: images
+  - changeSet:
+      id: 1647977756683-36
+      author: benjamin
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: mollie_payment_transaction_pkey
+                  name: id
+                  type: VARCHAR(255)
+              - column:
+                  name: currency
+                  type: INTEGER
+              - column:
+                  name: value
+                  type: VARCHAR(255)
+              - column:
+                  name: description
+                  type: VARCHAR(255)
+              - column:
+                  name: redirect_url
+                  type: VARCHAR(255)
+              - column:
+                  name: status
+                  type: VARCHAR(255)
+              - column:
+                  name: webhook_url
+                  type: VARCHAR(255)
+              - column:
+                  name: href
+                  type: VARCHAR(255)
+              - column:
+                  name: type
+                  type: VARCHAR(255)
+            tableName: mollie_payment_transaction
+  - changeSet:
+      id: 1647977756683-37
+      author: benjamin
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: order_items_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: quantity
+                  type: FLOAT
+              - column:
+                  name: unit_price
+                  type: FLOAT
+              - column:
+                  name: order_id
+                  type: BIGINT
+              - column:
+                  name: batch_id
+                  type: BIGINT
+            tableName: order_items
+  - changeSet:
+      id: 1647977756683-38
+      author: benjamin
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: ordered_items_pkey
+                  name: order_id
+                  type: BIGINT
+              - column:
+                  name: ordered_quantity
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: ordered_items_pkey
+                  name: ordered_items_key
+                  type: BIGINT
+            tableName: ordered_items
+  - changeSet:
+      id: 1647977756683-39
+      author: benjamin
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: orders_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: customer_id
+                  type: BIGINT
+              - column:
+                  name: delivery_id
+                  type: BIGINT
+              - column:
+                  name: status
+                  type: VARCHAR(255)
+            tableName: orders
+  - changeSet:
+      id: 1647977756683-40
+      author: benjamin
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: payments_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: amount
+                  type: FLOAT
+              - column:
+                  name: status
+                  type: VARCHAR(255)
+              - column:
+                  name: transaction_id
+                  type: VARCHAR(255)
+              - column:
+                  name: order_id
+                  type: BIGINT
+              - column:
+                  name: payment_url
+                  type: VARCHAR(255)
+            tableName: payments
+  - changeSet:
+      id: 1647977756683-41
+      author: benjamin
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: product_templates_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: description
+                  type: VARCHAR(255)
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: net_weight
+                  type: FLOAT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: unit_price
+                  type: FLOAT
+              - column:
+                  name: farm_id
+                  type: BIGINT
+              - column:
+                  name: photo_id
+                  type: BIGINT
+            tableName: product_templates
+  - changeSet:
+      id: 1647977756683-42
+      author: benjamin
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: products_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: description
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: unit_price
+                  type: FLOAT
+              - column:
+                  name: animal_id
+                  type: BIGINT
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: farm_id
+                  type: BIGINT
+              - column:
+                  name: net_weight
+                  type: FLOAT
+              - column:
+                  name: photo_id
+                  type: BIGINT
+            tableName: products
+  - changeSet:
+      id: 1647977756683-43
+      author: benjamin
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: public_delivery_access_control_pkey
+                  name: id
+                  type: BIGINT
+            tableName: public_delivery_access_control
+  - changeSet:
+      id: 1647977756683-44
+      author: benjamin
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: shared_delivery_access_key_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: key
+                  type: VARCHAR(255)
+            tableName: shared_delivery_access_key
+  - changeSet:
+      id: 1647977756683-45
+      author: benjamin
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: shared_key_delivery_access_control_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: shared_key_id
+                  type: BIGINT
+            tableName: shared_key_delivery_access_control
+  - changeSet:
+      id: 1647977756683-46
+      author: benjamin
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: slaughters_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: slaughter_date
+                  type: date
+              - column:
+                  name: animal_id
+                  type: BIGINT
+              - column:
+                  name: delivery_id
+                  type: BIGINT
+              - column:
+                  name: cutting_date
+                  type: date
+            tableName: slaughters
+  - changeSet:
+      id: 1647977756683-47
+      author: benjamin
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: delivery_id
+            baseTableName: slaughters
+            constraintName: fk11opdck3ak7ou7bwymk5fjpy2
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: deliveries
+            validate: true
+  - changeSet:
+      id: 1647977756683-48
+      author: benjamin
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: batch_id
+            baseTableName: order_items
+            constraintName: fk1920yk9vs4rqhsjcygwjk6wrr
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: batches
+            validate: true
+  - changeSet:
+      id: 1647977756683-49
+      author: benjamin
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: customer_id
+            baseTableName: customers_orders
+            constraintName: fk23d13l73po2yhpnru16evw5o3
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: customers
+            validate: true
+  - changeSet:
+      id: 1647977756683-50
+      author: benjamin
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: delivery_address_id
+            baseTableName: deliveries
+            constraintName: fk3q3f98q617o25xdcs7kwmnf4c
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: addresses
+            validate: true
+  - changeSet:
+      id: 1647977756683-51
+      author: benjamin
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: animal_id
+            baseTableName: slaughters
+            constraintName: fk4tejvtd9rrg699a6wy0fbvn1y
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: animals
+            validate: true
+  - changeSet:
+      id: 1647977756683-52
+      author: benjamin
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: farm_id
+            baseTableName: breeders
+            constraintName: fk5wytgqi6hbdr1ud5ip6ki5o38
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: farms
+            validate: true
+  - changeSet:
+      id: 1647977756683-53
+      author: benjamin
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: ordered_items_key
+            baseTableName: ordered_items
+            constraintName: fk6dphjili8qffi6m23tmpa8ppn
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: products
+            validate: true
+  - changeSet:
+      id: 1647977756683-54
+      author: benjamin
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: photo_id
+            baseTableName: product_templates
+            constraintName: fk6hg7ttn7bstt40a5aeplu5y90
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: images
+            validate: true
+  - changeSet:
+      id: 1647977756683-55
+      author: benjamin
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: farm_id
+            baseTableName: products
+            constraintName: fk6u1nuo7vlt4ffm43qduh1ngbu
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: farms
+            validate: true
+  - changeSet:
+      id: 1647977756683-56
+      author: benjamin
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: final_farm_id
+            baseTableName: animals
+            constraintName: fk74dqysfa9r17uwr63t0bjrg5g
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: farms
+            validate: true
+  - changeSet:
+      id: 1647977756683-57
+      author: benjamin
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: delivery_id
+            baseTableName: delivery_available_batches
+            constraintName: fk80j3cltftmmw6nv61lpr3f3pu
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: deliveries
+            validate: true
+  - changeSet:
+      id: 1647977756683-58
+      author: benjamin
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: order_id
+            baseTableName: payments
+            constraintName: fk81gagumt0r8y3rmudcgpbk42l
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: orders
+            validate: true
+  - changeSet:
+      id: 1647977756683-59
+      author: benjamin
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: delivery_id
+            baseTableName: orders
+            constraintName: fk8w9m21riko8j8eit0yvog02nr
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: deliveries
+            validate: true
+  - changeSet:
+      id: 1647977756683-60
+      author: benjamin
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: order_id
+            baseTableName: order_items
+            constraintName: fkbioxgbv59vetrxe0ejfubep1w
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: orders
+            validate: true
+  - changeSet:
+      id: 1647977756683-61
+      author: benjamin
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: orders_id
+            baseTableName: customers_orders
+            constraintName: fkcgubpw142krbvsbpfumpss2wl
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: orders
+            validate: true
+  - changeSet:
+      id: 1647977756683-62
+      author: benjamin
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: animal_id
+            baseTableName: products
+            constraintName: fkeoonoj931jrqunr884p8i8098
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: animals
+            validate: true
+  - changeSet:
+      id: 1647977756683-63
+      author: benjamin
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: available_batches_id
+            baseTableName: delivery_available_batches
+            constraintName: fkff6i97n5gqud20tri12xmf2qp
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: batches
+            validate: true
+  - changeSet:
+      id: 1647977756683-64
+      author: benjamin
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: order_id
+            baseTableName: ordered_items
+            constraintName: fkha3q3tsqr7gri0mbp14hc5mkq
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: orders
+            validate: true
+  - changeSet:
+      id: 1647977756683-65
+      author: benjamin
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: product_id
+            baseTableName: batches
+            constraintName: fkjb38v1mk479a6t6ay2mewo03m
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: products
+            validate: true
+  - changeSet:
+      id: 1647977756683-66
+      author: benjamin
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: orders_id
+            baseTableName: deliveries_orders
+            constraintName: fkjpdigjxl254hbpo88bv59dfjb
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: orders
+            validate: true
+  - changeSet:
+      id: 1647977756683-67
+      author: benjamin
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: delivery_id
+            baseTableName: deliveries_orders
+            constraintName: fkkv0h9s26mthna5hjhe6v7400o
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: deliveries
+            validate: true
+  - changeSet:
+      id: 1647977756683-68
+      author: benjamin
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: shared_key_id
+            baseTableName: shared_key_delivery_access_control
+            constraintName: fkl35g4qxcp7emhdpxs8ucca3ap
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: shared_delivery_access_key
+            validate: true
+  - changeSet:
+      id: 1647977756683-69
+      author: benjamin
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: photo_id
+            baseTableName: products
+            constraintName: fkphxd4dun403ttilxtcrccurnv
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: images
+            validate: true
+  - changeSet:
+      id: 1647977756683-70
+      author: benjamin
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: customer_id
+            baseTableName: orders
+            constraintName: fkpxtb8awmi0dk6smoh2vp1litg
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: customers
+            validate: true
+  - changeSet:
+      id: 1647977756683-71
+      author: benjamin
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: farm_id
+            baseTableName: product_templates
+            constraintName: fkqud0f2q4y5gpphfdsh5plqj16
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: farms
+            validate: true
+  - changeSet:
+      id: 1647977756683-72
+      author: benjamin
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: username
+            baseTableName: authorities
+            constraintName: foreign_authorities_users_1
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: username
+            referencedTableName: users
+            validate: true
+

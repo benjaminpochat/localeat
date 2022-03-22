@@ -4,7 +4,7 @@ insert into orders (
     delivery_id,
     status)
 values (
-    nextval('order_id_seq'),
+    next value for order_id_seq,
     3,
     1,
     'BOOKED')
@@ -17,8 +17,8 @@ insert into order_items (
     quantity,
     unit_price)
 values (
-    nextval('order_item_id_seq'),
-    currval('order_id_seq'),
+    next value for order_item_id_seq,
+    current value for order_id_seq,
     1,
     10,
     13)
@@ -30,7 +30,7 @@ insert into orders (
     delivery_id,
     status)
 values (
-    nextval('order_id_seq'),
+    next value for order_id_seq,
     3,
     2,
     'PAYED')
@@ -43,8 +43,8 @@ insert into order_items (
     quantity,
     unit_price)
 values (
-    nextval('order_item_id_seq'),
-    currval('order_id_seq'),
+    next value for order_item_id_seq,
+    current value for order_id_seq,
     1,
     5,
     12)
@@ -56,7 +56,7 @@ insert into orders (
     delivery_id,
     status)
 values (
-    nextval('order_id_seq'),
+    next value for order_id_seq,
     4,
     1,
     'PAYED')
@@ -69,8 +69,8 @@ insert into order_items (
     quantity,
     unit_price)
 values (
-    nextval('order_item_id_seq'),
-    currval('order_id_seq'),
+    next value for order_item_id_seq,
+    current value for order_id_seq,
     1,
     20,
     12)

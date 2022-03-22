@@ -32,9 +32,12 @@ delete from customers ;
 -- product domain
 delete from products;
 delete from product_templates;
+alter sequence product_id_seq restart with 1;
+alter sequence product_template_id_seq restart with 1;
 
 -- farm domain
 delete from farms;
+alter sequence farm_id_seq restart with 1;
 
 -- security domain
 delete from authorities;

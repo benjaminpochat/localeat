@@ -19,9 +19,7 @@ import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuild
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@Sql(value = {
-        "/sql/create/com/localeat/domains/security/schema.sql"
-}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+
 @Sql(value = {
         "/sql/delete/com/localeat/domains/clear_data.sql"
 }, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)

@@ -2,7 +2,7 @@ insert into farms (
     id,
     name)
 values (
-    1,
+    next value for farm_id_seq,
     'La ferme de la Riviere')
 ;
 
@@ -10,6 +10,6 @@ insert into farms (
     id,
     name)
 values (
-    2,
+    next value for farm_id_seq,
     'Le GAEC des 3 freres')
 ;
