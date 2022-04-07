@@ -13,28 +13,51 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static com.localeat.core.domains.cutting.PieceCategory.*;
+import static com.localeat.core.domains.cutting.Shaping.GROS_MORCEAUX;
+import static com.localeat.core.domains.cutting.Shaping.HACHI;
+import static com.localeat.core.domains.cutting.Shaping.ROTI;
+import static com.localeat.core.domains.cutting.Shaping.STEAK_HACHE;
+import static com.localeat.core.domains.cutting.Shaping.TRANCHE;
 import static com.localeat.core.domains.cutting.Shaping.UNDEFINED;
 
 
 @Service
 public class CuttingService {
 
-    private Map<PieceCategory, Float> getPieceCategoryPercentage() {
-        Map<PieceCategory, Float> categoryDistribtion = new HashMap<>();
-        categoryDistribtion.put(FILET, 0.0234f);
-        categoryDistribtion.put(FAUX_FILET, 0.0384f);
-        categoryDistribtion.put(COTE, 0.1019f);
-        categoryDistribtion.put(BASSE_COTE, 0.0381f);
-        categoryDistribtion.put(RUMSTEAK, 0.0396f);
-        categoryDistribtion.put(STEAK_PREMIUM, 0.1857f);
-        categoryDistribtion.put(STEAK_STANDARD, 0.0579f);
-        categoryDistribtion.put(BAVETTE, 0.0301f);
-        categoryDistribtion.put(BOURGUIGNON, 0.1755f);
-        categoryDistribtion.put(PALERON, 0.0606f);
-        categoryDistribtion.put(JARRET, 0.0803f);
-        categoryDistribtion.put(PLAT_DE_COTE, 0.1626f);
-        categoryDistribtion.put(QUEUE, 0.0059f);
-        return categoryDistribtion;
+    Map<PieceCategory, Float> getPieceCategoryPercentage() {
+        Map<PieceCategory, Float> categoryDistribution = new HashMap<>();
+        categoryDistribution.put(FILET, 0.0234f);
+        categoryDistribution.put(FAUX_FILET, 0.0384f);
+        categoryDistribution.put(COTE, 0.1019f);
+        categoryDistribution.put(BASSE_COTE, 0.0381f);
+        categoryDistribution.put(RUMSTEAK, 0.0396f);
+        categoryDistribution.put(STEAK_PREMIUM, 0.1857f);
+        categoryDistribution.put(STEAK_STANDARD, 0.0579f);
+        categoryDistribution.put(BAVETTE, 0.0301f);
+        categoryDistribution.put(BOURGUIGNON, 0.1755f);
+        categoryDistribution.put(PALERON, 0.0606f);
+        categoryDistribution.put(JARRET, 0.0803f);
+        categoryDistribution.put(PLAT_DE_COTE, 0.1626f);
+        categoryDistribution.put(QUEUE, 0.0059f);
+        return categoryDistribution;
+    }
+
+    Map<PieceCategory, Set<Shaping>> getPieceCategoryShapings() {
+        Map<PieceCategory, Set<Shaping>> availableShapings = new HashMap<>();
+        availableShapings.put(FILET, Set.of(ROTI, TRANCHE));
+        availableShapings.put(FAUX_FILET, Set.of(TRANCHE));
+        availableShapings.put(COTE, Set.of(TRANCHE));
+        availableShapings.put(BASSE_COTE, Set.of(ROTI, HACHI, STEAK_HACHE));
+        availableShapings.put(RUMSTEAK, Set.of(TRANCHE, ROTI));
+        availableShapings.put(STEAK_PREMIUM, Set.of(HACHI, STEAK_HACHE, TRANCHE));
+        availableShapings.put(STEAK_STANDARD, Set.of(HACHI, STEAK_HACHE, TRANCHE));
+        availableShapings.put(BAVETTE, Set.of(TRANCHE));
+        availableShapings.put(BOURGUIGNON, Set.of(HACHI, STEAK_HACHE, GROS_MORCEAUX));
+        availableShapings.put(PALERON, Set.of(ROTI, HACHI, STEAK_HACHE));
+        availableShapings.put(JARRET, Set.of(GROS_MORCEAUX));
+        availableShapings.put(PLAT_DE_COTE, Set.of(HACHI, STEAK_HACHE));
+        availableShapings.put(QUEUE, Set.of(GROS_MORCEAUX));
+        return availableShapings;
     }
 
     public void updateMeatWeight(Animal animal) {
@@ -66,7 +89,7 @@ public class CuttingService {
         Map<PieceCategory, Float> pieceCategoryPercentagesInProducts = getPieceCategoryDistributionInProducts(pieceCategoriesInProducts);
         List<OrderItem> allOrderItemsSold = getAllOrderItemsSold(delivery);
         fillCuttingPlanWithOrderItemsSold(cuttingPlan, slaughter.getAnimal(), delivery, allOrderItemsSold, pieceCategoryPercentagesInProducts);
-        completeCuttinPlanWithUndefinedShapings(cuttingPlan, slaughter.getAnimal());
+        completeCuttingPlanWithUndefinedShapings(cuttingPlan, slaughter.getAnimal());
         return cuttingPlan;
     }
 
@@ -122,7 +145,7 @@ public class CuttingService {
                 });
     }
 
-    private void completeCuttinPlanWithUndefinedShapings(CuttingPlan cuttingPlan, Animal animal) {
+    private void completeCuttingPlanWithUndefinedShapings(CuttingPlan cuttingPlan, Animal animal) {
         Map<PieceCategory, Float> meatWeightPerPieceCategoryInAnimal = getPieceCategoryDistribution(animal);
         Map<PieceCategory, Float> meatWeightPerPieceCategoryInCuttingPlan = Arrays.stream(values())
                 .collect(Collectors.toMap(

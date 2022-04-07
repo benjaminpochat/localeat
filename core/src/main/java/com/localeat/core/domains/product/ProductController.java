@@ -41,7 +41,9 @@ public class ProductController {
     public ProductTemplate saveBreedersProductTemplate(@PathVariable Account account, @RequestBody ProductTemplate template){
         Breeder breeder = (Breeder) account.getActor();
         template.setFarm(breeder.getFarm());
-        imageRepository.save(template.getPhoto());
+        if( template.getPhoto() != null ) {
+            imageRepository.save(template.getPhoto());
+        }
         return productTemplateRepository.save(template);
     }
 

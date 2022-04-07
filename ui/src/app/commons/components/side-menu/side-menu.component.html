@@ -6,8 +6,6 @@
       </button>
       <div>Viande en Direct</div>
     </div>
-    <div class='side-menu__link' (click)="showSlaughtersList()">Vos abattages</div>
-    <div class='side-menu__link' (click)="showSalesList()">Vos livraisons</div>
-    <div class='side-menu__link' (click)="showProductsList()">Vos colis type</div>
+    <div *ngFor="let page of getPages()" class='side-menu__link' (click)="showPage(page.id)">{{page.label}}</div>
   </mat-sidenav>
 </mat-sidenav-container>

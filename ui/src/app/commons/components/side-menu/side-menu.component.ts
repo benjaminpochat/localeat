@@ -15,14 +15,25 @@ export class SideMenuComponent implements OnInit {
   sideMenuShown = false;
 
   @Output()
-  contentShown = new EventEmitter<string>();
+  contentShown = new EventEmitter<Object>();
 
   @ViewChild(MatSidenav)
   sideNav: MatSidenav;
 
-  constructor() { }
+  @Input()
+  pages : {label :string, id: Object}[]
+
+  constructor() {}
 
   ngOnInit(): void {
+  }
+
+  getPages(): {label: string, id: Object}[] {
+    return this.pages;
+  }
+
+  setPages(pages: {label: string, id: Object}[]): void {
+    this.pages = pages;
   }
 
   hideSideMenu(): void {
@@ -35,6 +46,11 @@ export class SideMenuComponent implements OnInit {
     //this.sideMenuShown = true;
   }
 
+  showPage(pageId: Object) {
+    this.contentShown.emit(pageId);
+    this.hideSideMenu();
+  }
+/*
   showSlaughtersList(): void {
     this.contentShown.emit('slaughters-list');
     this.hideSideMenu();
@@ -49,4 +65,5 @@ export class SideMenuComponent implements OnInit {
     this.contentShown.emit('products-list');
     this.hideSideMenu();
   }
+  */
 }

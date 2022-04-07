@@ -2,8 +2,8 @@ export enum Shaping {
     Roti = 'ROTI',
     Hachi = 'HACHI',
     SteakHache = 'STEAK_HACHE',
-    Tranche = 'TRANCHE',
-    GrosMorceaux = 'GROS_MORCEAUX',
+    Tranche = 'TRANCHE',            // steak ou côtes
+    GrosMorceaux = 'GROS_MORCEAUX', //bourguignon ou pot-au-feu
     Undefined = 'UNDEFINED'
 }
  
@@ -18,9 +18,9 @@ export enum Shaping {
         case Shaping.SteakHache:
             return 'steak haché';
         case Shaping.Tranche:
-            return 'tranche (steack ou côte)';
+            return 'tranche'; 
         case Shaping.GrosMorceaux:
-            return 'gros morceaux (bourguignon, pot-au-feu)';
+            return 'gros morceaux';
         case Shaping.Undefined:
             return 'non défini';
         default:

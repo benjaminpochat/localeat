@@ -52,6 +52,4 @@ export enum PieceCategory {
         const matchingPieceCategoryKeys = Object.keys(PieceCategory).filter(pieceCategory => PieceCategory[pieceCategory] == pieceCategoryValue);
         return matchingPieceCategoryKeys.length > 0 ? PieceCategory[matchingPieceCategoryKeys[0]] : null;
     }
-
   }
-  

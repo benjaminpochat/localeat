@@ -5,7 +5,6 @@ import { ProductTemplate, ProductTemplateUtils } from 'src/app/commons/models/pr
 import { Product } from 'src/app/commons/models/product.model';
 import { Image } from 'src/app/commons/models/image.model';
 import { UrlService } from 'src/app/commons/services/url.service';
-import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { PieceCategory } from 'src/app/commons/models/piece-category.model';
 import { Shaping } from 'src/app/commons/models/shaping.model';
@@ -21,11 +20,21 @@ export class ProductService {
   ) { }
 
   saveProduct(product: Product): Observable<Product> {
+    this.convertMapEntriesToAttributes(product.elements);
     return this.http.post<Product>(this.urlService.getAuthenticatedUrl(['products']), product);
   }
 
   saveProductTemplate(product: ProductTemplate): Observable<ProductTemplate> {
+    this.convertMapEntriesToAttributes(product.elements)
     return this.http.post<ProductTemplate>(this.urlService.getAuthenticatedUrl(['productTemplates']), product);
+  }
+  
+  private convertMapEntriesToAttributes(map: Map<string, Object>) {
+    for (let entry of map.entries()) {
+      if (entry[0]) {
+        map[entry[0]] = entry[1];
+      }
+    }
   }
 
   public getProductTemplates(): Observable<ProductTemplate[]> {
@@ -52,4 +61,11 @@ export class ProductService {
     return this.http.get<Image>(this.urlService.getAuthenticatedUrl(['productTemplates', productTemplate.id.toString(), 'photo']));
   }
 
+  async getPieceCategoryPercentages(): Promise<Map<PieceCategory, number>> {
+    return this.http.get<Map<PieceCategory, number>>(this.urlService.getAnonymousUrl(['piececategories', 'percentages'])).toPromise();
+  }
+
+  async getPieceCategoryShapings(): Promise<Map<PieceCategory, Shaping[]>> {
+    return this.http.get<Map<PieceCategory, Shaping[]>>(this.urlService.getAnonymousUrl(['piececategories', 'shapings'])).toPromise();
+  }
 }

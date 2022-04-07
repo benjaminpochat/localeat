@@ -3,10 +3,10 @@
     <app-main-menu [sideMenuDisabled]="false" [loginForced]='true' (sideMenuActivated)="showSideMenu($event)"></app-main-menu>
   </div>
   <div class='breeder-area__side-menu'>
-    <app-side-menu #sideMenu (contentShown)="showContent($event)"></app-side-menu>
+    <app-side-menu #sideMenu (contentShown)="handleNavigation($event)" [pages]="menuPages"></app-side-menu>
   </div>
   <div class='breeder-area__content-body'>
-    <div id="slaughters-list">
+    <div *ngIf="isSlaughtersPageShown()" id="slaughters-list">
       <app-slaughters-list
         [slaughters]="slaughters"
         (createSlaughterEvent)="handleSlaughterCreation($event)"
@@ -14,10 +14,13 @@
         (createDeliveryEvent)="handleDeliveryCreation($event)">
       </app-slaughters-list>
     </div>
-    <div id="deliveries-list">
+    <div *ngIf="isSlaughtersPageShown()" id="deliveries-list">
       <div class="subtitle">Vos ventes en cours</div>
       <app-delivery *ngFor="let slaughter of getSlaughtersWithDelivery()" [slaughter]="slaughter"></app-delivery>
     </div>
+    <div *ngIf="isProductTemplatesPageShown()" >
+      <app-product-templates-list></app-product-templates-list>
+    </div>  
   </div>
   <app-footer></app-footer>
 </div>

@@ -29,3 +29,30 @@
   margin: 2rem;
   width: 90%;
 }
+
+.product-form__shaping-selector {
+  display: grid;
+  row-gap: 0.5rem;
+  column-gap: 0.5rem;
+  margin: 2rem;
+}
+
+.pieceCategory {
+
+}
+
+.shaping {
+  cursor: pointer;
+  background-color: #e9e9ed;
+  border-radius: 3px;
+}
+
+.shaping--selected {
+  border-color: black;
+  border-style: solid;
+}
+
+.shaping:hover {
+  background-color: #9f9fac;
+}
+

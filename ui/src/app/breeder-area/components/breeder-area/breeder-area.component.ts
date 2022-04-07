@@ -1,12 +1,13 @@
-import { Component, OnInit, ViewChild, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, ViewChild, EventEmitter, Output, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthenticationService } from 'src/app/commons/services/authentication.service';
-import { SideMenuComponent } from 'src/app/commons/components/side-menu/side-menu.component';
 import { Delivery } from 'src/app/commons/models/delivery.model';
 import { Slaughter } from 'src/app/commons/models/slaughter.model';
 import { DeliveryService } from 'src/app/breeder-area/services/delivery.service';
 import { SlaughterService } from 'src/app/breeder-area/services/slaughter.service';
+import { SideMenuComponent } from 'src/app/commons/components/side-menu/side-menu.component';
+
 
 @Component({
   selector: 'app-breeder-area',
@@ -16,7 +17,7 @@ import { SlaughterService } from 'src/app/breeder-area/services/slaughter.servic
 export class BreederAreaComponent implements OnInit {
 
   @ViewChild(SideMenuComponent)
-  private sideMenu: SideMenuComponent;
+  private sideMenu : SideMenuComponent;
 
   @Output()
   createSlaughterEvent = new EventEmitter<Slaughter>();
@@ -28,7 +29,14 @@ export class BreederAreaComponent implements OnInit {
   createDeliveryEvent = new EventEmitter<Delivery>();
 
   slaughters: Slaughter[];
+
   deliveries: Delivery[];
+
+  pageShown = BreederAreaPage.SlaughtersPage;
+
+  menuPages = [
+    {label: "mes ventes", id: BreederAreaPage.SlaughtersPage},
+    {label: "mes colis type", id: BreederAreaPage.ProductTemplatesPage}];
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -72,11 +80,8 @@ export class BreederAreaComponent implements OnInit {
     this.sideMenu.showSideMenu();
   }
 
-  showContent(contentId: string){
-    document.getElementById(contentId).scrollIntoView({
-      behavior: 'smooth',
-      block: 'start',
-      inline: 'nearest'});
+  handleNavigation(page: BreederAreaPage){
+    this.pageShown = page;
   }
 
   handleSlaughterCreation(slaughterCreated: Slaughter) {
@@ -90,4 +95,18 @@ export class BreederAreaComponent implements OnInit {
   handleDeliveryCreation(slaughterPublished: Slaughter) {
     this.refreshDeliveries();
   }
+
+  isSlaughtersPageShown(): boolean {
+    return this.pageShown === BreederAreaPage.SlaughtersPage;
+  }
+
+  isProductTemplatesPageShown(): boolean {
+    return this.pageShown === BreederAreaPage.ProductTemplatesPage;
+  }
+
+}
+
+enum BreederAreaPage {
+  SlaughtersPage,
+  ProductTemplatesPage
 }

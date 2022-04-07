@@ -4,11 +4,11 @@ import { ProductService } from 'src/app/breeder-area/services/product.service';
 import { ProductComponent } from '../product/product.component';
 
 @Component({
-  selector: 'app-products-list',
+  selector: 'app-product-templates-list',
   templateUrl: './product-templates-list.component.html',
   styleUrls: ['./product-templates-list.component.css']
 })
-// TODO : This component is not used aynmore. To be deleted is really obsolete.
+
 export class ProductTemplatesListComponent implements OnInit {
 
   productTemplates: ProductTemplate[];
@@ -24,8 +24,12 @@ export class ProductTemplatesListComponent implements OnInit {
     this.refreshProductTemplatesList();
   }
 
+  showProductTemplate(product: ProductTemplate) {
+    this.productComponent.initProductTemplate(product)
+  }
+
   showProductTemplateCreation() {
-    this.productComponent.product = new ProductTemplate();
+    this.productComponent.initNewProductTemplate();
   }
 
   refreshProductTemplatesList() {

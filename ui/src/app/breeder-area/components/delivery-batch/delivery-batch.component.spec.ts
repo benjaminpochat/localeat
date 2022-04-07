@@ -30,7 +30,8 @@ describe('DeliveryBatchComponent', () => {
         unitPrice: 13.5,
         netWeight: 10,
         photo: null,
-        farm: null
+        farm: null,
+        elements: null
       },
       quantity: 10,
       quantitySold: 0

@@ -1,6 +1,6 @@
 <div class="subtitle">
   <div>Vos colis types</div>
-  <button mat-flat-button (click)="showProductTemplateCreation()" class="subtitle-action">
+  <button type="button" mat-button (click)="showProductTemplateCreation()">
     Créer
   </button>
 </div>
@@ -19,7 +19,7 @@
       <td mat-cell *matCellDef="let productTemplate"> {{productTemplate.unitPrice}} €TTC </td>
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="['name', 'description', 'unitPrice']"></tr>
-    <tr mat-row *matRowDef="let myRowData; columns: ['name', 'description', 'unitPrice']"></tr>
+    <tr class="clickable-row" mat-row *matRowDef="let myRowData; columns: ['name', 'description', 'unitPrice']" (click)="showProductTemplate(myRowData)" ></tr>
   </table>
 </div>
 

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { ProductTemplate } from 'src/app/commons/models/product-template.model';
@@ -15,6 +15,9 @@ import { Shaping, ShapingUtils } from 'src/app/commons/models/shaping.model';
 })
 export class ProductComponent implements OnInit {
 
+  @ViewChild('shapingSelector')
+  shapingSelector: ElementRef;
+
   @Output()
   saveProductEvent = new EventEmitter<Product>();
 
@@ -22,15 +25,130 @@ export class ProductComponent implements OnInit {
   saveProductTemplateEvent = new EventEmitter<ProductTemplate>();
 
   product: ProductTemplate | Product;
+  pieceCategoryPercentages: Map<PieceCategory, number>;
+  pieceCategoryShapings: Map<PieceCategory, Shaping[]>;
   productForm: FormGroup;
   photoUrl: any;
 
   constructor(
     private formBuilder: FormBuilder,
-    private productService: ProductService) { }
+    private productService: ProductService,
+    private renderer: Renderer2) { }
 
   ngOnInit(): void {
     this.initProductForm();
+  }
+
+  async initPieceCategoryShapingTable() {
+    this.pieceCategoryPercentages = await this.productService.getPieceCategoryPercentages()
+    this.pieceCategoryShapings = await this.productService.getPieceCategoryShapings()
+    this.createPieceCategoryShapingTable()
+    Array.from(this.product.elements.keys()).forEach(pieceCategory => {
+      const shaping = this.product.elements.get(pieceCategory);
+      const element = document.querySelector(`div.${pieceCategory}-shapings.${shaping}`);
+      this.selectShaping(pieceCategory, shaping, element);
+    })
+  }
+
+  private createPieceCategoryShapingTable() {
+    const nbOfPieceCategories = this.getPieceCategories().length;
+    const nbOfShapings = this.getShapings().length;
+    this.renderer.setStyle(this.shapingSelector.nativeElement, 'grid-template-columns', '3fr 1fr ' + '1fr '.repeat(nbOfShapings));
+    const emptyDiv = this.renderer.createElement('div');
+    this.renderer.setStyle(emptyDiv, 'grid-column', '1/3');
+    this.renderer.setStyle(emptyDiv, 'grid-row', '1/3');
+    this.renderer.appendChild(this.shapingSelector.nativeElement, emptyDiv);
+    this.getShapings().forEach(shaping => {
+      this.createShapingHeaderDiv(shaping);
+    });
+    this.getShapings().forEach(shaping => {
+      this.createShapingQuantityHeaderDiv(shaping);
+    });
+    this.getPieceCategories().forEach(pieceCategory => {
+      this.createPieceCategoryDiv(pieceCategory);
+      this.createPieceCategoryQuantityDiv(pieceCategory);
+      this.getShapings().forEach(shaping => {
+        this.createPieceCategoryShapingDiv(pieceCategory, shaping);
+      });
+    });
+  }
+
+  private createShapingHeaderDiv(shaping: Shaping) {
+    const shapingHeader = this.renderer.createElement('div');
+    this.renderer.addClass(shapingHeader, 'shaping-header-' + shaping);
+    const shapingHeaderContent = this.renderer.createText(ShapingUtils.getShapingLabel(shaping));
+    this.renderer.appendChild(shapingHeader, shapingHeaderContent);
+    this.renderer.appendChild(this.shapingSelector.nativeElement, shapingHeader);
+  }
+
+  private createShapingQuantityHeaderDiv(shaping: Shaping) {
+    const shapingQuantityHeader = this.renderer.createElement('div');
+    this.renderer.addClass(shapingQuantityHeader, 'shaping-header-quantity-' + shaping);
+    this.renderer.appendChild(this.shapingSelector.nativeElement, shapingQuantityHeader);
+  }
+
+  private createPieceCategoryDiv(pieceCategory: PieceCategory) {
+    const divPieceCategory = this.renderer.createElement('div');
+    const divPieceCategoryContent = this.renderer.createText(PieceCategoryUtils.getPieceCategoryLabel(pieceCategory));
+    this.renderer.appendChild(divPieceCategory, divPieceCategoryContent);
+    this.renderer.addClass(divPieceCategory, 'pieceCategory');
+    this.renderer.appendChild(this.shapingSelector.nativeElement, divPieceCategory);
+  }
+
+  createPieceCategoryQuantityDiv(pieceCategory: PieceCategory) {
+    const divPieceCategoryQuantity = this.renderer.createElement('div');
+    const pieceCategoryWeight = (this.product.netWeight || 0) * this.pieceCategoryPercentages[pieceCategory];
+    const divPieceCategoryQuantityContent = this.renderer.createText(pieceCategoryWeight.toFixed(2) + ' kg');
+    this.renderer.addClass(divPieceCategoryQuantity, 'piece-category-quantity-' + pieceCategory);
+    this.renderer.appendChild(divPieceCategoryQuantity, divPieceCategoryQuantityContent);
+    this.renderer.appendChild(this.shapingSelector.nativeElement, divPieceCategoryQuantity);
+  }
+
+  private createPieceCategoryShapingDiv(pieceCategory: PieceCategory, shaping: Shaping) {
+    const divShaping = this.renderer.createElement('div');
+    if (this.pieceCategoryShapings[pieceCategory].includes(shaping)){
+      this.renderer.addClass(divShaping, 'shaping');
+      this.renderer.addClass(divShaping, pieceCategory + '-shapings');
+      this.renderer.addClass(divShaping, shaping);
+      if (this.product.elements.get(pieceCategory) === shaping) {
+        this.renderer.addClass(divShaping, 'shaping-selected');
+      }
+      this.renderer.listen(divShaping, 'click', (event) => this.selectShaping(pieceCategory, shaping, divShaping));
+    }
+    this.renderer.appendChild(this.shapingSelector.nativeElement, divShaping);
+  }
+
+  selectShaping(pieceCategory: PieceCategory, shaping: Shaping, divShaping: Element): void {
+    this.product.elements.set(pieceCategory, shaping);
+    document.querySelectorAll('.' + pieceCategory + '-shapings').forEach(element => {
+      this.renderer.removeClass(element, 'shaping--selected');
+      element.textContent = null;
+    });
+    this.renderer.addClass(divShaping, 'shaping--selected');
+    const pieceCategoryWeight = this.product.netWeight * this.pieceCategoryPercentages[pieceCategory];
+    divShaping.textContent = pieceCategoryWeight.toFixed(2) + ' kg';
+
+    Object.values(Shaping).filter(shaping => shaping !== Shaping.Undefined).forEach(shaping => {
+      var shapingTotalWeight = 0;
+      this.product.elements.forEach((currentShaping, pieceCategory, map) => {
+        if (currentShaping === shaping) {
+          shapingTotalWeight += this.product.netWeight * this.pieceCategoryPercentages[pieceCategory];
+        }
+      })
+      document.querySelector('.shaping-header-quantity-' + shaping).textContent = shapingTotalWeight.toFixed(2);
+    })
+  }
+
+  initNewProductTemplate() {
+    this.product = new ProductTemplate();
+    this.product.elements = new Map<PieceCategory, Shaping>();
+    this.initPieceCategoryShapingTable();
+  }
+
+  initProductTemplate(productTemplate: ProductTemplate) {
+    this.product = productTemplate;
+    this.initProductForm()
+    this.initPieceCategoryShapingTable();
   }
 
   setProduct(product: Product | ProductTemplate) {
@@ -43,17 +161,25 @@ export class ProductComponent implements OnInit {
         this.productService.loadProductTemplatePhoto(this.product).subscribe(photo => this.product.photo = photo);
       }
     }
-    this.product.elements = new Map<PieceCategory, Shaping>();
-    Object.keys(PieceCategory).forEach(pieceCategory => this.product.elements[pieceCategory] = null);
   }
 
   initProductForm(){
     this.productForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      description: ['', [Validators.required, Validators.maxLength(255)]],
-      unitPrice: ['', [Validators.required]],
-      netWeight: ['', [Validators.required]],
+      name: [this.product?.name, Validators.required],
+      description: [this.product?.description, [Validators.required, Validators.maxLength(255)]],
+      unitPrice: [this.product?.unitPrice, [Validators.required]],
+      netWeight: [this.product?.netWeight, [Validators.required]],
     });
+    this.productForm.valueChanges.subscribe(form => {
+      if (this.product) {
+        const productNetWeight = form.netWeight;
+        this.getPieceCategories().forEach(pieceCategory => {
+          const pieceCategoryQuantity = productNetWeight * this.pieceCategoryPercentages[pieceCategory];
+          const divPieceCategoryQuantity = this.shapingSelector.nativeElement.querySelector('.' + 'piece-category-quantity-' + pieceCategory);
+          divPieceCategoryQuantity.textContent = pieceCategoryQuantity.toFixed(2) + ' kg';
+        })
+      }
+    })
   }
 
   cancel(): void {
@@ -105,7 +231,19 @@ export class ProductComponent implements OnInit {
     reader.readAsDataURL(inputNode.files[0]);
   }
 
-  getPieceCategories(): string[] {
-    return Object.keys(PieceCategory);
+  getPieceCategories(): PieceCategory[] {
+    return Object.keys(PieceCategory).map(key => PieceCategory[key]);
+  }
+
+  getPieceCategoryLabel(pieceCategory : PieceCategory): string {
+    return PieceCategoryUtils.getPieceCategoryLabel(pieceCategory);
+  }
+
+  getShapings(): Shaping[] {
+    return Object.keys(Shaping).map(key => Shaping[key]).filter(shaping => shaping != Shaping.Undefined);
+  }
+
+  getShapingLabel(shaping: Shaping): string {
+    return ShapingUtils.getShapingLabel(shaping);
   }
 }
