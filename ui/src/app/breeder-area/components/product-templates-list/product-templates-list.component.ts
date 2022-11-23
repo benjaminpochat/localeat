@@ -37,6 +37,6 @@ export class ProductTemplatesListComponent implements OnInit {
   }
 
   getProductDescription(productDescription: string): string {
-    return productDescription.replace(new RegExp('\n', 'g'), '<br/>');
+    return productDescription?.replace(new RegExp('\n', 'g'), '<br/>');
   }
 }

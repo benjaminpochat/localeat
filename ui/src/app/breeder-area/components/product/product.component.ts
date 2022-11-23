@@ -1,6 +1,6 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ObjectUnsubscribedError, Observable } from 'rxjs';
 import { ProductTemplate } from 'src/app/commons/models/product-template.model';
 import { Product } from 'src/app/commons/models/product.model';
 import { ProductService } from 'src/app/breeder-area/services/product.service';
@@ -29,6 +29,8 @@ export class ProductComponent implements OnInit {
   pieceCategoryShapings: Map<PieceCategory, Shaping[]>;
   productForm: FormGroup;
   photoUrl: any;
+  productFormTitle: string;
+  userAlert: string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -140,12 +142,14 @@ export class ProductComponent implements OnInit {
   }
 
   initNewProductTemplate() {
+    this.productFormTitle = "Créons un nouveau colis type";
     this.product = new ProductTemplate();
     this.product.elements = new Map<PieceCategory, Shaping>();
     this.initPieceCategoryShapingTable();
   }
 
   initProductTemplate(productTemplate: ProductTemplate) {
+    this.productFormTitle = "Editons un colis type existant";
     this.product = productTemplate;
     this.initProductForm()
     this.initPieceCategoryShapingTable();
@@ -165,10 +169,10 @@ export class ProductComponent implements OnInit {
 
   initProductForm(){
     this.productForm = this.formBuilder.group({
-      name: [this.product?.name, Validators.required],
-      description: [this.product?.description, [Validators.required, Validators.maxLength(255)]],
-      unitPrice: [this.product?.unitPrice, [Validators.required]],
-      netWeight: [this.product?.netWeight, [Validators.required]],
+      name: new FormControl(this.product?.name, Validators.required),
+      description: new FormControl(this.product?.description, [Validators.required, Validators.maxLength(255)]),
+      unitPrice: new FormControl(this.product?.unitPrice, Validators.required),
+      netWeight: new FormControl(this.product?.netWeight, Validators.required),
     });
     this.productForm.valueChanges.subscribe(form => {
       if (this.product) {
@@ -188,35 +192,47 @@ export class ProductComponent implements OnInit {
   }
 
   save(): void {
-    this.product.name = this.productForm.value.name;
-    this.product.description = this.productForm.value.description;
-    this.product.unitPrice = this.productForm.value.unitPrice;
-    this.product.netWeight = this.productForm.value.netWeight;
+    if (this.productForm.valid && this.isShapingDefined()) {
+      this.userAlert = undefined;
+      this.product.name = this.productForm.value.name;
+      this.product.description = this.productForm.value.description;
+      this.product.unitPrice = this.productForm.value.unitPrice;
+      this.product.netWeight = this.productForm.value.netWeight;
 
-    const saveProduct: (
-        (product: Product) => Observable<Product>)
-        | ((product: ProductTemplate) => Observable<ProductTemplate>
-      ) = product => {
-      if (this.product instanceof Product) {
-        return this.productService.saveProduct(product);
-      } else {
-        return this.productService.saveProductTemplate(product);
+      const saveProduct: (
+          (product: Product) => Observable<Product>)
+          | ((product: ProductTemplate) => Observable<ProductTemplate>
+        ) = product => {
+        if (this.product instanceof Product) {
+          return this.productService.saveProduct(product);
+        } else {
+          return this.productService.saveProductTemplate(product);
+        }
+      };
+
+      const emitSaveProductEvent = product => {
+        if (this.product instanceof Product) {
+          this.saveProductEvent.emit(product);
+        } else {
+          this.saveProductTemplateEvent.emit(product);
+        }
+      };
+
+      saveProduct(this.product).subscribe(product => {
+        emitSaveProductEvent(product);
+        this.productForm.reset();
+        this.product = null;
+      });
+    } else {
+      var alerts = [];
+      if (!this.isShapingDefined()) {
+        alerts.push('Veuillez définir une forme de découpe pour chaque partie de l\'animal.');
+      } 
+      if (!this.productForm.valid){
+        alerts.push['Veuillez vérifier les informations saisies.'];
       }
-    };
-
-    const emitSaveProductEvent = product => {
-      if (this.product instanceof Product) {
-        this.saveProductEvent.emit(product);
-      } else {
-        this.saveProductTemplateEvent.emit(product);
-      }
-    };
-
-    saveProduct(this.product).subscribe(product => {
-      emitSaveProductEvent(product);
-      this.productForm.reset();
-      this.product = null;
-    });
+      this.userAlert = alerts.join('\n');
+    }
   }
 
   uploadPhoto():void {
@@ -246,4 +262,9 @@ export class ProductComponent implements OnInit {
   getShapingLabel(shaping: Shaping): string {
     return ShapingUtils.getShapingLabel(shaping);
   }
+
+  isShapingDefined(): boolean {
+    return Object.values(PieceCategory).every(pieceCategory => this.product.elements?.get(pieceCategory))
+  }
 }
+

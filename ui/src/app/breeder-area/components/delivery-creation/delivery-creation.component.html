@@ -107,6 +107,6 @@
   </mat-vertical-stepper>
   <button mat-button (click)="save()">Valider</button>
   <button mat-button (click)='cancel()'>Annuler</button>
-  <div class='user-alert'>{{userAlert}}</div>
+  <div *ngIf='userAlert' class='user-alert'>{{userAlert}}</div>
 </div>
 <app-product (saveProductTemplateEvent)=addBatch($event)></app-product>

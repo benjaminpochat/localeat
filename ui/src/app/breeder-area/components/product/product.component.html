@@ -1,28 +1,28 @@
 <div *ngIf="product" class="product-form">
-  <div class="product-form__title">Créons un nouveau colis type</div>
+  <div class="product-form__title">{{productFormTitle}}</div>
 
   <form [formGroup]="productForm">
     <div class="product-form__name">
       <mat-form-field>
-        <mat-label>Nom du colis type</mat-label>
+        <mat-label required>Nom du colis type</mat-label>
         <input type="text" matInput value="product.name" formControlName="name" required>
       </mat-form-field>
     </div>
     <div class="product-form__description">
       <mat-form-field>
-        <mat-label>Description du colis</mat-label>
+        <mat-label required>Description du colis</mat-label>
         <textarea cdkTextareaAutosize matInput formControlName="description" placeholder="description du contenu du colis" required></textarea>
       </mat-form-field>
     </div>
     <div class="product-form__unit-price">
       <mat-form-field>
-        <mat-label>Prix de vente (€ <sup>TTC</sup>/kg)</mat-label>
+        <mat-label required>Prix de vente (€ <sup>TTC</sup>/kg)</mat-label>
         <input type="number" matInput formControlName="unitPrice" required>
       </mat-form-field>
     </div>
     <div class="product-form__net-weight">
       <mat-form-field>
-        <mat-label>Quantité de viande dans le colis (kg)</mat-label>
+        <mat-label required>Quantité de viande dans le colis (kg)</mat-label>
         <input type="number" matInput formControlName="netWeight" required>
       </mat-form-field>
     </div>
@@ -37,7 +37,9 @@
 
   </form>
 
+  <div class='user-alert' *ngIf="userAlert">{{userAlert}}</div>
   <button mat-button (click)="save()">Enregistrer</button>
   <button mat-button (click)="cancel()">Abandonner</button>
+
 </div>
 
