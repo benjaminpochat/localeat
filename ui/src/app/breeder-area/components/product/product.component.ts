@@ -113,7 +113,7 @@ export class ProductComponent implements OnInit {
       this.renderer.addClass(divShaping, pieceCategory + '-shapings');
       this.renderer.addClass(divShaping, shaping);
       if (this.product.elements.get(pieceCategory) === shaping) {
-        this.renderer.addClass(divShaping, 'shaping-selected');
+        this.renderer.addClass(divShaping, 'shaping--selected');
       }
       this.renderer.listen(divShaping, 'click', (event) => this.selectShaping(pieceCategory, shaping, divShaping));
     }
@@ -127,18 +127,21 @@ export class ProductComponent implements OnInit {
       element.textContent = null;
     });
     this.renderer.addClass(divShaping, 'shaping--selected');
-    const pieceCategoryWeight = this.product.netWeight * this.pieceCategoryPercentages[pieceCategory];
+    const pieceCategoryWeight = (this.product.netWeight || 0) * this.pieceCategoryPercentages[pieceCategory];
     divShaping.textContent = pieceCategoryWeight.toFixed(2) + ' kg';
+    this.updateAllShapingsHeadersQuantityValues();
+  }
 
+  private updateAllShapingsHeadersQuantityValues() {
     Object.values(Shaping).filter(shaping => shaping !== Shaping.Undefined).forEach(shaping => {
       var shapingTotalWeight = 0;
       this.product.elements.forEach((currentShaping, pieceCategory, map) => {
         if (currentShaping === shaping) {
           shapingTotalWeight += this.product.netWeight * this.pieceCategoryPercentages[pieceCategory];
         }
-      })
+      });
       document.querySelector('.shaping-header-quantity-' + shaping).textContent = shapingTotalWeight.toFixed(2);
-    })
+    });
   }
 
   initNewProductTemplate() {
@@ -176,11 +179,19 @@ export class ProductComponent implements OnInit {
     });
     this.productForm.valueChanges.subscribe(form => {
       if (this.product) {
-        const productNetWeight = form.netWeight;
+        this.product.netWeight = form.netWeight;
         this.getPieceCategories().forEach(pieceCategory => {
-          const pieceCategoryQuantity = productNetWeight * this.pieceCategoryPercentages[pieceCategory];
+          const pieceCategoryQuantity = this.product.netWeight * this.pieceCategoryPercentages[pieceCategory];
           const divPieceCategoryQuantity = this.shapingSelector.nativeElement.querySelector('.' + 'piece-category-quantity-' + pieceCategory);
-          divPieceCategoryQuantity.textContent = pieceCategoryQuantity.toFixed(2) + ' kg';
+          divPieceCategoryQuantity.textContent = `${pieceCategoryQuantity.toFixed(2)} kg`;
+          this.getShapings().forEach(shaping => {
+            const selectedShapingElement = document.querySelector(`.${pieceCategory}-shapings.${shaping}.shaping--selected`)
+            if (selectedShapingElement) {
+              const selectedShapingQuantity = (this.product.netWeight || 0) * this.pieceCategoryPercentages[pieceCategory];
+              selectedShapingElement.textContent = `${selectedShapingQuantity.toFixed(2)} kg`
+            }
+          })
+          this.updateAllShapingsHeadersQuantityValues();
         })
       }
     })

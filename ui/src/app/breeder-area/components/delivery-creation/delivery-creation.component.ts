@@ -108,6 +108,7 @@ export class DeliveryCreationComponent implements OnInit {
     product.unitPrice = productTemplate.unitPrice;
     product.netWeight = productTemplate.netWeight;
     product.description = productTemplate.description;
+    product.elements = productTemplate.elements;
     this.productService.loadProductTemplatePhoto(productTemplate).subscribe(photo => {
       if (photo) {
         product.photo = new Image();
