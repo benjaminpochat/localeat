@@ -3,7 +3,7 @@ services:
 
   database:
     image: postgres:12.2-alpine
-    container_name: databasex
+    container_name: database
     volumes:
       - ${postgres_datafile_path}:/var/lib/postgresql/data/pgdata
     environment:
