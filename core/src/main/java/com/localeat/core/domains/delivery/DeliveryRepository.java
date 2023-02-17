@@ -14,8 +14,6 @@ public interface DeliveryRepository extends CrudRepository<Delivery, Long> {
 
     @Query("SELECT DISTINCT d FROM Slaughter s " +
             "INNER JOIN s.delivery d " +
-            "INNER JOIN d.availableBatches b " +
-            "WHERE b.quantitySold < b.quantity " +
-            "AND d.deliveryStart > CURRENT_DATE")
+            "WHERE d.deliveryStart > CURRENT_DATE")
     Iterable<Delivery> findPublicDeliveries();
 }

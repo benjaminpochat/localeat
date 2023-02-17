@@ -37,6 +37,6 @@ public class TestQuantitySoldForDeliveryService {
         Float quantitySold = quantitySoldForDeliveryService.calculatePercentageSold(delivery);
 
         // then
-        Assertions.assertThat(quantitySold).isEqualTo(0.75f);
+        Assertions.assertThat(quantitySold).isEqualTo(0.6f);
     }
 }

@@ -30,6 +30,8 @@ public class QuantitySoldForDeliveryService {
 
     @Autowired
     private BatchRepository batchRepository;
+    @Autowired
+    private DeliveryRepository deliveryRepository;
 
     public float calculatePercentageSold(Delivery delivery) {
         List<Order> orders = new ArrayList<>();
@@ -39,7 +41,7 @@ public class QuantitySoldForDeliveryService {
                 .flatMap(order -> order.getOrderedItems().stream())
                 .map(item -> item.getQuantity() * item.getBatch().getProduct().getNetWeight())
                 .reduce(0f, Float::sum);
-        float totalWeightToSold = slaughterRepository.findByDelivery(delivery).getAnimal().getMeatWeight();
+        float totalWeightToSold = deliveryRepository.findById(delivery.getId()).get().getAvailableBatches().stream().map(batch -> batch.getQuantity() * batch.getProduct().getNetWeight()).reduce(0f, Float::sum);
         return totalWeightSold / totalWeightToSold;
     }
 

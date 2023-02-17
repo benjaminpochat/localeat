@@ -1,6 +1,6 @@
 <div class="product-selector">
   <button *ngIf="isIncreaseQuantityPossible() && quantityOrdered === 0" [disabled]="!isIncreaseQuantityPossible()" mat-flat-button color="primary" (click)="increaseQuantity()">Ajouter à la commande</button>
-  <button *ngIf="!isIncreaseQuantityPossible() && quantityOrdered === 0" disabled mat-flat-button color="primary">Tout été vendu</button>
+  <button *ngIf="!isIncreaseQuantityPossible() && quantityOrdered === 0" disabled mat-flat-button color="primary">Tout est vendu</button>
   <button mat-mini-fab color="primary" *ngIf="quantityOrdered > 0">
     <mat-icon (click)="decreaseQuantity()">remove</mat-icon>
   </button>
