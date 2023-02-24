@@ -10,7 +10,7 @@
     <div>Description</div>
     <div>Statut</div>
   </div>
-  <div *ngFor="let order of delivery.orders" class="delivery-orders__list-body">
+  <div *ngFor="let order of getOrdersValidated()" class="delivery-orders__list-body">
     <div class="delivery-orders__list-body__order-summary">{{order.id}}</div>
     <div class="delivery-orders__list-body__order-summary">{{order.customer.name}} {{order.customer.firstName}}</div>
     <div class="delivery-orders__list-body__order-summary"><a href="tel:{{order.customer.phoneNumber}}">{{order.customer.phoneNumber}}</a></div>
