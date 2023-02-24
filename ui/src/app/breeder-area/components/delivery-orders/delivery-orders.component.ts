@@ -63,4 +63,8 @@ export class DeliveryOrdersComponent implements OnInit {
         throw "order.orderStatus unknown"
     }
   }
+
+  getOrdersValidated(): Order[] {
+    return this.delivery.orders.filter(order => order.status !== OrderStatus.CANCELLED && order.status !== OrderStatus.SUBMITTED)
+  }
 }
