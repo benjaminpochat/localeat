@@ -39,6 +39,7 @@ class TestOrderBillService {
         var service = new OrderBillService();
         var slaughter = new Slaughter();
         var delivery = new Delivery();
+        delivery.setId(1l);
         delivery.setDeliveryStart(LocalDateTime.of(2022, 3, 11, 16, 45));
         slaughter.setDelivery(delivery);
         Batch batch1 = getProductBatch1();
