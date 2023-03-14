@@ -2,6 +2,10 @@
     size: A4 landscape;
 }
 
+body {
+    font-family: sans-serif;
+}
+
 article {
     page-break-after: always;
 }

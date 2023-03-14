@@ -63,7 +63,7 @@ export class DeliveryComponent implements OnInit {
   }
 
   generateProductElementsLabels(): void {
-    const elementsNames = "Bavette§Bourguignon§Côte§Faux filet§Filet§Hampe§Queue§Jarret§Joues§Onglet§Paleron§Pot-au-feu§Rosbeef§Roti§Rumsteak§Steaks§Steaks burger"
+    const elementsNames = "Bavette§Bourguignon§Côte§Faux filet§Filet§Hachi§Hampe§Queue§Jarret§Joues§Onglet§Osso buco§Paleron§Pot-au-feu§Rosbeef§Roti§Rumsteak§Steaks§Steaks burger"
     this.deliveryService.generateProductElementsLabels(this.slaughter.delivery, elementsNames).subscribe(data => this.downloadFile(data, 'etiquettes_paquets.pdf'));
   }
 
@@ -76,6 +76,6 @@ export class DeliveryComponent implements OnInit {
     downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
     downloadLink.download = filename
     document.body.appendChild(downloadLink);
-    downloadLink.click();  
+    downloadLink.click();
   }
 }
