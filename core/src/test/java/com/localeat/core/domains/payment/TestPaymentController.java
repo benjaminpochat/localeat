@@ -59,6 +59,9 @@ public class TestPaymentController {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
+    private PaymentTransactionService paymentTransactionService;
+
     @Test
     public void storePaymentTransactionChange_should_increase_quantity_sold_if_payment_is_accepted() {
         // given

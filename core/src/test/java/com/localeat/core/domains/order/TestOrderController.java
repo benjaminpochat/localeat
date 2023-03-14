@@ -36,9 +36,6 @@ public class TestOrderController {
     private OrderController orderController;
 
     @Autowired
-    private PaymentController paymentController;
-
-    @Autowired
     private AccountRepository accountRepository;
 
     @Autowired
