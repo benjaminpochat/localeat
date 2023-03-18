@@ -36,8 +36,8 @@ thead {
     font-size: 2rem;
     font-weight: bolder;
     text-align: center;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
 .dated-limits-and-animal-description > tbody > tr > td {
@@ -47,7 +47,7 @@ thead {
 .dated-limits,
 .product-description,
 .animal-description {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 
 .product-description,
