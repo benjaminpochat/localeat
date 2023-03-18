@@ -22,7 +22,7 @@
           Poids vif estimé : {{slaughter.animal.liveWeight}} kg
         </div>
         <div class="slaughter-card-content--identification-number">
-          {{slaughter.animal.identificationNumber ? slaughter.animal.identificationNumber : "????"}}
+          {{slaughter.animal.identificationNumber ? slaughter.animal.identificationNumber.slice(-4) : "????"}}
         </div>
       </div>
     </mat-card-content>

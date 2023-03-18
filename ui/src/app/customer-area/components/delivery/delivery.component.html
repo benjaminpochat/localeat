@@ -47,7 +47,7 @@
         <div *ngIf="animal?.identificationNumber" class="delivery-card__animal-id">
           <i class="icon label-icon"></i>
           <span>
-            {{animal.identificationNumber}}
+            {{animal.identificationNumber.slice(-4)}}
           </span>
         </div>
         <div *ngIf="animal?.finalFarm" class="delivery-card__farm">
