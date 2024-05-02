@@ -84,7 +84,7 @@ public class OrderBillService extends PDFService<OrderBillService.Arguments> {
     }
 
     private double getTotalTax(Order order) {
-        return getTotalPriceWithoutTax(order) * 0.05f;
+        return getTotalPriceWithoutTax(order) * 0.055f;
     }
 
     private Object getTotalPriceWithTax(Order order) {
@@ -92,7 +92,7 @@ public class OrderBillService extends PDFService<OrderBillService.Arguments> {
     }
 
     private float getItemPriceWithoutTax(OrderItem item) {
-        return item.getUnitPrice() * item.getBatch().getProduct().getNetWeight() / 1.05f;
+        return item.getUnitPrice() * item.getBatch().getProduct().getNetWeight() / 1.055f;
     }
 
     public static class Arguments {
